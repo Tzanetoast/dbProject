@@ -950,6 +950,7 @@ CREATE TABLE recipes_ingredients (
     quantity VARCHAR(64),
     PRIMARY KEY (recipeName, ingredientName),
     FOREIGN KEY (recipeName) REFERENCES recipes(name)
+    FOREIGN KEY (ingredientName) REFERENCES ingredients(name)
 );
 
 INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
@@ -1398,6 +1399,7 @@ INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
 ('Wiener Schnitzel', 'Flour', '100g'),
 ('Wiener Schnitzel', 'Lemon', '2 (for garnish)');
 
+DROP TABLE ingredients;
 
 CREATE TABLE ingredients (
     name VARCHAR(64),   
@@ -1595,3 +1597,702 @@ INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasur
 ('Veal cutlets', 'Meat and Products', '100g', 194, 0, 7, 0),
 ('Garlic powder', 'Spices and Essential Oils', 'teaspoon (3.1g)', 10, 2, 0, 0),
 ('Salt', 'Spices and Essential Oils', 'teaspoon (6g)', 0, 0, 0, 0);
+
+-- DROP TABLE recipes_ingredients;
+-- CREATE TABLE recipes_ingredients (
+--     recipeName VARCHAR(64),
+--     ingredientName VARCHAR(64),
+--     quantity INT,
+--     PRIMARY KEY (recipeName, ingredientName),
+--     FOREIGN KEY (recipeName) REFERENCES recipes(name)
+--     FOREIGN KEY (ingredientName) REFERENCES ingredients(name)
+-- );
+
+
+-- -- Apam balik
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apam balik', 'Eggs', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apam balik', 'Flour', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apam balik', 'Peanut filling', 1);
+
+-- -- Apple & Blackberry Crumble
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Apples', 3);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Blackberries', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Butter', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Flour', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Sugar', 1);
+
+-- -- Apple Frangipan Tart
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple Frangipan Tart', 'Apples', 3);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple Frangipan Tart', 'Frangipane', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple Frangipan Tart', 'Pastry crust', 1);
+
+-- -- Ayam Percik
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ayam Percik', 'Chicken', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ayam Percik', 'Coconut milk', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ayam Percik', 'Lemongrass', 1);
+
+-- -- Bakewell tart
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Bakewell tart', 'Frangipane', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Bakewell tart', 'Jam', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Bakewell tart', 'Pastry crust', 1);
+
+-- -- Banana Pancakes
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Banana Pancakes', 'Bananas', 2);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Banana Pancakes', 'Eggs', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Banana Pancakes', 'Flour', 1);
+
+-- -- Beef Wellington
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Beef Wellington', 'Beef fillet', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Beef Wellington', 'Mushroom duxelles', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Beef Wellington', 'Puff pastry', 1);
+
+-- -- Caldo verde
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Chorizo', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Garlic', 2);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Kale', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Onion', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Potatoes', 3);
+
+-- -- Cannelloni
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Cannelloni', 'Cannelloni tubes', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Cannelloni', 'Ricotta cheese', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Cannelloni', 'Spinach', 1);
+
+-- -- Chicken Congee
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Chicken Congee', 'Chicken breast', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Chicken Congee', 'Ginger', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Chicken Congee', 'Rice', 1);
+
+-- -- Danish Pastry
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Danish Pastry', 'Butter', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Danish Pastry', 'Flour', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Danish Pastry', 'Sugar', 1);
+
+-- -- Dum Aloo
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Cumin seeds', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Garam Masala', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Onion', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Potatoes', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Tomatoes', 1);
+
+-- -- Eclairs
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eclairs', 'Chocolate glaze', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eclairs', 'Choux pastry', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eclairs', 'Pastry cream', 1);
+
+-- -- English Breakfast
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('English Breakfast', 'Bacon', 2);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('English Breakfast', 'Eggs', 2);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('English Breakfast', 'Sausages', 2);
+
+-- -- Eton Mess
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eton Mess', 'Meringue', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eton Mess', 'Strawberries', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eton Mess', 'Whipping cream', 1);
+
+-- -- Fajitas
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Bell peppers', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Chicken breast', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Fajita seasoning', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Onion', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Tortillas', 1);
+
+-- -- Falafel
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Chickpeas', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Cumin', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Garlic', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Onion', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Parsley', 1);
+
+-- -- Fish and Chips
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fish and Chips', 'Beer', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fish and Chips', 'Flour', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fish and Chips', 'Potatoes', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fish and Chips', 'White fish fillets', 1);
+
+-- -- Gazpacho
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Bell pepper', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Cucumber', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Garlic', 2);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Olive oil', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Red onion', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Tomatoes', 3);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Vinegar', 1);
+
+-- -- Goulash
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Beef', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Bell peppers', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Onions', 2);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Paprika', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Tomatoes', 3);
+
+-- -- Greek Salad
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Cucumber', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Feta cheese', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Kalamata olives', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Red onion', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Tomatoes', 3);
+
+-- -- Grilled Cheese Sandwich
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Grilled Cheese Sandwich', 'Bread slices', 2);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Grilled Cheese Sandwich', 'Butter', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Grilled Cheese Sandwich', 'Cheese slices', 2);
+
+-- -- Guacamole
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Avocado', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Cilantro', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Jalapeno', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Lime', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Onion', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Tomato', 1);
+
+-- -- Gyoza
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gyoza', 'Gyoza wrappers', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gyoza', 'Ground pork', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gyoza', 'Napa cabbage', 1);
+
+-- -- Hot Cross Buns
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hot Cross Buns', 'Butter', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hot Cross Buns', 'Flour', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hot Cross Buns', 'Milk', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hot Cross Buns', 'Raisins', 1);
+
+-- -- Hummus
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Chickpeas', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Garlic', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Lemon juice', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Olive oil', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Tahini', 1);
+
+-- -- Lasagna
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Ground beef', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Lasagna noodles', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Mozzarella cheese', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Ricotta cheese', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Tomato sauce', 1);
+
+-- -- Miso Soup
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Miso Soup', 'Dashi', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Miso Soup', 'Miso paste', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Miso Soup', 'Tofu', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Miso Soup', 'Scallions', 1);
+
+-- -- Moqueca
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Coconut milk', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Fish fillets', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Lime', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Palm oil', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Tomatoes', 2);
+
+-- -- Pad Thai
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Bean sprouts', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Chicken breast', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Eggs', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Rice noodles', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Tamarind paste', 1);
+
+-- -- Paella
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Chicken thighs', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Chorizo', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Rice', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Saffron', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Shrimp', 1);
+
+-- -- Peking Duck
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Peking Duck', 'Duck', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Peking Duck', 'Hoisin sauce', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Peking Duck', 'Pancakes', 1);
+
+-- -- Pho
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pho', 'Beef broth', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pho', 'Beef sirloin', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pho', 'Rice noodles', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pho', 'Thai basil', 1);
+
+-- -- Pizza Margherita
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pizza Margherita', 'Basil leaves', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pizza Margherita', 'Mozzarella cheese', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pizza Margherita', 'Pizza dough', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pizza Margherita', 'Tomatoes', 1);
+
+-- -- Ratatouille
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Bell peppers', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Eggplant', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Onions', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Tomatoes', 2);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Zucchini', 1);
+
+-- -- Ravioli
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ravioli', 'Eggs', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ravioli', 'Flour', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ravioli', 'Parmesan cheese', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ravioli', 'Ricotta cheese', 1);
+
+-- -- Risotto
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Risotto', 'Arborio rice', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Risotto', 'Butter', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Risotto', 'Parmesan cheese', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Risotto', 'Vegetable broth', 1);
+
+-- -- Sushi
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Sushi', 'Nori', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Sushi', 'Rice', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Sushi', 'Rice vinegar', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Sushi', 'Seafood (e.g., salmon, tuna)', 1);
+
+-- -- Tiramisu
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tiramisu', 'Coffee', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tiramisu', 'Ladyfingers', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tiramisu', 'Mascarpone cheese', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tiramisu', 'Sugar', 1);
+
+-- -- Tom Yum Goong
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Galangal', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Kaffir lime leaves', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Lemongrass', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Shrimp', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Thai chili peppers', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Tomato', 1);
+
+-- -- Tostada
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Avocado', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Beans', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Corn tortillas', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Lettuce', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Tomato', 1);
+
+-- -- Wiener Schnitzel
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Wiener Schnitzel', 'Bread crumbs', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Wiener Schnitzel', 'Eggs', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Wiener Schnitzel', 'Veal cutlets', 1);
+
+-- -- Yakitori
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Yakitori', 'Bamboo skewers', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Yakitori', 'Chicken thighs', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Yakitori', 'Green onions', 1);
+
+-- -- Zucchini Bread
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Zucchini Bread', 'Cinnamon', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Zucchini Bread', 'Flour', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Zucchini Bread', 'Sugar', 1);
+-- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Zucchini Bread', 'Zucchini', 1);
+
+DROP TABLE recipes_ingredients;
+CREATE TABLE recipes_ingredients (
+    recipeName VARCHAR(64),
+    ingredientName VARCHAR(64),
+    quantity INT,
+    PRIMARY KEY (recipeName, ingredientName),
+    FOREIGN KEY (recipeName) REFERENCES recipes(name)
+    FOREIGN KEY (ingredientName) REFERENCES ingredients(name)
+);
+
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Apam balik', 'Eggs', 2),
+('Apam balik', 'Flour', 2), -- Cups
+('Apam balik', 'Peanut filling', 1), -- Cups
+('Apple & Blackberry Crumble', 'Apples', 3),
+('Apple & Blackberry Crumble', 'Blackberries', 2), -- Cups
+('Apple & Blackberry Crumble', 'Butter', 4), -- Tablespoons
+('Apple & Blackberry Crumble', 'Flour', 1), -- Cups
+('Apple & Blackberry Crumble', 'Sugar', 1), -- Cups
+('Apple Frangipan Tart', 'Apples', 3),
+('Apple Frangipan Tart', 'Frangipane', 1), -- 100g units
+('Apple Frangipan Tart', 'Pastry crust', 1),
+('Ayam Percik', 'Chicken', 2), -- 100g units
+('Ayam Percik', 'Coconut milk', 2), -- Cups
+('Ayam Percik', 'Lemongrass', 2),
+('Bakewell tart', 'Frangipane', 1), -- 100g units
+('Bakewell tart', 'Jam', 1), -- Tablespoons
+('Bakewell tart', 'Pastry crust', 1),
+('Banana Pancakes', 'Bananas', 2),
+('Banana Pancakes', 'Eggs', 2),
+('Banana Pancakes', 'Flour', 1), -- Cups
+('Beef Wellington', 'Beef fillet', 1), -- 100g units
+('Beef Wellington', 'Mushroom duxelles', 1), -- 100g units
+('Beef Wellington', 'Puff pastry', 1), -- Ounces
+('Caldo verde', 'Chorizo', 2), -- Slices
+('Caldo verde', 'Garlic', 2),
+('Caldo verde', 'Kale', 1), -- Cups
+('Caldo verde', 'Onion', 1),
+('Caldo verde', 'Potatoes', 2),
+('Cannelloni', 'Cannelloni tubes', 6),
+('Cannelloni', 'Ricotta cheese', 1), -- Cups
+('Cannelloni', 'Spinach', 2), -- Cups
+('Chicken Congee', 'Chicken breast', 2), -- 100g units
+('Chicken Congee', 'Ginger', 1), -- Tablespoons
+('Chicken Congee', 'Rice', 1), -- Cups
+('Dakdoritang', 'Carrots', 2),
+('Dakdoritang', 'Chicken', 2), -- 100g units
+('Dakdoritang', 'Garlic', 2),
+('Dakdoritang', 'Gochujang (Korean chili paste)', 1), -- Tablespoons
+('Dakdoritang', 'Potatoes', 2),
+('Dakdoritang', 'Soy sauce', 1), -- Tablespoons
+('Danish Pastry', 'Butter', 4), -- Tablespoons
+('Danish Pastry', 'Flour', 2), -- Cups
+('Danish Pastry', 'Sugar', 1); -- Cups
+
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Dum Aloo', 'Cumin seeds', 1), -- Teaspoons
+('Dum Aloo', 'Garam Masala', 1), -- Teaspoons
+('Dum Aloo', 'Onion', 1),
+('Dum Aloo', 'Potatoes', 3),
+('Dum Aloo', 'Tomatoes', 2),
+('Eclairs', 'Chocolate glaze', 1), -- Tablespoons
+('Eclairs', 'Choux pastry', 1), -- Pieces
+('Eclairs', 'Pastry cream', 1), -- Cups
+('English Breakfast', 'Bacon', 3), -- Slices
+('English Breakfast', 'Eggs', 2),
+('English Breakfast', 'Sausages', 2), -- Links
+('Eton Mess', 'Meringue', 3), -- Pieces
+('Eton Mess', 'Strawberries', 1), -- Cups
+('Eton Mess', 'Whipping cream', 1), -- Cups
+('Fajitas', 'Bell peppers', 2),
+('Fajitas', 'Chicken breast', 2), -- 100g units
+('Fajitas', 'Fajita seasoning', 1), -- Tablespoons
+('Fajitas', 'Onion', 1),
+('Fajitas', 'Tortillas', 4), -- Each
+('Falafel', 'Chickpeas', 2), -- Cups
+('Falafel', 'Cumin', 1), -- Teaspoons
+('Falafel', 'Garlic', 2),
+('Falafel', 'Onion', 1),
+('Falafel', 'Parsley', 1), -- Cups
+('Fish and Chips', 'Beer', 1), -- Cans
+('Fish and Chips', 'Flour', 1), -- Cups
+('Fish and Chips', 'Potatoes', 3),
+('Fish and Chips', 'White fish fillets', 4), -- Fillets
+('Gazpacho', 'Bell pepper', 1),
+('Gazpacho', 'Cucumber', 1),
+('Gazpacho', 'Garlic', 1),
+('Gazpacho', 'Olive oil', 1), -- Tablespoons
+('Gazpacho', 'Red onion', 1),
+('Gazpacho', 'Tomatoes', 3),
+('Gazpacho', 'Vinegar', 1), -- Tablespoons
+('Goulash', 'Beef', 2), -- 100g units
+('Goulash', 'Bell peppers', 2),
+('Goulash', 'Onions', 2),
+('Goulash', 'Paprika', 2), -- Teaspoons
+('Goulash', 'Tomatoes', 2),
+('Greek Salad', 'Cucumber', 1),
+('Greek Salad', 'Feta cheese', 1), -- Cups
+('Greek Salad', 'Kalamata olives', 1), -- Cups
+('Greek Salad', 'Olive oil', 2), -- Tablespoons
+('Greek Salad', 'Red onion', 1),
+('Greek Salad', 'Tomatoes', 3),
+('Hamburgers', 'Cheese', 4), -- Slices
+('Hamburgers', 'Ground beef', 2), -- 100g units
+('Hamburgers', 'Hamburger buns', 4), -- Each
+('Hamburgers', 'Lettuce', 4), -- Leaves
+('Hamburgers', 'Onion', 1),
+('Hamburgers', 'Tomato', 1),
+('Hot and Sour Soup', 'Bamboo shoots', 1), -- Cups
+('Hot and Sour Soup', 'Chicken broth', 2), -- Cups
+('Hot and Sour Soup', 'Rice vinegar', 1), -- Tablespoons
+('Hot and Sour Soup', 'Shiitake mushrooms', 1), -- Cups
+('Hot and Sour Soup', 'Soy sauce', 1), -- Tablespoons
+('Hot and Sour Soup', 'Tofu', 1), -- Block
+('Hummus', 'Chickpeas', 2), -- Cups
+('Hummus', 'Garlic', 2),
+('Hummus', 'Lemon juice', 2), -- Tablespoons
+('Hummus', 'Olive oil', 1), -- Tablespoons
+('Hummus', 'Tahini', 2), -- Tablespoons
+-- Continue for each recipe similarly
+-- Continuation of recipes_ingredients INSERT statements
+('Indian Curry', 'Chicken', 2), -- 100g units
+('Indian Curry', 'Coconut milk', 1), -- Cups
+('Indian Curry', 'Curry powder', 2), -- Teaspoons
+('Irish Coffee', 'Brown sugar', 2), -- Tablespoons
+('Irish Coffee', 'Coffee', 1), -- Cups
+('Irish Coffee', 'Cream', 1), -- Tablespoons
+('Irish Coffee', 'Irish whiskey', 1), -- Shots
+('Irish Stew', 'Beef stock', 2), -- Cups
+('Irish Stew', 'Carrots', 2),
+('Irish Stew', 'Lamb shoulder', 2), -- 100g units
+('Irish Stew', 'Onions', 2),
+('Irish Stew', 'Potatoes', 3),
+('Italian Biscotti', 'Almonds', 1), -- Cups
+('Italian Biscotti', 'Flour', 2), -- Cups
+('Italian Biscotti', 'Sugar', 1), -- Cups
+('Jambalaya', 'Andouille sausage', 2), -- Links
+('Jambalaya', 'Bell peppers', 2),
+('Jambalaya', 'Chicken', 2), -- 100g units
+('Jambalaya', 'Rice', 2), -- Cups
+('Jambalaya', 'Shrimp', 200), -- Grams
+('Japanese Cheesecake', 'Cream cheese', 1), -- Cups
+('Japanese Cheesecake', 'Eggs', 3),
+('Japanese Cheesecake', 'Sugar', 1), -- Cups
+('Japanese Curry', 'Beef', 2), -- 100g units
+('Japanese Curry', 'Carrots', 2),
+('Japanese Curry', 'Curry powder', 2), -- Teaspoons
+('Japanese Curry', 'Onion', 1),
+('Japanese Curry', 'Potatoes', 2),
+('Jerk Chicken', 'Chicken thighs', 4), -- 100g units
+('Jerk Chicken', 'Green onions', 1), -- 100g units
+('Jerk Chicken', 'Jerk seasoning', 1), -- Teaspoons
+('Jerk Chicken', 'Scotch bonnet peppers', 2), -- Peppers
+('Jerk Chicken', 'Thyme', 1), -- Tablespoons
+('Kaiserschmarrn', 'Butter', 2), -- Tablespoons
+('Kaiserschmarrn', 'Eggs', 3),
+('Kaiserschmarrn', 'Flour', 1), -- Cups
+('Kaiserschmarrn', 'Milk', 1), -- Cups
+('Kaiserschmarrn', 'Sugar', 2), -- Tablespoons
+('Kebab', 'Bell peppers', 2),
+('Kebab', 'Kebab spices', 1), -- Tablespoons
+('Kebab', 'Lamb', 2), -- 100g units
+('Kebab', 'Onions', 2),
+('Kebab', 'Yogurt', 1), -- Cups
+('Key Lime Pie', 'Condensed milk', 1), -- Cups
+('Key Lime Pie', 'Graham cracker crust', 1), -- Pieces
+('Key Lime Pie', 'Lime juice', 3), -- Tablespoons
+('Kimchi Fried Rice', 'Cooked rice', 2), -- Cups
+('Kimchi Fried Rice', 'Eggs', 2),
+('Kimchi Fried Rice', 'Kimchi', 1), -- Cups
+('Kimchi Fried Rice', 'Onion', 1),
+('Kimchi Fried Rice', 'Sesame oil', 1), -- Tablespoons
+('Kimchi Stew', 'Garlic', 2),
+('Kimchi Stew', 'Kimchi', 1), -- Cups
+('Kimchi Stew', 'Onion', 1),
+('Kimchi Stew', 'Pork belly', 1), -- 100g units
+('Kimchi Stew', 'Tofu', 1); -- Block
+-- Further continuation as required
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Lamb Tagine', 'Cinnamon', 1), -- Teaspoons
+('Lamb Tagine', 'Dried apricots', 1), -- Cups
+('Lamb Tagine', 'Garlic', 2),
+('Lamb Tagine', 'Lamb shoulder', 2), -- 100g units
+('Lamb Tagine', 'Onions', 2),
+('Lasagna', 'Lasagna noodles', 6), -- Pieces
+('Lasagna', 'Marinara sauce', 2), -- Cups
+('Lasagna', 'Ricotta cheese', 2), -- Cups
+('Lobster Bisque', 'Brandy', 1), -- Shots
+('Lobster Bisque', 'Carrots', 2),
+('Lobster Bisque', 'Celery', 2), -- Stalks
+('Lobster Bisque', 'Lobster', 1), -- 100g units
+('Lobster Bisque', 'Onion', 1),
+('Lobster Bisque', 'Tomato paste', 1), -- Tablespoons
+('Macaron', 'Almond flour', 1), -- Cups
+('Macaron', 'Egg whites', 3),
+('Macaron', 'Granulated sugar', 1), -- Cups
+('Mapo Tofu', 'Doubanjiang (fermented bean paste)', 1), -- Tablespoons
+('Mapo Tofu', 'Garlic', 2),
+('Mapo Tofu', 'Green onion', 1), -- 100g units
+('Mapo Tofu', 'Ground pork', 1), -- 100g units
+('Mapo Tofu', 'Tofu', 1), -- Block
+('Moussaka', 'Bechamel sauce', 2), -- Cups
+('Moussaka', 'Eggplant', 2),
+('Moussaka', 'Ground lamb', 2), -- 100g units
+('Moussaka', 'Onion', 2),
+('Moussaka', 'Tomatoes', 3),
+('Nachos', 'Cheddar cheese', 1), -- Cups
+('Nachos', 'Ground beef', 2), -- 100g units
+('Nachos', 'Jalapenos', 3), -- Peppers
+('Nachos', 'Salsa', 1), -- Cups
+('Nachos', 'Tortilla chips', 2), -- Ounces
+('Nasi Goreng', 'Chicken', 2), -- 100g units
+('Nasi Goreng', 'Cooked rice', 2), -- Cups
+('Nasi Goreng', 'Eggs', 2),
+('Nasi Goreng', 'Garlic', 2),
+('Nasi Goreng', 'Kecap Manis (sweet soy sauce)', 2), -- Tablespoons
+('Nasi Goreng', 'Shallots', 2),
+('Nougat', 'Almonds', 1), -- Cups
+('Nougat', 'Egg whites', 2),
+('Nougat', 'Honey', 1), -- Tablespoons
+('Nougat', 'Sugar', 2), -- Cups
+('Okonomiyaki', 'Bacon', 4), -- Slices
+('Okonomiyaki', 'Cabbage', 2), -- Cups
+('Okonomiyaki', 'Eggs', 2),
+('Okonomiyaki', 'Flour', 1), -- Cups
+('Okonomiyaki', 'Okonomiyaki sauce', 2), -- Tablespoons
+('Osso Buco', 'Carrots', 2),
+('Osso Buco', 'Celery', 2), -- Stalks
+('Osso Buco', 'Onion', 2),
+('Osso Buco', 'Tomatoes', 2), -- 100g units
+('Osso Buco', 'Veal shanks', 2), -- 100g units
+('Osso Buco', 'White wine', 1), -- Glasses
+('Oysters Kilpatrick', 'Bacon', 4), -- Slices
+('Oysters Kilpatrick', 'Butter', 2), -- Tablespoons
+('Oysters Kilpatrick', 'Oysters', 12), -- Medium size
+('Oysters Kilpatrick', 'Parsley', 1), -- Tablespoons
+('Oysters Kilpatrick', 'Worcestershire sauce', 1), -- Tablespoons
+('Paella', 'Bell peppers', 2),
+('Paella', 'Chicken', 2), -- 100g units
+('Paella', 'Rice', 2), -- Cups
+('Paella', 'Saffron', 1), -- Teaspoons
+('Paella', 'Seafood mix', 2), -- 100g units
+('Peking Duck', 'Cucumbers', 2),
+('Peking Duck', 'Duck', 1), -- Whole duck
+('Peking Duck', 'Green onions', 2), -- 100g units
+('Peking Duck', 'Hoisin sauce', 2), -- Tablespoons
+('Pierogi', 'Cheese', 1), -- Cups
+('Pierogi', 'Egg', 2),
+('Pierogi', 'Flour', 2), -- Cups
+('Pierogi', 'Onion', 2),
+('Pierogi', 'Potato', 3),
+('Quesadilla', 'Cheese', 1), -- Cups
+('Quesadilla', 'Chicken', 2), -- 100g units
+('Quesadilla', 'Green peppers', 2),
+('Quesadilla', 'Onion', 1),
+('Quesadilla', 'Tortillas', 4), -- Each
+('Quiche Lorraine', 'Bacon', 3), -- Slices
+('Quiche Lorraine', 'Eggs', 3),
+('Quiche Lorraine', 'Pastry crust', 1);
+-- Continue adding other recipes similarly
+
+-- Inserting remaining ingredients for Quinoa Salad
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Quinoa Salad', 'Cherry tomatoes', 1), -- Cups
+('Quinoa Salad', 'Cucumber', 1),
+('Quinoa Salad', 'Feta cheese', 1), -- Cups
+('Quinoa Salad', 'Lemon juice', 2), -- Tablespoons
+('Quinoa Salad', 'Olive oil', 2), -- Tablespoons
+('Quinoa Salad', 'Quinoa', 1), -- Cups
+('Quinoa Salad', 'Red onion', 1),
+
+-- Ramen ingredients
+('Ramen', 'Chicken broth', 2), -- Cups
+('Ramen', 'Eggs', 2),
+('Ramen', 'Green onions', 1), -- 100g units
+('Ramen', 'Ramen noodles', 2), -- Packages
+('Ramen', 'Sesame oil', 1), -- Tablespoons
+('Ramen', 'Soy sauce', 1), -- Tablespoons
+
+-- Ratatouille ingredients
+('Ratatouille', 'Bell peppers', 2),
+('Ratatouille', 'Eggplant', 1),
+('Ratatouille', 'Garlic', 2),
+('Ratatouille', 'Onion', 1),
+('Ratatouille', 'Tomato', 3),
+('Ratatouille', 'Yellow squash', 1),
+('Ratatouille', 'Zucchini', 1),
+
+-- Risotto ingredients
+('Risotto', 'Arborio rice', 1), -- Cups
+('Risotto', 'Butter', 2), -- Tablespoons
+('Risotto', 'Chicken stock', 3), -- Cups
+('Risotto', 'Onion', 1),
+('Risotto', 'Parmesan cheese', 1), -- Cups
+('Risotto', 'White wine', 1), -- Cups
+
+-- Samosa ingredients
+('Samosa', 'Cumin seeds', 1), -- Teaspoons
+('Samosa', 'Garam masala', 1), -- Teaspoons
+('Samosa', 'Green peas', 1), -- Cups
+('Samosa', 'Pastry dough', 2), -- Pieces
+('Samosa', 'Potatoes', 3),
+
+-- Shepherd's Pie ingredients
+('Shepherds Pie', 'Carrots', 2),
+('Shepherds Pie', 'Ground lamb', 2), -- 100g units
+('Shepherds Pie', 'Onion', 1),
+('Shepherds Pie', 'Peas', 1), -- Cups
+('Shepherds Pie', 'Potatoes', 3),
+
+-- Sushi ingredients
+('Sushi', 'Fresh fish (various)', 2), -- 100g units
+('Sushi', 'Nori sheets', 5), -- Sheets
+('Sushi', 'Rice vinegar', 2), -- Tablespoons
+('Sushi', 'Soy sauce', 1), -- Tablespoons
+('Sushi', 'Sushi rice', 2), -- Cups
+('Sushi', 'Wasabi', 1), -- Teaspoons
+
+-- Tabbouleh ingredients
+('Tabbouleh', 'Bulgur', 1), -- Cups
+('Tabbouleh', 'Lemon juice', 2), -- Tablespoons
+('Tabbouleh', 'Mint', 1), -- Cups
+('Tabbouleh', 'Olive oil', 2), -- Tablespoons
+('Tabbouleh', 'Parsley', 2), -- Cups
+('Tabbouleh', 'Tomatoes', 2),
+
+-- Tacos ingredients
+('Tacos', 'Cheddar cheese', 1), -- Cups
+('Tacos', 'Corn tortillas', 4), -- Each
+('Tacos', 'Ground beef', 2), -- 100g units
+('Tacos', 'Lettuce', 2), -- Leaves
+('Tacos', 'Onion', 1),
+('Tacos', 'Tomatoes', 2),
+
+-- Tiramisu ingredients
+('Tiramisu', 'Eggs', 3),
+('Tiramisu', 'Espresso', 1), -- Cups
+('Tiramisu', 'Ladyfingers', 12), -- Each
+('Tiramisu', 'Mascarpone cheese', 1), -- Cups
+('Tiramisu', 'Sugar', 1), -- Cups
+
+-- Udon Soup ingredients
+('Udon Soup', 'Dashi broth', 2), -- Cups
+('Udon Soup', 'Green onions', 1), -- 100g units
+('Udon Soup', 'Mirin', 1), -- Tablespoons
+('Udon Soup', 'Mushrooms', 1), -- Cups
+('Udon Soup', 'Soy sauce', 1), -- Tablespoons
+('Udon Soup', 'Udon noodles', 2), -- Packages
+
+-- Ukrainian Borscht ingredients
+('Ukrainian borscht', 'Beetroot', 3),
+('Ukrainian borscht', 'Cabbage', 1), -- Cups
+('Ukrainian borscht', 'Carrots', 2),
+('Ukrainian borscht', 'Onions', 2),
+('Ukrainian borscht', 'Potatoes', 3),
+('Ukrainian borscht', 'Tomato paste', 1), -- Tablespoons
+
+-- Umbrian Lentil Stew ingredients
+('Umbrian Lentil Stew', 'Carrots', 2),
+('Umbrian Lentil Stew', 'Celery', 2), -- Stalks
+('Umbrian Lentil Stew', 'Lentils', 2), -- Cups
+('Umbrian Lentil Stew', 'Onion', 1),
+('Umbrian Lentil Stew', 'Tomatoes', 2),
+
+-- Vegetable Terrine ingredients
+('Vegetable Terrine', 'Carrots', 2),
+('Vegetable Terrine', 'Eggplant', 1),
+('Vegetable Terrine', 'Gelatin', 1), -- Tablespoons
+('Vegetable Terrine', 'Zucchini', 1),
+
+-- Venison Stew ingredients
+('Venison Stew', 'Beef stock', 2), -- Cups
+('Venison Stew', 'Carrots', 2),
+('Venison Stew', 'Onions', 2),
+('Venison Stew', 'Potatoes', 3),
+('Venison Stew', 'Venison', 2), -- 100g units
+
+-- Vietnamese Pho ingredients
+('Vietnamese Pho', 'Beef brisket', 2), -- 100g units
+('Vietnamese Pho', 'Fish sauce', 1), -- Tablespoons
+('Vietnamese Pho', 'Ginger', 1), -- Tablespoons
+('Vietnamese Pho', 'Onion', 1),
+('Vietnamese Pho', 'Rice noodles', 2), -- Cups
+('Vietnamese Pho', 'Star anise', 2), -- Whole
+
+-- Waldorf Salad ingredients
+('Waldorf Salad', 'Apples', 2),
+('Waldorf Salad', 'Celery', 2), -- Stalks
+('Waldorf Salad', 'Lemon juice', 1), -- Tablespoons
+('Waldorf Salad', 'Mayonnaise', 1), -- Cups
+('Waldorf Salad', 'Walnuts', 1), -- Cups
+
+-- Welsh Rarebit ingredients
+('Welsh Rarebit', 'Beer', 1), -- Cans
+('Welsh Rarebit', 'Bread', 2), -- Slices
+('Welsh Rarebit', 'Cheddar cheese', 2), -- Slices
+('Welsh Rarebit', 'Mustard', 1), -- Tablespoons
+('Welsh Rarebit', 'Worcestershire sauce', 1), -- Tablespoons
+
+-- Wiener Schnitzel ingredients
+('Wiener Schnitzel', 'Breadcrumbs', 1), -- Cups
+('Wiener Schnitzel', 'Eggs', 2),
+('Wiener Schnitzel', 'Flour', 1), -- Cups
+('Wiener Schnitzel', 'Lemon', 1),
+('Wiener Schnitzel', 'Veal cutlets', 2), -- 100g units
+
+-- Xiaolongbao ingredients
+('Xiaolongbao', 'Flour', 2), -- Cups
+('Xiaolongbao', 'Ginger', 1), -- Tablespoons
+('Xiaolongbao', 'Green onions', 1), -- 100g units
+('Xiaolongbao', 'Ground pork', 2), -- 100g units
+('Xiaolongbao', 'Soy sauce', 1), -- Tablespoons
+
+-- Xinjiang Lamb Skewers ingredients
+('Xinjiang Lamb Skewers', 'Cumin seeds', 1), -- Teaspoons
+('Xinjiang Lamb Skewers', 'Garlic powder', 1), -- Teaspoons
+('Xinjiang Lamb Skewers', 'Lamb', 2), -- 100g units
+('Xinjiang Lamb Skewers', 'Paprika', 1), -- Teaspoons
+('Xinjiang Lamb Skewers', 'Salt', 1); -- Teaspoons
