@@ -941,3 +941,657 @@ INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Quesadilla', 'spatula'),
 ('Quesadilla', 'chefs knife'),
 ('Quesadilla', 'cutting board');
+
+
+DROP TABLE recipes_ingredients;
+CREATE TABLE recipes_ingredients (
+    recipeName VARCHAR(64),
+    ingredientName VARCHAR(64),
+    quantity VARCHAR(64),
+    PRIMARY KEY (recipeName, ingredientName),
+    FOREIGN KEY (recipeName) REFERENCES recipes(name)
+);
+
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Apple Frangipan Tart', 'Apples', '3 medium'),
+('Apple Frangipan Tart', 'Frangipane', '200g'),
+('Apple Frangipan Tart', 'Pastry crust', '1 unit');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Bakewell tart', 'Jam', '150g'),
+('Bakewell tart', 'Frangipane', '200g'),
+('Bakewell tart', 'Pastry crust', '1 unit');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Beef Wellington', 'Beef fillet', '500g'),
+('Beef Wellington', 'Puff pastry', '500g'),
+('Beef Wellington', 'Mushroom duxelles', '200g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Banana Pancakes', 'Bananas', '2 large'),
+('Banana Pancakes', 'Flour', '200g'),
+('Banana Pancakes', 'Eggs', '2 large');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Cannelloni', 'Cannelloni tubes', '12 units'),
+('Cannelloni', 'Ricotta cheese', '250g'),
+('Cannelloni', 'Spinach', '200g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Danish Pastry', 'Flour', '500g'),
+('Danish Pastry', 'Butter', '250g'),
+('Danish Pastry', 'Sugar', '100g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Eclairs', 'Choux pastry', '1 batch'),
+('Eclairs', 'Pastry cream', '200g'),
+('Eclairs', 'Chocolate glaze', '100g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('English Breakfast', 'Eggs', '4 large'),
+('English Breakfast', 'Bacon', '4 slices'),
+('English Breakfast', 'Sausages', '2 units');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Key Lime Pie', 'Lime juice', '100ml'),
+('Key Lime Pie', 'Condensed milk', '1 can'),
+('Key Lime Pie', 'Graham cracker crust', '1 unit');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Lasagna', 'Lasagna noodles', '12 sheets'),
+('Lasagna', 'Ricotta cheese', '500g'),
+('Lasagna', 'Marinara sauce', '600g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Macaron', 'Almond flour', '200g'),
+('Macaron', 'Granulated sugar', '200g'),
+('Macaron', 'Egg whites', '3 large');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Quiche Lorraine', 'Pastry crust', '1 unit'),
+('Quiche Lorraine', 'Bacon', '200g'),
+('Quiche Lorraine', 'Eggs', '3 large');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Japanese Cheesecake', 'Cream cheese', '250g'),
+('Japanese Cheesecake', 'Eggs', '3 large'),
+('Japanese Cheesecake', 'Sugar', '100g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+-- Breads and Pastries
+('Indian Curry', 'Chicken', '500g'),
+('Indian Curry', 'Curry powder', '2 tbsp'),
+('Indian Curry', 'Coconut milk', '400ml');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Italian Biscotti', 'Flour', '300g'),
+('Italian Biscotti', 'Sugar', '150g'),
+('Italian Biscotti', 'Almonds', '100g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+-- Grilled Meats and Barbecue
+('Ayam Percik', 'Chicken', '1 kg'),
+('Ayam Percik', 'Coconut milk', '200ml'),
+('Ayam Percik', 'Lemongrass', '2 stalks');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+-- General Cooking and Stir Frying
+('Apam balik', 'Flour', '200g'),
+('Apam balik', 'Eggs', '2 large'),
+('Apam balik', 'Peanut filling', '100g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Chicken Congee', 'Rice', '200g'),
+('Chicken Congee', 'Chicken breast', '300g'),
+('Chicken Congee', 'Ginger', '20g');
+
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Dakdoritang', 'Chicken', '1 kg'),
+('Dakdoritang', 'Potatoes', '3 medium'),
+('Dakdoritang', 'Carrots', '2 large'),
+('Dakdoritang', 'Gochujang (Korean chili paste)', '3 tbsp'),
+('Dakdoritang', 'Soy sauce', '50 ml'),
+('Dakdoritang', 'Garlic', '5 cloves'),
+
+('Dum Aloo', 'Potatoes', '500g'),
+('Dum Aloo', 'Tomatoes', '200g'),
+('Dum Aloo', 'Onion', '1 large'),
+('Dum Aloo', 'Cumin seeds', '1 tsp'),
+('Dum Aloo', 'Garam Masala', '1 tsp'),
+
+('Falafel', 'Chickpeas', '400g (drained)'),
+('Falafel', 'Onion', '1 small'),
+('Falafel', 'Garlic', '3 cloves'),
+('Falafel', 'Parsley', '50g'),
+('Falafel', 'Cumin', '2 tsp'),
+
+('Fish and Chips', 'White fish fillets', '4 large'),
+('Fish and Chips', 'Flour', '150g'),
+('Fish and Chips', 'Beer', '250ml'),
+('Fish and Chips', 'Potatoes', '4 large'),
+
+('Goulash', 'Beef', '500g'),
+('Goulash', 'Onions', '2 large'),
+('Goulash', 'Bell peppers', '2'),
+('Goulash', 'Paprika', '2 tbsp'),
+('Goulash', 'Tomatoes', '400g (canned)'),
+
+('Hot and Sour Soup', 'Bamboo shoots', '100g'),
+('Hot and Sour Soup', 'Tofu', '200g'),
+('Hot and Sour Soup', 'Shiitake mushrooms', '100g'),
+('Hot and Sour Soup', 'Chicken broth', '1.5 liters'),
+('Hot and Sour Soup', 'Soy sauce', '3 tbsp'),
+('Hot and Sour Soup', 'Rice vinegar', '3 tbsp'),
+
+('Hummus', 'Chickpeas', '400g (drained)'),
+('Hummus', 'Tahini', '100g'),
+('Hummus', 'Lemon juice', '50ml'),
+('Hummus', 'Garlic', '2 cloves'),
+('Hummus', 'Olive oil', '50ml'),
+
+('Kimchi Fried Rice', 'Cooked rice', '400g'),
+('Kimchi Fried Rice', 'Kimchi', '200g'),
+('Kimchi Fried Rice', 'Onion', '1 medium'),
+('Kimchi Fried Rice', 'Sesame oil', '2 tbsp'),
+('Kimchi Fried Rice', 'Eggs', '2'),
+
+('Mapo Tofu', 'Tofu', '400g'),
+('Mapo Tofu', 'Ground pork', '150g'),
+('Mapo Tofu', 'Doubanjiang (fermented bean paste)', '2 tbsp'),
+('Mapo Tofu', 'Garlic', '3 cloves'),
+('Mapo Tofu', 'Green onion', '3 stalks'),
+
+('Nasi Goreng', 'Cooked rice', '400g'),
+('Nasi Goreng', 'Chicken', '200g'),
+('Nasi Goreng', 'Kecap Manis (sweet soy sauce)', '3 tbsp'),
+('Nasi Goreng', 'Shallots', '2'),
+('Nasi Goreng', 'Garlic', '2 cloves'),
+('Nasi Goreng', 'Eggs', '2'),
+
+('Nachos', 'Tortilla chips', '300g'),
+('Nachos', 'Cheddar cheese', '200g'),
+('Nachos', 'Jalapenos', '50g'),
+('Nachos', 'Ground beef', '200g'),
+('Nachos', 'Salsa', '100g'),
+
+('Pierogi', 'Flour', '500g'),
+('Pierogi', 'Egg', '1 large'),
+('Pierogi', 'Potato', '300g'),
+('Pierogi', 'Cheese', '100g'),
+('Pierogi', 'Onion', '1 medium');
+
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Ratatouille', 'Eggplant', '1 large'),
+('Ratatouille', 'Zucchini', '1 large'),
+('Ratatouille', 'Yellow squash', '1 large'),
+('Ratatouille', 'Bell peppers', '2'),
+('Ratatouille', 'Tomato', '3 medium'),
+('Ratatouille', 'Onion', '1 large'),
+('Ratatouille', 'Garlic', '3 cloves');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Risotto', 'Arborio rice', '200g'),
+('Risotto', 'Chicken stock', '800ml'),
+('Risotto', 'Onion', '1 small'),
+('Risotto', 'White wine', '100ml'),
+('Risotto', 'Parmesan cheese', '50g'),
+('Risotto', 'Butter', '50g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Ramen', 'Ramen noodles', '400g'),
+('Ramen', 'Chicken broth', '1.5 liters'),
+('Ramen', 'Soy sauce', '50ml'),
+('Ramen', 'Sesame oil', '2 tbsp'),
+('Ramen', 'Green onions', '4 stalks'),
+('Ramen', 'Eggs', '4');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Samosa', 'Potatoes', '300g'),
+('Samosa', 'Green peas', '150g'),
+('Samosa', 'Cumin seeds', '1 tsp'),
+('Samosa', 'Garam masala', '1 tsp'),
+('Samosa', 'Pastry dough', '500g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Sushi', 'Sushi rice', '500g'),
+('Sushi', 'Nori sheets', '5'),
+('Sushi', 'Rice vinegar', '50ml'),
+('Sushi', 'Soy sauce', 'for dipping'),
+('Sushi', 'Fresh fish (various)', '300g'),
+('Sushi', 'Wasabi', 'according to taste');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Tacos', 'Corn tortillas', '12'),
+('Tacos', 'Ground beef', '500g'),
+('Tacos', 'Onion', '1 medium'),
+('Tacos', 'Tomatoes', '2 large'),
+('Tacos', 'Cheddar cheese', '100g'),
+('Tacos', 'Lettuce', '1 head');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Udon Soup', 'Udon noodles', '400g'),
+('Udon Soup', 'Dashi broth', '1 liter'),
+('Udon Soup', 'Soy sauce', '3 tbsp'),
+('Udon Soup', 'Mirin', '2 tbsp'),
+('Udon Soup', 'Green onions', '3 stalks'),
+('Udon Soup', 'Mushrooms', '100g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Vietnamese Pho', 'Rice noodles', '400g'),
+('Vietnamese Pho', 'Beef brisket', '500g'),
+('Vietnamese Pho', 'Onion', '1 large'),
+('Vietnamese Pho', 'Ginger', '50g'),
+('Vietnamese Pho', 'Star anise', '5 pods'),
+('Vietnamese Pho', 'Fish sauce', '3 tbsp');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Xinjiang Lamb Skewers', 'Lamb', '500g'),
+('Xinjiang Lamb Skewers', 'Cumin seeds', '2 tbsp'),
+('Xinjiang Lamb Skewers', 'Paprika', '1 tbsp'),
+('Xinjiang Lamb Skewers', 'Garlic powder', '1 tsp'),
+('Xinjiang Lamb Skewers', 'Salt', '1 tsp');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Xiaolongbao', 'Flour', '500g'),
+('Xiaolongbao', 'Ground pork', '300g'),
+('Xiaolongbao', 'Ginger', '20g'),
+('Xiaolongbao', 'Green onions', '50g'),
+('Xiaolongbao', 'Soy sauce', '3 tbsp');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Irish stew', 'Lamb shoulder', '500g'),
+('Irish stew', 'Potatoes', '500g'),
+('Irish stew', 'Carrots', '200g'),
+('Irish stew', 'Onions', '2 large'),
+('Irish stew', 'Beef stock', '1 liter');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Lamb Tagine', 'Lamb shoulder', '500g'),
+('Lamb Tagine', 'Onions', '2'),
+('Lamb Tagine', 'Garlic', '3 cloves'),
+('Lamb Tagine', 'Dried apricots', '100g'),
+('Lamb Tagine', 'Cinnamon', '1 stick');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Venison Stew', 'Venison', '500g'),
+('Venison Stew', 'Potatoes', '300g'),
+('Venison Stew', 'Carrots', '200g'),
+('Venison Stew', 'Onions', '2'),
+('Venison Stew', 'Beef stock', '1 liter');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Welsh Rarebit', 'Cheddar cheese', '200g'),
+('Welsh Rarebit', 'Beer', '100ml'),
+('Welsh Rarebit', 'Worcestershire sauce', '2 tbsp'),
+('Welsh Rarebit', 'Mustard', '1 tsp'),
+('Welsh Rarebit', 'Bread', '4 slices');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Ukrainian borscht', 'Beetroot', '500g'),
+('Ukrainian borscht', 'Cabbage', '200g'),
+('Ukrainian borscht', 'Potatoes', '300g'),
+('Ukrainian borscht', 'Carrots', '2'),
+('Ukrainian borscht', 'Onions', '1'),
+('Ukrainian borscht', 'Tomato paste', '2 tbsp');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Moussaka', 'Eggplant', '2 large'),
+('Moussaka', 'Ground lamb', '500g'),
+('Moussaka', 'Tomatoes', '400g (canned)'),
+('Moussaka', 'Bechamel sauce', '500ml'),
+('Moussaka', 'Onion', '1 large');
+
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Greek Salad', 'Cucumber', '1 large'),
+('Greek Salad', 'Tomatoes', '3 medium'),
+('Greek Salad', 'Red onion', '1 small'),
+('Greek Salad', 'Kalamata olives', '100g'),
+('Greek Salad', 'Feta cheese', '200g'),
+('Greek Salad', 'Olive oil', '50ml'),
+
+('Gazpacho', 'Tomatoes', '500g'),
+('Gazpacho', 'Cucumber', '1 medium'),
+('Gazpacho', 'Bell pepper', '1'),
+('Gazpacho', 'Red onion', '1 small'),
+('Gazpacho', 'Garlic', '2 cloves'),
+('Gazpacho', 'Olive oil', '50ml'),
+('Gazpacho', 'Vinegar', '2 tbsp'),
+
+('Waldorf Salad', 'Apples', '2 large'),
+('Waldorf Salad', 'Celery', '100g'),
+('Waldorf Salad', 'Walnuts', '50g'),
+('Waldorf Salad', 'Mayonnaise', '100ml'),
+('Waldorf Salad', 'Lemon juice', '1 tbsp'),
+
+('Tabbouleh', 'Bulgur', '100g'),
+('Tabbouleh', 'Parsley', '200g'),
+('Tabbouleh', 'Mint', '50g'),
+('Tabbouleh', 'Tomatoes', '3 medium'),
+('Tabbouleh', 'Lemon juice', '3 tbsp'),
+('Tabbouleh', 'Olive oil', '50ml'),
+
+('Quinoa Salad', 'Quinoa', '200g'),
+('Quinoa Salad', 'Cucumber', '1 medium'),
+('Quinoa Salad', 'Cherry tomatoes', '150g'),
+('Quinoa Salad', 'Red onion', '1 small'),
+('Quinoa Salad', 'Feta cheese', '100g'),
+('Quinoa Salad', 'Lemon juice', '2 tbsp'),
+('Quinoa Salad', 'Olive oil', '50ml'),
+
+('Tiramisu', 'Mascarpone cheese', '250g'),
+('Tiramisu', 'Ladyfingers', '200g'),
+('Tiramisu', 'Espresso', '200ml'),
+('Tiramisu', 'Eggs', '3 large'),
+('Tiramisu', 'Sugar', '100g'),
+
+('Eton Mess', 'Strawberries', '300g'),
+('Eton Mess', 'Meringue', '100g'),
+('Eton Mess', 'Whipping cream', '200ml'),
+
+('Nougat', 'Honey', '200g'),
+('Nougat', 'Sugar', '300g'),
+('Nougat', 'Egg whites', '2'),
+('Nougat', 'Almonds', '150g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Apple & Blackberry Crumble', 'Apples', '3 large'),
+('Apple & Blackberry Crumble', 'Blackberries', '150g'),
+('Apple & Blackberry Crumble', 'Sugar', '100g'),
+('Apple & Blackberry Crumble', 'Flour', '100g'),
+('Apple & Blackberry Crumble', 'Butter', '100g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Irish Coffee', 'Coffee', '250ml'),
+('Irish Coffee', 'Irish whiskey', '50ml'),
+('Irish Coffee', 'Brown sugar', '2 tbsp'),
+('Irish Coffee', 'Cream', '50ml');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Kaiserschmarrn', 'Eggs', '4 large'),
+('Kaiserschmarrn', 'Milk', '200ml'),
+('Kaiserschmarrn', 'Flour', '120g'),
+('Kaiserschmarrn', 'Sugar', '30g'),
+('Kaiserschmarrn', 'Butter', '50g');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Caldo verde', 'Potatoes', '500g'),
+('Caldo verde', 'Kale', '200g'),
+('Caldo verde', 'Chorizo', '100g'),
+('Caldo verde', 'Onion', '1 large'),
+('Caldo verde', 'Garlic', '2 cloves');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Jambalaya', 'Rice', '300g'),
+('Jambalaya', 'Chicken', '200g'),
+('Jambalaya', 'Shrimp', '150g'),
+('Jambalaya', 'Andouille sausage', '100g'),
+('Jambalaya', 'Bell peppers', '2');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Japanese Curry', 'Curry powder', '2 tbsp'),
+('Japanese Curry', 'Beef', '300g'),
+('Japanese Curry', 'Potatoes', '300g'),
+('Japanese Curry', 'Carrots', '200g'),
+('Japanese Curry', 'Onion', '1 large');
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+('Lobster Bisque', 'Lobster', '2 whole'),
+('Lobster Bisque', 'Carrots', '2'),
+('Lobster Bisque', 'Celery', '2 stalks'),
+('Lobster Bisque', 'Onion', '1 large'),
+('Lobster Bisque', 'Tomato paste', '1 tbsp'),
+('Lobster Bisque', 'Brandy', '50ml'),
+
+('Osso Buco', 'Veal shanks', '4 pieces'),
+('Osso Buco', 'Carrots', '2'),
+('Osso Buco', 'Celery', '2 stalks'),
+('Osso Buco', 'Onion', '1 large'),
+('Osso Buco', 'White wine', '100ml'),
+('Osso Buco', 'Tomatoes', '400g (canned)'),
+
+('Okonomiyaki', 'Cabbage', '300g'),
+('Okonomiyaki', 'Flour', '100g'),
+('Okonomiyaki', 'Eggs', '2'),
+('Okonomiyaki', 'Bacon', '100g'),
+('Okonomiyaki', 'Okonomiyaki sauce', '50ml'),
+
+('Paella', 'Rice', '300g'),
+('Paella', 'Chicken', '200g'),
+('Paella', 'Seafood mix', '200g'),
+('Paella', 'Bell peppers', '2'),
+('Paella', 'Saffron', '1 pinch'),
+
+('Peking Duck', 'Duck', '1 whole'),
+('Peking Duck', 'Hoisin sauce', '100ml'),
+('Peking Duck', 'Cucumbers', '2'),
+('Peking Duck', 'Green onions', '5 stalks'),
+
+('Shepherds Pie', 'Ground lamb', '500g'),
+('Shepherds Pie', 'Potatoes', '600g'),
+('Shepherds Pie', 'Carrots', '2'),
+('Shepherds Pie', 'Onion', '1 large'),
+('Shepherds Pie', 'Peas', '100g'),
+
+('Umbrian Lentil Stew', 'Lentils', '200g'),
+('Umbrian Lentil Stew', 'Tomatoes', '400g (canned)'),
+('Umbrian Lentil Stew', 'Carrots', '2'),
+('Umbrian Lentil Stew', 'Celery', '2 stalks'),
+('Umbrian Lentil Stew', 'Onion', '1 large'),
+
+('Vegetable Terrine', 'Carrots', '2 large'),
+('Vegetable Terrine', 'Zucchini', '2'),
+('Vegetable Terrine', 'Eggplant', '1'),
+('Vegetable Terrine', 'Gelatin', '10g'),
+
+('Kimchi Stew', 'Kimchi', '300g'),
+('Kimchi Stew', 'Tofu', '200g'),
+('Kimchi Stew', 'Pork belly', '200g'),
+('Kimchi Stew', 'Onion', '1 large'),
+('Kimchi Stew', 'Garlic', '4 cloves');
+
+
+INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
+
+
+('Fajitas', 'Chicken breast', '500g'),
+('Fajitas', 'Bell peppers', '3 (mixed colors)'),
+('Fajitas', 'Onion', '1 large'),
+('Fajitas', 'Fajita seasoning', '2 tbsp'),
+('Fajitas', 'Tortillas', '8'),
+
+('Hamburgers', 'Ground beef', '500g'),
+('Hamburgers', 'Hamburger buns', '4'),
+('Hamburgers', 'Lettuce', '4 leaves'),
+('Hamburgers', 'Tomato', '1 large'),
+('Hamburgers', 'Onion', '1 large'),
+('Hamburgers', 'Cheese', '4 slices'),
+
+('Jerk Chicken', 'Chicken thighs', '1 kg'),
+('Jerk Chicken', 'Jerk seasoning', '50g'),
+('Jerk Chicken', 'Scotch bonnet peppers', '2'),
+('Jerk Chicken', 'Green onions', '5 stalks'),
+('Jerk Chicken', 'Thyme', '1 tbsp'),
+
+('Kebab', 'Lamb', '500g'),
+('Kebab', 'Onions', '2 large'),
+('Kebab', 'Bell peppers', '2'),
+('Kebab', 'Kebab spices', '2 tbsp'),
+('Kebab', 'Yogurt', '100ml'),
+
+('Oysters Kilpatrick', 'Oysters', '12'),
+('Oysters Kilpatrick', 'Bacon', '100g'),
+('Oysters Kilpatrick', 'Worcestershire sauce', '2 tbsp'),
+('Oysters Kilpatrick', 'Butter', '50g'),
+('Oysters Kilpatrick', 'Parsley', 'for garnish'),
+
+('Quesadilla', 'Tortillas', '4 large'),
+('Quesadilla', 'Cheese', '200g'),
+('Quesadilla', 'Chicken', '200g (optional)'),
+('Quesadilla', 'Green peppers', '1'),
+('Quesadilla', 'Onion', '1 large'),
+
+
+('Wiener Schnitzel', 'Veal cutlets', '4'),
+('Wiener Schnitzel', 'Eggs', '2'),
+('Wiener Schnitzel', 'Breadcrumbs', '200g'),
+('Wiener Schnitzel', 'Flour', '100g'),
+('Wiener Schnitzel', 'Lemon', '2 (for garnish)');
+
+
+CREATE TABLE ingredients (
+    name VARCHAR(64),   
+    foodGroup VARCHAR(64),  
+    unitOfMeasure VARCHAR(64),  
+    caloriesPerUnitOfMeasure INT,--kcal
+    carbohydratesPerUnitOfMeasure INT, --grams
+    fatsPerUnitOfMeasure INT,--grams
+    sugarsPerUnitOfMeasure INT,--grams
+    PRIMARY KEY (name)
+);
+
+
+INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
+('Eggs', 'Dairy, Eggs, and Products', 'large (50g each)', 70, 1, 5, 1),
+('Flour', 'Cereals and Products', 'cup (120g)', 455, 95, 1, 1),
+('Peanut filling', 'Various Plant-Based Foods', 'cup (100g)', 588, 20, 50, 9),
+('Apples', 'Various Plant-Based Foods', 'medium (182g)', 95, 25, 0, 19),
+('Blackberries', 'Various Plant-Based Foods', 'cup (144g)', 62, 14, 1, 7),
+('Butter', 'Dairy, Eggs, and Products', 'tablespoon (14g)', 102, 0, 12, 0),
+('Sugar', 'Sweeteners', 'tablespoon (12.6g)', 49, 13, 0, 13),
+('Frangipane', 'Various Plant-Based Foods', '100g', 400, 44, 24, 24),
+('Pastry crust', 'Cereals and Products', 'piece (60g)', 200, 20, 11, 0),
+('Chicken', 'Meat and Products', '100g', 239, 0, 14, 0),
+('Coconut milk', 'Various Plant-Based Foods', 'cup (240g)', 552, 13, 57, 8),
+('Lemongrass', 'Spices and Essential Oils', 'stalk (18g)', 5, 1, 0, 0);
+INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
+('Jam', 'Preserved Foods', 'tablespoon (20g)', 56, 14, 0, 10),
+('Bananas', 'Various Plant-Based Foods', 'medium (118g)', 105, 27, 0, 14),
+('Beef fillet', 'Meat and Products', '100g', 250, 0, 15, 0),
+('Mushroom duxelles', 'Various Plant-Based Foods', '100g', 70, 5, 5, 2),
+('Puff pastry', 'Cereals and Products', 'ounce (28g)', 158, 11, 11, 0),
+('Chorizo', 'Meat and Products', 'slice (10g)', 50, 0, 5, 0),
+('Garlic', 'Various Plant-Based Foods', 'clove (3g)', 5, 1, 0, 0),
+('Kale', 'Various Plant-Based Foods', 'cup (67g)', 34, 6, 1, 0),
+('Onion', 'Various Plant-Based Foods', 'medium (110g)', 44, 10, 0, 5),
+('Potatoes', 'Various Plant-Based Foods', 'medium (173g)', 161, 37, 0, 2),
+('Cannelloni tubes', 'Cereals and Products', 'piece (30g)', 90, 18, 1, 1),
+('Ricotta cheese', 'Dairy, Eggs, and Products', 'cup (248g)', 428, 8, 32, 1),
+('Spinach', 'Various Plant-Based Foods', 'cup (30g)', 7, 1, 0, 0),
+('Chicken breast', 'Meat and Products', '100g', 165, 0, 4, 0),
+('Ginger', 'Spices and Essential Oils', 'tablespoon (6g)', 5, 1, 0, 0),
+('Rice', 'Cereals and Products', 'cup (cooked, 158g)', 206, 45, 0, 0),
+('Carrots', 'Various Plant-Based Foods', 'medium (61g)', 25, 6, 0, 3),
+('Gochujang (Korean chili paste)', 'Preserved Foods', 'tablespoon (20g)', 45, 9, 1, 7),
+('Soy sauce', 'Preserved Foods', 'tablespoon (18g)', 10, 1, 0, 0),
+('Cumin seeds', 'Spices and Essential Oils', 'teaspoon (2g)', 8, 1, 0, 0),
+('Garam Masala', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 1, 0, 0),
+('Tomatoes', 'Various Plant-Based Foods', 'medium (123g)', 22, 5, 0, 3),
+('Chocolate glaze', 'Sweeteners', 'tablespoon (20g)', 100, 15, 5, 12),
+('Choux pastry', 'Cereals and Products', 'piece (10g)', 30, 3, 2, 1),
+('Pastry cream', 'Dairy, Eggs, and Products', 'cup (250g)', 305, 30, 18, 23),
+('Bacon', 'Meat and Products', 'slice (8g)', 42, 0, 3, 0),
+('Sausages', 'Meat and Products', 'link (50g)', 142, 1, 12, 1),
+('Meringue', 'Sweeteners', 'piece (30g)', 95, 22, 0, 22),
+('Strawberries', 'Various Plant-Based Foods', 'cup (152g)', 49, 12, 0, 7),
+('Whipping cream', 'Dairy, Eggs, and Products', 'cup (60g)', 154, 4, 16, 3);
+INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
+('Bell peppers', 'Various Plant-Based Foods', 'medium (119g)', 24, 6, 0, 4),
+('Fajita seasoning', 'Spices and Essential Oils', 'tablespoon (8g)', 20, 4, 0, 0),
+('Tortillas', 'Cereals and Products', 'each (medium, 40g)', 94, 16, 2, 0),
+('Chickpeas', 'Various Plant-Based Foods', 'cup (cooked, 164g)', 269, 45, 4, 8),
+('Cumin', 'Spices and Essential Oils', 'teaspoon (2g)', 8, 1, 0, 0),
+('Parsley', 'Spices and Essential Oils', 'cup (chopped, 60g)', 22, 4, 0, 1),
+('Beer', 'Various Beverages', 'can (356ml)', 154, 13, 0, 0),
+('White fish fillets', 'Fish and Products', 'fillet (180g)', 206, 0, 2, 0),
+('Bell pepper', 'Various Plant-Based Foods', 'medium (119g)', 24, 6, 0, 4),
+('Cucumber', 'Various Plant-Based Foods', 'medium (201g)', 30, 7, 0, 4),
+('Olive oil', 'Fats and Oils', 'tablespoon (13.5g)', 119, 0, 14, 0),
+('Red onion', 'Various Plant-Based Foods', 'medium (110g)', 44, 10, 0, 5),
+('Vinegar', 'Various Plant-Based Foods', 'tablespoon (15g)', 3, 0, 0, 0),
+('Beef', 'Meat and Products', '100g', 250, 0, 15, 0),
+('Onions', 'Various Plant-Based Foods', 'medium (110g)', 44, 10, 0, 5),
+('Paprika', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 1, 0, 0),
+('Feta cheese', 'Dairy, Eggs, and Products', 'cup (crumbled, 150g)', 396, 6, 32, 0),
+('Kalamata olives', 'Various Plant-Based Foods', 'cup (134g)', 275, 15, 23, 0),
+('Cheese', 'Dairy, Eggs, and Products', 'slice (28g)', 113, 1, 9, 0),
+('Ground beef', 'Meat and Products', '100g', 254, 0, 18, 0),
+('Hamburger buns', 'Cereals and Products', 'each (43g)', 120, 21, 2, 3),
+('Lettuce', 'Various Plant-Based Foods', 'leaf (5g)', 1, 0, 0, 0),
+('Tomato', 'Various Plant-Based Foods', 'medium (123g)', 22, 5, 0, 3),
+('Bamboo shoots', 'Various Plant-Based Foods', 'cup (120g)', 20, 3, 0, 2),
+('Chicken broth', 'Preserved Foods', 'cup (240ml)', 38, 3, 1, 1),
+('Rice vinegar', 'Various Plant-Based Foods', 'tablespoon (15ml)', 3, 0, 0, 0),
+('Shiitake mushrooms', 'Various Plant-Based Foods', 'cup (87g)', 35, 7, 0, 2),
+('Tofu', 'Various Plant-Based Foods', 'block (122g)', 177, 5, 12, 1),
+('Lemon juice', 'Various Plant-Based Foods', 'tablespoon (15ml)', 4, 1, 0, 0),
+('Tahini', 'Various Plant-Based Foods', 'tablespoon (15g)', 89, 3, 8, 0),
+('Curry powder', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 1, 0, 0),
+('Brown sugar', 'Sweeteners', 'tablespoon (12g)', 45, 12, 0, 12),
+('Coffee', 'Coffee, Tea, and Related Products', 'cup (240ml)', 2, 0, 0, 0),
+('Cream', 'Dairy, Eggs, and Products', 'tablespoon (15ml)', 52, 1, 6, 1),
+('Irish whiskey', 'Various Beverages', 'shot (44ml)', 98, 0, 0, 0),
+('Beef stock', 'Preserved Foods', 'cup (240ml)', 31, 0, 0, 0),
+('Lamb shoulder', 'Meat and Products', '100g', 236, 0, 16, 0),
+('Almonds', 'Various Plant-Based Foods', 'cup (143g)', 828, 30, 72, 6),
+('Andouille sausage', 'Meat and Products', 'link (85g)', 229, 2, 19, 1),
+('Shrimp', 'Fish and Products', '100g', 99, 0, 1, 0),
+('Cream cheese', 'Dairy, Eggs, and Products', 'ounce (28g)', 99, 1, 10, 1);
+INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
+('Chicken thighs', 'Meat and Products', '100g', 209, 0, 15, 0),
+('Green onions', 'Various Plant-Based Foods', '100g', 32, 7, 0, 2),
+('Jerk seasoning', 'Spices and Essential Oils', 'teaspoon (2g)', 5, 1, 0, 0),
+('Scotch bonnet peppers', 'Various Plant-Based Foods', 'pepper (6.5g)', 2, 1, 0, 0),
+('Thyme', 'Spices and Essential Oils', 'tablespoon (1g)', 3, 1, 0, 0),
+('Milk', 'Dairy, Eggs, and Products', 'cup (244g)', 103, 12, 2, 12),
+('Kebab spices', 'Spices and Essential Oils', 'tablespoon (7g)', 20, 4, 0, 0),
+('Lamb', 'Meat and Products', '100g', 294, 0, 24, 0),
+('Yogurt', 'Dairy, Eggs, and Products', 'cup (245g)', 154, 17, 9, 17),
+('Condensed milk', 'Dairy, Eggs, and Products', 'cup (306g)', 982, 166, 27, 166),
+('Graham cracker crust', 'Cereals and Products', 'piece (21g)', 102, 12, 5, 5),
+('Lime juice', 'Various Plant-Based Foods', 'tablespoon (15ml)', 4, 1, 0, 0),
+('Cooked rice', 'Cereals and Products', 'cup (158g)', 206, 45, 0, 0),
+('Kimchi', 'Various Plant-Based Foods', 'cup (150g)', 23, 4, 0, 2),
+('Sesame oil', 'Fats and Oils', 'tablespoon (14ml)', 120, 0, 14, 0),
+('Pork belly', 'Meat and Products', '100g', 518, 0, 53, 0),
+('Cinnamon', 'Spices and Essential Oils', 'teaspoon (2.6g)', 6, 2, 0, 0),
+('Dried apricots', 'Fruits and Products', 'cup (130g)', 313, 81, 1, 69),
+('Lasagna noodles', 'Cereals and Products', 'piece (56g)', 180, 36, 1, 1),
+('Marinara sauce', 'Various Plant-Based Foods', 'cup (240g)', 70, 13, 2, 9),
+('Brandy', 'Various Beverages', 'shot (42g)', 95, 0, 0, 0),
+('Celery', 'Various Plant-Based Foods', 'stalk (40g)', 6, 1, 0, 1),
+('Lobster', 'Fish and Products', '100g', 89, 0, 1, 0),
+('Tomato paste', 'Preserved Foods', 'tablespoon (16g)', 13, 3, 0, 2),
+('Almond flour', 'Various Plant-Based Foods', 'cup (96g)', 544, 20, 48, 4),
+('Egg whites', 'Dairy, Eggs, and Products', 'large (33g)', 17, 0, 0, 0),
+('Granulated sugar', 'Sweeteners', 'cup (200g)', 774, 200, 0, 200),
+('Doubanjiang (fermented bean paste)', 'Various Plant-Based Foods', 'tablespoon (15g)', 25, 4, 1, 3),
+('Green onion', 'Various Plant-Based Foods', '100g', 32, 7, 0, 2),
+('Ground pork', 'Meat and Products', '100g', 297, 0, 21, 0),
+('Bechamel sauce', 'Dairy, Eggs, and Products', 'cup (250g)', 300, 20, 23, 9),
+('Eggplant', 'Various Plant-Based Foods', 'medium (200g)', 50, 12, 0, 7),
+('Ground lamb', 'Meat and Products', '100g', 282, 0, 23, 0),
+('Cheddar cheese', 'Dairy, Eggs, and Products', 'slice (28g)', 113, 0, 9, 0),
+('Jalapenos', 'Various Plant-Based Foods', 'pepper (14g)', 4, 1, 0, 1),
+('Salsa', 'Various Plant-Based Foods', 'tablespoon (15g)', 4, 1, 0, 1),
+('Tortilla chips', 'Cereals and Products', 'ounce (28g)', 138, 19, 7, 0),
+('Kecap Manis (sweet soy sauce)', 'Preserved Foods', 'tablespoon (15ml)', 40, 10, 0, 9),
+('Shallots', 'Various Plant-Based Foods', 'medium (10g)', 7, 2, 0, 1),
+('Honey', 'Sweeteners', 'tablespoon (21g)', 64, 17, 0, 17),
+('Cabbage', 'Various Plant-Based Foods', 'cup (chopped, 89g)', 22, 5, 0, 3),
+('Okonomiyaki sauce', 'Preserved Foods', 'tablespoon (18g)', 35, 7, 0, 6),
+('Veal shanks', 'Meat and Products', '100g', 178, 0, 9, 0),
+('White wine', 'Various Beverages', 'glass (147ml)', 123, 4, 0, 1),
+('Oysters', 'Fish and Products', 'medium (25g)', 17, 2, 1, 0),
+('Worcestershire sauce', 'Spices and Essential Oils', 'tablespoon (17ml)', 13, 3, 0, 1),
+('Saffron', 'Spices and Essential Oils', 'teaspoon (0.7g)', 6, 1, 0, 0),
+('Seafood mix', 'Fish and Products', '100g', 89, 0, 1, 0),
+('Cucumbers', 'Various Plant-Based Foods', 'medium (201g)', 30, 7, 0, 4),
+('Duck', 'Meat and Products', '100g', 337, 0, 28, 0),
+('Hoisin sauce', 'Various Plant-Based Foods', 'tablespoon (19g)', 35, 7, 1, 6),
+('Egg', 'Dairy, Eggs, and Products', 'large (50g)', 70, 1, 5, 1),
+('Potato', 'Various Plant-Based Foods', 'medium (173g)', 161, 37, 0, 2),
+('Green peppers', 'Various Plant-Based Foods', 'medium (119g)', 24, 6, 0, 4),
+('Cherry tomatoes', 'Various Plant-Based Foods', 'cup (149g)', 27, 6, 0, 4),
+('Quinoa', 'Cereals and Products', 'cup (185g)', 222, 39, 4, 0),
+('Ramen noodles', 'Cereals and Products', 'package (85g)', 371, 51, 14, 1),
+('Yellow squash', 'Various Plant-Based Foods', 'medium (200g)', 31, 7, 0, 4),
+('Zucchini', 'Various Plant-Based Foods', 'medium (196g)', 33, 6, 1, 5),
+('Arborio rice', 'Cereals and Products', 'cup (192g)', 716, 158, 1, 0),
+('Chicken stock', 'Preserved Foods', 'cup (240ml)', 86, 8, 3, 1),
+('Parmesan cheese', 'Dairy, Eggs, and Products', 'ounce (28g)', 122, 1, 8, 0),
+('Garam masala', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 1, 0, 0),
+('Green peas', 'Various Plant-Based Foods', 'cup (160g)', 118, 21, 1, 8),
+('Pastry dough', 'Cereals and Products', 'piece (100g)', 455, 45, 30, 1),
+('Peas', 'Various Plant-Based Foods', 'cup (160g)', 117, 21, 1, 8),
+('Fresh fish (various)', 'Fish and Products', '100g', 206, 0, 12, 0),
+('Nori sheets', 'Fish and Products', 'sheet (2.5g)', 9, 1, 0, 0),
+('Sushi rice', 'Cereals and Products', 'cup (cooked, 158g)', 296, 65, 0, 0),
+('Wasabi', 'Spices and Essential Oils', 'teaspoon (6g)', 15, 3, 0, 0),
+('Bulgur', 'Cereals and Products', 'cup (140g)', 479, 106, 2, 0),
+('Mint', 'Spices and Essential Oils', 'cup (chopped, 18g)', 12, 2, 0, 0),
+('Corn tortillas', 'Cereals and Products', 'each (24g)', 52, 11, 1, 1),
+('Espresso', 'Coffee, Tea, and Related Products', 'shot (30ml)', 2, 0, 0, 0),
+('Ladyfingers', 'Cereals and Products', 'each (15g)', 47, 8, 1, 3),
+('Mascarpone cheese', 'Dairy, Eggs, and Products', 'cup (250g)', 859, 6, 89, 0),
+('Dashi broth', 'Various Beverages', 'cup (240ml)', 10, 2, 0, 0),
+('Mirin', 'Various Beverages', 'tablespoon (15ml)', 48, 8, 0, 5),
+('Mushrooms', 'Various Plant-Based Foods', 'cup (70g)', 15, 2, 0, 1),
+('Udon noodles', 'Cereals and Products', 'package (200g)', 200, 42, 1, 2),
+('Beetroot', 'Various Plant-Based Foods', 'medium (82g)', 35, 8, 0, 7),
+('Lentils', 'Various Plant-Based Foods', 'cup (192g)', 678, 115, 2, 4),
+('Gelatin', 'Dairy, Eggs, and Products', 'tablespoon (7g)', 23, 0, 0, 0),
+('Venison', 'Meat and Products', '100g', 158, 0, 2, 0),
+('Beef brisket', 'Meat and Products', '100g', 248, 0, 19, 0),
+('Fish sauce', 'Preserved Foods', 'tablespoon (18ml)', 9, 1, 0, 1),
+('Rice noodles', 'Cereals and Products', 'cup (176g)', 192, 44, 0, 0),
+('Star anise', 'Spices and Essential Oils', 'whole (2g)', 7, 1, 0, 0),
+('Mayonnaise', 'Fats and Oils', 'tablespoon (13g)', 94, 0, 10, 0),
+('Walnuts', 'Various Plant-Based Foods', 'cup (120g)', 765, 16, 76, 3),
+('Bread', 'Cereals and Products', 'slice (32g)', 85, 16, 1, 2),
+('Mustard', 'Spices and Essential Oils', 'tablespoon (15g)', 15, 2, 1, 1),
+('Breadcrumbs', 'Cereals and Products', 'cup (120g)', 460, 78, 6, 8),
+('Lemon', 'Various Plant-Based Foods', 'whole (58g)', 17, 5, 0, 1),
+('Veal cutlets', 'Meat and Products', '100g', 194, 0, 7, 0),
+('Garlic powder', 'Spices and Essential Oils', 'teaspoon (3.1g)', 10, 2, 0, 0),
+('Salt', 'Spices and Essential Oils', 'teaspoon (6g)', 0, 0, 0, 0);
