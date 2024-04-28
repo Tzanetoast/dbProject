@@ -350,11 +350,13 @@ UPDATE recipes
 SET tools = 'frying pan, spatula, chefs knife, cutting board'
 WHERE name = 'Quesadilla';
 
+DROP TABLE tools;
+
 CREATE TABLE tools (
     name VARCHAR(64),
     usage VARCHAR(256),
-    PRIMARY KEY(name)
-)
+    PRIMARY KEY (name)
+);
 
 INSERT INTO tools (name, usage) VALUES
 ('oven', 'Used for baking and roasting foods.'),
@@ -417,15 +419,17 @@ INSERT INTO tools (name, usage) VALUES
 ('whisk', 'Used for whisking or beating to incorporate air into mixtures.'),
 ('stirring spoon', 'Used for stirring foods while cooking.');
 
-CREATE TABLE recipes-tools (
+DROP TABLE recipes_tools;
+
+CREATE TABLE recipes_tools (
     recipeName VARCHAR(64),
     toolName VARCHAR(64),
     PRIMARY KEY (recipeName,toolName),
     FOREIGN KEY (recipeName) REFERENCES recipes(name),
     FOREIGN KEY (toolName) REFERENCES tools(name)
-)
+);
 
-INSERT INTO recipes-tools (recipeName, toolName) VALUES
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Apple Frangipan Tart', 'oven'),
 ('Apple Frangipan Tart', 'mixing bowl'),
 ('Apple Frangipan Tart', 'cake mold'),
@@ -487,8 +491,8 @@ INSERT INTO recipes-tools (recipeName, toolName) VALUES
 ('Key Lime Pie', 'cake mold'),
 ('Key Lime Pie', 'rolling pin'),
 ('Key Lime Pie', 'pastry brush'),
-('Key Lime Pie', 'measuring spoon'),
-
+('Key Lime Pie', 'measuring spoon');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Lasagna', 'oven'),
 ('Lasagna', 'mixing bowl'),
 ('Lasagna', 'cake mold'),
@@ -602,8 +606,8 @@ INSERT INTO recipes-tools (recipeName, toolName) VALUES
 ('Dum Aloo', 'spatula'),
 ('Dum Aloo', 'ladle'),
 ('Dum Aloo', 'chefs knife'),
-('Dum Aloo', 'cutting board'),
-
+('Dum Aloo', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Falafel', 'stovetop'),
 ('Falafel', 'frying pan'),
 ('Falafel', 'spatula'),
@@ -672,115 +676,111 @@ INSERT INTO recipes-tools (recipeName, toolName) VALUES
 ('Pierogi', 'spatula'),
 ('Pierogi', 'ladle'),
 ('Pierogi', 'chefs knife'),
-('Pierogi', 'cutting board'),
-
+('Pierogi', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Ratatouille', 'stovetop'),
 ('Ratatouille', 'frying pan'),
 ('Ratatouille', 'spatula'),
 ('Ratatouille', 'ladle'),
 ('Ratatouille', 'chefs knife'),
-('Ratatouille', 'cutting board'),
-
+('Ratatouille', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Risotto', 'stovetop'),
 ('Risotto', 'frying pan'),
 ('Risotto', 'spatula'),
 ('Risotto', 'ladle'),
 ('Risotto', 'chefs knife'),
-('Risotto', 'cutting board'),
-
+('Risotto', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Ramen', 'stovetop'),
 ('Ramen', 'frying pan'),
 ('Ramen', 'spatula'),
 ('Ramen', 'ladle'),
 ('Ramen', 'chefs knife'),
-('Ramen', 'cutting board'),
-
+('Ramen', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Samosa', 'stovetop'),
 ('Samosa', 'frying pan'),
 ('Samosa', 'spatula'),
 ('Samosa', 'ladle'),
 ('Samosa', 'chefs knife'),
-('Samosa', 'cutting board'),
-
+('Samosa', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Sushi', 'stovetop'),
 ('Sushi', 'frying pan'),
 ('Sushi', 'spatula'),
 ('Sushi', 'ladle'),
 ('Sushi', 'chefs knife'),
-('Sushi', 'cutting board'),
-
+('Sushi', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Tacos', 'stovetop'),
 ('Tacos', 'frying pan'),
 ('Tacos', 'spatula'),
 ('Tacos', 'ladle'),
 ('Tacos', 'chefs knife'),
-('Tacos', 'cutting board'),
-
+('Tacos', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Udon Soup', 'stovetop'),
 ('Udon Soup', 'frying pan'),
 ('Udon Soup', 'spatula'),
 ('Udon Soup', 'ladle'),
 ('Udon Soup', 'chefs knife'),
-('Udon Soup', 'cutting board'),
-
+('Udon Soup', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Vietnamese Pho', 'stovetop'),
 ('Vietnamese Pho', 'frying pan'),
 ('Vietnamese Pho', 'spatula'),
 ('Vietnamese Pho', 'ladle'),
 ('Vietnamese Pho', 'chefs knife'),
-('Vietnamese Pho', 'cutting board'),
-
+('Vietnamese Pho', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Xinjiang Lamb Skewers', 'stovetop'),
 ('Xinjiang Lamb Skewers', 'frying pan'),
 ('Xinjiang Lamb Skewers', 'spatula'),
 ('Xinjiang Lamb Skewers', 'ladle'),
 ('Xinjiang Lamb Skewers', 'chefs knife'),
-('Xinjiang Lamb Skewers', 'cutting board'),
-
+('Xinjiang Lamb Skewers', 'cutting board');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Xiaolongbao', 'steamer basket'),
 ('Xiaolongbao', 'pot'),
 ('Xiaolongbao', 'chefs knife'),
-('Xiaolongbao', 'cutting board'),
+('Xiaolongbao', 'cutting board');
 
-('Chicken Congee', 'steamer basket'),
-('Chicken Congee', 'pot'),
-('Chicken Congee', 'chefs knife'),
-('Chicken Congee', 'cutting board'),
-
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Falafel', 'deep fryer'),
 ('Falafel', 'slotted spoon'),
 ('Falafel', 'thermometer'),
-('Falafel', 'paper towel'),
-
+('Falafel', 'paper towel');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Fish and Chips', 'deep fryer'),
 ('Fish and Chips', 'slotted spoon'),
 ('Fish and Chips', 'thermometer'),
-('Fish and Chips', 'paper towel'),
-
+('Fish and Chips', 'paper towel');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Irish stew', 'slow cooker'),
 ('Irish stew', 'ladle'),
-('Irish stew', 'meat thermometer'),
-
+('Irish stew', 'meat thermometer');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Lamb Tagine', 'slow cooker'),
 ('Lamb Tagine', 'ladle'),
-('Lamb Tagine', 'meat thermometer'),
-
+('Lamb Tagine', 'meat thermometer');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Venison Stew', 'slow cooker'),
 ('Venison Stew', 'ladle'),
-('Venison Stew', 'meat thermometer'),
-
+('Venison Stew', 'meat thermometer');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Welsh Rarebit', 'slow cooker'),
 ('Welsh Rarebit', 'ladle'),
-('Welsh Rarebit', 'meat thermometer'),
-
+('Welsh Rarebit', 'meat thermometer');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Ukrainian borscht', 'slow cooker'),
 ('Ukrainian borscht', 'ladle'),
-('Ukrainian borscht', 'meat thermometer'),
-
+('Ukrainian borscht', 'meat thermometer');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Moussaka', 'slow cooker'),
 ('Moussaka', 'ladle'),
-('Moussaka', 'meat thermometer'),
-
+('Moussaka', 'meat thermometer');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Greek Salad', 'mixing bowl'),
 ('Greek Salad', 'chopping board'),
 ('Greek Salad', 'chefs knife'),
@@ -863,8 +863,8 @@ INSERT INTO recipes-tools (recipeName, toolName) VALUES
 ('Jambalaya', 'ladle'),
 ('Jambalaya', 'chefs knife'),
 ('Jambalaya', 'cutting board'),
-('Jambalaya', 'stirring spoon'),
-
+('Jambalaya', 'stirring spoon');
+INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Japanese Curry', 'pot'),
 ('Japanese Curry', 'ladle'),
 ('Japanese Curry', 'chefs knife'),
