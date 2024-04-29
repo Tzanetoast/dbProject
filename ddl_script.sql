@@ -1,172 +1,56 @@
--- DROP TABLE nationalCuisines;
+DROP TABLE nationalCuisines;
 
--- CREATE TABLE nationalCuisines (
---     nation VARCHAR(128) NOT NULL,
---     PRIMARY KEY (nation)
--- );
+CREATE TABLE nationalCuisines (
+    name VARCHAR(64),
+    description VARCHAR(256),
+    PRIMARY KEY (name)
+);
 
--- INSERT INTO NationalCuisines (nation) VALUES
--- ('Italian'),('French'),('Japanese'),('Mexican');
+INSERT INTO nationalCuisines (name, description) VALUES 
+('British', 'Known for its traditional dishes like fish and chips, puddings, and roasts.'),
+('Malaysian', 'Features complex flavors with spicy, sweet, and savory elements, heavily influenced by various cultures including Chinese and Indian.'),
+('American', 'Diverse and broad, encompasses everything from classic hamburgers and hot dogs to regional specialties like Southern barbecue.'),
+('Chinese', 'Rich with flavors from Sichuan spice to Cantonese dim sum, known for its regional diversity.'),
+('Italian', 'Emphasizes fresh, high-quality ingredients like tomatoes, garlic, and olive oil, famous for pasta and pizza.'),
+('Portuguese', 'Seafood-centric, often includes spices like piri piri and dishes like bacalhau.'),
+('Korean', 'Known for its balance of spice, sweetness, and fermentation with dishes like kimchi and barbecued meats.'),
+('Danish', 'Features hearty meat-based meals alongside pastries, most famously Danish pastries.'),
+('Indian', 'Renowned for its use of aromatic spices and a wide array of dishes from curries to tandoori.'),
+('French', 'Famous for its fine dining and techniques, includes bread, wines, and cheeses as staples.'),
+('Mexican', 'Rich in flavors and colors, often spicy, includes tacos, quesadillas, and mole among other dishes.'),
+('Middle Eastern', 'Characterized by dishes like hummus, falafel, and kebabs, with a heavy emphasis on spices and herbs.'),
+('Spanish', 'Known for tapas and seafood, dishes like paella and gazpacho highlight its regional diversity.'),
+('Hungarian', 'Famous for its hearty stews and paprika-laden dishes such as goulash.'),
+('Greek', 'Mediterranean cuisine known for its use of feta cheese, olives, and herbs in dishes like moussaka and Greek salad.'),
+('Irish', 'Comforting and hearty with staples like Irish stew, potatoes, and a variety of breads.'),
+('Japanese', 'Notable for its sushi, ramen, and precision in preparation and presentation of meals.'),
+('Caribbean', 'Vibrant and flavorful, with a strong emphasis on spices, seafood, and tropical fruits.'),
+('Austrian', 'Known for its pastries such as strudel and savory dishes like Wiener Schnitzel.'),
+('Moroccan', 'Rich in spices and flavors with specialties like tagine and couscous.'),
+('Indonesian', 'Diverse archipelago cuisine featuring satay, nasi goreng, and rich peanut sauces.'),
+('Australian', 'Combines British influences with native bush tucker, famous for its barbecues and seafood.'),
+('Eastern European', 'Hearty dishes with a significant use of meat, potatoes, and dairy, along with a strong pickling tradition.'),
+('International', 'Encompasses global dishes tailored to worldwide tastes, often found in cosmopolitan areas.'),
+('Ukrainian', 'Known for its use of vegetables and grains, with dishes like borscht and pierogi.'),
+('Vietnamese', 'Marked by the use of fresh herbs, fish sauce, and dishes that balance sweet, sour, salty, and hot flavors.');
 
--- DROP TABLE mealType;
+DROP TABLE mealTypes;
+CREATE TABLE mealTypes(
+    name VARCHAR(64),
+    PRIMARY KEY (name)
+);
 
--- CREATE TABLE mealType (
---     type VARCHAR(128) NOT NULL,
---     PRIMARY KEY (type) 
--- );
+INSERT INTO mealTypes (name) VALUES
+('Dessert'),
+('Snack'),
+('Dinner'),
+('Breakfast'),
+('Lunch'),
+('Cold-dish'),
+('Barbecue'),
+('Appetizer'),
+('Brunch');
 
--- CREATE TABLE recipe-mealType (
---     recipeId INT NOT NULL,
---     type VARCHAR(128) NOT NULL,
---     PRIMARY KEY (recipeId,type),
---     FOREIGN KEY recipeId REFERENCES recipes(recipeId),
---     FOREIGN KEY type REFERENCES mealType(type)
--- )
-
--- DROP TABLE recipes;
-
--- CREATE TABLE recipes (
---     recipeId INT NOT NULL,
---     name VARCHAR(128) NOT NULL,
---     cookingORpastry VARCHAR(7) NOT NULL CHECK (cookingORpastry IN ('cooking', 'pastry')),
---     shortDescription TEXT,
---     nationalCuisine VARCHAR(128) NOT NULL,
---     difficulty  SMALLINT CHECK (difficulty BETWEEN 1 AND 5),
---     PrepTime INT, -- in minutes
---     CookingTime INT, -- in minutes
---     MealType VARCHAR(255), -- e.g., Breakfast, Lunch, Dinner
---     AdditionalTags TEXT, -- JSON array of tags
---     Tips TEXT, -- JSON array of tips
---     MainIngredientID INT,
---     PRIMARY KEY (recipeId),
---     FOREIGN KEY (nationalCuisine) REFERENCES nationalCuisines(nation)
--- );
-
--- DROP TABLE recipes;
-
--- CREATE TABLE recipes (
---     recipeId INT NOT NULL,
---     name VARCHAR(128) NOT NULL,
---     cookingORpastry VARCHAR(7) NOT NULL CHECK (cookingORpastry IN ('cooking', 'pastry')),
---     shortDescription TEXT,
---     nationalCuisine VARCHAR(128) NOT NULL,  
---     difficulty  SMALLINT CHECK (difficulty BETWEEN 1 AND 5), --dificulty of the dish
---     prepTime INT, -- in minutes
---     cookingTime INT, -- in minutes
---     mealType VARCHAR(255), -- e.g., Breakfast, Lunch, Dinner,Snack,Appetizers,Dessert, brunch, cold-dish,Barbecue,Buffet,Halal,Fine-Dining,Vegan,Raw-Food
---     tools VARCHAR(255),
---     PRIMARY KEY (recipeId)
---     --FOREIGN KEY (nationalCuisine) REFERENCES nationalCuisines(nation)
--- );
-
--- INSERT INTO recipes (recipeId, name, cookingORpastry, shortDescription, nationalCuisine, difficulty, prepTime, cookingTime, mealType) VALUES 
--- (1, 'Apple Frangipan Tart', 'pastry', 'A delicious tart made with apples and frangipane.', 'British', 3, 30, 45, 'Dessert'),
--- (2, 'Apple & Blackberry Crumble', 'pastry', 'A traditional dessert combining apples and blackberries with a crumble topping.', 'British', 2, 15, 30, 'Dessert'),
--- (3, 'Apam balik', 'cooking', 'A sweet Malaysian pancake that is crispy on the outside and fluffy inside.', 'Malaysian', 2, 10, 15, 'Snack'),
--- (4, 'Ayam Percik', 'cooking', 'Malaysian grilled chicken slathered in a spicy coconut milk marinade.', 'Malaysian', 3, 20, 30, 'Dinner'),
-
--- (5, 'Bakewell tart', 'pastry', 'A classic English dessert tart with jam and frangipane.', 'British', 3, 20, 40, 'Dessert, Snack'),
--- (6, 'Beef Wellington', 'cooking', 'Beef fillet coated with mushroom duxelles and wrapped in puff pastry.', 'British', 5, 30, 60, 'Dinner, Fine-Dining'),
-
--- (7, 'Irish stew', 'cooking', 'A hearty stew made with lamb, potatoes, and carrots.', 'Irish', 2, 15, 120, 'Dinner, Lunch'),
-
--- (8, 'Banana Pancakes', 'cooking', 'Sweet pancakes made with ripe bananas.', 'American', 1, 10, 15, 'Breakfast, Dessert'),
-
--- (9, 'Chicken Congee', 'cooking', 'A type of rice porridge popular in Asian countries.', 'Chinese', 1, 10, 90, 'Breakfast, Dinner'),
--- (10, 'Cannelloni', 'cooking', 'Tubular pasta filled with meat or cheese and baked in a sauce.', 'Italian', 3, 30, 45, 'Lunch, Dinner'),
--- (11, 'Caldo verde', 'cooking', 'A traditional Portuguese soup made with potatoes, chorizo, and kale.', 'Portuguese', 2, 15, 35, 'Dinner, Cold-dish'),
-
--- (12, 'Dakdoritang', 'cooking', 'Korean spicy chicken stew with vegetables.', 'Korean', 3, 20, 40, 'Dinner'),
--- (13, 'Danish Pastry', 'pastry', 'Sweet pastry originated from Denmark.', 'Danish', 4, 30, 20, 'Breakfast, Snack'),
--- (14, 'Dum Aloo', 'cooking', 'Potatoes cooked in curry, popular in Indian cuisine.', 'Indian', 2, 15, 30, 'Lunch, Dinner'),
-
--- (15, 'English Breakfast', 'cooking', 'Full breakfast dish consisting of eggs, sausages, beans, toast, and more.', 'British', 2, 5, 15, 'Breakfast, Brunch'),
--- (16, 'Eclairs', 'pastry', 'Pastry filled with cream and topped with chocolate icing.', 'French', 4, 25, 50, 'Dessert, Snack'),
--- (17, 'Eton Mess', 'pastry', 'Dessert consisting of a mix of strawberries, meringue, and whipped cream.', 'British', 1, 15, 0, 'Dessert, Snack'),
-
--- (18, 'Fish and Chips', 'cooking', 'Battered fish with deep-fried chips, a popular British fast food.', 'British', 2, 10, 20, 'Lunch, Dinner, Snack'),
--- (19, 'Fajitas', 'cooking', 'Grilled meat served on a flour or corn tortilla.', 'Mexican', 2, 20, 10, 'Dinner, Barbecue'),
--- (20, 'Falafel', 'cooking', 'Deep-fried balls made from ground chickpeas or fava beans.', 'Middle Eastern', 2, 30, 5, 'Lunch, Dinner, Snack'),
-
--- (21, 'Gazpacho', 'cooking', 'Cold soup made from raw, blended vegetables.', 'Spanish', 1, 20, 0, 'Lunch, Dinner, Cold-dish'),
--- (22, 'Goulash', 'cooking', 'Stew of meat and vegetables seasoned with paprika.', 'Hungarian', 3, 15, 120, 'Dinner'),
--- (23, 'Greek Salad', 'cooking', 'Salad made with tomatoes, cucumbers, onion, feta cheese, and olives.', 'Greek', 1, 10, 0, 'Lunch, Dinner, Cold-dish'),
-
--- (24, 'Hot and Sour Soup', 'cooking', 'A variety of soups from severalAsian countries, particularly spicy in Sichuan cuisine.', 'Chinese', 2, 10, 20, 'Dinner, Snack'),
--- (25, 'Hummus', 'cooking', 'Creamy dip made from cooked, mashed chickpeas blended with tahini, lemon juice, and garlic.', 'Middle Eastern', 1, 10, 0, 'Snack, Appetizer'),
--- (26, 'Hamburgers', 'cooking', 'Ground meat patties, typically beef, served on a bun with various toppings.', 'American', 1, 10, 10, 'Lunch, Dinner, Snack'),
-
--- (27, 'Irish Coffee', 'pastry', 'Hot coffee with Irish whiskey and sugar, stirred, and topped with cream.', 'Irish', 1, 5, 0, 'Dessert, Snack'),
--- (28, 'Indian Curry', 'cooking', 'Spiced meat, fish, or vegetables cooked in a sauce.', 'Indian', 3, 20, 40, 'Lunch, Dinner'),
--- (29, 'Italian Biscotti', 'pastry', 'Twice-baked almond biscuits originating from Italy.', 'Italian', 2, 20, 30, 'Snack, Dessert'),
-
--- (30, 'Jambalaya', 'cooking', 'A Creole rice dish with meat and seafood, cooked in a tomato base.', 'American', 3, 20, 45, 'Lunch, Dinner'),
--- (31, 'Japanese Curry', 'cooking', 'A thick, stew-like curry with meat and vegetables.', 'Japanese', 2, 15, 35, 'Dinner'),
--- (32, 'Jerk Chicken', 'cooking', 'Spicy chicken dish marinated with a hot spice mixture called jerk spice.', 'Caribbean', 3, 240, 45, 'Dinner, Barbecue'),
-
--- (33, 'Kimchi Fried Rice', 'cooking', 'Fried rice made with kimchi and other ingredients such as vegetables or meat.', 'Korean', 1, 10, 15, 'Lunch, Dinner'),
--- (34, 'Kaiserschmarrn', 'pastry', 'A fluffy shredded pancake that has its origins in Austria.', 'Austrian', 2, 10, 20, 'Dessert, Snack'),
--- (35, 'Kebab', 'cooking', 'Meat cut into cubes, marinated, and then grilled on skewers.', 'Middle Eastern', 2, 180, 10, 'Lunch, Dinner, Snack'),
-
--- (36, 'Lasagna', 'cooking', 'Layered pasta dish with cheese, meat, and tomato sauce.', 'Italian', 4, 30, 60, 'Lunch, Dinner'),
--- (37, 'Lamb Tagine', 'cooking', 'Moroccan dish of slow-cooked lamb with spices.', 'Moroccan', 3, 20, 120, 'Dinner'),
--- (38, 'Lobster Bisque', 'cooking', 'A smooth and creamy soup made with lobster stock.', 'French', 4, 15, 45, 'Dinner, Fine-Dining'),
-
--- (39, 'Moussaka', 'cooking', 'Eggplant or potato-based dish, often including ground meat.', 'Greek', 3, 30, 60, 'Dinner'),
--- (40, 'Mapo Tofu', 'cooking', 'Spicy Sichuan tofu dish with minced meat, typically pork or beef.', 'Chinese', 2, 10, 20, 'Lunch, Dinner'),
--- (41, 'Macaron', 'pastry', 'Sweet meringue-based confection made with egg white, icing sugar, granulated sugar, almond meal, and food coloring.', 'French', 4, 25, 15, 'Dessert, Snack'),
-
--- (42, 'Nachos', 'cooking', 'Dish of heated tortilla chips or totopos covered with melted cheese, often served as a snack or appetizer.', 'Mexican', 1, 5, 10, 'Snack, Appetizer'),
--- (43, 'Nasi Goreng', 'cooking', 'Indonesian dish made with fried rice, typically flavored with kecap manis (sweet soy sauce), shallot, garlic, tamarind and chili.', 'Indonesian', 2, 10, 15, 'Lunch, Dinner'),
--- (44, 'Nougat', 'pastry', 'A family of confections made with sugar or honey, roasted nuts, whipped egg whites, and sometimes chopped candied fruit.', 'French', 3, 30, 20, 'Dessert, Snack'),
-
--- (45, 'Osso Buco', 'cooking', 'An Italian dish made with veal shanks cooked with vegetables, white wine, and broth.', 'Italian', 4, 15, 120, 'Lunch, Dinner'),
--- (46, 'Oysters Kilpatrick', 'cooking', 'Oysters topped with a Worcestershire-based sauce, bacon and breadcrumbs, then grilled.', 'Australian', 2, 10, 10, 'Appetizer, Fine-Dining'),
--- (47, 'Okonomiyaki', 'cooking', 'Japanese savory pancake containing a variety of ingredients.', 'Japanese', 2, 10, 15, 'Lunch, Dinner, Snack'),
-
--- (48, 'Paella', 'cooking', 'Spanish rice dish originally from Valencia, containing meat, seafood, and vegetables.', 'Spanish', 3, 20, 40, 'Lunch, Dinner'),
--- (49, 'Pierogi', 'cooking', 'Filled dumplings of Central European origin made by wrapping unleavened dough around a savory or sweet filling.', 'Eastern European', 3, 30, 20, 'Lunch, Dinner, Snack'),
--- (50, 'Peking Duck', 'cooking', 'A famous duck dish from Beijing that has been prepared since the imperial era, known for its thin, crisp skin.', 'Chinese', 5, 120, 60, 'Dinner, Fine-Dining'),
-
--- (51, 'Quiche Lorraine', 'pastry', 'A French tart consisting of pastry crust filled with smoked bacon, cheese, and egg custard.', 'French', 3, 20, 45, 'Breakfast, Brunch, Snack'),
--- (52, 'Quesadilla', 'cooking', 'A Mexican dish consisting of a tortilla that is filled primarily with cheese, and sometimes meats, spices, and other fillings, and then cooked on a griddle.', 'Mexican', 1, 5, 10, 'Snack, Lunch'),
--- (53, 'Quinoa Salad', 'cooking', 'Salad made from quinoa mixed with various vegetables and sometimes meat or seafood.', 'International', 1, 15, 0, 'Lunch, Dinner, Cold-dish'),
-
--- (54, 'Ratatouille', 'cooking', 'A French Provençal stewed vegetable dish, originating in Nice.', 'French', 2, 20, 40, 'Lunch, Dinner'),
--- (55, 'Risotto', 'cooking', 'An Italian rice dish cooked with broth until it reaches a creamy consistency.', 'Italian', 3, 10, 30, 'Lunch, Dinner'),
--- (56, 'Ramen', 'cooking', 'A Japanese noodle soup dish with meat or fish broth flavored with soy sauce or miso, and uses toppings such as sliced pork, nori, and green onions.', 'Japanese', 3, 15, 30, 'Lunch, Dinner'),
-
--- (57, 'Sushi', 'cooking', 'Japanese dish of prepared vinegared rice, usually with some sugar and salt, accompanying a variety of ingredients, such as seafood, often raw, and vegetables.', 'Japanese', 3, 30, 0, 'Lunch, Dinner, Snack'),
--- (58, 'Shepherds Pie', 'cooking', 'A traditional British dish of minced meat topped with a mashed potato crust.', 'British', 2, 20, 60, 'Lunch, Dinner'),
--- (59, 'Samosa', 'cooking', 'A fried or baked pastry with a savory filling, such as spiced potatoes, onions, peas, or lentils.', 'Indian', 2, 30, 10, 'Snack, Appetizer'),
-
--- (60, 'Tiramisu', 'pastry', 'A popular coffee-flavored Italian dessert.', 'Italian', 2, 30, 0, 'Dessert'),
--- (61, 'Tacos', 'cooking', 'Traditional Mexican dish consisting of a small hand-sized corn or wheat tortilla topped with a filling.', 'Mexican', 1, 10, 10, 'Lunch, Dinner, Snack'),
--- (62, 'Tabbouleh', 'cooking', 'A Levantine vegetarian salad made of finely chopped parsley, with tomatoes, mint, onion, bulgur, and seasoned with olive oil, lemon juice, salt and pepper.', 'Middle Eastern', 1, 20, 0, 'Lunch, Dinner, Cold-dish'),
-
--- (63, 'Udon Soup', 'cooking', 'A Japanese noodle soup made with udon noodles.', 'Japanese', 2, 5, 15, 'Lunch, Dinner'),
--- (64, 'Ukrainian borscht', 'cooking', 'A hearty soup made with beetroot as a main ingredient, giving it a distinctive red color.', 'Ukrainian', 3, 30, 60, 'Lunch, Dinner'),
--- (65, 'Umbrian Lentil Stew', 'cooking', 'Made with lentils and typically includes tomatoes, vegetables, and herbs.', 'Italian', 2, 10, 45, 'Lunch, Dinner'),
-
--- (66, 'Vietnamese Pho', 'cooking', 'A Vietnamese soup consisting of broth, rice noodles, herbs, and meat.', 'Vietnamese', 2, 20, 90, 'Lunch, Dinner'),
--- (67, 'Vegetable Terrine', 'cooking', 'Made with layers of cooked or raw vegetables held together by a gelatin made from a vegetable stock or a meat stock.', 'French', 4, 30, 120, 'Lunch, Dinner, Cold-dish'),
--- (68, 'Venison Stew', 'cooking', 'A hearty stew made using venison as the main ingredient.', 'International', 3, 20, 120, 'Lunch, Dinner'),
-
--- (69, 'Waldorf Salad', 'cooking', 'An American salad generally made of fresh apples, celery, grapes, and walnuts, dressed in mayonnaise, and usually served on a bed of lettuce.', 'American', 1, 15, 0, 'Lunch, Dinner, Cold-dish'),
--- (70, 'Welsh Rarebit', 'cooking', 'A dish made with a savory sauce of melted cheese and various other ingredients and served hot, after being poured over slices of toasted bread.', 'British', 1, 5, 10, 'Snack, Lunch'),
--- (71, 'Wiener Schnitzel', 'cooking', 'A traditional Viennese dish made by breading and frying a thin slice of meat (usually veal).', 'Austrian', 2, 10, 10, 'Lunch, Dinner'),
-
--- (72, 'Xiaolongbao', 'cooking', 'Chinese steamed buns filled with meat and broth.', 'Chinese', 4, 30, 20, 'Lunch, Dinner, Snack'),
--- (73, 'Xinjiang Lamb Skewers', 'cooking', 'Spicy skewers of grilled lamb, a popular street food from the Xinjiang region.', 'Chinese', 2, 120, 10, 'Dinner, Snack'),
-
--- (74, 'Jerk Chicken', 'cooking', 'Spicy marinated chicken grilled to perfection.', 'Jamaican', 3, 240, 45, 'Dinner, Barbecue'),
--- (75, 'Jambalaya', 'cooking', 'A Creole dish with rice, meat, and vegetables.', 'American', 3, 20, 45, 'Lunch, Dinner'),
--- (76, 'Japanese Cheesecake', 'pastry', 'A fluffy and light style of cheesecake.', 'Japanese', 2, 15, 45, 'Dessert'),
-
--- (77, 'Kimchi Stew', 'cooking', 'Spicy stew made with kimchi and tofu.', 'Korean', 2, 15, 30, 'Lunch, Dinner'),
--- (78, 'Kebab', 'cooking', 'Skewered and grilled meats with vegetables.', 'Middle Eastern', 2, 30, 15, 'Lunch, Dinner, Snack'),
--- (79, 'Key Lime Pie', 'pastry', 'A pie made with Key lime juice, egg yolks, and sweetened condensed milk.', 'American', 2, 20, 30, 'Dessert');
--- DROP TABLE recipes;
 
 DROP TABLE recipes;
 
@@ -182,7 +66,7 @@ CREATE TABLE recipes (
     tools VARCHAR(255),
     portions INT,
     PRIMARY KEY (name)
-    --FOREIGN KEY (nationalCuisine) REFERENCES nationalCuisines(nation)
+    FOREIGN KEY (nationalCuisine) REFERENCES nationalCuisines(name)
 );
 
 INSERT INTO recipes (name, cookingORpastry, shortDescription, nationalCuisine, difficulty, prepTime, cookingTime, mealType, portions) VALUES 
@@ -285,7 +169,223 @@ INSERT INTO recipes (name, cookingORpastry, shortDescription, nationalCuisine, d
 
 ('Xiaolongbao', 'cooking', 'Chinese steamed buns filled with meat and broth.', 'Chinese', 4, 30, 20, 'Lunch, Dinner, Snack', 6),
 ('Xinjiang Lamb Skewers', 'cooking', 'Spicy skewers of grilled lamb, a popular street food from the Xinjiang region.', 'Chinese', 2, 120, 10, 'Dinner, Snack', 6);
+DROP TABLE recipes_mealTypes;
+CREATE TABLE recipes_mealTypes(
+    recipeName VARCHAR(64),
+    mealTypeName VARCHAR(64),
+    PRIMARY KEY (recipeName,mealTypeName),
+    FOREIGN KEY (recipeName) REFERENCES recipes(name),
+    FOREIGN KEY (mealTypeName) REFERENCES mealTypes(name)
+);
 
+INSERT INTO recipes_mealTypes (recipeName, mealTypeName) VALUES 
+('Apple Frangipan Tart', 'Dessert'),
+('Apple & Blackberry Crumble', 'Dessert'),
+
+('Apam balik', 'Snack'),
+
+('Ayam Percik', 'Dinner'),
+
+('Bakewell tart', 'Dessert'),
+('Bakewell tart', 'Snack'),
+
+('Beef Wellington', 'Dinner'),
+
+('Banana Pancakes', 'Breakfast'),
+
+('Chicken Congee', 'Breakfast'),
+('Chicken Congee', 'Dinner'),
+
+('Cannelloni', 'Lunch'),
+
+('Caldo verde', 'Dinner'),
+
+('Dakdoritang', 'Dinner'),
+
+('Danish Pastry', 'Breakfast'),
+('Danish Pastry', 'Snack'),
+
+('Dum Aloo', 'Lunch'),
+
+('English Breakfast', 'Breakfast'),
+('Eclairs', 'Dessert'),
+
+('Eton Mess', 'Dessert'),
+
+('Fish and Chips', 'Lunch'),
+('Fish and Chips', 'Dinner'),
+('Fish and Chips', 'Snack'),
+
+('Fajitas', 'Dinner'),
+
+('Falafel', 'Lunch'),
+('Falafel', 'Dinner'),
+('Falafel', 'Snack'),
+
+('Gazpacho', 'Lunch'),
+('Gazpacho', 'Dinner'),
+('Gazpacho', 'Cold-dish'),
+('Goulash', 'Dinner'),
+
+('Greek Salad', 'Lunch'),
+('Greek Salad', 'Dinner'),
+('Greek Salad', 'Cold-dish'),
+
+('Hot and Sour Soup', 'Dinner'),
+('Hot and Sour Soup', 'Snack'),
+
+('Hummus', 'Snack'),
+
+('Hamburgers', 'Lunch'),
+('Hamburgers', 'Dinner'),
+('Hamburgers', 'Snack'),
+
+('Irish Coffee', 'Dessert'),
+
+('Indian Curry', 'Lunch'),
+('Indian Curry', 'Dinner'),
+
+('Italian Biscotti', 'Snack'),
+
+('Irish Stew', 'Lunch'),
+('Irish Stew', 'Dinner'),
+
+('Jambalaya', 'Lunch'),
+('Jambalaya', 'Dinner'),
+
+('Jerk Chicken','Dinner'),
+('Jerk Chicken','Barbecue'),
+
+('Japanese Curry', 'Dinner'),
+
+('Japanese Cheesecake', 'Dessert'),
+
+('Kimchi Fried Rice', 'Lunch'),
+('Kimchi Fried Rice', 'Dinner'),
+
+('Kaiserschmarrn', 'Dessert'),
+('Kaiserschmarrn', 'Snack'),
+
+('Kebab', 'Lunch'),
+('Kebab', 'Dinner'),
+('Kebab', 'Snack'),
+
+('Kimchi Stew', 'Lunch'),
+('Kimchi Stew', 'Dinner'),
+
+('Key Lime Pie', 'Dessert'),
+
+('Lasagna', 'Lunch'),
+('Lasagna', 'Dinner'),
+
+('Lamb Tagine', 'Dinner'),
+
+('Lobster Bisque', 'Dinner'),
+
+('Moussaka', 'Dinner'),
+
+('Mapo Tofu', 'Lunch'),
+('Mapo Tofu', 'Dinner'),
+
+('Macaron', 'Dessert'),
+('Macaron', 'Snack'),
+
+('Nachos', 'Snack'),
+('Nasi Goreng', 'Lunch'),
+
+('Nougat', 'Dessert'),
+('Nougat', 'Snack'),
+
+('Osso Buco', 'Lunch'),
+
+('Oysters Kilpatrick', 'Appetizer'),
+
+('Okonomiyaki', 'Lunch'),
+('Okonomiyaki', 'Dinner'),
+('Okonomiyaki', 'Snack'),
+
+('Paella', 'Lunch'),
+('Paella', 'Dinner'),
+
+('Pierogi', 'Lunch'),
+('Pierogi', 'Dinner'),
+('Pierogi', 'Snack'),
+
+('Peking Duck', 'Dinner'),
+
+('Quiche Lorraine', 'Breakfast'),
+('Quiche Lorraine', 'Brunch'),
+('Quiche Lorraine', 'Snack'),
+
+('Quesadilla', 'Snack'),
+
+('Quinoa Salad', 'Lunch'),
+('Quinoa Salad', 'Dinner'),
+('Quinoa Salad', 'Cold-dish'),
+
+('Ratatouille', 'Lunch'),
+('Ratatouille', 'Dinner'),
+
+('Risotto', 'Lunch'),
+('Risotto', 'Dinner'),
+
+('Ramen', 'Lunch'),
+('Ramen', 'Dinner'),
+
+('Sushi', 'Lunch'),
+('Sushi', 'Dinner'),
+('Sushi', 'Snack'),
+
+('Shepherds Pie', 'Lunch'),
+('Shepherds Pie', 'Dinner'),
+
+('Samosa', 'Snack'),
+('Samosa', 'Appetizer'),
+
+('Tiramisu', 'Dessert'),
+
+('Tacos', 'Lunch'),
+('Tacos', 'Dinner'),
+('Tacos', 'Snack'),
+
+('Tabbouleh', 'Lunch'),
+('Tabbouleh', 'Dinner'),
+('Tabbouleh', 'Cold-dish'),
+
+('Udon Soup', 'Lunch'),
+('Udon Soup', 'Dinner'),
+
+('Ukrainian borscht', 'Lunch'),
+('Ukrainian borscht', 'Dinner'),
+
+('Umbrian Lentil Stew', 'Lunch'),
+('Umbrian Lentil Stew', 'Dinner'),
+
+('Vietnamese Pho', 'Lunch'),
+('Vietnamese Pho', 'Dinner'),
+
+('Vegetable Terrine', 'Lunch'),
+('Vegetable Terrine', 'Dinner'),
+('Vegetable Terrine', 'Cold-dish'),
+
+('Venison Stew', 'Lunch'),
+
+('Waldorf Salad', 'Lunch'),
+('Waldorf Salad', 'Dinner'),
+('Waldorf Salad', 'Cold-dish'),
+
+('Welsh Rarebit', 'Snack'),
+('Welsh Rarebit', 'Lunch'),
+
+('Wiener Schnitzel', 'Lunch'),
+('Wiener Schnitzel', 'Dinner'),
+
+('Xiaolongbao', 'Lunch'),
+('Xiaolongbao', 'Dinner'),
+('Xiaolongbao', 'Snack'),
+
+('Xinjiang Lamb Skewers', 'Dinner'),
+('Xinjiang Lamb Skewers', 'Snack');
 
 -- Pies, Tarts, and Cakes
 UPDATE recipes
@@ -351,6 +451,254 @@ WHERE name IN ('Hamburgers', 'Wiener Schnitzel');
 UPDATE recipes
 SET tools = 'frying pan, spatula, chefs knife, cutting board'
 WHERE name = 'Quesadilla';
+
+DROP TABLE recipes_usageTips;
+
+CREATE TABLE recipes_usageTips(
+    recipeName VARCHAR(64),
+    usageTipNumber SMALL INT,
+    usageTip VARCHAR(256),
+    PRIMARY KEY (recipeName, usageTipNumber),
+    FOREIGN KEY (recipeName) REFERENCES recipes(name)
+);
+
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Apam balik', 1, 'Best served warm with a sprinkle of sugar and crushed peanuts'),
+('Apam balik', 2, 'Store any leftovers in an airtight container to maintain freshness'),
+('Apple & Blackberry Crumble', 1, 'Serve with a scoop of vanilla ice cream for a delicious contrast of warm and cold'),
+('Apple & Blackberry Crumble', 2, 'Leftovers can be reheated in the oven for a few minutes to regain crispiness'),
+('Apple & Blackberry Crumble', 3, 'Make extra crumble topping and freeze it for future use'),
+('Apple Frangipan Tart', 1, 'Dust with powdered sugar before serving for an elegant touch'),
+('Apple Frangipan Tart', 2, 'Refrigerate any leftovers and reheat in the oven for a few minutes before serving again'),
+('Ayam Percik', 1, 'Marinate the chicken overnight for maximum flavor absorption'),
+('Ayam Percik', 2, 'Brush with extra marinade while grilling for added moisture and flavor'),
+('Ayam Percik', 3, 'Serve with steamed rice and a side of cucumber slices'),
+('Bakewell tart', 1, 'Serve at room temperature with a dollop of whipped cream or custard'),
+('Bakewell tart', 2, 'For extra indulgence, drizzle with a raspberry coulis before serving'),
+('Bakewell tart', 3, 'Leftovers can be enjoyed cold or reheated in the microwave'),
+('Banana Pancakes', 1, 'Top with sliced bananas and a drizzle of maple syrup'),
+('Banana Pancakes', 2, 'Add a pinch of cinnamon to the batter for extra flavor'),
+('Banana Pancakes', 3, 'Leftover pancakes can be frozen and reheated in the toaster for a quick breakfast');
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Beef Wellington', 1, 'Rest the beef wellington before slicing to allow the juices to redistribute'),
+('Beef Wellington', 2, 'For a perfectly golden crust, brush the pastry with egg wash before baking'),
+('Beef Wellington', 3, 'Serve with a rich red wine sauce or a creamy mushroom sauce on the side'),
+('Caldo verde', 1, 'Garnish with a drizzle of olive oil and freshly chopped parsley before serving'),
+('Caldo verde', 2, 'For extra creaminess, swirl in a spoonful of sour cream or Greek yogurt before serving'),
+('Caldo verde', 3, 'Serve with crusty bread or cornbread on the side for a complete meal'),
+('Cannelloni', 1, 'Top with extra grated cheese before baking for a golden, cheesy crust'),
+('Cannelloni', 2, 'Serve with a side salad dressed with balsamic vinaigrette for a refreshing contrast'),
+('Cannelloni', 3, 'Leftovers can be frozen and reheated in the oven for a quick and easy meal'),
+('Chicken Congee', 1, 'Garnish with sliced green onions, chopped cilantro, and a drizzle of sesame oil before serving'),
+('Chicken Congee', 2, 'For extra flavor, add a few drops of soy sauce or fish sauce to taste'),
+('Chicken Congee', 3, 'Serve with Chinese fried dough sticks (youtiao) or steamed buns on the side'),
+('Dakdoritang', 1, 'Adjust the spiciness by adding more or less gochujang (Korean red chili paste)'),
+('Dakdoritang', 2, 'For added depth of flavor, simmer the stew for an extra 10-15 minutes before serving'),
+('Dakdoritang', 3, 'Serve with a bowl of steamed rice and kimchi on the side'),
+('Danish Pastry', 1, 'Top with a simple glaze made from powdered sugar and milk for a glossy finish'),
+('Danish Pastry', 2, 'For extra richness, sprinkle chopped nuts or chocolate chips over the filling before folding'),
+('Danish Pastry', 3, 'Enjoy warm from the oven or toast lightly before serving for a crispy exterior'),
+('Dum Aloo', 1, 'Garnish with a sprinkle of chopped fresh cilantro or parsley before serving'),
+('Dum Aloo', 2, 'For extra creaminess, stir in a spoonful of yogurt or sour cream just before serving'),
+('Dum Aloo', 3, 'Serve with naan bread or steamed rice for a complete meal');
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Eclairs', 1, 'Drizzle with melted chocolate or caramel sauce for an indulgent finish'),
+('Eclairs', 2, 'For added texture, sprinkle chopped nuts or toasted coconut over the icing before it sets'),
+('Eclairs', 3, 'Store in an airtight container in the refrigerator for up to three days'),
+('English Breakfast', 1, 'Serve with toast, butter, and a selection of jams or marmalades on the side'),
+('English Breakfast', 2, 'Brew a pot of strong English breakfast tea to accompany the meal'),
+('English Breakfast', 3, 'For a vegetarian option, swap out the bacon and sausage for vegetarian alternatives'),
+('Eton Mess', 1, 'Top with extra fresh berries and a drizzle of fruit coulis for a burst of flavor and color'),
+('Eton Mess', 2, 'For extra crunch, sprinkle crushed meringue or toasted nuts over the whipped cream'),
+('Eton Mess', 3, 'Serve immediately after assembling to prevent the meringue from becoming soggy'),
+('Fajitas', 1, 'Serve with warm flour tortillas and a selection of toppings such as guacamole, salsa, and sour cream'),
+('Fajitas', 2, 'For extra flavor, marinate the meat in lime juice, garlic, and spices before cooking'),
+('Fajitas', 3, 'Add grilled vegetables such as bell peppers and onions to make it a complete meal'),
+('Falafel', 1, 'Serve with tahini sauce or tzatziki for dipping'),
+('Falafel', 2, 'For added freshness, serve with a side of tabbouleh salad or pickled vegetables'),
+('Falafel', 3, 'Stuff falafel into pita bread with lettuce, tomatoes, and onions for a satisfying sandwich'),
+('Fish and Chips', 1, 'Serve with malt vinegar, tartar sauce, or ketchup for dipping'),
+('Fish and Chips', 2, 'For extra crunch, double fry the potatoes or use a beer batter for the fish'),
+('Fish and Chips', 3, 'Serve with mushy peas or a side salad to balance out the meal'),
+('Gazpacho', 1, 'Garnish with a drizzle of extra virgin olive oil and a sprinkle of fresh herbs before serving'),
+('Gazpacho', 2, 'For added texture, top with diced cucumber, bell pepper, and croutons before serving'),
+('Gazpacho', 3, 'Chill in the refrigerator for at least an hour before serving to enhance the flavors'),
+('Goulash', 1, 'Serve with a dollop of sour cream and a sprinkle of chopped fresh parsley or dill on top'),
+('Goulash', 2, 'For extra richness, stir in a tablespoon of tomato paste or red wine before simmering'),
+('Goulash', 3, 'Serve over cooked egg noodles, rice, or mashed potatoes for a hearty meal');
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Greek Salad', 1, 'Drizzle with extra virgin olive oil and a squeeze of fresh lemon juice before serving'),
+('Greek Salad', 2, 'For extra flavor, add a sprinkle of dried oregano and crumbled feta cheese on top'),
+('Greek Salad', 3, 'Serve with crusty bread or pita on the side for a complete meal'),
+('Hamburgers', 1, 'Top with your favorite condiments and vegetables such as lettuce, tomato, and onion'),
+('Hamburgers', 2, 'For extra flavor, mix seasonings such as Worcestershire sauce or garlic powder into the ground beef before forming patties'),
+('Hamburgers', 3, 'Serve with crispy french fries or onion rings on the side for a classic diner experience'),
+('Hot and Sour Soup', 1, 'Garnish with sliced green onions and a drizzle of sesame oil before serving'),
+('Hot and Sour Soup', 2, 'For extra heat, add more white pepper or chili paste to taste'),
+('Hot and Sour Soup', 3, 'Serve with crispy wonton strips or steamed rice on the side for a complete meal'),
+('Hummus', 1, 'Drizzle with extra virgin olive oil and a sprinkle of paprika before serving'),
+('Hummus', 2, 'For extra flavor, add roasted garlic, sun-dried tomatoes, or roasted red peppers to the hummus mixture'),
+('Hummus', 3, 'Serve with warm pita bread, crackers, or fresh vegetables for dipping'),
+('Indian Curry', 1, 'Serve with basmati rice, naan bread, or roti for soaking up the delicious sauce'),
+('Indian Curry', 2, 'For extra richness, stir in a splash of coconut milk or heavy cream before serving'),
+('Indian Curry', 3, 'Garnish with fresh cilantro or chopped nuts for added flavor and texture'),
+('Irish Coffee', 1, 'Top with a dollop of whipped cream and a sprinkle of ground nutmeg or cinnamon before serving'),
+('Irish Coffee', 2, 'For extra indulgence, drizzle with chocolate syrup or sprinkle with shaved chocolate before adding the cream'),
+('Irish Coffee', 3, 'Serve with a side of shortbread cookies or biscotti for dipping'),
+('Irish Stew', 1, 'Serve with crusty bread or Irish soda bread for soaking up the flavorful broth'),
+('Irish Stew', 2, 'For extra richness, stir in a tablespoon of tomato paste or red wine before simmering'),
+('Irish Stew', 3, 'Garnish with chopped fresh parsley or thyme for a pop of color and flavor'),
+('Italian Biscotti', 1, 'Dip in a cup of espresso or Vin Santo for a traditional Italian treat'),
+('Italian Biscotti', 2, 'For extra flavor, add chopped nuts, dried fruit, or chocolate chips to the biscotti dough'),
+('Italian Biscotti', 3, 'Store in an airtight container at room temperature for up to two weeks'),
+('Jambalaya', 1, 'Serve with hot sauce or a sprinkle of cayenne pepper for extra heat'),
+('Jambalaya', 2, 'For extra flavor, use andouille sausage or smoked ham in the recipe'),
+('Jambalaya', 3, 'Garnish with chopped green onions or fresh parsley before serving for added freshness');
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Japanese Cheesecake', 1, 'Dust with powdered sugar or cocoa powder before serving for an elegant touch'),
+('Japanese Cheesecake', 2, 'Serve with a dollop of whipped cream and fresh berries on the side'),
+('Japanese Cheesecake', 3, 'Chill in the refrigerator for a few hours before serving for a firmer texture'),
+('Japanese Curry', 1, 'Serve with steamed rice or Japanese-style pickles (tsukemono) on the side'),
+('Japanese Curry', 2, 'For extra flavor, stir in a spoonful of Japanese curry roux or honey before serving'),
+('Japanese Curry', 3, 'Garnish with pickled ginger or chopped green onions for added freshness and color'),
+('Jerk Chicken', 1, 'Serve with traditional Jamaican side dishes such as rice and peas, fried plantains, and festival bread'),
+('Jerk Chicken', 2, 'For extra heat, marinate the chicken in jerk seasoning overnight before grilling'),
+('Jerk Chicken', 3, 'Garnish with lime wedges and fresh cilantro before serving for added flavor and brightness'),
+('Kaiserschmarrn', 1, 'Serve dusted with powdered sugar and a drizzle of fruit compote or maple syrup'),
+('Kaiserschmarrn', 2, 'For extra richness, sprinkle with toasted almonds or top with a scoop of vanilla ice cream'),
+('Kaiserschmarrn', 3, 'Enjoy as a dessert or sweet breakfast dish with a cup of coffee or tea'),
+('Kebab', 1, 'Serve wrapped in warm pita bread with a generous dollop of tzatziki sauce'),
+('Kebab', 2, 'For extra flavor, marinate the meat in yogurt, lemon juice, and spices before grilling'),
+('Kebab', 3, 'Serve with a side of tabbouleh salad or grilled vegetables for a complete meal'),
+('Key Lime Pie', 1, 'Top with whipped cream or meringue before serving for an extra decadent touch'),
+('Key Lime Pie', 2, 'For extra tanginess, garnish with lime zest or thinly sliced lime wedges before serving'),
+('Key Lime Pie', 3, 'Chill in the refrigerator for at least two hours before serving for a firm, set filling');
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Kimchi Fried Rice', 1, 'Serve with a fried egg on top for added richness and flavor'),
+('Kimchi Fried Rice', 2, 'For extra heat, add more gochujang (Korean red chili paste) or kimchi juice to taste'),
+('Kimchi Fried Rice', 3, 'Garnish with sliced green onions and toasted sesame seeds before serving for added freshness and crunch'),
+('Kimchi Stew', 1, 'Serve with a bowl of steamed rice and a side of kimchi on the side'),
+('Kimchi Stew', 2, 'For extra depth of flavor, add a spoonful of doenjang (Korean fermented soybean paste) or gochujang (Korean red chili paste)'),
+('Kimchi Stew', 3, 'Garnish with sliced green onions and a drizzle of sesame oil before serving for added flavor and freshness'),
+('Lamb Tagine', 1, 'Serve with couscous or crusty bread to soak up the flavorful sauce'),
+('Lamb Tagine', 2, 'For extra richness, stir in a handful of dried fruits such as apricots or raisins before serving'),
+('Lamb Tagine', 3, 'Garnish with chopped fresh cilantro or parsley before serving for added freshness and color'),
+('Lasagna', 1, 'Let it rest for 10-15 minutes before slicing to allow the layers to set'),
+('Lasagna', 2, 'For extra cheesiness, add a sprinkle of grated Parmesan or mozzarella cheese on top before baking'),
+('Lasagna', 3, 'Serve with garlic bread and a side salad for a complete meal'),
+('Lobster Bisque', 1, 'Garnish with a drizzle of heavy cream and a sprinkle of fresh chives or tarragon before serving'),
+('Lobster Bisque', 2, 'For extra richness, stir in a tablespoon of brandy or sherry just before serving'),
+('Lobster Bisque', 3, 'Serve with crusty bread or oyster crackers on the side for dipping'),
+('Macaron', 1, 'Let the macarons rest for 30 minutes before baking to develop a smooth, shiny surface'),
+('Macaron', 2, 'For extra flavor, add a teaspoon of instant espresso powder or matcha powder to the meringue mixture'),
+('Macaron', 3, 'Store in an airtight container in the refrigerator for up to three days to allow the flavors to meld'),
+('Mapo Tofu', 1, 'Garnish with sliced green onions and a sprinkle of toasted sesame seeds before serving'),
+('Mapo Tofu', 2, 'For extra heat, add more doubanjiang (Chinese chili bean paste) or chili oil to taste'),
+('Mapo Tofu', 3, 'Serve with steamed rice or noodles for a satisfying meal'),
+('Moussaka', 1, 'Let it rest for 10-15 minutes before slicing to allow the layers to set'),
+('Moussaka', 2, 'For extra richness, sprinkle grated cheese or breadcrumbs on top before baking'),
+('Moussaka', 3, 'Serve with a Greek salad and crusty bread for a complete meal'),
+('Nachos', 1, 'Top with your favorite toppings such as salsa, guacamole, sour cream, and jalapenos'),
+('Nachos', 2, 'For extra flavor, add seasoned ground beef, shredded chicken, or black beans to the nachos'),
+('Nachos', 3, 'Serve immediately after assembling to prevent the chips from becoming soggy'),
+('Nasi Goreng', 1, 'Top with a fried egg and a sprinkle of crispy shallots before serving'),
+('Nasi Goreng', 2, 'For extra heat, add more sambal oelek or chopped fresh chili peppers to taste'),
+('Nasi Goreng', 3, 'Garnish with sliced cucumber, tomato wedges, and a wedge of lime before serving for added freshness'),
+('Nougat', 1, 'Cut into bite-sized pieces and wrap individually in parchment paper for a sweet treat on the go'),
+('Nougat', 2, 'For extra crunch, add toasted nuts such as almonds, pistachios, or hazelnuts to the nougat mixture'),
+('Nougat', 3, 'Store in an airtight container at room temperature for up to two weeks');
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Okonomiyaki', 1, 'Top with a drizzle of okonomiyaki sauce, Japanese mayo, and bonito flakes before serving'),
+('Okonomiyaki', 2, 'For extra flavor, add chopped cabbage, scallions, shrimp, or pork belly to the batter'),
+('Okonomiyaki', 3, 'Serve with a side of pickled ginger and a bowl of miso soup for a complete meal'),
+('Osso Buco', 1, 'Serve with creamy polenta, mashed potatoes, or crusty bread to soak up the flavorful sauce'),
+('Osso Buco', 2, 'For extra richness, stir in a tablespoon of gremolata (lemon zest, garlic, and parsley) just before serving'),
+('Osso Buco', 3, 'Garnish with chopped fresh parsley or lemon zest before serving for added freshness and flavor'),
+('Oysters Kilpatrick', 1, 'Top with crispy bacon pieces and a sprinkle of breadcrumbs before grilling'),
+('Oysters Kilpatrick', 2, 'For extra flavor, add a dash of Worcestershire sauce or hot sauce to each oyster before grilling'),
+('Oysters Kilpatrick', 3, 'Serve with lemon wedges and a glass of chilled white wine for an elegant appetizer'),
+('Paella', 1, 'Garnish with lemon wedges and fresh parsley before serving for added freshness and color'),
+('Paella', 2, 'For extra flavor, use homemade seafood or chicken stock instead of water to cook the rice'),
+('Paella', 3, 'Serve with a side of crusty bread and a glass of Spanish wine for a complete meal'),
+('Peking Duck', 1, 'Serve with Mandarin pancakes, hoisin sauce, and thinly sliced scallions for wrapping'),
+('Peking Duck', 2, 'For extra crispiness, hang the duck in front of a fan or air-dry'),
+('Peking Duck', 3, 'Serve with steamed buns or lettuce cups for a variation in presentation'),
+('Pierogi', 1, 'Serve with sour cream or applesauce for dipping'),
+('Pierogi', 2, 'For extra flavor, sauté in butter until golden brown and crispy before serving'),
+('Pierogi', 3, 'Freeze any leftovers for a quick and easy meal later on'),
+('Quesadilla', 1, 'Serve with salsa, guacamole, and sour cream for dipping'),
+('Quesadilla', 2, 'For extra flavor, add cooked chicken, steak, or shrimp to the filling mixture'),
+('Quesadilla', 3, 'Cut into wedges and serve immediately while warm and crispy');
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Quiche Lorraine', 1, 'Serve with a side salad dressed with balsamic vinaigrette for a light and refreshing meal'),
+('Quiche Lorraine', 2, 'For extra richness, use heavy cream instead of milk in the custard mixture'),
+('Quiche Lorraine', 3, 'Enjoy warm or at room temperature for breakfast, brunch, or lunch'),
+('Quinoa Salad', 1, 'Garnish with chopped fresh herbs such as parsley, cilantro, or mint before serving'),
+('Quinoa Salad', 2, 'For extra flavor, add diced avocado, cherry tomatoes, or crumbled feta cheese to the salad mixture'),
+('Quinoa Salad', 3, 'Serve chilled or at room temperature as a side dish or light meal option'),
+('Ramen', 1, 'Top with sliced green onions, nori strips, and a seasoned soft-boiled egg before serving'),
+('Ramen', 2, 'For extra flavor, add a spoonful of miso paste, soy sauce, or chili oil to the broth'),
+('Ramen', 3, 'Customize with your favorite toppings such as sliced pork, tofu, mushrooms, or corn kernels'),
+('Ratatouille', 1, 'Garnish with a drizzle of extra virgin olive oil and a sprinkle of fresh basil or parsley before serving'),
+('Ratatouille', 2, 'For extra richness, sprinkle grated Parmesan or crumbled goat cheese on top before serving'),
+('Ratatouille', 3, 'Serve as a side dish, over pasta, or with crusty bread for a complete meal'),
+('Risotto', 1, 'Stir in a knob of butter and a handful of grated Parmesan cheese for extra creaminess before serving'),
+('Risotto', 2, 'For extra flavor, add cooked vegetables, mushrooms, or seafood to the risotto halfway through cooking'),
+('Risotto', 3, 'Garnish with fresh herbs such as parsley, chives, or thyme for added freshness and color'),
+('Samosa', 1, 'Serve with tamarind chutney, mint chutney, or mango chutney for dipping'),
+('Samosa', 2, 'For extra heat, add more green chilies or red chili powder to the filling mixture'),
+('Samosa', 3, 'Enjoy as a snack or appetizer with a cup of chai tea or your favorite beverage'),
+('Shepherds Pie', 1, 'For extra flavor, stir in a tablespoon of Worcestershire sauce or tomato paste to the meat mixture'),
+('Shepherds Pie', 2, 'Top with grated cheddar cheese or mashed sweet potatoes for a twist on the classic recipe'),
+('Shepherds Pie', 3, 'Bake until the top is golden brown and crispy for the perfect finishing touch'),
+('Sushi', 1, 'Serve with soy sauce, pickled ginger, and wasabi for dipping'),
+('Sushi', 2, 'For extra flavor, add a thin layer of spicy mayo or eel sauce on top of the sushi rolls'),
+('Sushi', 3, 'Experiment with different fillings such as raw fish, cooked shrimp, avocado, cucumber, or cream cheese');
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Tabbouleh', 1, 'For extra freshness, add chopped mint or basil to the tabbouleh mixture before serving'),
+('Tabbouleh', 2, 'Serve with grilled pita bread or falafel for a complete Middle Eastern meal'),
+('Tabbouleh', 3, 'Drizzle with extra virgin olive oil and a squeeze of fresh lemon juice for added flavor before serving'),
+('Tacos', 1, 'Serve with salsa, guacamole, sour cream, and lime wedges for topping and garnish'),
+('Tacos', 2, 'For extra flavor, marinate the meat in lime juice, garlic, and spices before cooking'),
+('Tacos', 3, 'Use soft tortillas for traditional tacos or crispy taco shells for a crunchy texture'),
+('Tiramisu', 1, 'Dust with cocoa powder or grated chocolate before serving for an elegant finish'),
+('Tiramisu', 2, 'For extra indulgence, drizzle with coffee liqueur or rum over the ladyfinger layers before adding the mascarpone mixture'),
+('Tiramisu', 3, 'Chill in the refrigerator for at least four hours or overnight to allow the flavors to meld together'),
+('Udon Soup', 1, 'Top with sliced green onions, kamaboko (fish cake), and a sprinkle of sesame seeds before serving'),
+('Udon Soup', 2, 'For extra flavor, add a spoonful of miso paste or soy sauce to the broth before serving'),
+('Udon Soup', 3, 'Customize with your favorite toppings such as tempura, tofu, spinach, or narutomaki (fish cake)'),
+('Ukrainian borscht', 1, 'Serve with a dollop of sour cream and a sprinkle of fresh dill or parsley on top'),
+('Ukrainian borscht', 2, 'For extra richness, stir in a spoonful of vinegar or lemon juice just before serving'),
+('Ukrainian borscht', 3, 'Enjoy with a slice of hearty rye bread or pampushky (Ukrainian garlic bread rolls)'),
+('Umbrian Lentil Stew', 1, 'Garnish with a drizzle of extra virgin olive oil and a sprinkle of grated Parmesan cheese before serving'),
+('Umbrian Lentil Stew', 2, 'For extra flavor, stir in a spoonful of tomato paste or balsamic vinegar before simmering'),
+('Umbrian Lentil Stew', 3, 'Serve with crusty bread or polenta for a hearty and satisfying meal'),
+('Vegetable Terrine', 1, 'Serve with a dollop of herbed yogurt or tomato sauce on the side'),
+('Vegetable Terrine', 2, 'For extra flavor, add roasted garlic, sun-dried tomatoes, or olives to the vegetable mixture'),
+('Vegetable Terrine', 3, 'Chill in the refrigerator for at least four hours or overnight to allow the terrine to set before slicing'),
+('Venison Stew', 1, 'Serve with mashed potatoes, buttered noodles, or crusty bread for soaking up the flavorful gravy'),
+('Venison Stew', 2, 'For extra richness, stir in a tablespoon of red currant jelly or cocoa powder before simmering'),
+('Venison Stew', 3, 'Garnish with chopped fresh parsley or rosemary before serving for added freshness and flavor');
+INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
+('Vietnamese Pho', 1, 'Top with bean sprouts, fresh herbs, lime wedges, and sliced chili peppers before serving'),
+('Vietnamese Pho', 2, 'For extra flavor, add a splash of fish sauce or hoisin sauce to the broth before serving'),
+('Vietnamese Pho', 3, 'Customize with your favorite toppings such as thinly sliced beef, cooked chicken, tofu, or shrimp'),
+('Waldorf Salad', 1, 'For extra crunch, add toasted walnuts or pecans to the salad mixture before serving'),
+('Waldorf Salad', 2, 'Serve on a bed of lettuce or mixed greens for a refreshing and light meal option'),
+('Waldorf Salad', 3, 'Drizzle with a creamy dressing such as ranch or blue cheese before serving for added flavor'),
+('Welsh Rarebit', 1, 'Serve with crusty bread or toasted English muffins for a classic British meal'),
+('Welsh Rarebit', 2, 'For extra flavor, add a spoonful of Worcestershire sauce or mustard to the cheese sauce before serving'),
+('Welsh Rarebit', 3, 'Broil until bubbly and golden brown for the perfect finishing touch'),
+('Wiener Schnitzel', 1, 'Serve with lemon wedges and a sprinkle of chopped parsley before serving'),
+('Wiener Schnitzel', 2, 'For extra flavor, season the breadcrumbs with salt, pepper, and paprika before breading the veal cutlets'),
+('Wiener Schnitzel', 3, 'Enjoy with a side of potato salad, cucumber salad, or lingonberry jam for a traditional Austrian meal'),
+('Xiaolongbao', 1, 'Serve with black vinegar, shredded ginger, and a few drops of chili oil for dipping'),
+('Xiaolongbao', 2, 'For extra flavor, add a spoonful of hot broth or soup to each dumpling before eating'),
+('Xiaolongbao', 3, 'Be careful when biting into the dumplings as the hot soup inside can be very hot'),
+('Xinjiang Lamb Skewers', 1, 'Serve with a sprinkle of cumin and chili powder for added flavor'),
+('Xinjiang Lamb Skewers', 2, 'For extra richness, brush with a mixture of melted butter and minced garlic before grilling'),
+('Xinjiang Lamb Skewers', 3, 'Enjoy with a side of naan bread or steamed rice for a complete meal');
+
 
 DROP TABLE tools;
 
