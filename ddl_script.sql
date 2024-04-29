@@ -2370,3 +2370,457 @@ INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
 ('Xinjiang Lamb Skewers', 'Lamb', 2), -- 100g units
 ('Xinjiang Lamb Skewers', 'Paprika', 1), -- Teaspoons
 ('Xinjiang Lamb Skewers', 'Salt', 1); -- Teaspoons
+
+DROP TABLE recipes_instructions;
+
+CREATE TABLE recipes_instructions (
+    recipeName VARCHAR(64),
+    instructionStepNumber SMALL INT,
+    instruction VARCHAR(512),
+    PRIMARY KEY (recipeName, instructionStepNumber),
+    FOREIGN KEY (recipeName) REFERENCES recipes(name)
+);
+
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Apam balik', 1, 'Mix flour, eggs, and water to form a smooth pancake batter.'),
+('Apam balik', 2, 'Heat a non-stick skillet and pour in batter to form a thin pancake.'),
+('Apam balik', 3, 'When the pancake starts to bubble, sprinkle the peanut filling evenly, then fold the pancake in half.'),
+('Apam balik', 4, 'Cook until the pancake is golden brown and crispy, then serve warm.'),
+
+('Apple & Blackberry Crumble', 1, 'Preheat oven to 375°F (190°C).'),
+('Apple & Blackberry Crumble', 2, 'Mix sliced apples and blackberries with sugar and place in a baking dish.'),
+('Apple & Blackberry Crumble', 3, 'Combine flour, butter, and a pinch of salt in a bowl to make the crumble topping.'),
+('Apple & Blackberry Crumble', 4, 'Sprinkle the crumble topping over the fruit mixture and bake for 30 minutes until the topping is golden brown.'),
+
+('Apple Frangipan Tart', 1, 'Preheat oven to 350°F (175°C).'),
+('Apple Frangipan Tart', 2, 'Place the pastry crust in a tart pan and pre-bake for 10 minutes.'),
+('Apple Frangipan Tart', 3, 'Spread frangipane evenly over the crust and arrange apple slices on top.'),
+('Apple Frangipan Tart', 4, 'Bake for 45 minutes until the frangipane is set and the apples are tender.'),
+
+('Ayam Percik', 1, 'Marinate the chicken in a blend of coconut milk, lemongrass, and spices for at least 2 hours.'),
+('Ayam Percik', 2, 'Preheat the grill to medium heat and place the chicken on the grill.'),
+('Ayam Percik', 3, 'Grill the chicken, basting frequently with the remaining marinade, until cooked through.'),
+('Ayam Percik', 4, 'Serve the chicken hot with steamed rice or salad.'),
+
+('Bakewell tart', 1, 'Preheat the oven to 375°F (190°C).'),
+('Bakewell tart', 2, 'Spread jam over the bottom of the pre-baked pastry crust.'),
+('Bakewell tart', 3, 'Pour frangipane over the jam and spread evenly.'),
+('Bakewell tart', 4, 'Bake for 40 minutes until the frangipane is golden and set.'),
+
+('Banana Pancakes', 1, 'In a bowl, mash the bananas and mix with eggs and flour to form a batter.'),
+('Banana Pancakes', 2, 'Heat a skillet over medium heat and pour in a scoop of batter for each pancake.'),
+('Banana Pancakes', 3, 'Cook each side until golden brown, then serve hot with syrup or honey.'),
+
+('Beef Wellington', 1, 'Preheat oven to 400°F (200°C). Season the beef fillet with salt and pepper, then sear all sides in a hot skillet.'),
+('Beef Wellington', 2, 'Roll out the puff pastry, spread mushroom duxelles over it, then place the beef in the center.'),
+('Beef Wellington', 3, 'Wrap the pastry around the beef, seal the edges, and brush with an egg wash.'),
+('Beef Wellington', 4, 'Bake for 20-25 minutes until the pastry is golden. Let rest before slicing.'),
+
+('Caldo verde', 1, 'In a large pot, sauté onions and garlic until soft. Add sliced chorizo and sauté for a few minutes.'),
+('Caldo verde', 2, 'Add diced potatoes and cover with water or chicken stock. Simmer until potatoes are tender.'),
+('Caldo verde', 3, 'Add finely chopped kale to the pot and cook for another 5-7 minutes.'),
+('Caldo verde', 4, 'Season with salt and pepper, then serve hot with crusty bread.'),
+
+('Cannelloni', 1, 'Prepare the filling by mixing ricotta cheese, spinach, and seasoning.'),
+('Cannelloni', 2, 'Fill cannelloni tubes with the cheese mixture and place in a baking dish.'),
+('Cannelloni', 3, 'Cover with tomato sauce and sprinkle with grated cheese.'),
+('Cannelloni', 4, 'Bake in a preheated oven at 350°F (175°C) for 45 minutes until bubbly and golden.'),
+
+('Chicken Congee', 1, 'In a large pot, bring water or stock to a boil and add rinsed rice.'),
+('Chicken Congee', 2, 'Reduce to a simmer, add chicken breasts, and cook until the rice is very soft and porridge-like.'),
+('Chicken Congee', 3, 'Shred the cooked chicken, then return to the pot. Add ginger and adjust seasoning.'),
+('Chicken Congee', 4, 'Serve hot, garnished with green onions or fried garlic.');
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Dakdoritang', 1, 'In a large pot, mix gochujang, garlic, soy sauce, and water to make the base of the stew.'),
+('Dakdoritang', 2, 'Add the chicken pieces to the pot and bring to a boil.'),
+('Dakdoritang', 3, 'Add chopped potatoes and carrots, then simmer until the chicken is fully cooked and vegetables are tender.'),
+('Dakdoritang', 4, 'Adjust seasoning with salt and pepper, and add chopped green onions before serving.'),
+
+('Danish Pastry', 1, 'Prepare the dough by mixing flour, sugar, yeast, and butter.'),
+('Danish Pastry', 2, 'Roll out the dough and fold several times to create layers.'),
+('Danish Pastry', 3, 'Cut the dough into desired shapes and add fillings such as fruits or creams.'),
+('Danish Pastry', 4, 'Bake in a preheated oven at 375°F (190°C) until golden brown and puffed up.'),
+
+('Dum Aloo', 1, 'Boil potatoes until they are cooked yet firm, then peel and prick them all over with a fork.'),
+('Dum Aloo', 2, 'Fry the potatoes in hot oil until golden, then remove and set aside.'),
+('Dum Aloo', 3, 'In the same oil, add cumin seeds, Garam Masala, and finely chopped onions, frying until onions are golden.'),
+('Dum Aloo', 4, 'Add chopped tomatoes and cook until oil separates from the masala.'),
+('Dum Aloo', 5, 'Add potatoes back to the pan, cover with water, and simmer until the sauce thickens.'),
+
+('Eclairs', 1, 'Make choux pastry dough and pipe into long, thin shapes on a baking tray.'),
+('Eclairs', 2, 'Bake at 425°F (220°C) for 15 minutes, then reduce temperature to 375°F (190°C) and bake until golden.'),
+('Eclairs', 3, 'For the filling, whip cream with vanilla and sugar until stiff peaks form.'),
+('Eclairs', 4, 'Once cooled, split eclairs and pipe in the cream filling.'),
+('Eclairs', 5, 'Top with chocolate glaze and allow to set before serving.'),
+
+('English Breakfast', 1, 'Fry the bacon and sausages in a skillet until well browned.'),
+('English Breakfast', 2, 'In the same skillet, fry eggs to your liking.'),
+('English Breakfast', 3, 'Serve all cooked ingredients together with toast, baked beans, and any other desired sides like tomatoes and mushrooms.'),
+
+('Eton Mess', 1, 'Whip the cream until soft peaks form, then chill.'),
+('Eton Mess', 2, 'Crumble the meringues into large chunks.'),
+('Eton Mess', 3, 'In a bowl, combine the meringues with the whipped cream and fresh chopped strawberries.'),
+('Eton Mess', 4, 'Gently fold together and serve immediately in chilled glasses.'),
+
+('Fajitas', 1, 'Marinate the chicken in lime juice, oil, and fajita seasoning for at least 1 hour.'),
+('Fajitas', 2, 'In a large skillet, sauté sliced onions and bell peppers until soft.'),
+('Fajitas', 3, 'Add the marinated chicken to the skillet and cook until chicken is done.'),
+('Fajitas', 4, 'Serve hot on tortillas with toppings like salsa, cheese, and sour cream.'),
+
+('Falafel', 1, 'Combine soaked chickpeas, onions, parsley, garlic, and spices in a food processor and pulse until finely ground.'),
+('Falafel', 2, 'Form the mixture into small balls or patties.'),
+('Falafel', 3, 'Heat oil in a deep pan and fry the falafel balls until golden and crispy.'),
+('Falafel', 4, 'Drain on paper towels and serve hot with tahini sauce or wrapped in pita bread.'),
+
+('Fish and Chips', 1, 'Prepare batter from flour, beer, salt, and baking powder.'),
+('Fish and Chips', 2, 'Dip fish fillets in batter and deep-fry in hot oil until golden and crispy.'),
+('Fish and Chips', 3, 'Fry potato chips in the same oil until golden and crisp.'),
+('Fish and Chips', 4, 'Serve fish and chips with tartar sauce and lemon wedges.'),
+
+('Gazpacho', 1, 'Combine chopped tomatoes, bell pepper, cucumber, red onion, garlic, and bread in a blender.'),
+('Gazpacho', 2, 'Add olive oil, vinegar, and water, then blend until smooth.'),
+('Gazpacho', 3, 'Season with salt and pepper, then chill for at least 2 hours.'),
+('Gazpacho', 4, 'Serve cold, garnished with diced cucumber, peppers, and a drizzle of olive oil.');
+
+-- Continue similarly for other recipes based on their ingredients and the typical steps required to prepare them.
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Goulash', 1, 'Heat oil in a large pot and brown the beef chunks on all sides.'),
+('Goulash', 2, 'Add chopped onions and bell peppers, and sauté until the onions are translucent.'),
+('Goulash', 3, 'Stir in paprika, garlic, and tomatoes, cooking until the mixture starts to thicken.'),
+('Goulash', 4, 'Pour in enough water to cover the ingredients, bring to a boil, then simmer for about 1.5 hours until the beef is tender.'),
+('Goulash', 5, 'Adjust seasoning with salt and pepper, and serve with a dollop of sour cream and fresh bread.'),
+
+('Greek Salad', 1, 'In a large mixing bowl, combine chopped cucumbers, tomatoes, red onion, and Kalamata olives.'),
+('Greek Salad', 2, 'Crumble feta cheese over the vegetables.'),
+('Greek Salad', 3, 'Drizzle with olive oil and lemon juice, then season with salt and oregano.'),
+('Greek Salad', 4, 'Toss gently to mix all the ingredients together and serve immediately.'),
+
+('Hamburgers', 1, 'Form ground beef into patties and season with salt and pepper.'),
+('Hamburgers', 2, 'Grill or fry patties over medium heat until cooked to desired doneness.'),
+('Hamburgers', 3, 'Toast hamburger buns and prepare toppings such as lettuce, tomato, and onion.'),
+('Hamburgers', 4, 'Assemble the hamburgers by placing a patty on the bottom bun, adding cheese, toppings, and any sauces, then top with the other half of the bun.'),
+
+('Hot and Sour Soup', 1, 'In a large pot, bring chicken broth to a simmer and add soy sauce and rice vinegar.'),
+('Hot and Sour Soup', 2, 'Add chopped tofu, bamboo shoots, and shiitake mushrooms to the pot.'),
+('Hot and Sour Soup', 3, 'Simmer until the vegetables are tender and the flavors meld, about 10-15 minutes.'),
+('Hot and Sour Soup', 4, 'Adjust the heat with chili oil and the sourness with additional vinegar to taste. Serve hot, garnished with chopped green onions.'),
+
+('Hummus', 1, 'In a food processor, combine cooked chickpeas, tahini, lemon juice, and garlic.'),
+('Hummus', 2, 'Blend until smooth, adding olive oil gradually until the desired consistency is reached.'),
+('Hummus', 3, 'Season with salt and cumin, adjusting to taste.'),
+('Hummus', 4, 'Serve with a drizzle of olive oil and a sprinkle of paprika, accompanied by warm pita bread or fresh vegetables.'),
+
+('Indian Curry', 1, 'In a large pot, heat oil and add curry powder to bloom the spices.'),
+('Indian Curry', 2, 'Add chopped chicken and fry until all sides are golden brown.'),
+('Indian Curry', 3, 'Pour in coconut milk and bring to a simmer.'),
+('Indian Curry', 4, 'Cook until the chicken is tender and the curry sauce has thickened. Serve with rice or naan bread.'),
+
+('Irish Coffee', 1, 'Brew a strong cup of coffee and pour it into a heat-proof glass.'),
+('Irish Coffee', 2, 'Stir in brown sugar until fully dissolved.'),
+('Irish Coffee', 3, 'Add Irish whiskey and stir well.'),
+('Irish Coffee', 4, 'Carefully float the cream on top by pouring it over the back of a spoon. Serve hot without stirring.'),
+
+('Irish Stew', 1, 'In a large pot, brown the lamb chunks and set aside.'),
+('Irish Stew', 2, 'Sauté onions and carrots in the same pot until onions are soft.'),
+('Irish Stew', 3, 'Return the lamb to the pot, add potatoes and enough beef stock to cover.'),
+('Irish Stew', 4, 'Simmer until the meat is tender and the stew has thickened, about 1.5 hours. Season with salt, pepper, and thyme.'),
+
+('Italian Biscotti', 1, 'Mix flour, sugar, and almonds in a bowl.'),
+('Italian Biscotti', 2, 'In a separate bowl, whisk together eggs and any flavorings like vanilla or almond extract.'),
+('Italian Biscotti', 3, 'Combine the wet and dry ingredients to form a dough, then shape into logs and place on a baking sheet.'),
+('Italian Biscotti', 4, 'Bake until golden, then slice and bake again until crisp and dry.'),
+
+('Jambalaya', 1, 'In a large skillet, sauté bell peppers, onions, and Andouille sausage until the vegetables are soft and the sausage is browned.'),
+('Jambalaya', 2, 'Add uncooked rice and stir to coat in the oil and flavors.'),
+('Jambalaya', 3, 'Pour in chicken stock and bring to a boil. Reduce heat and simmer until rice is cooked, about 20 minutes.'),
+('Jambalaya', 4, 'Stir in shrimp and cook until they are pink and firm. Serve hot, garnished with sliced green onions.'),
+
+('Jerk Chicken', 1, 'Marinate chicken thighs in jerk seasoning and let sit for at least 4 hours, preferably overnight.'),
+('Jerk Chicken', 2, 'Grill chicken over medium heat until charred and fully cooked.'),
+('Jerk Chicken', 3, 'Serve with a side of rice and peas or roasted sweet potatoes.');
+
+-- More recipes to be continued similarly
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Japanese Cheesecake', 1, 'Preheat oven to 325°F (163°C) and line the bottom of a springform pan with parchment paper.'),
+('Japanese Cheesecake', 2, 'In a double boiler, melt cream cheese, butter, and milk until smooth. Allow to cool.'),
+('Japanese Cheesecake', 3, 'Whisk eggs with sugar until fluffy, then gradually fold into the cream cheese mixture.'),
+('Japanese Cheesecake', 4, 'Sift flour into the mixture and fold gently to combine without deflating the mixture.'),
+('Japanese Cheesecake', 5, 'Pour batter into the prepared pan and bake in a water bath for about 70 minutes.'),
+('Japanese Cheesecake', 6, 'Turn off oven and let the cheesecake cool inside for 1 hour before chilling in the fridge. Serve chilled.'),
+
+('Kimchi Fried Rice', 1, 'Heat sesame oil in a large skillet or wok over medium-high heat.'),
+('Kimchi Fried Rice', 2, 'Add chopped onion and sauté until translucent. Stir in chopped kimchi and cook for a few minutes.'),
+('Kimchi Fried Rice', 3, 'Add cooked rice to the skillet, breaking up clumps and mixing well.'),
+('Kimchi Fried Rice', 4, 'Push rice to the side of the skillet and crack eggs into the pan. Scramble the eggs and then mix into the rice.'),
+('Kimchi Fried Rice', 5, 'Season with soy sauce and cook until everything is well combined and heated through. Serve hot garnished with sliced green onions.'),
+
+('Kaiserschmarrn', 1, 'In a mixing bowl, separate egg whites from yolks. Beat the whites to stiff peaks.'),
+('Kaiserschmarrn', 2, 'Whisk yolks with sugar until creamy, then mix in milk and flour to form a batter.'),
+('Kaiserschmarrn', 3, 'Fold the egg whites into the batter gently to keep it fluffy.'),
+('Kaiserschmarrn', 4, 'Heat butter in a non-stick skillet, pour in the batter, and cook over medium heat until the underside is golden.'),
+('Kaiserschmarrn', 5, 'Flip the pancake, break it into pieces using two forks, and continue cooking until golden and crispy. Sprinkle with powdered sugar and serve warm with fruit compote or applesauce.'),
+
+('Kebab', 1, 'Marinate cubed lamb in a mixture of yogurt, kebab spices, and minced onions for at least 3 hours.'),
+('Kebab', 2, 'Thread the marinated lamb and bell peppers onto skewers.'),
+('Kebab', 3, 'Grill skewers on a preheated grill, turning occasionally, until the meat is cooked through and charred on all sides.'),
+('Kebab', 4, 'Serve the kebabs hot with flatbreads, fresh salads, and additional yogurt or tahini sauce on the side.'),
+
+('Kimchi Stew', 1, 'In a large pot, sauté pork belly and garlic until the pork is nicely browned.'),
+('Kimchi Stew', 2, 'Add kimchi and fry together for a few minutes until it starts to soften.'),
+('Kimchi Stew', 3, 'Pour water or stock into the pot until all ingredients are well covered, bring to a boil, then simmer for about 25 minutes.'),
+('Kimchi Stew', 4, 'Add tofu cubes and continue to simmer until the tofu is heated through. Adjust seasoning with salt, sugar, or more garlic as needed.'),
+('Kimchi Stew', 5, 'Serve hot, garnished with sliced green onions and a drizzle of sesame oil.'),
+
+('Key Lime Pie', 1, 'Mix graham cracker crumbs with melted butter and press into the bottom of a pie dish to form the crust.'),
+('Key Lime Pie', 2, 'Whisk together condensed milk, key lime juice, and egg yolks until smooth. Pour into the crust.'),
+('Key Lime Pie', 3, 'Bake at 350°F (175°C) for about 15 minutes or until the filling is set.'),
+('Key Lime Pie', 4, 'Allow to cool completely before chilling in the refrigerator. Serve cold, garnished with whipped cream and lime slices.');
+
+-- Continue with this pattern for the rest of the recipes
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Lasagna', 1, 'Preheat oven to 375°F (190°C). Cook lasagna noodles according to package instructions; drain and set aside.'),
+('Lasagna', 2, 'In a skillet, cook ground lamb and onions until meat is browned; drain excess fat. Stir in marinara sauce and simmer for 10 minutes.'),
+('Lasagna', 3, 'In a bowl, mix ricotta cheese with beaten egg and set aside.'),
+('Lasagna', 4, 'Layer a baking dish with a bit of sauce, followed by noodles, ricotta mixture, more sauce, and a layer of mozzarella cheese.'),
+('Lasagna', 5, 'Repeat the layering until all ingredients are used, finishing with a layer of cheese.'),
+('Lasagna', 6, 'Cover with foil and bake for 25 minutes. Remove foil and bake for another 25 minutes until bubbly and browned. Let stand 15 minutes before serving.'),
+
+('Lamb Tagine', 1, 'In a tagine or heavy pot, heat oil over medium heat and brown the lamb on all sides.'),
+('Lamb Tagine', 2, 'Add chopped onions and garlic to the pot and sauté until onions are translucent.'),
+('Lamb Tagine', 3, 'Stir in spices and dried apricots, cover with water or stock, and bring to a simmer.'),
+('Lamb Tagine', 4, 'Cover the tagine and cook on low heat for about 2 hours until lamb is tender.'),
+('Lamb Tagine', 5, 'Adjust seasoning with salt and pepper, garnish with fresh cilantro, and serve with couscous or flatbread.'),
+
+('Lobster Bisque', 1, 'In a large pot, sauté carrots, onions, and celery in butter until soft.'),
+('Lobster Bisque', 2, 'Add lobster shells to the pot and fry until fragrant. Pour in brandy and flambé.'),
+('Lobster Bisque', 3, 'Add tomato paste and flour, stir well, then gradually add fish stock and bring to a boil.'),
+('Lobster Bisque', 4, 'Reduce heat and simmer for 30 minutes. Strain the solids, return the liquid to the pot.'),
+('Lobster Bisque', 5, 'Add chopped lobster meat to the soup, season with salt and pepper, and simmer for an additional 10 minutes.'),
+('Lobster Bisque', 6, 'Stir in cream, heat through without boiling, and serve garnished with fresh herbs.'),
+
+('Moussaka', 1, 'Preheat oven to 350°F (175°C). Slice eggplants, salt them, and set aside for 30 minutes to draw out bitterness.'),
+('Moussaka', 2, 'Rinse eggplant slices and pat dry. Fry in oil until golden on both sides; drain on paper towels.'),
+('Moussaka', 3, 'In a skillet, cook ground lamb with onions until browned; add tomatoes and season with herbs.'),
+('Moussaka', 4, 'Layer a baking dish with eggplant, followed by the meat mixture, and repeat. Pour bechamel sauce over the top.'),
+('Moussaka', 5, 'Bake for 45 minutes until the top is golden and bubbling. Allow to cool for 10 minutes before serving.'),
+
+('Mapo Tofu', 1, 'Heat oil in a wok over medium heat. Add doubanjiang and stir fry until oil is red and fragrant.'),
+('Mapo Tofu', 2, 'Add minced garlic and ground pork, stirring until pork is fully cooked.'),
+('Mapo Tofu', 3, 'Cube tofu and add to the wok, gently coating it in the sauce without breaking it.'),
+('Mapo Tofu', 4, 'Add chicken stock and bring to a simmer. Cook gently for about 10 minutes to allow tofu to absorb flavors.'),
+('Mapo Tofu', 5, 'Stir in cornstarch slurry to thicken the sauce, then sprinkle with chopped green onions and serve with steamed rice.'),
+
+('Macaron', 1, 'Prepare baking sheets with parchment paper and preheat oven to 300°F (150°C).'),
+('Macaron', 2, 'Sift together almond flour and powdered sugar twice to remove any lumps.'),
+('Macaron', 3, 'In a large bowl, whip egg whites until foamy, then gradually add granulated sugar until stiff peaks form.'),
+('Macaron', 4, 'Fold dry ingredients into the meringue until the mixture flows like lava.'),
+('Macaron', 5, 'Pipe small rounds onto prepared sheets, tap sheets to release air bubbles, and let sit for 30 minutes.'),
+('Macaron', 6, 'Bake for 17 minutes, until feet form and shells don’t stick. Cool completely and fill with desired filling.');
+
+-- Continue with this pattern for the remaining recipes
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Nachos', 1, 'Preheat oven to 375°F (190°C). Arrange tortilla chips on a baking sheet in a single layer.'),
+('Nachos', 2, 'Sprinkle shredded cheddar cheese and cooked ground beef over the chips.'),
+('Nachos', 3, 'Add sliced jalapenos and dollops of salsa evenly over the chips.'),
+('Nachos', 4, 'Bake in the preheated oven until cheese is melted and bubbly, about 10 minutes.'),
+('Nachos', 5, 'Serve hot, garnished with chopped cilantro and sour cream if desired.'),
+
+('Nasi Goreng', 1, 'Heat oil in a large skillet over medium-high heat. Add chopped shallots and garlic, sauté until fragrant.'),
+('Nasi Goreng', 2, 'Increase heat to high, add chicken and cook until it starts to brown.'),
+('Nasi Goreng', 3, 'Add cooked rice, breaking up any clumps. Stir-fry until rice is hot and begins to crisp.'),
+('Nasi Goreng', 4, 'Stir in kecap manis and cook for another minute.'),
+('Nasi Goreng', 5, 'Push rice to the side, crack eggs into the pan, and scramble. Mix into the rice.'),
+('Nasi Goreng', 6, 'Serve hot, garnished with sliced cucumber and tomato, topped with fried shallots.'),
+
+('Nougat', 1, 'Line a pan with parchment paper and lightly oil it.'),
+('Nougat', 2, 'In a saucepan, heat honey and sugar until it reaches the hard ball stage (260°F or 127°C).'),
+('Nougat', 3, 'While syrup cooks, whip egg whites to stiff peaks in a large bowl.'),
+('Nougat', 4, 'Slowly pour the hot syrup into the whipped egg whites, beating continuously.'),
+('Nougat', 5, 'Fold in roasted nuts and pour mixture into the prepared pan, spreading evenly.'),
+('Nougat', 6, 'Allow to cool completely, then cut into pieces and wrap in wax paper.'),
+
+('Osso Buco', 1, 'Season veal shanks with salt and pepper, then dredge in flour.'),
+('Osso Buco', 2, 'In a large skillet, brown veal shanks in hot oil on all sides. Remove and set aside.'),
+('Osso Buco', 3, 'In the same skillet, add chopped onions, carrots, and celery. Cook until softened.'),
+('Osso Buco', 4, 'Return shanks to the skillet, add white wine and let reduce by half.'),
+('Osso Buco', 5, 'Add enough stock to cover the shanks, bring to a simmer, cover, and cook over low heat for 1.5-2 hours.'),
+('Osso Buco', 6, 'Serve the shanks with the vegetable sauce and a sprinkle of gremolata (lemon zest, garlic, parsley).'),
+
+('Oysters Kilpatrick', 1, 'Preheat the grill. Place oysters on a baking tray.'),
+('Oysters Kilpatrick', 2, 'Top each oyster with a small piece of bacon and a few drops of Worcestershire sauce.'),
+('Oysters Kilpatrick', 3, 'Grill under high heat until bacon is crispy.'),
+('Oysters Kilpatrick', 4, 'Garnish with chopped parsley and serve immediately with lemon wedges.'),
+
+('Paella', 1, 'In a large paella pan, heat oil and sauté chicken until browned. Remove and set aside.'),
+('Paella', 2, 'Add sliced bell peppers and onions to the pan, cook until soft.'),
+('Paella', 3, 'Add rice and stir until grains are well coated with oil. Add saffron infused stock.'),
+('Paella', 4, 'Return chicken to the pan, add seafood mix, and cook without stirring until rice is tender and liquid is absorbed.'),
+('Paella', 5, 'Remove from heat, cover with a towel, and let sit for 10 minutes before serving garnished with lemon wedges and parsley.'),
+
+('Pierogi', 1, 'Prepare the dough by mixing flour, water, and egg until a soft dough forms. Knead until smooth and let rest.'),
+('Pierogi', 2, 'For filling, cook onions until caramelized and mix with mashed potatoes and cheese.'),
+('Pierogi', 3, 'Roll out dough thinly, cut out circles, spoon filling onto each, fold, and seal edges.'),
+('Pierogi', 4, 'Boil pierogi in salted water until they float, then fry until golden.'),
+('Pierogi', 5, 'Serve with sour cream and a sprinkle of fresh herbs.'),
+
+('Peking Duck', 1, 'Air-dry the duck after rubbing with honey, soy, and a spice mixture. Let it hang in a cool place for 24 hours.'),
+('Peking Duck', 2, 'Roast in a preheated oven at 350°F (175°C) until the skin is crispy and golden.'),
+('Peking Duck', 3, 'Carve the duck and serve with warm pancakes, hoisin sauce, thinly sliced cucumbers, and green onions.'),
+('Peking Duck', 4, 'Guests assemble the pancakes by spreading hoisin sauce, adding duck slices, cucumber, and green onions, then rolling to eat.');
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Quiche Lorraine', 1, 'Preheat your oven to 375°F (190°C). Roll out pastry dough and line a 9-inch pie pan.'),
+('Quiche Lorraine', 2, 'Prick the bottom of the dough with a fork, line with parchment paper, and fill with pie weights.'),
+('Quiche Lorraine', 3, 'Bake the crust for 20 minutes, remove weights and parchment, and bake for another 10 minutes.'),
+('Quiche Lorraine', 4, 'Cook bacon until crisp, then place on the bottom of the crust. Sprinkle cheese over the bacon.'),
+('Quiche Lorraine', 5, 'In a bowl, whisk together eggs, cream, salt, and pepper. Pour over the bacon and cheese.'),
+('Quiche Lorraine', 6, 'Bake for 35-40 minutes until the custard is set and golden. Let cool before serving.'),
+
+('Quesadilla', 1, 'Heat a skillet over medium-high heat and place one tortilla in the pan.'),
+('Quesadilla', 2, 'Sprinkle cheese evenly over the tortilla, add cooked chicken, and diced green peppers.'),
+('Quesadilla', 3, 'Place another tortilla on top, cook until the bottom is golden, then flip carefully.'),
+('Quesadilla', 4, 'Cook until the second side is golden and the cheese is melted.'),
+('Quesadilla', 5, 'Remove from heat, cut into wedges, and serve with salsa and sour cream.'),
+
+('Quinoa Salad', 1, 'Rinse quinoa under cold water until water runs clear.'),
+('Quinoa Salad', 2, 'Cook quinoa according to package instructions, then cool to room temperature.'),
+('Quinoa Salad', 3, 'In a large bowl, combine cooled quinoa, diced cucumbers, cherry tomatoes, and finely chopped red onions.'),
+('Quinoa Salad', 4, 'Crumble feta cheese over the salad and drizzle with olive oil and lemon juice.'),
+('Quinoa Salad', 5, 'Toss everything together and season with salt and pepper to taste. Serve chilled or at room temperature.'),
+
+('Ratatouille', 1, 'Preheat oven to 375°F (190°C). Slice eggplant, zucchini, yellow squash, and bell peppers into consistent rounds.'),
+('Ratatouille', 2, 'Arrange the sliced vegetables in a spiral pattern in a baking dish, alternating them and seasoning with salt and pepper.'),
+('Ratatouille', 3, 'Drizzle with olive oil and sprinkle chopped garlic over the vegetables.'),
+('Ratatouille', 4, 'Cover with parchment paper cut to fit inside the dish and bake for 45-55 minutes, until vegetables are tender.'),
+('Ratatouille', 5, 'Serve hot, garnished with fresh basil or thyme.'),
+
+('Risotto', 1, 'In a saucepan, warm chicken stock over low heat.'),
+('Risotto', 2, 'In a separate pan, melt butter and sauté onions until translucent.'),
+('Risotto', 3, 'Add Arborio rice to the onions and cook, stirring, until the grains are well-coated and slightly translucent.'),
+('Risotto', 4, 'Pour in white wine and stir until fully absorbed.'),
+('Risotto', 5, 'Add warm chicken stock one ladle at a time, stirring continuously until the liquid is absorbed before adding the next ladle.'),
+('Risotto', 6, 'When the rice is al dente and creamy, stir in grated Parmesan cheese. Adjust seasoning and serve immediately.'),
+
+('Ramen', 1, 'In a pot, bring chicken broth to a simmer. Add soy sauce and a drizzle of sesame oil.'),
+('Ramen', 2, 'In another pot, boil water and cook ramen noodles according to package instructions, then drain.'),
+('Ramen', 3, 'Fry eggs to your preference (soft boiled, poached, or fried).'),
+('Ramen', 4, 'Assemble the ramen by placing noodles in bowls, pouring hot broth over them, and topping with eggs and chopped green onions.'),
+('Ramen', 5, 'Serve with additional toppings like bamboo shoots, corn, or chili oil as desired.');
+
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Samosa', 1, 'Prepare the filling by boiling potatoes until tender, mashing them, and mixing with peas, garam masala, cumin seeds, and salt.'),
+('Samosa', 2, 'Heat oil in a pan and sauté chopped onions until golden, then add the potato mixture and cook for a few more minutes.'),
+('Samosa', 3, 'Roll out the pastry dough into thin circles, cut each circle in half, and form cones by folding them in half.'),
+('Samosa', 4, 'Fill the cones with the potato mixture, then seal the edges with a paste made from flour and water.'),
+('Samosa', 5, 'Deep fry the samosas in hot oil until golden and crisp. Drain on paper towels before serving with chutney.'),
+
+('Shepherds Pie', 1, 'Preheat oven to 400°F (200°C). Cook ground lamb in a pan until browned, then drain excess fat.'),
+('Shepherds Pie', 2, 'Add chopped onions and carrots to the pan with the lamb, cooking until softened.'),
+('Shepherds Pie', 3, 'Stir in peas and a tablespoon of flour, then add beef stock and simmer until thickened.'),
+('Shepherds Pie', 4, 'For the topping, boil potatoes until tender, mash with butter and milk, and season with salt and pepper.'),
+('Shepherds Pie', 5, 'Spread the meat mixture in a baking dish, top with mashed potatoes, and bake for 20 minutes until the top is golden.'),
+
+('Sushi', 1, 'Prepare sushi rice by rinsing the rice and cooking it with water. Once cooked, season with a mixture of rice vinegar, sugar, and salt.'),
+('Sushi', 2, 'Cut fresh fish into thin slices and prepare additional fillings like cucumber, avocado, and cream cheese.'),
+('Sushi', 3, 'Place a nori sheet on a bamboo mat, spread a thin layer of sushi rice on the nori, and arrange the fillings on top.'),
+('Sushi', 4, 'Roll the sushi tightly using the bamboo mat, then slice the roll into bite-sized pieces using a sharp, wet knife.'),
+('Sushi', 5, 'Serve with soy sauce, wasabi, and pickled ginger.'),
+
+('Tabbouleh', 1, 'Cook bulgur wheat as directed on the package, then cool to room temperature.'),
+('Tabbouleh', 2, 'Combine finely chopped parsley, mint, and diced tomatoes in a large bowl.'),
+('Tabbouleh', 3, 'Add cooled bulgur to the bowl along with finely chopped onions.'),
+('Tabbouleh', 4, 'Dress the salad with olive oil, lemon juice, salt, and pepper. Mix well and let sit for flavors to meld.'),
+('Tabbouleh', 5, 'Chill in the refrigerator for at least an hour before serving to enhance the flavors.'),
+
+('Tacos', 1, 'Cook ground beef in a skillet over medium heat until browned. Drain excess grease and add taco seasoning.'),
+('Tacos', 2, 'Warm corn tortillas in a dry skillet or microwave until flexible.'),
+('Tacos', 3, 'Assemble tacos by placing cooked beef on tortillas, then topping with shredded lettuce, diced tomatoes, chopped onions, and cheddar cheese.'),
+('Tacos', 4, 'Serve with additional toppings such as sour cream, salsa, and guacamole.'),
+('Tacos', 5, 'Optionally, garnish with cilantro and lime wedges for extra flavor.');
+
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Tiramisu', 1, 'Combine egg yolks and sugar in a large bowl and whisk until thick and pale.'),
+('Tiramisu', 2, 'Mix in mascarpone cheese until smooth. In a separate bowl, whip the cream and fold it into the mascarpone mixture.'),
+('Tiramisu', 3, 'Dip ladyfingers quickly into espresso, making sure they are not soggy, and lay them in a dish to form the first layer.'),
+('Tiramisu', 4, 'Spread half of the mascarpone mixture over the ladyfingers, then repeat with another layer of dipped ladyfingers and the remaining mascarpone.'),
+('Tiramisu', 5, 'Cover and refrigerate for several hours. Before serving, dust with cocoa powder.'),
+
+('Udon Soup', 1, 'Prepare the dashi broth according to package instructions or by simmering kombu and bonito flakes.'),
+('Udon Soup', 2, 'In a separate pot, cook udon noodles until just tender, then drain and rinse under cold water.'),
+('Udon Soup', 3, 'Add soy sauce and mirin to the dashi broth and bring to a simmer.'),
+('Udon Soup', 4, 'Divide noodles among bowls, pour hot broth over, and top with thinly sliced green onions and mushrooms.'),
+('Udon Soup', 5, 'Serve hot, garnished with nori or tempura flakes if desired.'),
+
+('Ukrainian borscht', 1, 'Sauté onions, carrots, and beetroots in a pot until they start to soften.'),
+('Ukrainian borscht', 2, 'Add chopped cabbage and diced potatoes, then cover with water or stock and bring to a boil.'),
+('Ukrainian borscht', 3, 'Simmer until all vegetables are tender. Season with salt, pepper, and a touch of vinegar to taste.'),
+('Ukrainian borscht', 4, 'Stir in tomato paste and cook for an additional 10 minutes.'),
+('Ukrainian borscht', 5, 'Serve hot with a dollop of sour cream and a sprinkle of fresh dill.'),
+
+('Umbrian Lentil Stew', 1, 'Rinse lentils and soak if necessary according to package instructions.'),
+('Umbrian Lentil Stew', 2, 'In a large pot, sauté onions, carrots, and celery until softened.'),
+('Umbrian Lentil Stew', 3, 'Add the lentils, diced tomatoes, and enough water or vegetable stock to cover. Bring to a boil.'),
+('Umbrian Lentil Stew', 4, 'Reduce heat and simmer until lentils are tender, about 30-45 minutes.'),
+('Umbrian Lentil Stew', 5, 'Season with salt and pepper, and add a splash of olive oil or vinegar to taste before serving.'),
+
+('Vegetable Terrine', 1, 'Blanch all vegetables separately until just tender, then refresh in ice water.'),
+('Vegetable Terrine', 2, 'Line a loaf pan with plastic wrap, leaving extra on the sides. Arrange the blanched vegetables in layers, seasoning each layer.'),
+('Vegetable Terrine', 3, 'Dissolve gelatin in a small amount of vegetable stock and pour over the layered vegetables.'),
+('Vegetable Terrine', 4, 'Fold over the plastic wrap to cover, place a weight on top, and refrigerate overnight to set.'),
+('Vegetable Terrine', 5, 'Unmold by turning onto a plate, remove plastic wrap, and slice. Serve chilled.');
+
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Venison Stew', 1, 'Season the venison with salt and pepper and sear in a hot pan until browned on all sides.'),
+('Venison Stew', 2, 'Remove the venison and sauté onions and carrots in the same pan until they start to soften.'),
+('Venison Stew', 3, 'Return the venison to the pan, add beef stock and bring to a boil.'),
+('Venison Stew', 4, 'Reduce heat to a simmer, cover, and cook until the venison is tender, about 1.5-2 hours.'),
+('Venison Stew', 5, 'Add potatoes and cook until tender, then adjust seasoning and serve hot with fresh bread.'),
+
+('Vietnamese Pho', 1, 'Char onion and ginger under a broiler until slightly blackened, then add to beef broth with star anise and simmer.'),
+('Vietnamese Pho', 2, 'Season the broth with fish sauce and sugar to taste, simmer for at least an hour for flavors to meld.'),
+('Vietnamese Pho', 3, 'Strain the broth, return to the pot and keep hot.'),
+('Vietnamese Pho', 4, 'Cook rice noodles according to package instructions and divide among bowls.'),
+('Vietnamese Pho', 5, 'Top noodles with thin slices of beef brisket, pour hot broth over, and serve with herbs, lime, and chili sauce.'),
+
+('Waldorf Salad', 1, 'Combine chopped apples, celery, and walnuts in a large bowl.'),
+('Waldorf Salad', 2, 'In a small bowl, mix together mayonnaise and lemon juice to make the dressing.'),
+('Waldorf Salad', 3, 'Pour the dressing over the apple mixture and toss to coat evenly.'),
+('Waldorf Salad', 4, 'Refrigerate for at least an hour before serving to allow flavors to blend.'),
+
+('Welsh Rarebit', 1, 'Melt butter in a pan and stir in flour to create a roux.'),
+('Welsh Rarebit', 2, 'Gradually add beer to the roux while stirring continuously to form a smooth sauce.'),
+('Welsh Rarebit', 3, 'Add grated cheese to the sauce and stir until melted and smooth.'),
+('Welsh Rarebit', 4, 'Season with mustard and Worcestershire sauce, then spoon over toasted bread.'),
+('Welsh Rarebit', 5, 'Broil in the oven until bubbling and golden brown. Serve hot.'),
+
+('Wiener Schnitzel', 1, 'Pound veal cutlets to an even thickness, then season with salt.'),
+('Wiener Schnitzel', 2, 'Dredge each cutlet in flour, then dip in beaten egg, and finally coat with breadcrumbs.'),
+('Wiener Schnitzel', 3, 'Heat oil in a large skillet and fry the breaded cutlets until golden brown on each side.'),
+('Wiener Schnitzel', 4, 'Drain on paper towels, then serve hot with slices of lemon.'),
+
+('Xiaolongbao', 1, 'Mix the pork with ginger, green onions, soy sauce, and seasonings to make the filling.'),
+('Xiaolongbao', 2, 'Prepare the dough for the wrappers and roll out into small circles.'),
+('Xiaolongbao', 3, 'Place a small amount of filling and gelatinized broth in each wrapper, then pleat the edges to seal.'),
+('Xiaolongbao', 4, 'Steam the dumplings in a bamboo steamer over boiling water until the dough is translucent, about 8-10 minutes.'),
+
+('Xinjiang Lamb Skewers', 1, 'Combine cumin, paprika, garlic powder, and salt to make the spice mix.'),
+('Xinjiang Lamb Skewers', 2, 'Cut lamb into chunks and coat with the spice mix.'),
+('Xinjiang Lamb Skewers', 3, 'Thread the lamb onto skewers and let marinate for at least 2 hours.'),
+('Xinjiang Lamb Skewers', 4, 'Grill over high heat, turning occasionally, until nicely charred and cooked to desired doneness.'),
+('Xinjiang Lamb Skewers', 5, 'Serve hot, garnished with fresh herbs or a squeeze of lemon.');
+
+INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
+('Japanese Curry', 1, 'Sauté onions in a large pot until translucent.'),
+('Japanese Curry', 2, 'Add chopped carrots and potatoes, and cook until slightly browned.'),
+('Japanese Curry', 3, 'Add chunks of beef and fry until the meat is browned on all sides.'),
+('Japanese Curry', 4, 'Stir in enough water to cover the ingredients, bring to a boil, then add curry blocks.'),
+('Japanese Curry', 5, 'Simmer on low heat until the vegetables are tender and the curry has thickened.'),
+('Japanese Curry', 6, 'Serve hot over steamed rice or with bread.'),
+
+('Okonomiyaki', 1, 'Mix flour, water, and eggs to form a batter.'),
+('Okonomiyaki', 2, 'Stir in chopped cabbage, green onions, and optional ingredients like shrimp or bacon.'),
+('Okonomiyaki', 3, 'Heat oil in a skillet, pour the batter to form a pancake, and cook until the bottom is golden.'),
+('Okonomiyaki', 4, 'Flip the pancake and cook until the other side is golden and the pancake is cooked through.'),
+('Okonomiyaki', 5, 'Drizzle with okonomiyaki sauce, mayonnaise, sprinkle with bonito flakes and serve hot.');
+
+
+
