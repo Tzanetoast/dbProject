@@ -180,110 +180,112 @@ CREATE TABLE recipes (
     cookingTime INT, -- in minutes
     mealType VARCHAR(255), -- e.g., Breakfast, Lunch, Dinner,Snack,Appetizers,Dessert, brunch, cold-dish,Barbecue,Buffet,Halal,Fine-Dining,Vegan,Raw-Food
     tools VARCHAR(255),
+    portions INT,
     PRIMARY KEY (name)
     --FOREIGN KEY (nationalCuisine) REFERENCES nationalCuisines(nation)
 );
 
-INSERT INTO recipes (name, cookingORpastry, shortDescription, nationalCuisine, difficulty, prepTime, cookingTime, mealType) VALUES 
-('Apple Frangipan Tart', 'pastry', 'A delicious tart made with apples and frangipane.', 'British', 3, 30, 45, 'Dessert'),
-('Apple & Blackberry Crumble', 'pastry', 'A traditional dessert combining apples and blackberries with a crumble topping.', 'British', 2, 15, 30, 'Dessert'),
-('Apam balik', 'cooking', 'A sweet Malaysian pancake that is crispy on the outside and fluffy inside.', 'Malaysian', 2, 10, 15, 'Snack'),
-('Ayam Percik', 'cooking', 'Malaysian grilled chicken slathered in a spicy coconut milk marinade.', 'Malaysian', 3, 20, 30, 'Dinner'),
+INSERT INTO recipes (name, cookingORpastry, shortDescription, nationalCuisine, difficulty, prepTime, cookingTime, mealType, portions) VALUES 
+('Apple Frangipan Tart', 'pastry', 'A delicious tart made with apples and frangipane.', 'British', 3, 30, 45, 'Dessert', 4),
+('Apple & Blackberry Crumble', 'pastry', 'A traditional dessert combining apples and blackberries with a crumble topping.', 'British', 2, 15, 30, 'Dessert', 4),
+('Apam balik', 'cooking', 'A sweet Malaysian pancake that is crispy on the outside and fluffy inside.', 'Malaysian', 2, 10, 15, 'Snack', 4),
+('Ayam Percik', 'cooking', 'Malaysian grilled chicken slathered in a spicy coconut milk marinade.', 'Malaysian', 3, 20, 30, 'Dinner', 4),
 
-('Bakewell tart', 'pastry', 'A classic English dessert tart with jam and frangipane.', 'British', 3, 20, 40, 'Dessert, Snack'),
-('Beef Wellington', 'cooking', 'Beef fillet coated with mushroom duxelles and wrapped in puff pastry.', 'British', 5, 30, 60, 'Dinner, Fine-Dining'),
-('Banana Pancakes', 'cooking', 'Sweet pancakes made with ripe bananas.', 'American', 1, 10, 15, 'Breakfast, Dessert'),
+('Bakewell tart', 'pastry', 'A classic English dessert tart with jam and frangipane.', 'British', 3, 20, 40, 'Dessert, Snack', 6),
+('Beef Wellington', 'cooking', 'Beef fillet coated with mushroom duxelles and wrapped in puff pastry.', 'British', 5, 30, 60, 'Dinner, Fine-Dining', 4),
+('Banana Pancakes', 'cooking', 'Sweet pancakes made with ripe bananas.', 'American', 1, 10, 15, 'Breakfast, Dessert', 4),
 
-('Chicken Congee', 'cooking', 'A type of rice porridge popular in Asian countries.', 'Chinese', 1, 10, 90, 'Breakfast, Dinner'),
-('Cannelloni', 'cooking', 'Tubular pasta filled with meat or cheese and baked in a sauce.', 'Italian', 3, 30, 45, 'Lunch, Dinner'),
-('Caldo verde', 'cooking', 'A traditional Portuguese soup made with potatoes, chorizo, and kale.', 'Portuguese', 2, 15, 35, 'Dinner, Cold-dish'),
+('Chicken Congee', 'cooking', 'A type of rice porridge popular in Asian countries.', 'Chinese', 1, 10, 90, 'Breakfast, Dinner', 2),
+('Cannelloni', 'cooking', 'Tubular pasta filled with meat or cheese and baked in a sauce.', 'Italian', 3, 30, 45, 'Lunch, Dinner', 4),
+('Caldo verde', 'cooking', 'A traditional Portuguese soup made with potatoes, chorizo, and kale.', 'Portuguese', 2, 15, 35, 'Dinner, Cold-dish', 4),
 
-('Dakdoritang', 'cooking', 'Korean spicy chicken stew with vegetables.', 'Korean', 3, 20, 40, 'Dinner'),
-('Danish Pastry', 'pastry', 'Sweet pastry originated from Denmark.', 'Danish', 4, 30, 20, 'Breakfast, Snack'),
-('Dum Aloo', 'cooking', 'Potatoes cooked in curry, popular in Indian cuisine.', 'Indian', 2, 15, 30, 'Lunch, Dinner'),
+('Dakdoritang', 'cooking', 'Korean spicy chicken stew with vegetables.', 'Korean', 3, 20, 40, 'Dinner', 4),
+('Danish Pastry', 'pastry', 'Sweet pastry originated from Denmark.', 'Danish', 4, 30, 20, 'Breakfast, Snack', 4),
+('Dum Aloo', 'cooking', 'Potatoes cooked in curry, popular in Indian cuisine.', 'Indian', 2, 15, 30, 'Lunch, Dinner', 4),
 
-('English Breakfast', 'cooking', 'Full breakfast dish consisting of eggs, sausages, beans, toast, and more.', 'British', 2, 5, 15, 'Breakfast, Brunch'),
-('Eclairs', 'pastry', 'Pastry filled with cream and topped with chocolate icing.', 'French', 4, 25, 50, 'Dessert, Snack'),
-('Eton Mess', 'pastry', 'Dessert consisting of a mix of strawberries, meringue, and whipped cream.', 'British', 1, 15, 0, 'Dessert, Snack'),
+('English Breakfast', 'cooking', 'Full breakfast dish consisting of eggs, sausages, beans, toast, and more.', 'British', 2, 5, 15, 'Breakfast, Brunch', 1),
+('Eclairs', 'pastry', 'Pastry filled with cream and topped with chocolate icing.', 'French', 4, 25, 50, 'Dessert, Snack', 8),
+('Eton Mess', 'pastry', 'Dessert consisting of a mix of strawberries, meringue, and whipped cream.', 'British', 1, 15, 0, 'Dessert, Snack', 2),
 
-('Fish and Chips', 'cooking', 'Battered fish with deep-fried chips, a popular British fast food.', 'British', 2, 10, 20, 'Lunch, Dinner, Snack'),
-('Fajitas', 'cooking', 'Grilled meat served on a flour or corn tortilla.', 'Mexican', 2, 20, 10, 'Dinner, Barbecue'),
-('Falafel', 'cooking', 'Deep-fried balls made from ground chickpeas or fava beans.', 'Middle Eastern', 2, 30, 5, 'Lunch, Dinner, Snack'),
+('Fish and Chips', 'cooking', 'Battered fish with deep-fried chips, a popular British fast food.', 'British', 2, 10, 20, 'Lunch, Dinner, Snack', 2),
+('Fajitas', 'cooking', 'Grilled meat served on a flour or corn tortilla.', 'Mexican', 2, 20, 10, 'Dinner, Barbecue', 4),
+('Falafel', 'cooking', 'Deep-fried balls made from ground chickpeas or fava beans.', 'Middle Eastern', 2, 30, 5, 'Lunch, Dinner, Snack', 4),
 
-('Gazpacho', 'cooking', 'Cold soup made from raw, blended vegetables.', 'Spanish', 1, 20, 0, 'Lunch, Dinner, Cold-dish'),
-('Goulash', 'cooking', 'Stew of meat and vegetables seasoned with paprika.', 'Hungarian', 3, 15, 120, 'Dinner'),
-('Greek Salad', 'cooking', 'Salad made with tomatoes, cucumbers, onion, feta cheese, and olives.', 'Greek', 1, 10, 0, 'Lunch, Dinner, Cold-dish'),
+('Gazpacho', 'cooking', 'Cold soup made from raw, blended vegetables.', 'Spanish', 1, 20, 0, 'Lunch, Dinner, Cold-dish', 4),
+('Goulash', 'cooking', 'Stew of meat and vegetables seasoned with paprika.', 'Hungarian', 3, 15, 120, 'Dinner', 4),
+('Greek Salad', 'cooking', 'Salad made with tomatoes, cucumbers, onion, feta cheese, and olives.', 'Greek', 1, 10, 0, 'Lunch, Dinner, Cold-dish', 2),
 
-('Hot and Sour Soup', 'cooking', 'A variety of soups from severalAsian countries, particularly spicy in Sichuan cuisine.', 'Chinese', 2, 10, 20, 'Dinner, Snack'),
-('Hummus', 'cooking', 'Creamy dip made from cooked, mashed chickpeas blended with tahini, lemon juice, and garlic.', 'Middle Eastern', 1, 10, 0, 'Snack, Appetizer'),
-('Hamburgers', 'cooking', 'Ground meat patties, typically beef, served on a bun with various toppings.', 'American', 1, 10, 10, 'Lunch, Dinner, Snack'),
+('Hot and Sour Soup', 'cooking', 'A variety of soups from several Asian countries, particularly spicy in Sichuan cuisine.', 'Chinese', 2, 10, 20, 'Dinner, Snack', 2),
+('Hummus', 'cooking', 'Creamy dip made from cooked, mashed chickpeas blended with tahini, lemon juice, and garlic.', 'Middle Eastern', 1, 10, 0, 'Snack, Appetizer', 4),
+('Hamburgers', 'cooking', 'Ground meat patties, typically beef, served on a bun with various toppings.', 'American', 1, 10, 10, 'Lunch, Dinner, Snack', 4),
 
-('Irish Coffee', 'pastry', 'Hot coffee with Irish whiskey and sugar, stirred, and topped with cream.', 'Irish', 1, 5, 0, 'Dessert, Snack'),
-('Indian Curry', 'cooking', 'Spiced meat, fish, or vegetables cooked in a sauce.', 'Indian', 3, 20, 40, 'Lunch, Dinner'),
-('Italian Biscotti', 'pastry', 'Twice-baked almond biscuits originating from Italy.', 'Italian', 2, 20, 30, 'Snack, Dessert'),
-('Irish stew', 'cooking', 'A hearty stew made with lamb, potatoes, and carrots.', 'Irish', 2, 15, 120, 'Dinner, Lunch'),
+('Irish Coffee', 'pastry', 'Hot coffee with Irish whiskey and sugar, stirred, and topped with cream.', 'Irish', 1, 5, 0, 'Dessert, Snack', 1),
+('Indian Curry', 'cooking', 'Spiced meat, fish, or vegetables cooked in a sauce.', 'Indian', 3, 20, 40, 'Lunch, Dinner', 4),
+('Italian Biscotti', 'pastry', 'Twice-baked almond biscuits originating from Italy.', 'Italian', 2, 20, 30, 'Snack, Dessert', 8),
+('Irish Stew', 'cooking', 'A hearty stew made with lamb, potatoes, and carrots.', 'Irish', 2, 15, 120, 'Dinner, Lunch', 4),
 
-('Jambalaya', 'cooking', 'A Creole rice dish with meat and seafood, cooked in a tomato base.', 'American', 3, 20, 45, 'Lunch, Dinner'),
-('Japanese Curry', 'cooking', 'A thick, stew-like curry with meat and vegetables.', 'Japanese', 2, 15, 35, 'Dinner'),
-('Jerk Chicken', 'cooking', 'Spicy chicken dish marinated with a hot spice mixture called jerk spice.', 'Caribbean', 3, 240, 45, 'Dinner, Barbecue'),
-('Japanese Cheesecake', 'pastry', 'A fluffy and light style of cheesecake.', 'Japanese', 2, 15, 45, 'Dessert'),
+('Jambalaya', 'cooking', 'A Creole rice dish with meat and seafood, cooked in a tomato base.', 'American', 3, 20, 45, 'Lunch, Dinner', 4),
+('Japanese Curry', 'cooking', 'A thick, stew-like curry with meat and vegetables.', 'Japanese', 2, 15, 35, 'Dinner', 4),
+('Jerk Chicken', 'cooking', 'Spicy chicken dish marinated with a hot spice mixture called jerk spice.', 'Caribbean', 3, 240, 45, 'Dinner, Barbecue', 4),
+('Japanese Cheesecake', 'pastry', 'A fluffy and light style of cheesecake.', 'Japanese', 2, 15, 45, 'Dessert', 6),
 
-('Kimchi Fried Rice', 'cooking', 'Fried rice made with kimchi and other ingredients such as vegetables or meat.', 'Korean', 1, 10, 15, 'Lunch, Dinner'),
-('Kaiserschmarrn', 'pastry', 'A fluffy shredded pancake that has its origins in Austria.', 'Austrian', 2, 10, 20, 'Dessert, Snack'),
-('Kebab', 'cooking', 'Meat cut into cubes, marinated, and then grilled on skewers.', 'Middle Eastern', 2, 180, 10, 'Lunch, Dinner, Snack'),
-('Kimchi Stew', 'cooking', 'Spicy stew made with kimchi and tofu.', 'Korean', 2, 15, 30, 'Lunch, Dinner'),
-('Key Lime Pie', 'pastry', 'A pie made with Key lime juice, egg yolks, and sweetened condensed milk.', 'American', 2, 20, 30, 'Dessert'),
+('Kimchi Fried Rice', 'cooking', 'Fried rice made with kimchi and other ingredients such as vegetables or meat.', 'Korean', 1, 10, 15, 'Lunch, Dinner', 2),
+('Kaiserschmarrn', 'pastry', 'A fluffy shredded pancake that has its origins in Austria.', 'Austrian', 2, 10, 20, 'Dessert, Snack', 4),
+('Kebab', 'cooking', 'Meat cut into cubes, marinated, and then grilled on skewers.', 'Middle Eastern', 2, 180, 10, 'Lunch, Dinner, Snack', 4),
+('Kimchi Stew', 'cooking', 'Spicy stew made with kimchi and tofu.', 'Korean', 2, 15, 30, 'Lunch, Dinner', 4),
+('Key Lime Pie', 'pastry', 'A pie made with Key lime juice, egg yolks, and sweetened condensed milk.', 'American', 2, 20, 30, 'Dessert', 8),
 
-('Lasagna', 'cooking', 'Layered pasta dish with cheese, meat, and tomato sauce.', 'Italian', 4, 30, 60, 'Lunch, Dinner'),
-('Lamb Tagine', 'cooking', 'Moroccan dish of slow-cooked lamb with spices.', 'Moroccan', 3, 20, 120, 'Dinner'),
-('Lobster Bisque', 'cooking', 'A smooth and creamy soup made with lobster stock.', 'French', 4, 15, 45, 'Dinner, Fine-Dining'),
+('Lasagna', 'cooking', 'Layered pasta dish with cheese, meat, and tomato sauce.', 'Italian', 4, 30, 60, 'Lunch, Dinner', 6),
+('Lamb Tagine', 'cooking', 'Moroccan dish of slow-cooked lamb with spices.', 'Moroccan', 3, 20, 120, 'Dinner', 4),
+('Lobster Bisque', 'cooking', 'A smooth and creamy soup made with lobster stock.', 'French', 4, 15, 45, 'Dinner, Fine-Dining', 4),
 
-('Moussaka', 'cooking', 'Eggplant or potato-based dish, often including ground meat.', 'Greek', 3, 30, 60, 'Dinner'),
-('Mapo Tofu', 'cooking', 'Spicy Sichuan tofu dish with minced meat, typically pork or beef.', 'Chinese', 2, 10, 20, 'Lunch, Dinner'),
-('Macaron', 'pastry', 'Sweet meringue-based confection made with egg white, icing sugar, granulated sugar, almond meal, and food coloring.', 'French', 4, 25, 15, 'Dessert, Snack'),
+('Moussaka', 'cooking', 'Eggplant or potato-based dish, often including ground meat.', 'Greek', 3, 30, 60, 'Dinner', 4),
+('Mapo Tofu', 'cooking', 'Spicy Sichuan tofu dish with minced meat, typically pork or beef.', 'Chinese', 2, 10, 20, 'Lunch, Dinner', 4),
+('Macaron', 'pastry', 'Sweet meringue-based confection made with egg white, icing sugar, granulated sugar, almond meal, and food coloring.', 'French', 4, 25, 15, 'Dessert, Snack', 8),
 
-('Nachos', 'cooking', 'Dish of heated tortilla chips or totopos covered with melted cheese, often served as a snack or appetizer.', 'Mexican', 1, 5, 10, 'Snack, Appetizer'),
-('Nasi Goreng', 'cooking', 'Indonesian dish made with fried rice, typically flavored with kecap manis (sweet soy sauce), shallot, garlic, tamarind and chili.', 'Indonesian', 2, 10, 15, 'Lunch, Dinner'),
-('Nougat', 'pastry', 'A family of confections made with sugar or honey, roasted nuts, whipped egg whites, and sometimes chopped candied fruit.', 'French', 3, 30, 20, 'Dessert, Snack'),
+('Nachos', 'cooking', 'Dish of heated tortilla chips or totopos covered with melted cheese, often served as a snack or appetizer.', 'Mexican', 1, 5, 10, 'Snack, Appetizer', 4),
+('Nasi Goreng', 'cooking', 'Indonesian dish made with fried rice, typically flavored with kecap manis (sweet soy sauce), shallot, garlic, tamarind and chili.', 'Indonesian', 2, 10, 15, 'Lunch, Dinner', 2),
+('Nougat', 'pastry', 'A family of confections made with sugar or honey, roasted nuts, whipped egg whites, and sometimes chopped candied fruit.', 'French', 3, 30, 20, 'Dessert, Snack', 8),
 
-('Osso Buco', 'cooking', 'An Italian dish made with veal shanks cooked with vegetables, white wine, and broth.', 'Italian', 4, 15, 120, 'Lunch, Dinner'),
-('Oysters Kilpatrick', 'cooking', 'Oysters topped with a Worcestershire-based sauce, bacon and breadcrumbs, then grilled.', 'Australian', 2, 10, 10, 'Appetizer, Fine-Dining'),
-('Okonomiyaki', 'cooking', 'Japanese savory pancake containing a variety of ingredients.', 'Japanese', 2, 10, 15, 'Lunch, Dinner, Snack'),
+('Osso Buco', 'cooking', 'An Italian dish made with veal shanks cooked with vegetables, white wine, and broth.', 'Italian', 4, 15, 120, 'Lunch, Dinner', 4),
+('Oysters Kilpatrick', 'cooking', 'Oysters topped with a Worcestershire-based sauce, bacon and breadcrumbs, then grilled.', 'Australian', 2, 10, 10, 'Appetizer, Fine-Dining', 2),
+('Okonomiyaki', 'cooking', 'Japanese savory pancake containing a variety of ingredients.', 'Japanese', 2, 10, 15, 'Lunch, Dinner, Snack', 2),
 
-('Paella', 'cooking', 'Spanish rice dish originally from Valencia, containing meat, seafood, and vegetables.', 'Spanish', 3, 20, 40, 'Lunch, Dinner'),
-('Pierogi', 'cooking', 'Filled dumplings of Central European origin made by wrapping unleavened dough around a savory or sweet filling.', 'Eastern European', 3, 30, 20, 'Lunch, Dinner, Snack'),
-('Peking Duck', 'cooking', 'A famous duck dish from Beijing that has been prepared since the imperial era, known for its thin, crisp skin.', 'Chinese', 5, 120, 60, 'Dinner, Fine-Dining'),
+('Paella', 'cooking', 'Spanish rice dish originally from Valencia, containing meat, seafood, and vegetables.', 'Spanish', 3, 20, 40, 'Lunch, Dinner', 4),
+('Pierogi', 'cooking', 'Filled dumplings of Central European origin made by wrapping unleavened dough around a savory or sweet filling.', 'Eastern European', 3, 30, 20, 'Lunch, Dinner, Snack', 6),
+('Peking Duck', 'cooking', 'A famous duck dish from Beijing that has been prepared since the imperial era, known for its thin, crisp skin.', 'Chinese', 5, 120, 60, 'Dinner, Fine-Dining', 4),
 
-('Quiche Lorraine', 'pastry', 'A French tart consisting of pastry crust filled with smoked bacon, cheese, and egg custard.', 'French', 3, 20, 45, 'Breakfast, Brunch, Snack'),
-('Quesadilla', 'cooking', 'A Mexican dish consisting of a tortilla that is filled primarily with cheese, and sometimes meats, spices, and other fillings, and then cooked on a griddle.', 'Mexican', 1, 5, 10, 'Snack, Lunch'),
-('Quinoa Salad', 'cooking', 'Salad made from quinoa mixed with various vegetables and sometimes meat or seafood.', 'International', 1, 15, 0, 'Lunch, Dinner, Cold-dish'),
+('Quiche Lorraine', 'pastry', 'A French tart consisting of pastry crust filled with smoked bacon, cheese, and egg custard.', 'French', 3, 20, 45, 'Breakfast, Brunch, Snack', 6),
+('Quesadilla', 'cooking', 'A Mexican dish consisting of a tortilla that is filled primarily with cheese, and sometimes meats, spices, and other fillings, and then cooked on a griddle.', 'Mexican', 1, 5, 10, 'Snack, Lunch', 4),
+('Quinoa Salad', 'cooking', 'Salad made from quinoa mixed with various vegetables and sometimes meat or seafood.', 'International', 1, 15, 0, 'Lunch, Dinner, Cold-dish', 4),
 
-('Ratatouille', 'cooking', 'A French Provençal stewed vegetable dish, originating in Nice.', 'French', 2, 20, 40, 'Lunch, Dinner'),
-('Risotto', 'cooking', 'An Italian rice dish cooked with broth until it reaches a creamy consistency.', 'Italian', 3, 10, 30, 'Lunch, Dinner'),
-('Ramen', 'cooking', 'A Japanese noodle soup dish with meat or fish broth flavored with soy sauce or miso, and uses toppings such as sliced pork, nori, and green onions.', 'Japanese', 3, 15, 30, 'Lunch, Dinner'),
+('Ratatouille', 'cooking', 'A French Provençal stewed vegetable dish, originating in Nice.', 'French', 2, 20, 40, 'Lunch, Dinner', 4),
+('Risotto', 'cooking', 'An Italian rice dish cooked with broth until it reaches a creamy consistency.', 'Italian', 3, 10, 30, 'Lunch, Dinner', 4),
+('Ramen', 'cooking', 'A Japanese noodle soup dish with meat or fish broth flavored with soy sauce or miso, and uses toppings such as sliced pork, nori, and green onions.', 'Japanese', 3, 15, 30, 'Lunch, Dinner', 2),
 
-('Sushi', 'cooking', 'Japanese dish of prepared vinegared rice, usually with some sugar and salt, accompanying a variety of ingredients, such as seafood, often raw, and vegetables.', 'Japanese', 3, 30, 0, 'Lunch, Dinner, Snack'),
-('Shepherds Pie', 'cooking', 'A traditional British dish of minced meat topped with a mashed potato crust.', 'British', 2, 20, 60, 'Lunch, Dinner'),
-('Samosa', 'cooking', 'A fried or baked pastry with a savory filling, such as spiced potatoes, onions, peas, or lentils.', 'Indian', 2, 30, 10, 'Snack, Appetizer'),
+('Sushi', 'cooking', 'Japanese dish of prepared vinegared rice, usually with some sugar and salt, accompanying a variety of ingredients, such as seafood, often raw, and vegetables.', 'Japanese', 3, 30, 0, 'Lunch, Dinner, Snack', 4),
+('Shepherds Pie', 'cooking', 'A traditional British dish of minced meat topped with a mashed potato crust.', 'British', 2, 20, 60, 'Lunch, Dinner', 4),
+('Samosa', 'cooking', 'A fried or baked pastry with a savory filling, such as spiced potatoes, onions, peas, or lentils.', 'Indian', 2, 30, 10, 'Snack, Appetizer', 6),
 
-('Tiramisu', 'pastry', 'A popular coffee-flavored Italian dessert.', 'Italian', 2, 30, 0, 'Dessert'),
-('Tacos', 'cooking', 'Traditional Mexican dish consisting of a small hand-sized corn or wheat tortilla topped with a filling.', 'Mexican', 1, 10, 10, 'Lunch, Dinner, Snack'),
-('Tabbouleh', 'cooking', 'A Levantine vegetarian salad made of finely chopped parsley, with tomatoes, mint, onion, bulgur, and seasoned with olive oil, lemon juice, salt and pepper.', 'Middle Eastern', 1, 20, 0, 'Lunch, Dinner, Cold-dish'),
+('Tiramisu', 'pastry', 'A popular coffee-flavored Italian dessert.', 'Italian', 2, 30, 0, 'Dessert', 8),
+('Tacos', 'cooking', 'Traditional Mexican dish consisting of a small hand-sized corn or wheat tortilla topped with a filling.', 'Mexican', 1, 10, 10, 'Lunch, Dinner, Snack', 4),
+('Tabbouleh', 'cooking', 'A Levantine vegetarian salad made of finely chopped parsley, with tomatoes, mint, onion, bulgur, and seasoned with olive oil, lemon juice, salt and pepper.', 'Middle Eastern', 1, 20, 0, 'Lunch, Dinner, Cold-dish', 4),
 
-('Udon Soup', 'cooking', 'A Japanese noodle soup made with udon noodles.', 'Japanese', 2, 5, 15, 'Lunch, Dinner'),
-('Ukrainian borscht', 'cooking', 'A hearty soup made with beetroot as a main ingredient, giving it a distinctive red color.', 'Ukrainian', 3, 30, 60, 'Lunch, Dinner'),
-('Umbrian Lentil Stew', 'cooking', 'Made with lentils and typically includes tomatoes, vegetables, and herbs.', 'Italian', 2, 10, 45, 'Lunch, Dinner'),
+('Udon Soup', 'cooking', 'A Japanese noodle soup made with udon noodles.', 'Japanese', 2, 5, 15, 'Lunch, Dinner', 2),
+('Ukrainian borscht', 'cooking', 'A hearty soup made with beetroot as a main ingredient, giving it a distinctive red color.', 'Ukrainian', 3, 30, 60, 'Lunch, Dinner', 4),
+('Umbrian Lentil Stew', 'cooking', 'Made with lentils and typically includes tomatoes, vegetables, and herbs.', 'Italian', 2, 10, 45, 'Lunch, Dinner', 4),
 
-('Vietnamese Pho', 'cooking', 'A Vietnamese soup consisting of broth, rice noodles, herbs, and meat.', 'Vietnamese', 2, 20, 90, 'Lunch, Dinner'),
-('Vegetable Terrine', 'cooking', 'Made with layers of cooked or raw vegetables held together by a gelatin made from a vegetable stock or a meat stock.', 'French', 4, 30, 120, 'Lunch, Dinner, Cold-dish'),
-('Venison Stew', 'cooking', 'A hearty stew made using venison as the main ingredient.', 'International', 3, 20, 120, 'Lunch, Dinner'),
+('Vietnamese Pho', 'cooking', 'A Vietnamese soup consisting of broth, rice noodles, herbs, and meat.', 'Vietnamese', 2, 20, 90, 'Lunch, Dinner', 4),
+('Vegetable Terrine', 'cooking', 'Made with layers of cooked or raw vegetables held together by a gelatin made from a vegetable stock or a meat stock.', 'French', 4, 30, 120, 'Lunch, Dinner, Cold-dish', 4),
+('Venison Stew', 'cooking', 'A hearty stew made using venison as the main ingredient.', 'International', 3, 20, 120, 'Lunch, Dinner', 4),
 
-('Waldorf Salad', 'cooking', 'An American salad generally made of fresh apples, celery, grapes, and walnuts, dressed in mayonnaise, and usually served on a bed of lettuce.', 'American', 1, 15, 0, 'Lunch, Dinner, Cold-dish'),
-('Welsh Rarebit', 'cooking', 'A dish made with a savory sauce of melted cheese and various other ingredients and served hot, after being poured over slices of toasted bread.', 'British', 1, 5, 10, 'Snack, Lunch'),
-('Wiener Schnitzel', 'cooking', 'A traditional Viennese dish made by breading and frying a thin slice of meat (usually veal).', 'Austrian', 2, 10, 10, 'Lunch, Dinner'),
+('Waldorf Salad', 'cooking', 'An American salad generally made of fresh apples, celery, grapes, and walnuts, dressed in mayonnaise, and usually served on a bed of lettuce.', 'American', 1, 15, 0, 'Lunch, Dinner, Cold-dish', 4),
+('Welsh Rarebit', 'cooking', 'A dish made with a savory sauce of melted cheese and various other ingredients and served hot, after being poured over slices of toasted bread.', 'British', 1, 5, 10, 'Snack, Lunch', 4),
+('Wiener Schnitzel', 'cooking', 'A traditional Viennese dish made by breading and frying a thin slice of meat (usually veal).', 'Austrian', 2, 10, 10, 'Lunch, Dinner', 4),
 
-('Xiaolongbao', 'cooking', 'Chinese steamed buns filled with meat and broth.', 'Chinese', 4, 30, 20, 'Lunch, Dinner, Snack'),
-('Xinjiang Lamb Skewers', 'cooking', 'Spicy skewers of grilled lamb, a popular street food from the Xinjiang region.', 'Chinese', 2, 120, 10, 'Dinner, Snack');
+('Xiaolongbao', 'cooking', 'Chinese steamed buns filled with meat and broth.', 'Chinese', 4, 30, 20, 'Lunch, Dinner, Snack', 6),
+('Xinjiang Lamb Skewers', 'cooking', 'Spicy skewers of grilled lamb, a popular street food from the Xinjiang region.', 'Chinese', 2, 120, 10, 'Dinner, Snack', 6);
+
 
 -- Pies, Tarts, and Cakes
 UPDATE recipes
@@ -1406,476 +1408,200 @@ CREATE TABLE ingredients (
     foodGroup VARCHAR(64),  
     unitOfMeasure VARCHAR(64),  
     caloriesPerUnitOfMeasure INT,--kcal
+    proteinsPerUnitOfMeasure INT,
     carbohydratesPerUnitOfMeasure INT, --grams
     fatsPerUnitOfMeasure INT,--grams
     sugarsPerUnitOfMeasure INT,--grams
     PRIMARY KEY (name)
 );
 
-
-INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
-('Eggs', 'Dairy, Eggs, and Products', 'large (50g each)', 70, 1, 5, 1),
-('Flour', 'Cereals and Products', 'cup (120g)', 455, 95, 1, 1),
-('Peanut filling', 'Various Plant-Based Foods', 'cup (100g)', 588, 20, 50, 9),
-('Apples', 'Various Plant-Based Foods', 'medium (182g)', 95, 25, 0, 19),
-('Blackberries', 'Various Plant-Based Foods', 'cup (144g)', 62, 14, 1, 7),
-('Butter', 'Dairy, Eggs, and Products', 'tablespoon (14g)', 102, 0, 12, 0),
-('Sugar', 'Sweeteners', 'tablespoon (12.6g)', 49, 13, 0, 13),
-('Frangipane', 'Various Plant-Based Foods', '100g', 400, 44, 24, 24),
-('Pastry crust', 'Cereals and Products', 'piece (60g)', 200, 20, 11, 0),
-('Chicken', 'Meat and Products', '100g', 239, 0, 14, 0),
-('Coconut milk', 'Various Plant-Based Foods', 'cup (240g)', 552, 13, 57, 8),
-('Lemongrass', 'Spices and Essential Oils', 'stalk (18g)', 5, 1, 0, 0);
-INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
-('Jam', 'Preserved Foods', 'tablespoon (20g)', 56, 14, 0, 10),
-('Bananas', 'Various Plant-Based Foods', 'medium (118g)', 105, 27, 0, 14),
-('Beef fillet', 'Meat and Products', '100g', 250, 0, 15, 0),
-('Mushroom duxelles', 'Various Plant-Based Foods', '100g', 70, 5, 5, 2),
-('Puff pastry', 'Cereals and Products', 'ounce (28g)', 158, 11, 11, 0),
-('Chorizo', 'Meat and Products', 'slice (10g)', 50, 0, 5, 0),
-('Garlic', 'Various Plant-Based Foods', 'clove (3g)', 5, 1, 0, 0),
-('Kale', 'Various Plant-Based Foods', 'cup (67g)', 34, 6, 1, 0),
-('Onion', 'Various Plant-Based Foods', 'medium (110g)', 44, 10, 0, 5),
-('Potatoes', 'Various Plant-Based Foods', 'medium (173g)', 161, 37, 0, 2),
-('Cannelloni tubes', 'Cereals and Products', 'piece (30g)', 90, 18, 1, 1),
-('Ricotta cheese', 'Dairy, Eggs, and Products', 'cup (248g)', 428, 8, 32, 1),
-('Spinach', 'Various Plant-Based Foods', 'cup (30g)', 7, 1, 0, 0),
-('Chicken breast', 'Meat and Products', '100g', 165, 0, 4, 0),
-('Ginger', 'Spices and Essential Oils', 'tablespoon (6g)', 5, 1, 0, 0),
-('Rice', 'Cereals and Products', 'cup (cooked, 158g)', 206, 45, 0, 0),
-('Carrots', 'Various Plant-Based Foods', 'medium (61g)', 25, 6, 0, 3),
-('Gochujang (Korean chili paste)', 'Preserved Foods', 'tablespoon (20g)', 45, 9, 1, 7),
-('Soy sauce', 'Preserved Foods', 'tablespoon (18g)', 10, 1, 0, 0),
-('Cumin seeds', 'Spices and Essential Oils', 'teaspoon (2g)', 8, 1, 0, 0),
-('Garam Masala', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 1, 0, 0),
-('Tomatoes', 'Various Plant-Based Foods', 'medium (123g)', 22, 5, 0, 3),
-('Chocolate glaze', 'Sweeteners', 'tablespoon (20g)', 100, 15, 5, 12),
-('Choux pastry', 'Cereals and Products', 'piece (10g)', 30, 3, 2, 1),
-('Pastry cream', 'Dairy, Eggs, and Products', 'cup (250g)', 305, 30, 18, 23),
-('Bacon', 'Meat and Products', 'slice (8g)', 42, 0, 3, 0),
-('Sausages', 'Meat and Products', 'link (50g)', 142, 1, 12, 1),
-('Meringue', 'Sweeteners', 'piece (30g)', 95, 22, 0, 22),
-('Strawberries', 'Various Plant-Based Foods', 'cup (152g)', 49, 12, 0, 7),
-('Whipping cream', 'Dairy, Eggs, and Products', 'cup (60g)', 154, 4, 16, 3);
-INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
-('Bell peppers', 'Various Plant-Based Foods', 'medium (119g)', 24, 6, 0, 4),
-('Fajita seasoning', 'Spices and Essential Oils', 'tablespoon (8g)', 20, 4, 0, 0),
-('Tortillas', 'Cereals and Products', 'each (medium, 40g)', 94, 16, 2, 0),
-('Chickpeas', 'Various Plant-Based Foods', 'cup (cooked, 164g)', 269, 45, 4, 8),
-('Cumin', 'Spices and Essential Oils', 'teaspoon (2g)', 8, 1, 0, 0),
-('Parsley', 'Spices and Essential Oils', 'cup (chopped, 60g)', 22, 4, 0, 1),
-('Beer', 'Various Beverages', 'can (356ml)', 154, 13, 0, 0),
-('White fish fillets', 'Fish and Products', 'fillet (180g)', 206, 0, 2, 0),
-('Bell pepper', 'Various Plant-Based Foods', 'medium (119g)', 24, 6, 0, 4),
-('Cucumber', 'Various Plant-Based Foods', 'medium (201g)', 30, 7, 0, 4),
-('Olive oil', 'Fats and Oils', 'tablespoon (13.5g)', 119, 0, 14, 0),
-('Red onion', 'Various Plant-Based Foods', 'medium (110g)', 44, 10, 0, 5),
-('Vinegar', 'Various Plant-Based Foods', 'tablespoon (15g)', 3, 0, 0, 0),
-('Beef', 'Meat and Products', '100g', 250, 0, 15, 0),
-('Onions', 'Various Plant-Based Foods', 'medium (110g)', 44, 10, 0, 5),
-('Paprika', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 1, 0, 0),
-('Feta cheese', 'Dairy, Eggs, and Products', 'cup (crumbled, 150g)', 396, 6, 32, 0),
-('Kalamata olives', 'Various Plant-Based Foods', 'cup (134g)', 275, 15, 23, 0),
-('Cheese', 'Dairy, Eggs, and Products', 'slice (28g)', 113, 1, 9, 0),
-('Ground beef', 'Meat and Products', '100g', 254, 0, 18, 0),
-('Hamburger buns', 'Cereals and Products', 'each (43g)', 120, 21, 2, 3),
-('Lettuce', 'Various Plant-Based Foods', 'leaf (5g)', 1, 0, 0, 0),
-('Tomato', 'Various Plant-Based Foods', 'medium (123g)', 22, 5, 0, 3),
-('Bamboo shoots', 'Various Plant-Based Foods', 'cup (120g)', 20, 3, 0, 2),
-('Chicken broth', 'Preserved Foods', 'cup (240ml)', 38, 3, 1, 1),
-('Rice vinegar', 'Various Plant-Based Foods', 'tablespoon (15ml)', 3, 0, 0, 0),
-('Shiitake mushrooms', 'Various Plant-Based Foods', 'cup (87g)', 35, 7, 0, 2),
-('Tofu', 'Various Plant-Based Foods', 'block (122g)', 177, 5, 12, 1),
-('Lemon juice', 'Various Plant-Based Foods', 'tablespoon (15ml)', 4, 1, 0, 0),
-('Tahini', 'Various Plant-Based Foods', 'tablespoon (15g)', 89, 3, 8, 0),
-('Curry powder', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 1, 0, 0),
-('Brown sugar', 'Sweeteners', 'tablespoon (12g)', 45, 12, 0, 12),
-('Coffee', 'Coffee, Tea, and Related Products', 'cup (240ml)', 2, 0, 0, 0),
-('Cream', 'Dairy, Eggs, and Products', 'tablespoon (15ml)', 52, 1, 6, 1),
-('Irish whiskey', 'Various Beverages', 'shot (44ml)', 98, 0, 0, 0),
-('Beef stock', 'Preserved Foods', 'cup (240ml)', 31, 0, 0, 0),
-('Lamb shoulder', 'Meat and Products', '100g', 236, 0, 16, 0),
-('Almonds', 'Various Plant-Based Foods', 'cup (143g)', 828, 30, 72, 6),
-('Andouille sausage', 'Meat and Products', 'link (85g)', 229, 2, 19, 1),
-('Shrimp', 'Fish and Products', '100g', 99, 0, 1, 0),
-('Cream cheese', 'Dairy, Eggs, and Products', 'ounce (28g)', 99, 1, 10, 1);
-INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
-('Chicken thighs', 'Meat and Products', '100g', 209, 0, 15, 0),
-('Green onions', 'Various Plant-Based Foods', '100g', 32, 7, 0, 2),
-('Jerk seasoning', 'Spices and Essential Oils', 'teaspoon (2g)', 5, 1, 0, 0),
-('Scotch bonnet peppers', 'Various Plant-Based Foods', 'pepper (6.5g)', 2, 1, 0, 0),
-('Thyme', 'Spices and Essential Oils', 'tablespoon (1g)', 3, 1, 0, 0),
-('Milk', 'Dairy, Eggs, and Products', 'cup (244g)', 103, 12, 2, 12),
-('Kebab spices', 'Spices and Essential Oils', 'tablespoon (7g)', 20, 4, 0, 0),
-('Lamb', 'Meat and Products', '100g', 294, 0, 24, 0),
-('Yogurt', 'Dairy, Eggs, and Products', 'cup (245g)', 154, 17, 9, 17),
-('Condensed milk', 'Dairy, Eggs, and Products', 'cup (306g)', 982, 166, 27, 166),
-('Graham cracker crust', 'Cereals and Products', 'piece (21g)', 102, 12, 5, 5),
-('Lime juice', 'Various Plant-Based Foods', 'tablespoon (15ml)', 4, 1, 0, 0),
-('Cooked rice', 'Cereals and Products', 'cup (158g)', 206, 45, 0, 0),
-('Kimchi', 'Various Plant-Based Foods', 'cup (150g)', 23, 4, 0, 2),
-('Sesame oil', 'Fats and Oils', 'tablespoon (14ml)', 120, 0, 14, 0),
-('Pork belly', 'Meat and Products', '100g', 518, 0, 53, 0),
-('Cinnamon', 'Spices and Essential Oils', 'teaspoon (2.6g)', 6, 2, 0, 0),
-('Dried apricots', 'Fruits and Products', 'cup (130g)', 313, 81, 1, 69),
-('Lasagna noodles', 'Cereals and Products', 'piece (56g)', 180, 36, 1, 1),
-('Marinara sauce', 'Various Plant-Based Foods', 'cup (240g)', 70, 13, 2, 9),
-('Brandy', 'Various Beverages', 'shot (42g)', 95, 0, 0, 0),
-('Celery', 'Various Plant-Based Foods', 'stalk (40g)', 6, 1, 0, 1),
-('Lobster', 'Fish and Products', '100g', 89, 0, 1, 0),
-('Tomato paste', 'Preserved Foods', 'tablespoon (16g)', 13, 3, 0, 2),
-('Almond flour', 'Various Plant-Based Foods', 'cup (96g)', 544, 20, 48, 4),
-('Egg whites', 'Dairy, Eggs, and Products', 'large (33g)', 17, 0, 0, 0),
-('Granulated sugar', 'Sweeteners', 'cup (200g)', 774, 200, 0, 200),
-('Doubanjiang (fermented bean paste)', 'Various Plant-Based Foods', 'tablespoon (15g)', 25, 4, 1, 3),
-('Green onion', 'Various Plant-Based Foods', '100g', 32, 7, 0, 2),
-('Ground pork', 'Meat and Products', '100g', 297, 0, 21, 0),
-('Bechamel sauce', 'Dairy, Eggs, and Products', 'cup (250g)', 300, 20, 23, 9),
-('Eggplant', 'Various Plant-Based Foods', 'medium (200g)', 50, 12, 0, 7),
-('Ground lamb', 'Meat and Products', '100g', 282, 0, 23, 0),
-('Cheddar cheese', 'Dairy, Eggs, and Products', 'slice (28g)', 113, 0, 9, 0),
-('Jalapenos', 'Various Plant-Based Foods', 'pepper (14g)', 4, 1, 0, 1),
-('Salsa', 'Various Plant-Based Foods', 'tablespoon (15g)', 4, 1, 0, 1),
-('Tortilla chips', 'Cereals and Products', 'ounce (28g)', 138, 19, 7, 0),
-('Kecap Manis (sweet soy sauce)', 'Preserved Foods', 'tablespoon (15ml)', 40, 10, 0, 9),
-('Shallots', 'Various Plant-Based Foods', 'medium (10g)', 7, 2, 0, 1),
-('Honey', 'Sweeteners', 'tablespoon (21g)', 64, 17, 0, 17),
-('Cabbage', 'Various Plant-Based Foods', 'cup (chopped, 89g)', 22, 5, 0, 3),
-('Okonomiyaki sauce', 'Preserved Foods', 'tablespoon (18g)', 35, 7, 0, 6),
-('Veal shanks', 'Meat and Products', '100g', 178, 0, 9, 0),
-('White wine', 'Various Beverages', 'glass (147ml)', 123, 4, 0, 1),
-('Oysters', 'Fish and Products', 'medium (25g)', 17, 2, 1, 0),
-('Worcestershire sauce', 'Spices and Essential Oils', 'tablespoon (17ml)', 13, 3, 0, 1),
-('Saffron', 'Spices and Essential Oils', 'teaspoon (0.7g)', 6, 1, 0, 0),
-('Seafood mix', 'Fish and Products', '100g', 89, 0, 1, 0),
-('Cucumbers', 'Various Plant-Based Foods', 'medium (201g)', 30, 7, 0, 4),
-('Duck', 'Meat and Products', '100g', 337, 0, 28, 0),
-('Hoisin sauce', 'Various Plant-Based Foods', 'tablespoon (19g)', 35, 7, 1, 6),
-('Egg', 'Dairy, Eggs, and Products', 'large (50g)', 70, 1, 5, 1),
-('Potato', 'Various Plant-Based Foods', 'medium (173g)', 161, 37, 0, 2),
-('Green peppers', 'Various Plant-Based Foods', 'medium (119g)', 24, 6, 0, 4),
-('Cherry tomatoes', 'Various Plant-Based Foods', 'cup (149g)', 27, 6, 0, 4),
-('Quinoa', 'Cereals and Products', 'cup (185g)', 222, 39, 4, 0),
-('Ramen noodles', 'Cereals and Products', 'package (85g)', 371, 51, 14, 1),
-('Yellow squash', 'Various Plant-Based Foods', 'medium (200g)', 31, 7, 0, 4),
-('Zucchini', 'Various Plant-Based Foods', 'medium (196g)', 33, 6, 1, 5),
-('Arborio rice', 'Cereals and Products', 'cup (192g)', 716, 158, 1, 0),
-('Chicken stock', 'Preserved Foods', 'cup (240ml)', 86, 8, 3, 1),
-('Parmesan cheese', 'Dairy, Eggs, and Products', 'ounce (28g)', 122, 1, 8, 0),
-('Garam masala', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 1, 0, 0),
-('Green peas', 'Various Plant-Based Foods', 'cup (160g)', 118, 21, 1, 8),
-('Pastry dough', 'Cereals and Products', 'piece (100g)', 455, 45, 30, 1),
-('Peas', 'Various Plant-Based Foods', 'cup (160g)', 117, 21, 1, 8),
-('Fresh fish (various)', 'Fish and Products', '100g', 206, 0, 12, 0),
-('Nori sheets', 'Fish and Products', 'sheet (2.5g)', 9, 1, 0, 0),
-('Sushi rice', 'Cereals and Products', 'cup (cooked, 158g)', 296, 65, 0, 0),
-('Wasabi', 'Spices and Essential Oils', 'teaspoon (6g)', 15, 3, 0, 0),
-('Bulgur', 'Cereals and Products', 'cup (140g)', 479, 106, 2, 0),
-('Mint', 'Spices and Essential Oils', 'cup (chopped, 18g)', 12, 2, 0, 0),
-('Corn tortillas', 'Cereals and Products', 'each (24g)', 52, 11, 1, 1),
-('Espresso', 'Coffee, Tea, and Related Products', 'shot (30ml)', 2, 0, 0, 0),
-('Ladyfingers', 'Cereals and Products', 'each (15g)', 47, 8, 1, 3),
-('Mascarpone cheese', 'Dairy, Eggs, and Products', 'cup (250g)', 859, 6, 89, 0),
-('Dashi broth', 'Various Beverages', 'cup (240ml)', 10, 2, 0, 0),
-('Mirin', 'Various Beverages', 'tablespoon (15ml)', 48, 8, 0, 5),
-('Mushrooms', 'Various Plant-Based Foods', 'cup (70g)', 15, 2, 0, 1),
-('Udon noodles', 'Cereals and Products', 'package (200g)', 200, 42, 1, 2),
-('Beetroot', 'Various Plant-Based Foods', 'medium (82g)', 35, 8, 0, 7),
-('Lentils', 'Various Plant-Based Foods', 'cup (192g)', 678, 115, 2, 4),
-('Gelatin', 'Dairy, Eggs, and Products', 'tablespoon (7g)', 23, 0, 0, 0),
-('Venison', 'Meat and Products', '100g', 158, 0, 2, 0),
-('Beef brisket', 'Meat and Products', '100g', 248, 0, 19, 0),
-('Fish sauce', 'Preserved Foods', 'tablespoon (18ml)', 9, 1, 0, 1),
-('Rice noodles', 'Cereals and Products', 'cup (176g)', 192, 44, 0, 0),
-('Star anise', 'Spices and Essential Oils', 'whole (2g)', 7, 1, 0, 0),
-('Mayonnaise', 'Fats and Oils', 'tablespoon (13g)', 94, 0, 10, 0),
-('Walnuts', 'Various Plant-Based Foods', 'cup (120g)', 765, 16, 76, 3),
-('Bread', 'Cereals and Products', 'slice (32g)', 85, 16, 1, 2),
-('Mustard', 'Spices and Essential Oils', 'tablespoon (15g)', 15, 2, 1, 1),
-('Breadcrumbs', 'Cereals and Products', 'cup (120g)', 460, 78, 6, 8),
-('Lemon', 'Various Plant-Based Foods', 'whole (58g)', 17, 5, 0, 1),
-('Veal cutlets', 'Meat and Products', '100g', 194, 0, 7, 0),
-('Garlic powder', 'Spices and Essential Oils', 'teaspoon (3.1g)', 10, 2, 0, 0),
-('Salt', 'Spices and Essential Oils', 'teaspoon (6g)', 0, 0, 0, 0);
-
--- DROP TABLE recipes_ingredients;
--- CREATE TABLE recipes_ingredients (
---     recipeName VARCHAR(64),
---     ingredientName VARCHAR(64),
---     quantity INT,
---     PRIMARY KEY (recipeName, ingredientName),
---     FOREIGN KEY (recipeName) REFERENCES recipes(name)
---     FOREIGN KEY (ingredientName) REFERENCES ingredients(name)
--- );
+INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, proteinsPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
+('Eggs', 'Dairy, Eggs, and Products', 'large (50g each)', 70, 6, 1, 5, 1),
+('Flour', 'Cereals and Products', 'cup (120g)', 455, 13, 95, 1, 1),
+('Peanut filling', 'Various Plant-Based Foods', 'cup (100g)', 588, 25, 20, 50, 9),
+('Apples', 'Various Plant-Based Foods', 'medium (182g)', 95, 0, 25, 0, 19),
+('Blackberries', 'Various Plant-Based Foods', 'cup (144g)', 62, 2, 14, 1, 7),
+('Butter', 'Dairy, Eggs, and Products', 'tablespoon (14g)', 102, 0, 0, 12, 0),
+('Sugar', 'Sweeteners', 'tablespoon (12.6g)', 49, 0, 13, 0, 13),
+('Frangipane', 'Various Plant-Based Foods', '100g', 400, 4, 44, 24, 24),
+('Pastry crust', 'Cereals and Products', 'piece (60g)', 200, 3, 20, 11, 0),
+('Chicken', 'Meat and Products', '100g', 239, 27, 0, 14, 0),
+('Coconut milk', 'Various Plant-Based Foods', 'cup (240g)', 552, 5, 13, 57, 8),
+('Lemongrass', 'Spices and Essential Oils', 'stalk (18g)', 5, 0, 1, 0, 0),
+('Jam', 'Preserved Foods', 'tablespoon (20g)', 56, 0, 14, 0, 10),
+('Bananas', 'Various Plant-Based Foods', 'medium (118g)', 105, 1, 27, 0, 14),
+('Beef fillet', 'Meat and Products', '100g', 250, 26, 0, 15, 0),
+('Mushroom duxelles', 'Various Plant-Based Foods', '100g', 70, 3, 5, 5, 2),
+('Puff pastry', 'Cereals and Products', 'ounce (28g)', 158, 2, 11, 11, 0),
+('Chorizo', 'Meat and Products', 'slice (10g)', 50, 3, 0, 5, 0),
+('Garlic', 'Various Plant-Based Foods', 'clove (3g)', 5, 0, 1, 0, 0),
+('Kale', 'Various Plant-Based Foods', 'cup (67g)', 34, 2, 6, 1, 0),
+('Onion', 'Various Plant-Based Foods', 'medium (110g)', 44, 1, 10, 0, 5),
+('Potatoes', 'Various Plant-Based Foods', 'medium (173g)', 161, 4, 37, 0, 2),
+('Cannelloni tubes', 'Cereals and Products', 'piece (30g)', 90, 3, 18, 1, 1),
+('Ricotta cheese', 'Dairy, Eggs, and Products', 'cup (248g)', 428, 28, 8, 32, 1),
+('Spinach', 'Various Plant-Based Foods', 'cup (30g)', 7, 1, 1, 0, 0),
+('Chicken breast', 'Meat and Products', '100g', 165, 31, 0, 4, 0),
+('Ginger', 'Spices and Essential Oils', 'tablespoon (6g)', 5, 0, 1, 0, 0),
+('Rice', 'Cereals and Products', 'cup (cooked, 158g)', 206, 5, 45, 0, 0),
+('Carrots', 'Various Plant-Based Foods', 'medium (61g)', 25, 1, 6, 0, 3),
+('Gochujang (Korean chili paste)', 'Preserved Foods', 'tablespoon (20g)', 45, 2, 9, 1, 7),
+('Soy sauce', 'Preserved Foods', 'tablespoon (18g)', 10, 2, 1, 0, 0),
+('Cumin seeds', 'Spices and Essential Oils', 'teaspoon (2g)', 8, 0, 1, 0, 0),
+('Garam Masala', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 0, 1, 0, 0),
+('Tomatoes', 'Various Plant-Based Foods', 'medium (123g)', 22, 1, 5, 0, 3),
+('Chocolate glaze', 'Sweeteners', 'tablespoon (20g)', 100, 1, 15, 5, 12),
+('Choux pastry', 'Cereals and Products', 'piece (10g)', 30, 1, 3, 2, 1),
+('Pastry cream', 'Dairy, Eggs, and Products', 'cup (250g)', 305, 6, 30, 18, 23),
+('Bacon', 'Meat and Products', 'slice (8g)', 42, 3, 0, 3, 0),
+('Sausages', 'Meat and Products', 'link (50g)', 142, 7, 1, 12, 1),
+('Meringue', 'Sweeteners', 'piece (30g)', 95, 1, 22, 0, 22),
+('Strawberries', 'Various Plant-Based Foods', 'cup (152g)', 49, 1, 12, 0, 7),
+('Whipping cream', 'Dairy, Eggs, and Products', 'cup (60g)', 154, 1, 4, 16, 3);
+-- Continue adding more entries similarly for the remaining ingredients
+INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, proteinsPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
+('Bell peppers', 'Various Plant-Based Foods', 'medium (119g)', 24, 1, 6, 0, 4),
+('Fajita seasoning', 'Spices and Essential Oils', 'tablespoon (8g)', 20, 0, 4, 0, 0),
+('Tortillas', 'Cereals and Products', 'each (medium, 40g)', 94, 2, 16, 2, 0),
+('Chickpeas', 'Various Plant-Based Foods', 'cup (cooked, 164g)', 269, 15, 45, 4, 8),
+('Cumin', 'Spices and Essential Oils', 'teaspoon (2g)', 8, 0, 1, 0, 0),
+('Parsley', 'Spices and Essential Oils', 'cup (chopped, 60g)', 22, 2, 4, 0, 0),
+('Beer', 'Various Beverages', 'can (356ml)', 154, 2, 13, 0, 0),
+('White fish fillets', 'Fish and Products', 'fillet (180g)', 206, 42, 0, 2, 0),
+('Bell pepper', 'Various Plant-Based Foods', 'medium (119g)', 24, 1, 6, 0, 4),
+('Cucumber', 'Various Plant-Based Foods', 'medium (201g)', 30, 1, 7, 0, 4),
+('Olive oil', 'Fats and Oils', 'tablespoon (13.5g)', 119, 0, 0, 14, 0),
+('Red onion', 'Various Plant-Based Foods', 'medium (110g)', 44, 1, 10, 0, 5),
+('Vinegar', 'Various Plant-Based Foods', 'tablespoon (15ml)', 3, 0, 0, 0, 0),
+('Beef', 'Meat and Products', '100g', 250, 26, 0, 15, 0),
+('Onions', 'Various Plant-Based Foods', 'medium (110g)', 44, 1, 10, 0, 5),
+('Paprika', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 0, 1, 0, 0),
+('Feta cheese', 'Dairy, Eggs, and Products', 'cup (crumbled, 150g)', 396, 21, 6, 32, 0),
+('Kalamata olives', 'Various Plant-Based Foods', 'cup (134g)', 275, 2, 15, 23, 0),
+('Cheese', 'Dairy, Eggs, and Products', 'slice (28g)', 113, 7, 1, 9, 0),
+('Ground beef', 'Meat and Products', '100g', 254, 17, 0, 18, 0),
+('Hamburger buns', 'Cereals and Products', 'each (43g)', 120, 4, 21, 2, 3),
+('Lettuce', 'Various Plant-Based Foods', 'leaf (5g)', 1, 0, 0, 0, 0),
+('Tomato', 'Various Plant-Based Foods', 'medium (123g)', 22, 1, 5, 0, 3),
+('Bamboo shoots', 'Various Plant-Based Foods', 'cup (120g)', 20, 2, 3, 0, 2),
+('Chicken broth', 'Preserved Foods', 'cup (240ml)', 38, 5, 3, 1, 1),
+('Rice vinegar', 'Various Plant-Based Foods', 'tablespoon (15ml)', 3, 0, 0, 0, 0),
+('Shiitake mushrooms', 'Various Plant-Based Foods', 'cup (87g)', 35, 2, 7, 0, 2),
+('Tofu', 'Various Plant-Based Foods', 'block (122g)', 177, 16, 5, 12, 1),
+('Lemon juice', 'Various Plant-Based Foods', 'tablespoon (15ml)', 4, 0, 1, 0, 0),
+('Tahini', 'Various Plant-Based Foods', 'tablespoon (15g)', 89, 3, 3, 8, 0),
+('Curry powder', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 0, 1, 0, 0),
+('Brown sugar', 'Sweeteners', 'tablespoon (12g)', 45, 0, 12, 0, 12),
+('Coffee', 'Coffee, Tea, and Related Products', 'cup (240ml)', 2, 0, 0, 0, 0),
+('Cream', 'Dairy, Eggs, and Products', 'tablespoon (15ml)', 52, 0, 1, 6, 1),
+('Irish whiskey', 'Various Beverages', 'shot (44ml)', 98, 0, 0, 0, 0),
+('Beef stock', 'Preserved Foods', 'cup (240ml)', 31, 5, 0, 1, 0),
+('Lamb shoulder', 'Meat and Products', '100g', 236, 22, 0, 16, 0),
+('Almonds', 'Various Plant-Based Foods', 'cup (143g)', 828, 30, 30, 72, 6),
+('Andouille sausage', 'Meat and Products', 'link (85g)', 229, 14, 2, 19, 1),
+('Shrimp', 'Fish and Products', '100g', 99, 24, 0, 1, 0),
+('Cream cheese', 'Dairy, Eggs, and Products', 'ounce (28g)', 99, 2, 1, 10, 1);
+-- Add the next set of ingredients in a similar format
+INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, proteinsPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
+('Chicken thighs', 'Meat and Products', '100g', 209, 26, 0, 15, 0),
+('Green onions', 'Various Plant-Based Foods', '100g', 32, 1, 7, 0, 2),
+('Jerk seasoning', 'Spices and Essential Oils', 'teaspoon (2g)', 5, 0, 1, 0, 0),
+('Scotch bonnet peppers', 'Various Plant-Based Foods', 'pepper (6.5g)', 2, 0, 0, 0, 0),
+('Thyme', 'Spices and Essential Oils', 'tablespoon (1g)', 3, 0, 1, 0, 0),
+('Milk', 'Dairy, Eggs, and Products', 'cup (244g)', 103, 8, 12, 2, 12),
+('Kebab spices', 'Spices and Essential Oils', 'tablespoon (7g)', 20, 1, 4, 0, 0),
+('Lamb', 'Meat and Products', '100g', 294, 25, 0, 24, 0),
+('Yogurt', 'Dairy, Eggs, and Products', 'cup (245g)', 154, 13, 17, 9, 17),
+('Condensed milk', 'Dairy, Eggs, and Products', 'cup (306g)', 982, 24, 166, 27, 166),
+('Graham cracker crust', 'Cereals and Products', 'piece (21g)', 102, 1, 12, 5, 5),
+('Lime juice', 'Various Plant-Based Foods', 'tablespoon (15ml)', 4, 0, 1, 0, 0),
+('Cooked rice', 'Cereals and Products', 'cup (158g)', 206, 4, 45, 0, 0),
+('Kimchi', 'Various Plant-Based Foods', 'cup (150g)', 23, 2, 4, 0, 2),
+('Sesame oil', 'Fats and Oils', 'tablespoon (14ml)', 120, 0, 0, 14, 0),
+('Pork belly', 'Meat and Products', '100g', 518, 9, 0, 53, 0),
+('Cinnamon', 'Spices and Essential Oils', 'teaspoon (2.6g)', 6, 0, 2, 0, 0),
+('Dried apricots', 'Fruits and Products', 'cup (130g)', 313, 4, 81, 1, 69),
+('Lasagna noodles', 'Cereals and Products', 'piece (56g)', 180, 6, 36, 1, 1),
+('Marinara sauce', 'Various Plant-Based Foods', 'cup (240g)', 70, 2, 13, 2, 9),
+('Brandy', 'Various Beverages', 'shot (42g)', 95, 0, 0, 0, 0),
+('Celery', 'Various Plant-Based Foods', 'stalk (40g)', 6, 0, 1, 0, 1),
+('Lobster', 'Fish and Products', '100g', 89, 19, 0, 1, 0),
+('Tomato paste', 'Preserved Foods', 'tablespoon (16g)', 13, 1, 3, 0, 2),
+('Almond flour', 'Various Plant-Based Foods', 'cup (96g)', 544, 21, 20, 48, 4),
+('Egg whites', 'Dairy, Eggs, and Products', 'large (33g)', 17, 4, 0, 0, 0),
+('Granulated sugar', 'Sweeteners', 'cup (200g)', 774, 0, 200, 0, 200),
+('Doubanjiang (fermented bean paste)', 'Various Plant-Based Foods', 'tablespoon (15g)', 25, 2, 4, 1, 3),
+('Green onion', 'Various Plant-Based Foods', '100g', 32, 1, 7, 0, 2),
+('Ground pork', 'Meat and Products', '100g', 297, 25, 0, 21, 0),
+('Bechamel sauce', 'Dairy, Eggs, and Products', 'cup (250g)', 300, 6, 20, 23, 9),
+('Eggplant', 'Various Plant-Based Foods', 'medium (200g)', 50, 2, 12, 0, 7),
+('Ground lamb', 'Meat and Products', '100g', 282, 17, 0, 23, 0),
+('Cheddar cheese', 'Dairy, Eggs, and Products', 'slice (28g)', 113, 7, 1, 9, 0),
+('Jalapenos', 'Various Plant-Based Foods', 'pepper (14g)', 4, 0, 1, 0, 1),
+('Salsa', 'Various Plant-Based Foods', 'tablespoon (15g)', 4, 0, 1, 0, 1),
+('Tortilla chips', 'Cereals and Products', 'ounce (28g)', 138, 2, 19, 7, 0),
+('Kecap Manis (sweet soy sauce)', 'Preserved Foods', 'tablespoon (15ml)', 40, 1, 10, 0, 9),
+('Shallots', 'Various Plant-Based Foods', 'medium (10g)', 7, 0, 2, 0, 1),
+('Honey', 'Sweeteners', 'tablespoon (21g)', 64, 0, 17, 0, 17),
+('Cabbage', 'Various Plant-Based Foods', 'cup (chopped, 89g)', 22, 1, 5, 0, 3),
+('Okonomiyaki sauce', 'Preserved Foods', 'tablespoon (18g)', 35, 0, 7, 0, 6),
+('Veal shanks', 'Meat and Products', '100g', 178, 18, 0, 9, 0),
+('White wine', 'Various Beverages', 'glass (147ml)', 123, 0, 4, 0, 1),
+('Oysters', 'Fish and Products', 'medium (25g)', 17, 2, 2, 1, 0),
+('Worcestershire sauce', 'Spices and Essential Oils', 'tablespoon (17ml)', 13, 0, 3, 0, 1),
+('Saffron', 'Spices and Essential Oils', 'teaspoon (0.7g)', 6, 0, 1, 0, 0),
+('Seafood mix', 'Fish and Products', '100g', 89, 19, 0, 1, 0),
+('Cucumbers', 'Various Plant-Based Foods', 'medium (201g)', 30, 1, 7, 0, 4),
+('Duck', 'Meat and Products', '100g', 337, 27, 0, 28, 0),
+('Hoisin sauce', 'Various Plant-Based Foods', 'tablespoon (19g)', 35, 0, 7, 1, 6),
+('Egg', 'Dairy, Eggs, and Products', 'large (50g)', 70, 6, 1, 5, 1),
+('Potato', 'Various Plant-Based Foods', 'medium (173g)', 161, 4, 37, 0, 2),
+('Green peppers', 'Various Plant-Based Foods', 'medium (119g)', 24, 1, 6, 0, 4),
+('Cherry tomatoes', 'Various Plant-Based Foods', 'cup (149g)', 27, 1, 6, 0, 4),
+('Quinoa', 'Cereals and Products', 'cup (185g)', 222, 8, 39, 4, 0),
+('Ramen noodles', 'Cereals and Products', 'package (85g)', 371, 10, 51, 14, 1),
+('Yellow squash', 'Various Plant-Based Foods', 'medium (200g)', 31, 2, 7, 0, 4),
+('Zucchini', 'Various Plant-Based Foods', 'medium (196g)', 33, 2, 6, 1, 5),
+('Arborio rice', 'Cereals and Products', 'cup (192g)', 716, 14, 158, 1, 0),
+('Chicken stock', 'Preserved Foods', 'cup (240ml)', 86, 6, 8, 3, 1),
+('Parmesan cheese', 'Dairy, Eggs, and Products', 'ounce (28g)', 122, 10, 1, 8, 0),
+('Garam masala', 'Spices and Essential Oils', 'teaspoon (2g)', 6, 0, 1, 0, 0),
+('Green peas', 'Various Plant-Based Foods', 'cup (160g)', 118, 8, 21, 1, 8),
+('Pastry dough', 'Cereals and Products', 'piece (100g)', 455, 6, 45, 30, 1),
+('Peas', 'Various Plant-Based Foods', 'cup (160g)', 117, 8, 21, 1, 8),
+('Fresh fish (various)', 'Fish and Products', '100g', 206, 22, 0, 12, 0),
+('Nori sheets', 'Fish and Products', 'sheet (2.5g)', 9, 1, 1, 0, 0),
+('Sushi rice', 'Cereals and Products', 'cup (cooked, 158g)', 296, 6, 65, 0, 0),
+('Wasabi', 'Spices and Essential Oils', 'teaspoon (6g)', 15, 0, 3, 0, 0),
+('Bulgur', 'Cereals and Products', 'cup (140g)', 479, 17, 106, 2, 0),
+('Mint', 'Spices and Essential Oils', 'cup (chopped, 18g)', 12, 1, 2, 0, 0),
+('Corn tortillas', 'Cereals and Products', 'each (24g)', 52, 1, 11, 1, 1),
+('Espresso', 'Coffee, Tea, and Related Products', 'shot (30ml)', 2, 0, 0, 0, 0),
+('Ladyfingers', 'Cereals and Products', 'each (15g)', 47, 1, 8, 1, 3),
+('Mascarpone cheese', 'Dairy, Eggs, and Products', 'cup (250g)', 859, 10, 6, 89, 0),
+('Dashi broth', 'Various Beverages', 'cup (240ml)', 10, 2, 2, 0, 0),
+('Mirin', 'Various Beverages', 'tablespoon (15ml)', 48, 0, 8, 0, 5),
+('Mushrooms', 'Various Plant-Based Foods', 'cup (70g)', 15, 2, 2, 0, 1),
+('Udon noodles', 'Cereals and Products', 'package (200g)', 200, 6, 42, 1, 2),
+('Beetroot', 'Various Plant-Based Foods', 'medium (82g)', 35, 1, 8, 0, 7),
+('Lentils', 'Various Plant-Based Foods', 'cup (192g)', 678, 50, 115, 2, 4),
+('Gelatin', 'Dairy, Eggs, and Products', 'tablespoon (7g)', 23, 6, 0, 0, 0),
+('Venison', 'Meat and Products', '100g', 158, 30, 0, 2, 0),
+('Beef brisket', 'Meat and Products', '100g', 248, 28, 0, 19, 0),
+('Fish sauce', 'Preserved Foods', 'tablespoon (18ml)', 9, 1, 1, 0, 1),
+('Rice noodles', 'Cereals and Products', 'cup (176g)', 192, 4, 44, 0, 0),
+('Star anise', 'Spices and Essential Oils', 'whole (2g)', 7, 0, 1, 0, 0),
+('Mayonnaise', 'Fats and Oils', 'tablespoon (13g)', 94, 0, 0, 10, 0),
+('Walnuts', 'Various Plant-Based Foods', 'cup (120g)', 765, 18, 16, 76, 3),
+('Bread', 'Cereals and Products', 'slice (32g)', 85, 3, 16, 1, 2),
+('Mustard', 'Spices and Essential Oils', 'tablespoon (15g)', 15, 1, 2, 1, 1),
+('Breadcrumbs', 'Cereals and Products', 'cup (120g)', 460, 14, 78, 6, 8),
+('Lemon', 'Various Plant-Based Foods', 'whole (58g)', 17, 1, 5, 0, 1),
+('Veal cutlets', 'Meat and Products', '100g', 194, 25, 0, 7, 0),
+('Garlic powder', 'Spices and Essential Oils', 'teaspoon (3.1g)', 10, 0, 2, 0, 0),
+('Salt', 'Spices and Essential Oils', 'teaspoon (6g)', 0, 0, 0, 0, 0);
 
 
--- -- Apam balik
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apam balik', 'Eggs', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apam balik', 'Flour', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apam balik', 'Peanut filling', 1);
-
--- -- Apple & Blackberry Crumble
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Apples', 3);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Blackberries', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Butter', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Flour', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple & Blackberry Crumble', 'Sugar', 1);
-
--- -- Apple Frangipan Tart
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple Frangipan Tart', 'Apples', 3);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple Frangipan Tart', 'Frangipane', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Apple Frangipan Tart', 'Pastry crust', 1);
-
--- -- Ayam Percik
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ayam Percik', 'Chicken', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ayam Percik', 'Coconut milk', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ayam Percik', 'Lemongrass', 1);
-
--- -- Bakewell tart
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Bakewell tart', 'Frangipane', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Bakewell tart', 'Jam', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Bakewell tart', 'Pastry crust', 1);
-
--- -- Banana Pancakes
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Banana Pancakes', 'Bananas', 2);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Banana Pancakes', 'Eggs', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Banana Pancakes', 'Flour', 1);
-
--- -- Beef Wellington
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Beef Wellington', 'Beef fillet', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Beef Wellington', 'Mushroom duxelles', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Beef Wellington', 'Puff pastry', 1);
-
--- -- Caldo verde
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Chorizo', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Garlic', 2);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Kale', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Onion', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Caldo verde', 'Potatoes', 3);
-
--- -- Cannelloni
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Cannelloni', 'Cannelloni tubes', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Cannelloni', 'Ricotta cheese', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Cannelloni', 'Spinach', 1);
-
--- -- Chicken Congee
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Chicken Congee', 'Chicken breast', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Chicken Congee', 'Ginger', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Chicken Congee', 'Rice', 1);
-
--- -- Danish Pastry
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Danish Pastry', 'Butter', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Danish Pastry', 'Flour', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Danish Pastry', 'Sugar', 1);
-
--- -- Dum Aloo
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Cumin seeds', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Garam Masala', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Onion', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Potatoes', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Dum Aloo', 'Tomatoes', 1);
-
--- -- Eclairs
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eclairs', 'Chocolate glaze', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eclairs', 'Choux pastry', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eclairs', 'Pastry cream', 1);
-
--- -- English Breakfast
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('English Breakfast', 'Bacon', 2);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('English Breakfast', 'Eggs', 2);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('English Breakfast', 'Sausages', 2);
-
--- -- Eton Mess
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eton Mess', 'Meringue', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eton Mess', 'Strawberries', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Eton Mess', 'Whipping cream', 1);
-
--- -- Fajitas
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Bell peppers', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Chicken breast', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Fajita seasoning', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Onion', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fajitas', 'Tortillas', 1);
-
--- -- Falafel
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Chickpeas', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Cumin', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Garlic', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Onion', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Falafel', 'Parsley', 1);
-
--- -- Fish and Chips
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fish and Chips', 'Beer', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fish and Chips', 'Flour', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fish and Chips', 'Potatoes', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Fish and Chips', 'White fish fillets', 1);
-
--- -- Gazpacho
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Bell pepper', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Cucumber', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Garlic', 2);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Olive oil', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Red onion', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Tomatoes', 3);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gazpacho', 'Vinegar', 1);
-
--- -- Goulash
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Beef', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Bell peppers', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Onions', 2);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Paprika', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Goulash', 'Tomatoes', 3);
-
--- -- Greek Salad
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Cucumber', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Feta cheese', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Kalamata olives', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Red onion', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Greek Salad', 'Tomatoes', 3);
-
--- -- Grilled Cheese Sandwich
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Grilled Cheese Sandwich', 'Bread slices', 2);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Grilled Cheese Sandwich', 'Butter', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Grilled Cheese Sandwich', 'Cheese slices', 2);
-
--- -- Guacamole
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Avocado', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Cilantro', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Jalapeno', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Lime', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Onion', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Guacamole', 'Tomato', 1);
-
--- -- Gyoza
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gyoza', 'Gyoza wrappers', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gyoza', 'Ground pork', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Gyoza', 'Napa cabbage', 1);
-
--- -- Hot Cross Buns
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hot Cross Buns', 'Butter', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hot Cross Buns', 'Flour', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hot Cross Buns', 'Milk', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hot Cross Buns', 'Raisins', 1);
-
--- -- Hummus
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Chickpeas', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Garlic', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Lemon juice', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Olive oil', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Hummus', 'Tahini', 1);
-
--- -- Lasagna
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Ground beef', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Lasagna noodles', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Mozzarella cheese', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Ricotta cheese', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Lasagna', 'Tomato sauce', 1);
-
--- -- Miso Soup
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Miso Soup', 'Dashi', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Miso Soup', 'Miso paste', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Miso Soup', 'Tofu', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Miso Soup', 'Scallions', 1);
-
--- -- Moqueca
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Coconut milk', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Fish fillets', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Lime', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Palm oil', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Moqueca', 'Tomatoes', 2);
-
--- -- Pad Thai
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Bean sprouts', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Chicken breast', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Eggs', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Rice noodles', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pad Thai', 'Tamarind paste', 1);
-
--- -- Paella
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Chicken thighs', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Chorizo', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Rice', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Saffron', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Paella', 'Shrimp', 1);
-
--- -- Peking Duck
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Peking Duck', 'Duck', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Peking Duck', 'Hoisin sauce', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Peking Duck', 'Pancakes', 1);
-
--- -- Pho
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pho', 'Beef broth', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pho', 'Beef sirloin', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pho', 'Rice noodles', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pho', 'Thai basil', 1);
-
--- -- Pizza Margherita
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pizza Margherita', 'Basil leaves', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pizza Margherita', 'Mozzarella cheese', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pizza Margherita', 'Pizza dough', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Pizza Margherita', 'Tomatoes', 1);
-
--- -- Ratatouille
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Bell peppers', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Eggplant', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Onions', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Tomatoes', 2);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ratatouille', 'Zucchini', 1);
-
--- -- Ravioli
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ravioli', 'Eggs', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ravioli', 'Flour', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ravioli', 'Parmesan cheese', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Ravioli', 'Ricotta cheese', 1);
-
--- -- Risotto
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Risotto', 'Arborio rice', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Risotto', 'Butter', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Risotto', 'Parmesan cheese', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Risotto', 'Vegetable broth', 1);
-
--- -- Sushi
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Sushi', 'Nori', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Sushi', 'Rice', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Sushi', 'Rice vinegar', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Sushi', 'Seafood (e.g., salmon, tuna)', 1);
-
--- -- Tiramisu
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tiramisu', 'Coffee', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tiramisu', 'Ladyfingers', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tiramisu', 'Mascarpone cheese', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tiramisu', 'Sugar', 1);
-
--- -- Tom Yum Goong
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Galangal', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Kaffir lime leaves', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Lemongrass', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Shrimp', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Thai chili peppers', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tom Yum Goong', 'Tomato', 1);
-
--- -- Tostada
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Avocado', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Beans', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Corn tortillas', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Lettuce', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Tostada', 'Tomato', 1);
-
--- -- Wiener Schnitzel
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Wiener Schnitzel', 'Bread crumbs', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Wiener Schnitzel', 'Eggs', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Wiener Schnitzel', 'Veal cutlets', 1);
-
--- -- Yakitori
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Yakitori', 'Bamboo skewers', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Yakitori', 'Chicken thighs', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Yakitori', 'Green onions', 1);
-
--- -- Zucchini Bread
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Zucchini Bread', 'Cinnamon', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Zucchini Bread', 'Flour', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Zucchini Bread', 'Sugar', 1);
--- INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES ('Zucchini Bread', 'Zucchini', 1);
 
 DROP TABLE recipes_ingredients;
 CREATE TABLE recipes_ingredients (
