@@ -65,9 +65,31 @@ CREATE TABLE recipes (
     mealType VARCHAR(255), -- e.g., Breakfast, Lunch, Dinner,Snack,Appetizers,Dessert, brunch, cold-dish,Barbecue,Buffet,Halal,Fine-Dining,Vegan,Raw-Food
     tools VARCHAR(255),
     portions INT,
+    basicIngredient VARCHAR(64),
+    categoryBasedOnBasicIngredient VARCHAR(64) AS (
+        CASE 
+            WHEN basicIngredient IS NULL THEN NULL
+            WHEN department = 'Fish and Products' THEN 'Seafood'
+            WHEN department = 'Various Plant-Based Foods' THEN 'Vegetarian'
+            WHEN basicIngredient = 'Meat and Products' THEN 'Category for recipes which basic ingredient belongs to the group Meat and Products'
+            WHEN basicIngredient = 'Dairy, Eggs, and Products' THEN 'Category for recipes which basic ingredient belongs to the group Dairy, Eggs, and Products'
+            WHEN basicIngredient = 'Cereals and Products' THEN 'Category for recipes which basic ingredient belongs to the group Cereals and Products'
+            WHEN basicIngredient = 'Sweeteners' THEN 'Category for recipes which basic ingredient belongs to the group Sweeteners'
+            WHEN basicIngredient = 'Spices and Essential Oils' THEN 'Category for recipes which basic ingredient belongs to the group Spices and Essential Oils'
+            WHEN basicIngredient = 'Preserved Foods' THEN 'Category for recipes which basic ingredient belongs to the group Preserved Foods'
+            WHEN basicIngredient = 'Various Beverages' THEN 'Category for recipes which basic ingredient belongs to the group Various Beverages'
+            WHEN basicIngredient = 'Fats and Oils' THEN 'Category for recipes which basic ingredient belongs to the group Fats and Oils'
+            WHEN basicIngredient = 'Coffee, Tea, and Related Products' THEN 'Category for recipes which basic ingredient belongs to the group Coffee, Tea, and Related Products'
+            WHEN basicIngredient = 'Fruits and Products' THEN 'Category for recipes which basic ingredient belongs to the group Fruits and Products'
+            ELSE 0.05 -- 5% bonus for other departments
+        END    
+    
+    )
     PRIMARY KEY (name)
     FOREIGN KEY (nationalCuisine) REFERENCES nationalCuisines(name)
 );
+
+
 
 INSERT INTO recipes (name, cookingORpastry, shortDescription, nationalCuisine, difficulty, prepTime, cookingTime, mealType, portions) VALUES 
 ('Apple Frangipan Tart', 'pastry', 'A delicious tart made with apples and frangipane.', 'British', 3, 30, 45, 'Dessert', 4),
@@ -169,6 +191,165 @@ INSERT INTO recipes (name, cookingORpastry, shortDescription, nationalCuisine, d
 
 ('Xiaolongbao', 'cooking', 'Chinese steamed buns filled with meat and broth.', 'Chinese', 4, 30, 20, 'Lunch, Dinner, Snack', 6),
 ('Xinjiang Lamb Skewers', 'cooking', 'Spicy skewers of grilled lamb, a popular street food from the Xinjiang region.', 'Chinese', 2, 120, 10, 'Dinner, Snack', 6);
+
+
+UPDATE recipes SET portions = 4 WHERE name = 'Apple Frangipan Tart';
+UPDATE recipes SET portions = 4 WHERE name = 'Apple & Blackberry Crumble';
+UPDATE recipes SET portions = 4 WHERE name = 'Apam balik';
+UPDATE recipes SET portions = 4 WHERE name = 'Ayam Percik';
+UPDATE recipes SET portions = 6 WHERE name = 'Bakewell tart';
+UPDATE recipes SET portions = 4 WHERE name = 'Beef Wellington';
+UPDATE recipes SET portions = 4 WHERE name = 'Banana Pancakes';
+UPDATE recipes SET portions = 2 WHERE name = 'Chicken Congee';
+UPDATE recipes SET portions = 4 WHERE name = 'Cannelloni';
+UPDATE recipes SET portions = 4 WHERE name = 'Caldo verde';
+UPDATE recipes SET portions = 4 WHERE name = 'Dakdoritang';
+UPDATE recipes SET portions = 4 WHERE name = 'Danish Pastry';
+UPDATE recipes SET portions = 4 WHERE name = 'Dum Aloo';
+UPDATE recipes SET portions = 1 WHERE name = 'English Breakfast';
+UPDATE recipes SET portions = 8 WHERE name = 'Eclairs';
+UPDATE recipes SET portions = 2 WHERE name = 'Eton Mess';
+UPDATE recipes SET portions = 2 WHERE name = 'Fish and Chips';
+UPDATE recipes SET portions = 4 WHERE name = 'Fajitas';
+UPDATE recipes SET portions = 4 WHERE name = 'Falafel';
+UPDATE recipes SET portions = 4 WHERE name = 'Gazpacho';
+UPDATE recipes SET portions = 4 WHERE name = 'Goulash';
+UPDATE recipes SET portions = 2 WHERE name = 'Greek Salad';
+UPDATE recipes SET portions = 2 WHERE name = 'Hot and Sour Soup';
+UPDATE recipes SET portions = 4 WHERE name = 'Hummus';
+UPDATE recipes SET portions = 4 WHERE name = 'Hamburgers';
+UPDATE recipes SET portions = 1 WHERE name = 'Irish Coffee';
+UPDATE recipes SET portions = 4 WHERE name = 'Indian Curry';
+UPDATE recipes SET portions = 8 WHERE name = 'Italian Biscotti';
+UPDATE recipes SET portions = 4 WHERE name = 'Irish Stew';
+UPDATE recipes SET portions = 4 WHERE name = 'Jambalaya';
+UPDATE recipes SET portions = 4 WHERE name = 'Japanese Curry';
+UPDATE recipes SET portions = 4 WHERE name = 'Jerk Chicken';
+UPDATE recipes SET portions = 6 WHERE name = 'Japanese Cheesecake';
+UPDATE recipes SET portions = 2 WHERE name = 'Kimchi Fried Rice';
+UPDATE recipes SET portions = 4 WHERE name = 'Kaiserschmarrn';
+UPDATE recipes SET portions = 4 WHERE name = 'Kebab';
+UPDATE recipes SET portions = 4 WHERE name = 'Kimchi Stew';
+UPDATE recipes SET portions = 8 WHERE name = 'Key Lime Pie';
+UPDATE recipes SET portions = 6 WHERE name = 'Lasagna';
+UPDATE recipes SET portions = 4 WHERE name = 'Lamb Tagine';
+UPDATE recipes SET portions = 4 WHERE name = 'Lobster Bisque';
+UPDATE recipes SET portions = 4 WHERE name = 'Moussaka';
+UPDATE recipes SET portions = 4 WHERE name = 'Mapo Tofu';
+UPDATE recipes SET portions = 8 WHERE name = 'Macaron';
+UPDATE recipes SET portions = 4 WHERE name = 'Nachos';
+UPDATE recipes SET portions = 2 WHERE name = 'Nasi Goreng';
+UPDATE recipes SET portions = 8 WHERE name = 'Nougat';
+UPDATE recipes SET portions = 4 WHERE name = 'Osso Buco';
+UPDATE recipes SET portions = 2 WHERE name = 'Oysters Kilpatrick';
+UPDATE recipes SET portions = 2 WHERE name = 'Okonomiyaki';
+UPDATE recipes SET portions = 4 WHERE name = 'Paella';
+UPDATE recipes SET portions = 6 WHERE name = 'Pierogi';
+UPDATE recipes SET portions = 4 WHERE name = 'Peking Duck';
+UPDATE recipes SET portions = 6 WHERE name = 'Quiche Lorraine';
+UPDATE recipes SET portions = 4 WHERE name = 'Quesadilla';
+UPDATE recipes SET portions = 4 WHERE name = 'Quinoa Salad';
+UPDATE recipes SET portions = 4 WHERE name = 'Ratatouille';
+UPDATE recipes SET portions = 4 WHERE name = 'Risotto';
+UPDATE recipes SET portions = 2 WHERE name = 'Ramen';
+UPDATE recipes SET portions = 4 WHERE name = 'Sushi';
+UPDATE recipes SET portions = 4 WHERE name = 'Shepherds Pie';
+UPDATE recipes SET portions = 6 WHERE name = 'Samosa';
+UPDATE recipes SET portions = 8 WHERE name = 'Tiramisu';
+UPDATE recipes SET portions = 4 WHERE name = 'Tacos';
+UPDATE recipes SET portions = 4 WHERE name = 'Tabbouleh';
+UPDATE recipes SET portions = 2 WHERE name = 'Udon Soup';
+UPDATE recipes SET portions = 4 WHERE name = 'Ukrainian borscht';
+UPDATE recipes SET portions = 4 WHERE name = 'Umbrian Lentil Stew';
+UPDATE recipes SET portions = 4 WHERE name = 'Vietnamese Pho';
+UPDATE recipes SET portions = 4 WHERE name = 'Vegetable Terrine';
+UPDATE recipes SET portions = 4 WHERE name = 'Venison Stew';
+UPDATE recipes SET portions = 4 WHERE name = 'Waldorf Salad';
+UPDATE recipes SET portions = 4 WHERE name = 'Welsh Rarebit';
+UPDATE recipes SET portions = 4 WHERE name = 'Wiener Schnitzel';
+UPDATE recipes SET portions = 6 WHERE name = 'Xiaolongbao';
+UPDATE recipes SET portions = 6 WHERE name = 'Xinjiang Lamb Skewers';
+
+
+-- Updating basic ingredients for a few recipes
+UPDATE recipes SET basicIngredient = 'Apples' WHERE name = 'Apple Frangipan Tart';
+UPDATE recipes SET basicIngredient = 'Apples' WHERE name = 'Apple & Blackberry Crumble';
+UPDATE recipes SET basicIngredient = 'Flour' WHERE name = 'Apam balik';
+UPDATE recipes SET basicIngredient = 'Chicken' WHERE name = 'Ayam Percik';
+UPDATE recipes SET basicIngredient = 'Jam' WHERE name = 'Bakewell tart';
+UPDATE recipes SET basicIngredient = 'Beef fillet' WHERE name = 'Beef Wellington';
+UPDATE recipes SET basicIngredient = 'Bananas' WHERE name = 'Banana Pancakes';
+UPDATE recipes SET basicIngredient = 'Chicken breast' WHERE name = 'Chicken Congee';
+UPDATE recipes SET basicIngredient = 'Cannelloni tubes' WHERE name = 'Cannelloni';
+UPDATE recipes SET basicIngredient = 'Potatoes' WHERE name = 'Caldo verde';
+UPDATE recipes SET basicIngredient = 'Chicken' WHERE name = 'Dakdoritang';
+UPDATE recipes SET basicIngredient = 'Flour' WHERE name = 'Danish Pastry';
+UPDATE recipes SET basicIngredient = 'Potatoes' WHERE name = 'Dum Aloo';
+UPDATE recipes SET basicIngredient = 'Eggs' WHERE name = 'English Breakfast';
+UPDATE recipes SET basicIngredient = 'Pastry cream' WHERE name = 'Eclairs';
+UPDATE recipes SET basicIngredient = 'Strawberries' WHERE name = 'Eton Mess';
+UPDATE recipes SET basicIngredient = 'White fish fillets' WHERE name = 'Fish and Chips';
+UPDATE recipes SET basicIngredient = 'Chicken breast' WHERE name = 'Fajitas';
+UPDATE recipes SET basicIngredient = 'Chickpeas' WHERE name = 'Falafel';
+UPDATE recipes SET basicIngredient = 'Tomatoes' WHERE name = 'Gazpacho';
+UPDATE recipes SET basicIngredient = 'Beef' WHERE name = 'Goulash';
+UPDATE recipes SET basicIngredient = 'Tomatoes' WHERE name = 'Greek Salad';
+UPDATE recipes SET basicIngredient = 'Chicken broth' WHERE name = 'Hot and Sour Soup';
+UPDATE recipes SET basicIngredient = 'Chickpeas' WHERE name = 'Hummus';
+UPDATE recipes SET basicIngredient = 'Ground beef' WHERE name = 'Hamburgers';
+UPDATE recipes SET basicIngredient = 'Coffee' WHERE name = 'Irish Coffee';
+UPDATE recipes SET basicIngredient = 'Chicken' WHERE name = 'Indian Curry';
+UPDATE recipes SET basicIngredient = 'Almonds' WHERE name = 'Italian Biscotti';
+UPDATE recipes SET basicIngredient = 'Lamb shoulder' WHERE name = 'Irish Stew';
+UPDATE recipes SET basicIngredient = 'Chicken' WHERE name = 'Jambalaya';
+UPDATE recipes SET basicIngredient = 'Beef' WHERE name = 'Japanese Curry';
+UPDATE recipes SET basicIngredient = 'Chicken thighs' WHERE name = 'Jerk Chicken';
+UPDATE recipes SET basicIngredient = 'Cream cheese' WHERE name = 'Japanese Cheesecake';
+UPDATE recipes SET basicIngredient = 'Kimchi' WHERE name = 'Kimchi Fried Rice';
+UPDATE recipes SET basicIngredient = 'Eggs' WHERE name = 'Kaiserschmarrn';
+UPDATE recipes SET basicIngredient = 'Lamb' WHERE name = 'Kebab';
+UPDATE recipes SET basicIngredient = 'Kimchi' WHERE name = 'Kimchi Stew';
+UPDATE recipes SET basicIngredient = 'Lime juice' WHERE name = 'Key Lime Pie';
+UPDATE recipes SET basicIngredient = 'Lasagna noodles' WHERE name = 'Lasagna';
+UPDATE recipes SET basicIngredient = 'Lamb shoulder' WHERE name = 'Lamb Tagine';
+UPDATE recipes SET basicIngredient = 'Lobster' WHERE name = 'Lobster Bisque';
+UPDATE recipes SET basicIngredient = 'Eggplant' WHERE name = 'Moussaka';
+UPDATE recipes SET basicIngredient = 'Tofu' WHERE name = 'Mapo Tofu';
+UPDATE recipes SET basicIngredient = 'Almond flour' WHERE name = 'Macaron';
+UPDATE recipes SET basicIngredient = 'Ground beef' WHERE name = 'Nachos';
+UPDATE recipes SET basicIngredient = 'Chicken' WHERE name = 'Nasi Goreng';
+UPDATE recipes SET basicIngredient = 'Almonds' WHERE name = 'Nougat';
+UPDATE recipes SET basicIngredient = 'Veal shanks' WHERE name = 'Osso Buco';
+UPDATE recipes SET basicIngredient = 'Oysters' WHERE name = 'Oysters Kilpatrick';
+UPDATE recipes SET basicIngredient = 'Cabbage' WHERE name = 'Okonomiyaki';
+UPDATE recipes SET basicIngredient = 'Rice' WHERE name = 'Paella';
+UPDATE recipes SET basicIngredient = 'Potato' WHERE name = 'Pierogi';
+UPDATE recipes SET basicIngredient = 'Duck' WHERE name = 'Peking Duck';
+UPDATE recipes SET basicIngredient = 'Bacon' WHERE name = 'Quiche Lorraine';
+UPDATE recipes SET basicIngredient = 'Cheese' WHERE name = 'Quesadilla';
+UPDATE recipes SET basicIngredient = 'Quinoa' WHERE name = 'Quinoa Salad';
+UPDATE recipes SET basicIngredient = 'Tomato' WHERE name = 'Ratatouille';
+UPDATE recipes SET basicIngredient = 'Arborio rice' WHERE name = 'Risotto';
+UPDATE recipes SET basicIngredient = 'Ramen noodles' WHERE name = 'Ramen';
+UPDATE recipes SET basicIngredient = 'Fish' WHERE name = 'Sushi';
+UPDATE recipes SET basicIngredient = 'Ground lamb' WHERE name = 'Shepherds Pie';
+UPDATE recipes SET basicIngredient = 'Potatoes' WHERE name = 'Samosa';
+UPDATE recipes SET basicIngredient = 'Espresso' WHERE name = 'Tiramisu';
+UPDATE recipes SET basicIngredient = 'Beef' WHERE name = 'Tacos';
+UPDATE recipes SET basicIngredient = 'Bulgur' WHERE name = 'Tabbouleh';
+UPDATE recipes SET basicIngredient = 'Udon noodles' WHERE name = 'Udon Soup';
+UPDATE recipes SET basicIngredient = 'Beetroot' WHERE name = 'Ukrainian borscht';
+UPDATE recipes SET basicIngredient = 'Lentils' WHERE name = 'Umbrian Lentil Stew';
+UPDATE recipes SET basicIngredient = 'Beef brisket' WHERE name = 'Vietnamese Pho';
+UPDATE recipes SET basicIngredient = 'Vegetables' WHERE name = 'Vegetable Terrine';
+UPDATE recipes SET basicIngredient = 'Venison' WHERE name = 'Venison Stew';
+UPDATE recipes SET basicIngredient = 'Apples' WHERE name = 'Waldorf Salad';
+UPDATE recipes SET basicIngredient = 'Cheese' WHERE name = 'Welsh Rarebit';
+UPDATE recipes SET basicIngredient = 'Veal' WHERE name = 'Wiener Schnitzel';
+UPDATE recipes SET basicIngredient = 'Pork' WHERE name = 'Xiaolongbao';
+UPDATE recipes SET basicIngredient = 'Lamb' WHERE name = 'Xinjiang Lamb Skewers';
+
+
 DROP TABLE recipes_mealTypes;
 CREATE TABLE recipes_mealTypes(
     recipeName VARCHAR(64),
@@ -2823,4 +3004,23 @@ INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction
 ('Okonomiyaki', 5, 'Drizzle with okonomiyaki sauce, mayonnaise, sprinkle with bonito flakes and serve hot.');
 
 
+DROP TABLE foodGroups;
+CREATE TABLE foodGroups (
+    name VARCHAR(100),
+    description VARCHAR(255),
+    PRIMARY KEY (name)
+);
 
+
+INSERT INTO foodGroups (name, description) VALUES ('Dairy, Eggs, and Products', 'Includes milk, cheese, yogurt, and eggs, essential for calcium and protein intake.');
+INSERT INTO foodGroups (name, description) VALUES ('Cereals and Products', 'Covers all forms of cereals including wheat, rice, oats, and products made from them.');
+INSERT INTO foodGroups (name, description) VALUES ('Various Plant-Based Foods', 'Encompasses a wide variety of vegetarian foods including vegetables, beans, nuts, and seeds.');
+INSERT INTO foodGroups (name, description) VALUES ('Sweeteners', 'Includes natural and artificial sweeteners such as sugar, honey, and syrups.');
+INSERT INTO foodGroups (name, description) VALUES ('Meat and Products', 'Includes all types of meat like beef, poultry, pork as well as processed meat products.');
+INSERT INTO foodGroups (name, description) VALUES ('Spices and Essential Oils', 'Encompasses a variety of spices, herbs, and extracted essential oils used for flavoring and health benefits.');
+INSERT INTO foodGroups (name, description) VALUES ('Preserved Foods', 'Includes canned, dried, pickled, and otherwise preserved food items that offer extended shelf life.');
+INSERT INTO foodGroups (name, description) VALUES ('Various Beverages', 'Covers all types of drinks including water, sodas, juices, and alcoholic beverages.');
+INSERT INTO foodGroups (name, description) VALUES ('Fish and Products', 'Includes all types of fish and seafood, fresh or processed, important for omega-3 fatty acids.');
+INSERT INTO foodGroups (name, description) VALUES ('Fats and Oils', 'Includes essential cooking and dietary fats like butter, oils, and margarine used in food preparation.');
+INSERT INTO foodGroups (name, description) VALUES ('Coffee, Tea, and Related Products', 'Includes coffee, tea, and related caffeinated beverages along with associated products.');
+INSERT INTO foodGroups (name, description) VALUES ('Fruits and Products', 'Includes all types of fresh fruits, dried fruits, and products derived from them.');
