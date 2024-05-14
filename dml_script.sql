@@ -62,32 +62,181 @@ CREATE TABLE recipes (
     difficulty  SMALLINT CHECK (difficulty BETWEEN 1 AND 5), --dificulty of the dish
     prepTime INT, -- in minutes
     cookingTime INT, -- in minutes
-    mealType VARCHAR(255), -- e.g., Breakfast, Lunch, Dinner,Snack,Appetizers,Dessert, brunch, cold-dish,Barbecue,Buffet,Halal,Fine-Dining,Vegan,Raw-Food
+    mealType VARCHAR(255), -- e.g., Breakfast, Lunch, Dinner, Snack, Appetizers, Dessert, brunch, cold-dish, Barbecue, Buffet, Halal, Fine-Dining, Vegan, Raw-Food
     tools VARCHAR(255),
     portions INT,
     basicIngredient VARCHAR(64),
-    categoryBasedOnBasicIngredient VARCHAR(64) AS (
-        CASE 
-            WHEN basicIngredient IS NULL THEN NULL
-            WHEN department = 'Fish and Products' THEN 'Seafood'
-            WHEN department = 'Various Plant-Based Foods' THEN 'Vegetarian'
-            WHEN basicIngredient = 'Meat and Products' THEN 'Category for recipes which basic ingredient belongs to the group Meat and Products'
-            WHEN basicIngredient = 'Dairy, Eggs, and Products' THEN 'Category for recipes which basic ingredient belongs to the group Dairy, Eggs, and Products'
-            WHEN basicIngredient = 'Cereals and Products' THEN 'Category for recipes which basic ingredient belongs to the group Cereals and Products'
-            WHEN basicIngredient = 'Sweeteners' THEN 'Category for recipes which basic ingredient belongs to the group Sweeteners'
-            WHEN basicIngredient = 'Spices and Essential Oils' THEN 'Category for recipes which basic ingredient belongs to the group Spices and Essential Oils'
-            WHEN basicIngredient = 'Preserved Foods' THEN 'Category for recipes which basic ingredient belongs to the group Preserved Foods'
-            WHEN basicIngredient = 'Various Beverages' THEN 'Category for recipes which basic ingredient belongs to the group Various Beverages'
-            WHEN basicIngredient = 'Fats and Oils' THEN 'Category for recipes which basic ingredient belongs to the group Fats and Oils'
-            WHEN basicIngredient = 'Coffee, Tea, and Related Products' THEN 'Category for recipes which basic ingredient belongs to the group Coffee, Tea, and Related Products'
-            WHEN basicIngredient = 'Fruits and Products' THEN 'Category for recipes which basic ingredient belongs to the group Fruits and Products'
-            ELSE 0.05 -- 5% bonus for other departments
-        END    
-    
-    )
-    PRIMARY KEY (name)
+    categoryBasedOnBasicIngredient VARCHAR(64),
+    caloriesPerPortion INT,
+    proteinsPerPortion INT,
+    carbohydratesPerPortion INT,
+    fatsPerPortion INT,
+    sugarsPerPortion INT,
+    PRIMARY KEY (name),
     FOREIGN KEY (nationalCuisine) REFERENCES nationalCuisines(name)
 );
+
+CREATE TRIGGER set_categoryBasedOnBasicIngredient_after_insert
+AFTER INSERT ON recipes
+FOR EACH ROW
+BEGIN
+    UPDATE recipes
+    SET categoryBasedOnBasicIngredient = (SELECT foodGroup FROM ingredients WHERE name = NEW.name)
+    WHERE name = NEW.name;
+END;
+
+CREATE TRIGGER set_categoryBasedOnBasicIngredient_after_update
+AFTER UPDATE ON recipes
+FOR EACH ROW
+BEGIN
+    UPDATE recipes
+    SET categoryBasedOnBasicIngredient = (SELECT foodGroup FROM ingredients WHERE name = NEW.name)
+    WHERE name = NEW.name;
+END;
+
+
+
+-- CREATE TRIGGER set_nutritional_information_per_portion_after_insert
+-- AFTER INSERT ON recipes
+-- FOR EACH ROW
+-- BEGIN
+--     CREATE TEMP VIEW table_1 AS
+--     SELECT * FROM recipes_ingredients 
+--     WHERE recipeName = New.name;
+
+--     CREATE TEMP VIEW table_2 AS 
+--     SELECT * FROM table_1 INNER JOIN ingredients ON table_1.ingredientName = ingredients.name;
+
+--     SELECT SUM(quantity * caloriesPerUnitOfMeasure) AS total_calories
+--     FROM table_2;
+
+--     SELECT SUM(quantity * proteinsPerUnitOfMeasure) AS total_proteins
+--     FROM table_2;
+
+--     SELECT SUM(quantity * carbohysratesPerUnitOfMeasure) AS total_carbohysrates
+--     FROM table_2;
+
+--     SELECT SUM(quantity * fatsPerUnitOfMeasure) AS total_fats
+--     FROM table_2;
+
+--     SELECT SUM(quantity * sugarsPerUnitOfMeasure) AS total_sugars
+--     FROM table_2;
+
+--     UPDATE recipes
+--     SET 
+--     caloriesPerPortion = totalCalories / portions
+--     proteinsPerPortion = totalProteins / portions
+--     WHERE name = NEW.name;
+-- END;
+
+ 
+    
+CREATE TRIGGER set_nutritional_information_per_portion_after_insert
+AFTER INSERT ON recipes
+FOR EACH ROW
+BEGIN
+    UPDATE recipes
+    SET caloriesPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.caloriesPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions,
+        proteinsPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.proteinsPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions,
+        carbohydratesPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.carbohydratesPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions,
+        fatsPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.fatsPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions,
+        sugarsPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.sugarsPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions
+    WHERE name = NEW.name;
+END;
+
+
+CREATE TRIGGER set_nutritional_information_per_portion_after_update
+AFTER UPDATE ON recipes
+FOR EACH ROW
+BEGIN
+    UPDATE recipes
+    SET caloriesPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.caloriesPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions,
+        proteinsPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.proteinsPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions,
+        carbohydratesPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.carbohydratesPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions,
+        fatsPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.fatsPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions,
+        sugarsPerPortion = (
+            SELECT SUM(table_1.quantity * ingredients.sugarsPerUnitOfMeasure)
+            FROM (
+                SELECT *
+                FROM recipes_ingredients
+                WHERE recipeName = NEW.name
+            ) AS table_1
+            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
+        ) / NEW.portions
+    WHERE name = NEW.name;
+END;
 
 
 
