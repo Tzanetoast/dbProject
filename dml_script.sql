@@ -81,7 +81,22 @@ AFTER INSERT ON recipes
 FOR EACH ROW
 BEGIN
     UPDATE recipes
-    SET categoryBasedOnBasicIngredient = (SELECT foodGroup FROM ingredients WHERE name = NEW.name)
+    SET categoryBasedOnBasicIngredient = (
+        CASE 
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Fish and Products' THEN 'Seafood'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Various Plant-Based Foods' THEN 'Vegeterian'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Preserved Foods' THEN 'Category for recipes whos basic ingredient belongs in the food group Preserved Foods'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Meat and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Meat and Products'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Dairy, Eggs, and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Dairy, Eggs, and Products'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Coffee, Tea, and Related Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Coffee, Tea, and Related Products'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Cereals and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Cereals and Products'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Fats and Oils' THEN 'Category for recipes whos basic ingredient belongs in the food group Fats and Oils'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Spices and Essential Oils' THEN 'Category for recipes whos basic ingredient belongs in the food group Spices and Essential Oils'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Sweeteners' THEN 'Category for recipes whos basic ingredient belongs in the food group Sweeteners'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Various Beverages' THEN 'Category for recipes whos basic ingredient belongs in the food group Various Beverages'
+            ELSE '!!!  there is something wrong with the basicIngredient of this recipe'
+        END
+    )
     WHERE name = NEW.name;
 END;
 
@@ -90,44 +105,24 @@ AFTER UPDATE ON recipes
 FOR EACH ROW
 BEGIN
     UPDATE recipes
-    SET categoryBasedOnBasicIngredient = (SELECT foodGroup FROM ingredients WHERE name = NEW.name)
+    SET categoryBasedOnBasicIngredient = (
+        CASE 
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Fish and Products' THEN 'Seafood'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Various Plant-Based Foods' THEN 'Vegeterian'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Preserved Foods' THEN 'Category for recipes whos basic ingredient belongs in the food group Preserved Foods'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Meat and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Meat and Products'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Dairy, Eggs, and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Dairy, Eggs, and Products'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Coffee, Tea, and Related Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Coffee, Tea, and Related Products'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Cereals and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Cereals and Products'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Fats and Oils' THEN 'Category for recipes whos basic ingredient belongs in the food group Fats and Oils'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Spices and Essential Oils' THEN 'Category for recipes whos basic ingredient belongs in the food group Spices and Essential Oils'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Sweeteners' THEN 'Category for recipes whos basic ingredient belongs in the food group Sweeteners'
+            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Various Beverages' THEN 'Category for recipes whos basic ingredient belongs in the food group Various Beverages'
+            ELSE '!!!  there is something wrong with the basicIngredient of this recipe'
+        END
+    )
     WHERE name = NEW.name;
 END;
-
-
-
--- CREATE TRIGGER set_nutritional_information_per_portion_after_insert
--- AFTER INSERT ON recipes
--- FOR EACH ROW
--- BEGIN
---     CREATE TEMP VIEW table_1 AS
---     SELECT * FROM recipes_ingredients 
---     WHERE recipeName = New.name;
-
---     CREATE TEMP VIEW table_2 AS 
---     SELECT * FROM table_1 INNER JOIN ingredients ON table_1.ingredientName = ingredients.name;
-
---     SELECT SUM(quantity * caloriesPerUnitOfMeasure) AS total_calories
---     FROM table_2;
-
---     SELECT SUM(quantity * proteinsPerUnitOfMeasure) AS total_proteins
---     FROM table_2;
-
---     SELECT SUM(quantity * carbohysratesPerUnitOfMeasure) AS total_carbohysrates
---     FROM table_2;
-
---     SELECT SUM(quantity * fatsPerUnitOfMeasure) AS total_fats
---     FROM table_2;
-
---     SELECT SUM(quantity * sugarsPerUnitOfMeasure) AS total_sugars
---     FROM table_2;
-
---     UPDATE recipes
---     SET 
---     caloriesPerPortion = totalCalories / portions
---     proteinsPerPortion = totalProteins / portions
---     WHERE name = NEW.name;
--- END;
 
  
     
@@ -480,7 +475,7 @@ UPDATE recipes SET basicIngredient = 'Quinoa' WHERE name = 'Quinoa Salad';
 UPDATE recipes SET basicIngredient = 'Tomato' WHERE name = 'Ratatouille';
 UPDATE recipes SET basicIngredient = 'Arborio rice' WHERE name = 'Risotto';
 UPDATE recipes SET basicIngredient = 'Ramen noodles' WHERE name = 'Ramen';
-UPDATE recipes SET basicIngredient = 'Fish' WHERE name = 'Sushi';
+UPDATE recipes SET basicIngredient = 'Sushi rice' WHERE name = 'Sushi';
 UPDATE recipes SET basicIngredient = 'Ground lamb' WHERE name = 'Shepherds Pie';
 UPDATE recipes SET basicIngredient = 'Potatoes' WHERE name = 'Samosa';
 UPDATE recipes SET basicIngredient = 'Espresso' WHERE name = 'Tiramisu';
@@ -490,12 +485,12 @@ UPDATE recipes SET basicIngredient = 'Udon noodles' WHERE name = 'Udon Soup';
 UPDATE recipes SET basicIngredient = 'Beetroot' WHERE name = 'Ukrainian borscht';
 UPDATE recipes SET basicIngredient = 'Lentils' WHERE name = 'Umbrian Lentil Stew';
 UPDATE recipes SET basicIngredient = 'Beef brisket' WHERE name = 'Vietnamese Pho';
-UPDATE recipes SET basicIngredient = 'Vegetables' WHERE name = 'Vegetable Terrine';
+UPDATE recipes SET basicIngredient = 'Zucchini' WHERE name = 'Vegetable Terrine';
 UPDATE recipes SET basicIngredient = 'Venison' WHERE name = 'Venison Stew';
 UPDATE recipes SET basicIngredient = 'Apples' WHERE name = 'Waldorf Salad';
 UPDATE recipes SET basicIngredient = 'Cheese' WHERE name = 'Welsh Rarebit';
-UPDATE recipes SET basicIngredient = 'Veal' WHERE name = 'Wiener Schnitzel';
-UPDATE recipes SET basicIngredient = 'Pork' WHERE name = 'Xiaolongbao';
+UPDATE recipes SET basicIngredient = 'Veal cutlets' WHERE name = 'Wiener Schnitzel';
+UPDATE recipes SET basicIngredient = 'Ground pork' WHERE name = 'Xiaolongbao';
 UPDATE recipes SET basicIngredient = 'Lamb' WHERE name = 'Xinjiang Lamb Skewers';
 
 
