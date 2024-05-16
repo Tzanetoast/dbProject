@@ -3168,3 +3168,99 @@ INSERT INTO foodGroups (name, description) VALUES ('Fish and Products', 'Include
 INSERT INTO foodGroups (name, description) VALUES ('Fats and Oils', 'Includes essential cooking and dietary fats like butter, oils, and margarine used in food preparation.');
 INSERT INTO foodGroups (name, description) VALUES ('Coffee, Tea, and Related Products', 'Includes coffee, tea, and related caffeinated beverages along with associated products.');
 INSERT INTO foodGroups (name, description) VALUES ('Fruits and Products', 'Includes all types of fresh fruits, dried fruits, and products derived from them.');
+
+
+
+
+
+DROP TABLE chefs;
+
+CREATE TABLE chefs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,    -- A unique ID for each chef
+    firstName VARCHAR(32) NOT NULL,                -- Chef's first name
+    lastName VARCHAR(32) NOT NULL,                 -- Chef's last name
+    contactNumber VARCHAR(32) NOT NULL,            -- Chef's contact phone number
+    dateOfBirth DATE NOT NULL,             -- Chef's date of birth
+    age INTEGER,                    -- Chef's age
+    dateOfExperienceStart DATE NOT NULL,
+    yearsOfExperience INTEGER,    -- Number of years of professional experience
+    professionalGrade TEXT NOT NULL,         -- Chef's professional grade (e.g., Γ΄ μάγειρας, Β΄ μάγειρας, etc.)
+    CHECK (professionalGrade IN ('Third-Chef', 'Second-Chef', 'Third-Chef', 'Sous-Chef', 'Head-Chef')),
+    --CHECK (age > 0 OR age IS NULL)
+    CHECK (age > 0)
+);
+
+
+INSERT INTO chefs (firstName, lastName, contactNumber, dateOfBirth, dateOfExperienceStart, professionalGrade) VALUES
+('John', 'Doe', '555-0101', '1980-03-15', '2000-03-15', 'Head-Chef'),
+('Jane', 'Smith', '555-0102', '1985-07-22', '2005-07-22', 'Sous-Chef'),
+('Alex', 'Johnson', '555-0103', '1990-11-30', '2010-11-30', 'Third-Chef'),
+('Maria', 'Lee', '555-0104', '1992-05-17', '2012-05-17', 'Second-Chef'),
+('James', 'Brown', '555-0105', '1975-01-29', '1995-01-29', 'Head-Chef'),
+('Linda', 'Davis', '555-0106', '1988-08-19', '2008-08-19', 'Sous-Chef'),
+('Robert', 'Miller', '555-0107', '1982-12-24', '2002-12-24', 'Third-Chef'),
+('Barbara', 'Wilson', '555-0108', '1978-04-05', '1998-04-05', 'Second-Chef'),
+('Michael', 'Moore', '555-0109', '1994-09-15', '2014-09-15', 'Third-Chef'),
+('Betty', 'Taylor', '555-0110', '1986-03-11', '2006-03-11', 'Sous-Chef'),
+('William', 'Anderson', '555-0111', '1981-07-30', '2001-07-30', 'Head-Chef'),
+('Susan', 'Thomas', '555-0112', '1989-10-28', '2009-10-28', 'Second-Chef'),
+('David', 'Jackson', '555-0113', '1970-05-21', '1990-05-21', 'Head-Chef'),
+('Sarah', 'White', '555-0114', '1983-01-15', '2003-01-15', 'Sous-Chef'),
+('Joseph', 'Harris', '555-0115', '1991-08-19', '2011-08-19', 'Third-Chef'),
+('Karen', 'Martin', '555-0116', '1974-12-04', '1994-12-04', 'Head-Chef'),
+('Nancy', 'Thompson', '555-0117', '1993-06-02', '2013-06-02', 'Second-Chef'),
+('Daniel', 'Garcia', '555-0118', '1984-09-17', '2004-09-17', 'Sous-Chef'),
+('Lisa', 'Martinez', '555-0119', '1987-02-23', '2007-02-23', 'Third-Chef'),
+('Matthew', 'Robinson', '555-0120', '1995-04-18', '2015-04-18', 'Second-Chef'),
+('Anthony', 'Clark', '555-0121', '1976-10-30', '1996-10-30', 'Head-Chef'),
+('Mark', 'Rodriguez', '555-0122', '1988-01-25', '2008-01-25', 'Sous-Chef'),
+('Elizabeth', 'Lewis', '555-0123', '1979-11-07', '1999-11-07', 'Third-Chef'),
+('Donald', 'Lee', '555-0124', '1992-03-15', '2012-03-15', 'Second-Chef'),
+('Steven', 'Walker', '555-0125', '1990-07-20', '2010-07-20', 'Third-Chef'),
+('Emily', 'Hall', '555-0126', '1985-05-25', '2005-05-25', 'Sous-Chef'),
+('George', 'Allen', '555-0127', '1974-02-11', '1994-02-11', 'Head-Chef'),
+('Laura', 'Young', '555-0128', '1991-09-14', '2011-09-14', 'Second-Chef'),
+('Joshua', 'Hernandez', '555-0129', '1989-12-18', '2009-12-18', 'Third-Chef'),
+('Jessica', 'King', '555-0130', '1993-10-31', '2013-10-31', 'Sous-Chef'),
+('Kevin', 'Wright', '555-0131', '1982-03-17', '2002-03-17', 'Head-Chef'),
+('Angela', 'Lopez', '555-0132', '1978-08-09', '1998-08-09', 'Second-Chef'),
+('Thomas', 'Hill', '555-0133', '1975-06-03', '1995-06-03', 'Head-Chef'),
+('Carol', 'Scott', '555-0134', '1984-04-12', '2004-04-12', 'Sous-Chef'),
+('Ryan', 'Green', '555-0135', '1987-11-23', '2007-11-23', 'Third-Chef'),
+('Eric', 'Adams', '555-0136', '1973-01-20', '1993-01-20', 'Head-Chef'),
+('Mary', 'Baker', '555-0137', '1994-02-28', '2014-02-28', 'Second-Chef'),
+('Jason', 'Gonzalez', '555-0138', '1981-10-05', '2001-10-05', 'Sous-Chef'),
+('Michelle', 'Nelson', '555-0139', '1977-07-07', '1997-07-07', 'Third-Chef'),
+('Timothy', 'Carter', '555-0140', '1996-03-19', '2016-03-19', 'Second-Chef'),
+('Charles', 'Mitchell', '555-0141', '1971-08-25', '1991-08-25', 'Head-Chef'),
+('Sarah', 'Perez', '555-0142', '1989-01-31', '2009-01-31', 'Sous-Chef'),
+('Brian', 'Roberts', '555-0143', '1976-12-14', '1996-12-14', 'Third-Chef'),
+('Diana', 'Turner', '555-0144', '1983-09-15', '2003-09-15', 'Second-Chef'),
+('Arthur', 'Phillips', '555-0145', '1978-05-06', '1998-05-06', 'Head-Chef'),
+('Ashley', 'Campbell', '555-0146', '1995-07-20', '2015-07-20', 'Third-Chef'),
+('Gregory', 'Parker', '555-0147', '1990-04-10', '2010-04-10', 'Sous-Chef'),
+('Deborah', 'Evans', '555-0148', '1972-11-08', '1992-11-08', 'Head-Chef'),
+('Shirley', 'Edwards', '555-0149', '1985-01-28', '2005-01-28', 'Second-Chef'),
+('Benjamin', 'Collins', '555-0150', '1987-10-12', '2007-10-12', 'Third-Chef');
+
+
+DROP TABLE chefs_nationalCuisines;
+
+CREATE TABLE chefs_nationalCuisines(
+    chefId INT,
+    nationalCuisineName VARCHAR(64),
+    PRIMARY KEY (chefId, nationalCuisineName)
+    FOREIGN KEY (chefId) REFERENCES chefs(id),
+    FOREIGN KEY (nationalCuisineName) REFERENCES nationalCuisines(Name)
+);
+
+DROP TABLE chefs_recipes;
+
+CREATE TABLE chefs_recipes(
+    chefId INT,
+    recipeName VARCHAR(64),
+    PRIMARY KEY (chefId, recipeName),
+    FOREIGN KEY (chefId) REFERENCES chefs(id),
+    FOREIGN KEY (recipeName) REFERENCES recipes(name)
+);
+
