@@ -3176,18 +3176,19 @@ INSERT INTO foodGroups (name, description) VALUES ('Fruits and Products', 'Inclu
 DROP TABLE chefs;
 
 CREATE TABLE chefs (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,    -- A unique ID for each chef
-    firstName VARCHAR(32) NOT NULL,                -- Chef's first name
-    lastName VARCHAR(32) NOT NULL,                 -- Chef's last name
-    contactNumber VARCHAR(32) NOT NULL,            -- Chef's contact phone number
-    dateOfBirth DATE NOT NULL,             -- Chef's date of birth
-    age INTEGER,                    -- Chef's age
+    id INTEGER PRIMARY KEY AUTOINCREMENT,   
+    firstName VARCHAR(32) NOT NULL,                
+    lastName VARCHAR(32) NOT NULL,                
+    contactNumber VARCHAR(32) NOT NULL,            
+    dateOfBirth DATE NOT NULL,            
+    age INTEGER,                  
     dateOfExperienceStart DATE NOT NULL,
-    yearsOfExperience INTEGER,    -- Number of years of professional experience
-    professionalGrade TEXT NOT NULL,         -- Chef's professional grade (e.g., Γ΄ μάγειρας, Β΄ μάγειρας, etc.)
+    yearsOfExperience INTEGER,    
+    professionalGrade TEXT NOT NULL,       
     CHECK (professionalGrade IN ('Third-Chef', 'Second-Chef', 'Third-Chef', 'Sous-Chef', 'Head-Chef')),
     --CHECK (age > 0 OR age IS NULL)
-    CHECK (age > 0)
+    CHECK (age > 0),
+    CHECK (yearsOfExperience > 0)
 );
 
 

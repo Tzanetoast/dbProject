@@ -1,72 +1,97 @@
 import sqlite3
 import random
 
+
+def choose_random_subset(input_list, min_length, max_length):
+    # Ensure min_length and max_length are within valid bounds
+    min_length = max(0, min(min_length, len(input_list)))
+    max_length = min(len(input_list), max_length)
+    
+    if min_length > max_length:
+        raise ValueError("min_length cannot be greater than max_length")
+    
+    # Generate a random length for the subset
+    subset_length = random.randint(min_length, max_length)
+    
+    # Select a random subset of the generated length
+    subset = random.sample(input_list, subset_length)
+    
+    return subset
+
 def connect_db():
     return sqlite3.connect('example.db')
 
 def assign_cuisines():
     conn = connect_db()
     cur = conn.cursor()
-    
-    # Fetch all chef IDs and names
+
+    cur.execute("DELETE FROM chefs_recipes")
+
+    # Fetch all chef IDs 
     cur.execute("SELECT *  FROM chefs_nationalCuisines")
     chefs_cuisines = cur.fetchall()
     
-    # Fetch all cuisine names
+    # Fetch all recipes with their nationalCuisine
     cur.execute("SELECT name, nationalCuisine FROM recipes")
     recipes = cur.fetchall()
 
-    for chef_cuisine in chefs_cuisines:
-        recipes_subset = [recipe for recipe in recipes if recipe[1] == chef_cuisine[1]]     
+    for chef_cuisine in chefs_cuisines:         #otan enas chef kserei mia kouzina. gia kathe synatgi autis tis kouzinas dwstoy 2/3 pithanotita na kserei ti sintagi
+        recipes_subset = [recipe for recipe in recipes if recipe[1] == chef_cuisine[1]]         
         for recipe in recipes_subset:
             if(random.randint(1, 3)>2):
                 cur.execute("INSERT INTO chefs_recipes (chefId, recipeName) VALUES (?, ?)",(chef_cuisine[0], recipe[0]))               
 
 
-    cur.execute("SELECT recipeName FROM chefs_recipes")
-    recipes_x =  [x[0] for x in cur.fetchall()]
+    cur.execute("SELECT name,nationalCuisine FROM recipes")                         #
+    x =  cur.fetchall()                                                             #
+    cur.execute("SELECT DISTINCT recipeName FROM chefs_recipes")                    #   find recipes that dont have a chef
+    y =  [x[0] for x in cur.fetchall()]                                             #
+    recipes_without_chef = [recipe for recipe in x if recipe[0] not in y]           #
+    print("the recipes that dont have chef are:")                                   #
+    print(recipes_without_chef)                                                     #
 
-    cur.execute("SELECT name FROM recipes")
-    recipes_y =  [x[0] for x in cur.fetchall()]
-    recipes_that_dont_have_chef = [recipe for recipe in recipes_y if recipe not in recipes_x]
+    for recipe_without_chef in recipes_without_chef:                                                                                                                    #
+        cur.execute("SELECT * FROM chefs_nationalCuisines WHERE nationalCuisineName = ?", (recipe_without_chef[1],))                                                    #
+        chefs_that_can_execute_the_recipe =  [x[0] for x in cur.fetchall()]                                                                                             # assign chefs to those recipes
+        chefs_that_we_will_define_to_execute_the_recipe = choose_random_subset(chefs_that_can_execute_the_recipe, 2, 4)                                                 #
+        for chef_that_we_will_define_to_execute_the_recipe in chefs_that_we_will_define_to_execute_the_recipe:                                                          #
+             cur.execute("INSERT INTO chefs_recipes (chefId, recipeName) VALUES (?, ?)",(chef_that_we_will_define_to_execute_the_recipe, recipe_without_chef[0]))       #
 
-    if len(recipes_that_dont_have_chef) > 0:
-        for recipe_that_doesnt_have_chef in recipes_that_dont_have_chef:
-            cur.execute("SELECT nationalCuisine FROM recipes WHERE name = ?", (recipe_that_doesnt_have_chef,))
-            nationalCuisineOfTheRecipe = [x[0] for x in cur.fetchall()][0]  # Assuming each recipe has only one national cuisine
 
-            cur.execute("SELECT chefId FROM chefs_nationalCuisines WHERE nationalCuisineName = ?", (nationalCuisineOfTheRecipe,))
-            chefs_that_can_execute_this_recipe = [x[0] for x in cur.fetchall()]
-
-            # If there are chefs who can execute this recipe, assign the first one
-            if chefs_that_can_execute_this_recipe:
-                i = random.randint(1, len(chefs_that_can_execute_this_recipe)-1)
-                cur.execute("INSERT INTO chefs_recipes (chefId, recipeName) VALUES (?, ?)", (chefs_that_can_execute_this_recipe[i], recipe_that_doesnt_have_chef))
-  
+    cur.execute("SELECT name,nationalCuisine FROM recipes")                         #
+    x =  cur.fetchall()                                                             #
+    cur.execute("SELECT DISTINCT recipeName FROM chefs_recipes")                    #   find recipes that dont have a chef again
+    y =  [x[0] for x in cur.fetchall()]                                             #
+    recipes_without_chef = [recipe for recipe in x if recipe[0] not in y]           #
+    print("the recipes that dont have chef are:")                                   #
+    print(recipes_without_chef)                                                     #
         
-    cur.execute("""
-        SELECT c.chefId
-        FROM chefs_nationalCuisines c
-        LEFT JOIN chefs_recipes r ON c.chefId = r.chefId
-        WHERE r.recipeName IS NULL
-    """)
-    chefs_without_recipes = [chef[0] for chef in cur.fetchall()]
+    cur.execute("SELECT * FROM chefs_nationalCuisines")                         #
+    x = cur.fetchall()                                                          #
+    cur.execute("SELECT DISTINCT chefId FROM chefs_recipes")                    #   find chefs that dont have recipes
+    y = [x[0] for x in cur.fetchall()]                                          #
+    chefs_without_recipes = [element for element in x if element[0] not in y]   #
+    print("the chefs that dont have recipes are")                               #
+    print(chefs_without_recipes)                                                #
 
-    # Assign at least one recipe to chefs without any
-    for chef_id in chefs_without_recipes:
-        # Fetch the chef's cuisines
-        cur.execute("SELECT nationalCuisineName FROM chefs_nationalCuisines WHERE chefId = ?", (chef_id,))
-        chef_cuisines = [cuisine[0] for cuisine in cur.fetchall()]
 
-        # Find recipes matching any of the chef's cuisines
-        for cuisine in chef_cuisines:
-            cur.execute("SELECT name FROM recipes WHERE nationalCuisine = ?", (cuisine,))
-            possible_recipes = [recipe[0] for recipe in cur.fetchall()]
+    while len(chefs_without_recipes)>0:
+        for chef_without_recipes in chefs_without_recipes:         #otan enas chef kserei mia kouzina. gia kathe synatgi autis tis kouzinas dwstoy 2/3 pithanotita na kserei ti sintagi
+            recipes_subset = [recipe for recipe in recipes if recipe[1] == chef_without_recipes[1]]         
+            for recipe in recipes_subset:
+                if(random.randint(1, 3)>2):
+                    cur.execute("INSERT INTO chefs_recipes (chefId, recipeName) VALUES (?, ?)",(chef_without_recipes[0], recipe[0]))   
 
-            # If recipes are found, assign the first one and break the loop
-            if possible_recipes:
-                cur.execute("INSERT INTO chefs_recipes (chefId, recipeName) VALUES (?, ?)", (chef_id, possible_recipes[0]))
-                break
+
+        cur.execute("SELECT * FROM chefs_nationalCuisines")                         #
+        x = cur.fetchall()                                                          #
+        cur.execute("SELECT DISTINCT chefId FROM chefs_recipes")                    #   find chefs that dont have recipes
+        y = [x[0] for x in cur.fetchall()]                                          #   again
+        chefs_without_recipes = [element for element in x if element[0] not in y]   #
+        print("the chefs that dont have recipes are")                               #
+        print(chefs_without_recipes)                                                #
+
+
     conn.commit()
     conn.close()
 
