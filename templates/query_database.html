@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query Database</title>
+    <style>
+        .query-buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Query Database</h1>
+    <a href="{{ url_for('admin_logged_in') }}">Back to Admin Dashboard</a>
+
+    <div class="query-buttons">
+        <form action="{{ url_for('query_1') }}" method="get">
+            <button type="submit">Query 1</button>
+        </form>
+        <form action="{{ url_for('query_2_form') }}" method="get">
+            <button type="submit">Query 2</button>
+        </form>
+        <form action="{{ url_for('query_3') }}" method="get">
+            <button type="submit">Query 3</button>
+        </form>
+        <form action="{{ url_for('query_4') }}" method="get">
+            <button type="submit">Query 4</button>
+        </form>
+        <form action="{{ url_for('query_5') }}" method="get">
+            <button type="submit">Query 5</button>
+        </form>
+        <!-- Add more queries as needed -->
+    </div>
+</body>
+</html>
+

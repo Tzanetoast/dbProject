@@ -1,10 +1,6 @@
-DROP TABLE nationalCuisines;
 
-CREATE TABLE nationalCuisines (
-    name VARCHAR(64),
-    description VARCHAR(256),
-    PRIMARY KEY (name)
-);
+
+
 
 INSERT INTO nationalCuisines (name, description) VALUES 
 ('British', 'Known for its traditional dishes like fish and chips, puddings, and roasts.'),
@@ -34,11 +30,6 @@ INSERT INTO nationalCuisines (name, description) VALUES
 ('Ukrainian', 'Known for its use of vegetables and grains, with dishes like borscht and pierogi.'),
 ('Vietnamese', 'Marked by the use of fresh herbs, fish sauce, and dishes that balance sweet, sour, salty, and hot flavors.');
 
-DROP TABLE mealTypes;
-CREATE TABLE mealTypes(
-    name VARCHAR(64),
-    PRIMARY KEY (name)
-);
 
 INSERT INTO mealTypes (name) VALUES
 ('Dessert'),
@@ -52,186 +43,6 @@ INSERT INTO mealTypes (name) VALUES
 ('Brunch');
 
 
-DROP TABLE recipes;
-
-CREATE TABLE recipes (
-    name VARCHAR(64) NOT NULL,
-    cookingORpastry VARCHAR(7) NOT NULL CHECK (cookingORpastry IN ('cooking', 'pastry')),
-    shortDescription TEXT,
-    nationalCuisine VARCHAR(64) NOT NULL,  
-    difficulty  SMALLINT CHECK (difficulty BETWEEN 1 AND 5), --dificulty of the dish
-    prepTime INT, -- in minutes
-    cookingTime INT, -- in minutes
-    mealType VARCHAR(255), -- e.g., Breakfast, Lunch, Dinner, Snack, Appetizers, Dessert, brunch, cold-dish, Barbecue, Buffet, Halal, Fine-Dining, Vegan, Raw-Food
-    tools VARCHAR(255),
-    portions INT,
-    basicIngredient VARCHAR(64),
-    categoryBasedOnBasicIngredient VARCHAR(64),
-    caloriesPerPortion INT,
-    proteinsPerPortion INT,
-    carbohydratesPerPortion INT,
-    fatsPerPortion INT,
-    sugarsPerPortion INT,
-    PRIMARY KEY (name),
-    FOREIGN KEY (nationalCuisine) REFERENCES nationalCuisines(name)
-);
-
-CREATE TRIGGER set_categoryBasedOnBasicIngredient_after_insert
-AFTER INSERT ON recipes
-FOR EACH ROW
-BEGIN
-    UPDATE recipes
-    SET categoryBasedOnBasicIngredient = (
-        CASE 
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Fish and Products' THEN 'Seafood'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Various Plant-Based Foods' THEN 'Vegeterian'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Preserved Foods' THEN 'Category for recipes whos basic ingredient belongs in the food group Preserved Foods'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Meat and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Meat and Products'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Dairy, Eggs, and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Dairy, Eggs, and Products'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Coffee, Tea, and Related Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Coffee, Tea, and Related Products'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Cereals and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Cereals and Products'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Fats and Oils' THEN 'Category for recipes whos basic ingredient belongs in the food group Fats and Oils'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Spices and Essential Oils' THEN 'Category for recipes whos basic ingredient belongs in the food group Spices and Essential Oils'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Sweeteners' THEN 'Category for recipes whos basic ingredient belongs in the food group Sweeteners'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Various Beverages' THEN 'Category for recipes whos basic ingredient belongs in the food group Various Beverages'
-            ELSE '!!!  there is something wrong with the basicIngredient of this recipe'
-        END
-    )
-    WHERE name = NEW.name;
-END;
-
-CREATE TRIGGER set_categoryBasedOnBasicIngredient_after_update
-AFTER UPDATE ON recipes
-FOR EACH ROW
-BEGIN
-    UPDATE recipes
-    SET categoryBasedOnBasicIngredient = (
-        CASE 
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Fish and Products' THEN 'Seafood'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Various Plant-Based Foods' THEN 'Vegeterian'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Preserved Foods' THEN 'Category for recipes whos basic ingredient belongs in the food group Preserved Foods'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Meat and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Meat and Products'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Dairy, Eggs, and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Dairy, Eggs, and Products'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Coffee, Tea, and Related Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Coffee, Tea, and Related Products'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Cereals and Products' THEN 'Category for recipes whos basic ingredient belongs in the food group Cereals and Products'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Fats and Oils' THEN 'Category for recipes whos basic ingredient belongs in the food group Fats and Oils'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Spices and Essential Oils' THEN 'Category for recipes whos basic ingredient belongs in the food group Spices and Essential Oils'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Sweeteners' THEN 'Category for recipes whos basic ingredient belongs in the food group Sweeteners'
-            WHEN (SELECT foodGroup FROM ingredients WHERE name = NEW.basicIngredient) = 'Various Beverages' THEN 'Category for recipes whos basic ingredient belongs in the food group Various Beverages'
-            ELSE '!!!  there is something wrong with the basicIngredient of this recipe'
-        END
-    )
-    WHERE name = NEW.name;
-END;
-
- 
-    
-CREATE TRIGGER set_nutritional_information_per_portion_after_insert
-AFTER INSERT ON recipes
-FOR EACH ROW
-BEGIN
-    UPDATE recipes
-    SET caloriesPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.caloriesPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions,
-        proteinsPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.proteinsPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions,
-        carbohydratesPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.carbohydratesPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions,
-        fatsPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.fatsPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions,
-        sugarsPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.sugarsPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions
-    WHERE name = NEW.name;
-END;
-
-
-CREATE TRIGGER set_nutritional_information_per_portion_after_update
-AFTER UPDATE ON recipes
-FOR EACH ROW
-BEGIN
-    UPDATE recipes
-    SET caloriesPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.caloriesPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions,
-        proteinsPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.proteinsPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions,
-        carbohydratesPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.carbohydratesPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions,
-        fatsPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.fatsPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions,
-        sugarsPerPortion = (
-            SELECT SUM(table_1.quantity * ingredients.sugarsPerUnitOfMeasure)
-            FROM (
-                SELECT *
-                FROM recipes_ingredients
-                WHERE recipeName = NEW.name
-            ) AS table_1
-            INNER JOIN ingredients ON table_1.ingredientName = ingredients.name
-        ) / NEW.portions
-    WHERE name = NEW.name;
-END;
 
 
 
@@ -494,14 +305,6 @@ UPDATE recipes SET basicIngredient = 'Ground pork' WHERE name = 'Xiaolongbao';
 UPDATE recipes SET basicIngredient = 'Lamb' WHERE name = 'Xinjiang Lamb Skewers';
 
 
-DROP TABLE recipes_mealTypes;
-CREATE TABLE recipes_mealTypes(
-    recipeName VARCHAR(64),
-    mealTypeName VARCHAR(64),
-    PRIMARY KEY (recipeName,mealTypeName),
-    FOREIGN KEY (recipeName) REFERENCES recipes(name),
-    FOREIGN KEY (mealTypeName) REFERENCES mealTypes(name)
-);
 
 INSERT INTO recipes_mealTypes (recipeName, mealTypeName) VALUES 
 ('Apple Frangipan Tart', 'Dessert'),
@@ -777,261 +580,248 @@ UPDATE recipes
 SET tools = 'frying pan, spatula, chefs knife, cutting board'
 WHERE name = 'Quesadilla';
 
-DROP TABLE recipes_usageTips;
-
-CREATE TABLE recipes_usageTips(
-    recipeName VARCHAR(64),
-    usageTipNumber SMALL INT,
-    usageTip VARCHAR(256),
-    PRIMARY KEY (recipeName, usageTipNumber),
-    FOREIGN KEY (recipeName) REFERENCES recipes(name)
-);
-
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Apam balik', 1, 'Best served warm with a sprinkle of sugar and crushed peanuts'),
-('Apam balik', 2, 'Store any leftovers in an airtight container to maintain freshness'),
-('Apple & Blackberry Crumble', 1, 'Serve with a scoop of vanilla ice cream for a delicious contrast of warm and cold'),
-('Apple & Blackberry Crumble', 2, 'Leftovers can be reheated in the oven for a few minutes to regain crispiness'),
-('Apple & Blackberry Crumble', 3, 'Make extra crumble topping and freeze it for future use'),
-('Apple Frangipan Tart', 1, 'Dust with powdered sugar before serving for an elegant touch'),
-('Apple Frangipan Tart', 2, 'Refrigerate any leftovers and reheat in the oven for a few minutes before serving again'),
-('Ayam Percik', 1, 'Marinate the chicken overnight for maximum flavor absorption'),
-('Ayam Percik', 2, 'Brush with extra marinade while grilling for added moisture and flavor'),
-('Ayam Percik', 3, 'Serve with steamed rice and a side of cucumber slices'),
-('Bakewell tart', 1, 'Serve at room temperature with a dollop of whipped cream or custard'),
-('Bakewell tart', 2, 'For extra indulgence, drizzle with a raspberry coulis before serving'),
-('Bakewell tart', 3, 'Leftovers can be enjoyed cold or reheated in the microwave'),
-('Banana Pancakes', 1, 'Top with sliced bananas and a drizzle of maple syrup'),
-('Banana Pancakes', 2, 'Add a pinch of cinnamon to the batter for extra flavor'),
-('Banana Pancakes', 3, 'Leftover pancakes can be frozen and reheated in the toaster for a quick breakfast');
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Beef Wellington', 1, 'Rest the beef wellington before slicing to allow the juices to redistribute'),
-('Beef Wellington', 2, 'For a perfectly golden crust, brush the pastry with egg wash before baking'),
-('Beef Wellington', 3, 'Serve with a rich red wine sauce or a creamy mushroom sauce on the side'),
-('Caldo verde', 1, 'Garnish with a drizzle of olive oil and freshly chopped parsley before serving'),
-('Caldo verde', 2, 'For extra creaminess, swirl in a spoonful of sour cream or Greek yogurt before serving'),
-('Caldo verde', 3, 'Serve with crusty bread or cornbread on the side for a complete meal'),
-('Cannelloni', 1, 'Top with extra grated cheese before baking for a golden, cheesy crust'),
-('Cannelloni', 2, 'Serve with a side salad dressed with balsamic vinaigrette for a refreshing contrast'),
-('Cannelloni', 3, 'Leftovers can be frozen and reheated in the oven for a quick and easy meal'),
-('Chicken Congee', 1, 'Garnish with sliced green onions, chopped cilantro, and a drizzle of sesame oil before serving'),
-('Chicken Congee', 2, 'For extra flavor, add a few drops of soy sauce or fish sauce to taste'),
-('Chicken Congee', 3, 'Serve with Chinese fried dough sticks (youtiao) or steamed buns on the side'),
-('Dakdoritang', 1, 'Adjust the spiciness by adding more or less gochujang (Korean red chili paste)'),
-('Dakdoritang', 2, 'For added depth of flavor, simmer the stew for an extra 10-15 minutes before serving'),
-('Dakdoritang', 3, 'Serve with a bowl of steamed rice and kimchi on the side'),
-('Danish Pastry', 1, 'Top with a simple glaze made from powdered sugar and milk for a glossy finish'),
-('Danish Pastry', 2, 'For extra richness, sprinkle chopped nuts or chocolate chips over the filling before folding'),
-('Danish Pastry', 3, 'Enjoy warm from the oven or toast lightly before serving for a crispy exterior'),
-('Dum Aloo', 1, 'Garnish with a sprinkle of chopped fresh cilantro or parsley before serving'),
-('Dum Aloo', 2, 'For extra creaminess, stir in a spoonful of yogurt or sour cream just before serving'),
-('Dum Aloo', 3, 'Serve with naan bread or steamed rice for a complete meal');
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Eclairs', 1, 'Drizzle with melted chocolate or caramel sauce for an indulgent finish'),
-('Eclairs', 2, 'For added texture, sprinkle chopped nuts or toasted coconut over the icing before it sets'),
-('Eclairs', 3, 'Store in an airtight container in the refrigerator for up to three days'),
-('English Breakfast', 1, 'Serve with toast, butter, and a selection of jams or marmalades on the side'),
-('English Breakfast', 2, 'Brew a pot of strong English breakfast tea to accompany the meal'),
-('English Breakfast', 3, 'For a vegetarian option, swap out the bacon and sausage for vegetarian alternatives'),
-('Eton Mess', 1, 'Top with extra fresh berries and a drizzle of fruit coulis for a burst of flavor and color'),
-('Eton Mess', 2, 'For extra crunch, sprinkle crushed meringue or toasted nuts over the whipped cream'),
-('Eton Mess', 3, 'Serve immediately after assembling to prevent the meringue from becoming soggy'),
-('Fajitas', 1, 'Serve with warm flour tortillas and a selection of toppings such as guacamole, salsa, and sour cream'),
-('Fajitas', 2, 'For extra flavor, marinate the meat in lime juice, garlic, and spices before cooking'),
-('Fajitas', 3, 'Add grilled vegetables such as bell peppers and onions to make it a complete meal'),
-('Falafel', 1, 'Serve with tahini sauce or tzatziki for dipping'),
-('Falafel', 2, 'For added freshness, serve with a side of tabbouleh salad or pickled vegetables'),
-('Falafel', 3, 'Stuff falafel into pita bread with lettuce, tomatoes, and onions for a satisfying sandwich'),
-('Fish and Chips', 1, 'Serve with malt vinegar, tartar sauce, or ketchup for dipping'),
-('Fish and Chips', 2, 'For extra crunch, double fry the potatoes or use a beer batter for the fish'),
-('Fish and Chips', 3, 'Serve with mushy peas or a side salad to balance out the meal'),
-('Gazpacho', 1, 'Garnish with a drizzle of extra virgin olive oil and a sprinkle of fresh herbs before serving'),
-('Gazpacho', 2, 'For added texture, top with diced cucumber, bell pepper, and croutons before serving'),
-('Gazpacho', 3, 'Chill in the refrigerator for at least an hour before serving to enhance the flavors'),
-('Goulash', 1, 'Serve with a dollop of sour cream and a sprinkle of chopped fresh parsley or dill on top'),
-('Goulash', 2, 'For extra richness, stir in a tablespoon of tomato paste or red wine before simmering'),
-('Goulash', 3, 'Serve over cooked egg noodles, rice, or mashed potatoes for a hearty meal');
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Greek Salad', 1, 'Drizzle with extra virgin olive oil and a squeeze of fresh lemon juice before serving'),
-('Greek Salad', 2, 'For extra flavor, add a sprinkle of dried oregano and crumbled feta cheese on top'),
-('Greek Salad', 3, 'Serve with crusty bread or pita on the side for a complete meal'),
-('Hamburgers', 1, 'Top with your favorite condiments and vegetables such as lettuce, tomato, and onion'),
-('Hamburgers', 2, 'For extra flavor, mix seasonings such as Worcestershire sauce or garlic powder into the ground beef before forming patties'),
-('Hamburgers', 3, 'Serve with crispy french fries or onion rings on the side for a classic diner experience'),
-('Hot and Sour Soup', 1, 'Garnish with sliced green onions and a drizzle of sesame oil before serving'),
-('Hot and Sour Soup', 2, 'For extra heat, add more white pepper or chili paste to taste'),
-('Hot and Sour Soup', 3, 'Serve with crispy wonton strips or steamed rice on the side for a complete meal'),
-('Hummus', 1, 'Drizzle with extra virgin olive oil and a sprinkle of paprika before serving'),
-('Hummus', 2, 'For extra flavor, add roasted garlic, sun-dried tomatoes, or roasted red peppers to the hummus mixture'),
-('Hummus', 3, 'Serve with warm pita bread, crackers, or fresh vegetables for dipping'),
-('Indian Curry', 1, 'Serve with basmati rice, naan bread, or roti for soaking up the delicious sauce'),
-('Indian Curry', 2, 'For extra richness, stir in a splash of coconut milk or heavy cream before serving'),
-('Indian Curry', 3, 'Garnish with fresh cilantro or chopped nuts for added flavor and texture'),
-('Irish Coffee', 1, 'Top with a dollop of whipped cream and a sprinkle of ground nutmeg or cinnamon before serving'),
-('Irish Coffee', 2, 'For extra indulgence, drizzle with chocolate syrup or sprinkle with shaved chocolate before adding the cream'),
-('Irish Coffee', 3, 'Serve with a side of shortbread cookies or biscotti for dipping'),
-('Irish Stew', 1, 'Serve with crusty bread or Irish soda bread for soaking up the flavorful broth'),
-('Irish Stew', 2, 'For extra richness, stir in a tablespoon of tomato paste or red wine before simmering'),
-('Irish Stew', 3, 'Garnish with chopped fresh parsley or thyme for a pop of color and flavor'),
-('Italian Biscotti', 1, 'Dip in a cup of espresso or Vin Santo for a traditional Italian treat'),
-('Italian Biscotti', 2, 'For extra flavor, add chopped nuts, dried fruit, or chocolate chips to the biscotti dough'),
-('Italian Biscotti', 3, 'Store in an airtight container at room temperature for up to two weeks'),
-('Jambalaya', 1, 'Serve with hot sauce or a sprinkle of cayenne pepper for extra heat'),
-('Jambalaya', 2, 'For extra flavor, use andouille sausage or smoked ham in the recipe'),
-('Jambalaya', 3, 'Garnish with chopped green onions or fresh parsley before serving for added freshness');
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Japanese Cheesecake', 1, 'Dust with powdered sugar or cocoa powder before serving for an elegant touch'),
-('Japanese Cheesecake', 2, 'Serve with a dollop of whipped cream and fresh berries on the side'),
-('Japanese Cheesecake', 3, 'Chill in the refrigerator for a few hours before serving for a firmer texture'),
-('Japanese Curry', 1, 'Serve with steamed rice or Japanese-style pickles (tsukemono) on the side'),
-('Japanese Curry', 2, 'For extra flavor, stir in a spoonful of Japanese curry roux or honey before serving'),
-('Japanese Curry', 3, 'Garnish with pickled ginger or chopped green onions for added freshness and color'),
-('Jerk Chicken', 1, 'Serve with traditional Jamaican side dishes such as rice and peas, fried plantains, and festival bread'),
-('Jerk Chicken', 2, 'For extra heat, marinate the chicken in jerk seasoning overnight before grilling'),
-('Jerk Chicken', 3, 'Garnish with lime wedges and fresh cilantro before serving for added flavor and brightness'),
-('Kaiserschmarrn', 1, 'Serve dusted with powdered sugar and a drizzle of fruit compote or maple syrup'),
-('Kaiserschmarrn', 2, 'For extra richness, sprinkle with toasted almonds or top with a scoop of vanilla ice cream'),
-('Kaiserschmarrn', 3, 'Enjoy as a dessert or sweet breakfast dish with a cup of coffee or tea'),
-('Kebab', 1, 'Serve wrapped in warm pita bread with a generous dollop of tzatziki sauce'),
-('Kebab', 2, 'For extra flavor, marinate the meat in yogurt, lemon juice, and spices before grilling'),
-('Kebab', 3, 'Serve with a side of tabbouleh salad or grilled vegetables for a complete meal'),
-('Key Lime Pie', 1, 'Top with whipped cream or meringue before serving for an extra decadent touch'),
-('Key Lime Pie', 2, 'For extra tanginess, garnish with lime zest or thinly sliced lime wedges before serving'),
-('Key Lime Pie', 3, 'Chill in the refrigerator for at least two hours before serving for a firm, set filling');
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Kimchi Fried Rice', 1, 'Serve with a fried egg on top for added richness and flavor'),
-('Kimchi Fried Rice', 2, 'For extra heat, add more gochujang (Korean red chili paste) or kimchi juice to taste'),
-('Kimchi Fried Rice', 3, 'Garnish with sliced green onions and toasted sesame seeds before serving for added freshness and crunch'),
-('Kimchi Stew', 1, 'Serve with a bowl of steamed rice and a side of kimchi on the side'),
-('Kimchi Stew', 2, 'For extra depth of flavor, add a spoonful of doenjang (Korean fermented soybean paste) or gochujang (Korean red chili paste)'),
-('Kimchi Stew', 3, 'Garnish with sliced green onions and a drizzle of sesame oil before serving for added flavor and freshness'),
-('Lamb Tagine', 1, 'Serve with couscous or crusty bread to soak up the flavorful sauce'),
-('Lamb Tagine', 2, 'For extra richness, stir in a handful of dried fruits such as apricots or raisins before serving'),
-('Lamb Tagine', 3, 'Garnish with chopped fresh cilantro or parsley before serving for added freshness and color'),
-('Lasagna', 1, 'Let it rest for 10-15 minutes before slicing to allow the layers to set'),
-('Lasagna', 2, 'For extra cheesiness, add a sprinkle of grated Parmesan or mozzarella cheese on top before baking'),
-('Lasagna', 3, 'Serve with garlic bread and a side salad for a complete meal'),
-('Lobster Bisque', 1, 'Garnish with a drizzle of heavy cream and a sprinkle of fresh chives or tarragon before serving'),
-('Lobster Bisque', 2, 'For extra richness, stir in a tablespoon of brandy or sherry just before serving'),
-('Lobster Bisque', 3, 'Serve with crusty bread or oyster crackers on the side for dipping'),
-('Macaron', 1, 'Let the macarons rest for 30 minutes before baking to develop a smooth, shiny surface'),
-('Macaron', 2, 'For extra flavor, add a teaspoon of instant espresso powder or matcha powder to the meringue mixture'),
-('Macaron', 3, 'Store in an airtight container in the refrigerator for up to three days to allow the flavors to meld'),
-('Mapo Tofu', 1, 'Garnish with sliced green onions and a sprinkle of toasted sesame seeds before serving'),
-('Mapo Tofu', 2, 'For extra heat, add more doubanjiang (Chinese chili bean paste) or chili oil to taste'),
-('Mapo Tofu', 3, 'Serve with steamed rice or noodles for a satisfying meal'),
-('Moussaka', 1, 'Let it rest for 10-15 minutes before slicing to allow the layers to set'),
-('Moussaka', 2, 'For extra richness, sprinkle grated cheese or breadcrumbs on top before baking'),
-('Moussaka', 3, 'Serve with a Greek salad and crusty bread for a complete meal'),
-('Nachos', 1, 'Top with your favorite toppings such as salsa, guacamole, sour cream, and jalapenos'),
-('Nachos', 2, 'For extra flavor, add seasoned ground beef, shredded chicken, or black beans to the nachos'),
-('Nachos', 3, 'Serve immediately after assembling to prevent the chips from becoming soggy'),
-('Nasi Goreng', 1, 'Top with a fried egg and a sprinkle of crispy shallots before serving'),
-('Nasi Goreng', 2, 'For extra heat, add more sambal oelek or chopped fresh chili peppers to taste'),
-('Nasi Goreng', 3, 'Garnish with sliced cucumber, tomato wedges, and a wedge of lime before serving for added freshness'),
-('Nougat', 1, 'Cut into bite-sized pieces and wrap individually in parchment paper for a sweet treat on the go'),
-('Nougat', 2, 'For extra crunch, add toasted nuts such as almonds, pistachios, or hazelnuts to the nougat mixture'),
-('Nougat', 3, 'Store in an airtight container at room temperature for up to two weeks');
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Okonomiyaki', 1, 'Top with a drizzle of okonomiyaki sauce, Japanese mayo, and bonito flakes before serving'),
-('Okonomiyaki', 2, 'For extra flavor, add chopped cabbage, scallions, shrimp, or pork belly to the batter'),
-('Okonomiyaki', 3, 'Serve with a side of pickled ginger and a bowl of miso soup for a complete meal'),
-('Osso Buco', 1, 'Serve with creamy polenta, mashed potatoes, or crusty bread to soak up the flavorful sauce'),
-('Osso Buco', 2, 'For extra richness, stir in a tablespoon of gremolata (lemon zest, garlic, and parsley) just before serving'),
-('Osso Buco', 3, 'Garnish with chopped fresh parsley or lemon zest before serving for added freshness and flavor'),
-('Oysters Kilpatrick', 1, 'Top with crispy bacon pieces and a sprinkle of breadcrumbs before grilling'),
-('Oysters Kilpatrick', 2, 'For extra flavor, add a dash of Worcestershire sauce or hot sauce to each oyster before grilling'),
-('Oysters Kilpatrick', 3, 'Serve with lemon wedges and a glass of chilled white wine for an elegant appetizer'),
-('Paella', 1, 'Garnish with lemon wedges and fresh parsley before serving for added freshness and color'),
-('Paella', 2, 'For extra flavor, use homemade seafood or chicken stock instead of water to cook the rice'),
-('Paella', 3, 'Serve with a side of crusty bread and a glass of Spanish wine for a complete meal'),
-('Peking Duck', 1, 'Serve with Mandarin pancakes, hoisin sauce, and thinly sliced scallions for wrapping'),
-('Peking Duck', 2, 'For extra crispiness, hang the duck in front of a fan or air-dry'),
-('Peking Duck', 3, 'Serve with steamed buns or lettuce cups for a variation in presentation'),
-('Pierogi', 1, 'Serve with sour cream or applesauce for dipping'),
-('Pierogi', 2, 'For extra flavor, sauté in butter until golden brown and crispy before serving'),
-('Pierogi', 3, 'Freeze any leftovers for a quick and easy meal later on'),
-('Quesadilla', 1, 'Serve with salsa, guacamole, and sour cream for dipping'),
-('Quesadilla', 2, 'For extra flavor, add cooked chicken, steak, or shrimp to the filling mixture'),
-('Quesadilla', 3, 'Cut into wedges and serve immediately while warm and crispy');
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Quiche Lorraine', 1, 'Serve with a side salad dressed with balsamic vinaigrette for a light and refreshing meal'),
-('Quiche Lorraine', 2, 'For extra richness, use heavy cream instead of milk in the custard mixture'),
-('Quiche Lorraine', 3, 'Enjoy warm or at room temperature for breakfast, brunch, or lunch'),
-('Quinoa Salad', 1, 'Garnish with chopped fresh herbs such as parsley, cilantro, or mint before serving'),
-('Quinoa Salad', 2, 'For extra flavor, add diced avocado, cherry tomatoes, or crumbled feta cheese to the salad mixture'),
-('Quinoa Salad', 3, 'Serve chilled or at room temperature as a side dish or light meal option'),
-('Ramen', 1, 'Top with sliced green onions, nori strips, and a seasoned soft-boiled egg before serving'),
-('Ramen', 2, 'For extra flavor, add a spoonful of miso paste, soy sauce, or chili oil to the broth'),
-('Ramen', 3, 'Customize with your favorite toppings such as sliced pork, tofu, mushrooms, or corn kernels'),
-('Ratatouille', 1, 'Garnish with a drizzle of extra virgin olive oil and a sprinkle of fresh basil or parsley before serving'),
-('Ratatouille', 2, 'For extra richness, sprinkle grated Parmesan or crumbled goat cheese on top before serving'),
-('Ratatouille', 3, 'Serve as a side dish, over pasta, or with crusty bread for a complete meal'),
-('Risotto', 1, 'Stir in a knob of butter and a handful of grated Parmesan cheese for extra creaminess before serving'),
-('Risotto', 2, 'For extra flavor, add cooked vegetables, mushrooms, or seafood to the risotto halfway through cooking'),
-('Risotto', 3, 'Garnish with fresh herbs such as parsley, chives, or thyme for added freshness and color'),
-('Samosa', 1, 'Serve with tamarind chutney, mint chutney, or mango chutney for dipping'),
-('Samosa', 2, 'For extra heat, add more green chilies or red chili powder to the filling mixture'),
-('Samosa', 3, 'Enjoy as a snack or appetizer with a cup of chai tea or your favorite beverage'),
-('Shepherds Pie', 1, 'For extra flavor, stir in a tablespoon of Worcestershire sauce or tomato paste to the meat mixture'),
-('Shepherds Pie', 2, 'Top with grated cheddar cheese or mashed sweet potatoes for a twist on the classic recipe'),
-('Shepherds Pie', 3, 'Bake until the top is golden brown and crispy for the perfect finishing touch'),
-('Sushi', 1, 'Serve with soy sauce, pickled ginger, and wasabi for dipping'),
-('Sushi', 2, 'For extra flavor, add a thin layer of spicy mayo or eel sauce on top of the sushi rolls'),
-('Sushi', 3, 'Experiment with different fillings such as raw fish, cooked shrimp, avocado, cucumber, or cream cheese');
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Tabbouleh', 1, 'For extra freshness, add chopped mint or basil to the tabbouleh mixture before serving'),
-('Tabbouleh', 2, 'Serve with grilled pita bread or falafel for a complete Middle Eastern meal'),
-('Tabbouleh', 3, 'Drizzle with extra virgin olive oil and a squeeze of fresh lemon juice for added flavor before serving'),
-('Tacos', 1, 'Serve with salsa, guacamole, sour cream, and lime wedges for topping and garnish'),
-('Tacos', 2, 'For extra flavor, marinate the meat in lime juice, garlic, and spices before cooking'),
-('Tacos', 3, 'Use soft tortillas for traditional tacos or crispy taco shells for a crunchy texture'),
-('Tiramisu', 1, 'Dust with cocoa powder or grated chocolate before serving for an elegant finish'),
-('Tiramisu', 2, 'For extra indulgence, drizzle with coffee liqueur or rum over the ladyfinger layers before adding the mascarpone mixture'),
-('Tiramisu', 3, 'Chill in the refrigerator for at least four hours or overnight to allow the flavors to meld together'),
-('Udon Soup', 1, 'Top with sliced green onions, kamaboko (fish cake), and a sprinkle of sesame seeds before serving'),
-('Udon Soup', 2, 'For extra flavor, add a spoonful of miso paste or soy sauce to the broth before serving'),
-('Udon Soup', 3, 'Customize with your favorite toppings such as tempura, tofu, spinach, or narutomaki (fish cake)'),
-('Ukrainian borscht', 1, 'Serve with a dollop of sour cream and a sprinkle of fresh dill or parsley on top'),
-('Ukrainian borscht', 2, 'For extra richness, stir in a spoonful of vinegar or lemon juice just before serving'),
-('Ukrainian borscht', 3, 'Enjoy with a slice of hearty rye bread or pampushky (Ukrainian garlic bread rolls)'),
-('Umbrian Lentil Stew', 1, 'Garnish with a drizzle of extra virgin olive oil and a sprinkle of grated Parmesan cheese before serving'),
-('Umbrian Lentil Stew', 2, 'For extra flavor, stir in a spoonful of tomato paste or balsamic vinegar before simmering'),
-('Umbrian Lentil Stew', 3, 'Serve with crusty bread or polenta for a hearty and satisfying meal'),
-('Vegetable Terrine', 1, 'Serve with a dollop of herbed yogurt or tomato sauce on the side'),
-('Vegetable Terrine', 2, 'For extra flavor, add roasted garlic, sun-dried tomatoes, or olives to the vegetable mixture'),
-('Vegetable Terrine', 3, 'Chill in the refrigerator for at least four hours or overnight to allow the terrine to set before slicing'),
-('Venison Stew', 1, 'Serve with mashed potatoes, buttered noodles, or crusty bread for soaking up the flavorful gravy'),
-('Venison Stew', 2, 'For extra richness, stir in a tablespoon of red currant jelly or cocoa powder before simmering'),
-('Venison Stew', 3, 'Garnish with chopped fresh parsley or rosemary before serving for added freshness and flavor');
-INSERT INTO recipes_usageTips (recipeName, usageTipNumber, usageTip) VALUES 
-('Vietnamese Pho', 1, 'Top with bean sprouts, fresh herbs, lime wedges, and sliced chili peppers before serving'),
-('Vietnamese Pho', 2, 'For extra flavor, add a splash of fish sauce or hoisin sauce to the broth before serving'),
-('Vietnamese Pho', 3, 'Customize with your favorite toppings such as thinly sliced beef, cooked chicken, tofu, or shrimp'),
-('Waldorf Salad', 1, 'For extra crunch, add toasted walnuts or pecans to the salad mixture before serving'),
-('Waldorf Salad', 2, 'Serve on a bed of lettuce or mixed greens for a refreshing and light meal option'),
-('Waldorf Salad', 3, 'Drizzle with a creamy dressing such as ranch or blue cheese before serving for added flavor'),
-('Welsh Rarebit', 1, 'Serve with crusty bread or toasted English muffins for a classic British meal'),
-('Welsh Rarebit', 2, 'For extra flavor, add a spoonful of Worcestershire sauce or mustard to the cheese sauce before serving'),
-('Welsh Rarebit', 3, 'Broil until bubbly and golden brown for the perfect finishing touch'),
-('Wiener Schnitzel', 1, 'Serve with lemon wedges and a sprinkle of chopped parsley before serving'),
-('Wiener Schnitzel', 2, 'For extra flavor, season the breadcrumbs with salt, pepper, and paprika before breading the veal cutlets'),
-('Wiener Schnitzel', 3, 'Enjoy with a side of potato salad, cucumber salad, or lingonberry jam for a traditional Austrian meal'),
-('Xiaolongbao', 1, 'Serve with black vinegar, shredded ginger, and a few drops of chili oil for dipping'),
-('Xiaolongbao', 2, 'For extra flavor, add a spoonful of hot broth or soup to each dumpling before eating'),
-('Xiaolongbao', 3, 'Be careful when biting into the dumplings as the hot soup inside can be very hot'),
-('Xinjiang Lamb Skewers', 1, 'Serve with a sprinkle of cumin and chili powder for added flavor'),
-('Xinjiang Lamb Skewers', 2, 'For extra richness, brush with a mixture of melted butter and minced garlic before grilling'),
-('Xinjiang Lamb Skewers', 3, 'Enjoy with a side of naan bread or steamed rice for a complete meal');
 
 
-DROP TABLE tools;
 
-CREATE TABLE tools (
-    name VARCHAR(64),
-    usage VARCHAR(256),
-    PRIMARY KEY (name)
-);
+INSERT INTO recipes_usageTips (recipeName,usageTip) VALUES 
+('Apam balik', 'Best served warm with a sprinkle of sugar and crushed peanuts'),
+('Apam balik', 'Store any leftovers in an airtight container to maintain freshness'),
+('Apple & Blackberry Crumble', 'Serve with a scoop of vanilla ice cream for a delicious contrast of warm and cold'),
+('Apple & Blackberry Crumble', 'Leftovers can be reheated in the oven for a few minutes to regain crispiness'),
+('Apple & Blackberry Crumble', 'Make extra crumble topping and freeze it for future use'),
+('Apple Frangipan Tart', 'Dust with powdered sugar before serving for an elegant touch'),
+('Apple Frangipan Tart', 'Refrigerate any leftovers and reheat in the oven for a few minutes before serving again'),
+('Ayam Percik', 'Marinate the chicken overnight for maximum flavor absorption'),
+('Ayam Percik', 'Brush with extra marinade while grilling for added moisture and flavor'),
+('Ayam Percik', 'Serve with steamed rice and a side of cucumber slices'),
+('Bakewell tart', 'Serve at room temperature with a dollop of whipped cream or custard'),
+('Bakewell tart', 'For extra indulgence, drizzle with a raspberry coulis before serving'),
+('Bakewell tart', 'Leftovers can be enjoyed cold or reheated in the microwave'),
+('Banana Pancakes','Top with sliced bananas and a drizzle of maple syrup'),
+('Banana Pancakes','Add a pinch of cinnamon to the batter for extra flavor'),
+('Banana Pancakes','Leftover pancakes can be frozen and reheated in the toaster for a quick breakfast');
+INSERT INTO recipes_usageTips (recipeName, usageTip) VALUES 
+('Beef Wellington','Rest the beef wellington before slicing to allow the juices to redistribute'),
+('Beef Wellington', 'For a perfectly golden crust, brush the pastry with egg wash before baking'),
+('Beef Wellington', 'Serve with a rich red wine sauce or a creamy mushroom sauce on the side'),
+('Caldo verde', 'Garnish with a drizzle of olive oil and freshly chopped parsley before serving'),
+('Caldo verde', 'For extra creaminess, swirl in a spoonful of sour cream or Greek yogurt before serving'),
+('Caldo verde', 'Serve with crusty bread or cornbread on the side for a complete meal'),
+('Cannelloni',  'Top with extra grated cheese before baking for a golden, cheesy crust'),
+('Cannelloni',  'Serve with a side salad dressed with balsamic vinaigrette for a refreshing contrast'),
+('Cannelloni',  'Leftovers can be frozen and reheated in the oven for a quick and easy meal'),
+('Chicken Congee',  'Garnish with sliced green onions, chopped cilantro, and a drizzle of sesame oil before serving'),
+('Chicken Congee',  'For extra flavor, add a few drops of soy sauce or fish sauce to taste'),
+('Chicken Congee',  'Serve with Chinese fried dough sticks (youtiao) or steamed buns on the side'),
+('Dakdoritang',  'Adjust the spiciness by adding more or less gochujang (Korean red chili paste)'),
+('Dakdoritang',  'For added depth of flavor, simmer the stew for an extra 10-15 minutes before serving'),
+('Dakdoritang',  'Serve with a bowl of steamed rice and kimchi on the side'),
+('Danish Pastry',  'Top with a simple glaze made from powdered sugar and milk for a glossy finish'),
+('Danish Pastry',  'For extra richness, sprinkle chopped nuts or chocolate chips over the filling before folding'),
+('Danish Pastry',  'Enjoy warm from the oven or toast lightly before serving for a crispy exterior'),
+('Dum Aloo',  'Garnish with a sprinkle of chopped fresh cilantro or parsley before serving'),
+('Dum Aloo',  'For extra creaminess, stir in a spoonful of yogurt or sour cream just before serving'),
+('Dum Aloo',  'Serve with naan bread or steamed rice for a complete meal');
+INSERT INTO recipes_usageTips (recipeName, usageTip) VALUES 
+('Eclairs',  'Drizzle with melted chocolate or caramel sauce for an indulgent finish'),
+('Eclairs',  'For added texture, sprinkle chopped nuts or toasted coconut over the icing before it sets'),
+('Eclairs',  'Store in an airtight container in the refrigerator for up to three days'),
+('English Breakfast',  'Serve with toast, butter, and a selection of jams or marmalades on the side'),
+('English Breakfast',  'Brew a pot of strong English breakfast tea to accompany the meal'),
+('English Breakfast',  'For a vegetarian option, swap out the bacon and sausage for vegetarian alternatives'),
+('Eton Mess',  'Top with extra fresh berries and a drizzle of fruit coulis for a burst of flavor and color'),
+('Eton Mess',  'For extra crunch, sprinkle crushed meringue or toasted nuts over the whipped cream'),
+('Eton Mess',  'Serve immediately after assembling to prevent the meringue from becoming soggy'),
+('Fajitas',  'Serve with warm flour tortillas and a selection of toppings such as guacamole, salsa, and sour cream'),
+('Fajitas',  'For extra flavor, marinate the meat in lime juice, garlic, and spices before cooking'),
+('Fajitas',  'Add grilled vegetables such as bell peppers and onions to make it a complete meal'),
+('Falafel',  'Serve with tahini sauce or tzatziki for dipping'),
+('Falafel',  'For added freshness, serve with a side of tabbouleh salad or pickled vegetables'),
+('Falafel',  'Stuff falafel into pita bread with lettuce, tomatoes, and onions for a satisfying sandwich'),
+('Fish and Chips',  'Serve with malt vinegar, tartar sauce, or ketchup for dipping'),
+('Fish and Chips', 'For extra crunch, double fry the potatoes or use a beer batter for the fish'),
+('Fish and Chips', 'Serve with mushy peas or a side salad to balance out the meal'),
+('Gazpacho', 'Garnish with a drizzle of extra virgin olive oil and a sprinkle of fresh herbs before serving'),
+('Gazpacho', 'For added texture, top with diced cucumber, bell pepper, and croutons before serving'),
+('Gazpacho', 'Chill in the refrigerator for at least an hour before serving to enhance the flavors'),
+('Goulash', 'Serve with a dollop of sour cream and a sprinkle of chopped fresh parsley or dill on top'),
+('Goulash', 'For extra richness, stir in a tablespoon of tomato paste or red wine before simmering'),
+('Goulash', 'Serve over cooked egg noodles, rice, or mashed potatoes for a hearty meal');
+INSERT INTO recipes_usageTips (recipeName, usageTip) VALUES 
+('Greek Salad', 'Drizzle with extra virgin olive oil and a squeeze of fresh lemon juice before serving'),
+('Greek Salad', 'For extra flavor, add a sprinkle of dried oregano and crumbled feta cheese on top'),
+('Greek Salad', 'Serve with crusty bread or pita on the side for a complete meal'),
+('Hamburgers', 'Top with your favorite condiments and vegetables such as lettuce, tomato, and onion'),
+('Hamburgers', 'For extra flavor, mix seasonings such as Worcestershire sauce or garlic powder into the ground beef before forming patties'),
+('Hamburgers',  'Serve with crispy french fries or onion rings on the side for a classic diner experience'),
+('Hot and Sour Soup', 'Garnish with sliced green onions and a drizzle of sesame oil before serving'),
+('Hot and Sour Soup',  'For extra heat, add more white pepper or chili paste to taste'),
+('Hot and Sour Soup',  'Serve with crispy wonton strips or steamed rice on the side for a complete meal'),
+('Hummus',  'Drizzle with extra virgin olive oil and a sprinkle of paprika before serving'),
+('Hummus',  'For extra flavor, add roasted garlic, sun-dried tomatoes, or roasted red peppers to the hummus mixture'),
+('Hummus', 'Serve with warm pita bread, crackers, or fresh vegetables for dipping'),
+('Indian Curry',  'Serve with basmati rice, naan bread, or roti for soaking up the delicious sauce'),
+('Indian Curry',  'For extra richness, stir in a splash of coconut milk or heavy cream before serving'),
+('Indian Curry',  'Garnish with fresh cilantro or chopped nuts for added flavor and texture'),
+('Irish Coffee',  'Top with a dollop of whipped cream and a sprinkle of ground nutmeg or cinnamon before serving'),
+('Irish Coffee',  'For extra indulgence, drizzle with chocolate syrup or sprinkle with shaved chocolate before adding the cream'),
+('Irish Coffee',  'Serve with a side of shortbread cookies or biscotti for dipping'),
+('Irish Stew',  'Serve with crusty bread or Irish soda bread for soaking up the flavorful broth'),
+('Irish Stew',  'For extra richness, stir in a tablespoon of tomato paste or red wine before simmering'),
+('Irish Stew',  'Garnish with chopped fresh parsley or thyme for a pop of color and flavor'),
+('Italian Biscotti',  'Dip in a cup of espresso or Vin Santo for a traditional Italian treat'),
+('Italian Biscotti',  'For extra flavor, add chopped nuts, dried fruit, or chocolate chips to the biscotti dough'),
+('Italian Biscotti',  'Store in an airtight container at room temperature for up to two weeks'),
+('Jambalaya',  'Serve with hot sauce or a sprinkle of cayenne pepper for extra heat'),
+('Jambalaya',  'For extra flavor, use andouille sausage or smoked ham in the recipe'),
+('Jambalaya',  'Garnish with chopped green onions or fresh parsley before serving for added freshness');
+INSERT INTO recipes_usageTips (recipeName, usageTip) VALUES 
+('Japanese Cheesecake',  'Dust with powdered sugar or cocoa powder before serving for an elegant touch'),
+('Japanese Cheesecake', 'Serve with a dollop of whipped cream and fresh berries on the side'),
+('Japanese Cheesecake', 'Chill in the refrigerator for a few hours before serving for a firmer texture'),
+('Japanese Curry', 'Serve with steamed rice or Japanese-style pickles (tsukemono) on the side'),
+('Japanese Curry', 'For extra flavor, stir in a spoonful of Japanese curry roux or honey before serving'),
+('Japanese Curry', 'Garnish with pickled ginger or chopped green onions for added freshness and color'),
+('Jerk Chicken', 'Serve with traditional Jamaican side dishes such as rice and peas, fried plantains, and festival bread'),
+('Jerk Chicken', 'For extra heat, marinate the chicken in jerk seasoning overnight before grilling'),
+('Jerk Chicken', 'Garnish with lime wedges and fresh cilantro before serving for added flavor and brightness'),
+('Kaiserschmarrn', 'Serve dusted with powdered sugar and a drizzle of fruit compote or maple syrup'),
+('Kaiserschmarrn', 'For extra richness, sprinkle with toasted almonds or top with a scoop of vanilla ice cream'),
+('Kaiserschmarrn', 'Enjoy as a dessert or sweet breakfast dish with a cup of coffee or tea'),
+('Kebab', 'Serve wrapped in warm pita bread with a generous dollop of tzatziki sauce'),
+('Kebab', 'For extra flavor, marinate the meat in yogurt, lemon juice, and spices before grilling'),
+('Kebab', 'Serve with a side of tabbouleh salad or grilled vegetables for a complete meal'),
+('Key Lime Pie', 'Top with whipped cream or meringue before serving for an extra decadent touch'),
+('Key Lime Pie', 'For extra tanginess, garnish with lime zest or thinly sliced lime wedges before serving'),
+('Key Lime Pie', 'Chill in the refrigerator for at least two hours before serving for a firm, set filling');
+INSERT INTO recipes_usageTips (recipeName, usageTip) VALUES 
+('Kimchi Fried Rice', 'Serve with a fried egg on top for added richness and flavor'),
+('Kimchi Fried Rice', 'For extra heat, add more gochujang (Korean red chili paste) or kimchi juice to taste'),
+('Kimchi Fried Rice', 'Garnish with sliced green onions and toasted sesame seeds before serving for added freshness and crunch'),
+('Kimchi Stew', 'Serve with a bowl of steamed rice and a side of kimchi on the side'),
+('Kimchi Stew', 'For extra depth of flavor, add a spoonful of doenjang (Korean fermented soybean paste) or gochujang (Korean red chili paste)'),
+('Kimchi Stew', 'Garnish with sliced green onions and a drizzle of sesame oil before serving for added flavor and freshness'),
+('Lamb Tagine', 'Serve with couscous or crusty bread to soak up the flavorful sauce'),
+('Lamb Tagine', 'For extra richness, stir in a handful of dried fruits such as apricots or raisins before serving'),
+('Lamb Tagine',  'Garnish with chopped fresh cilantro or parsley before serving for added freshness and color'),
+('Lasagna', 'Let it rest for 10-15 minutes before slicing to allow the layers to set'),
+('Lasagna', 'For extra cheesiness, add a sprinkle of grated Parmesan or mozzarella cheese on top before baking'),
+('Lasagna', 'Serve with garlic bread and a side salad for a complete meal'),
+('Lobster Bisque', 'Garnish with a drizzle of heavy cream and a sprinkle of fresh chives or tarragon before serving'),
+('Lobster Bisque', 'For extra richness, stir in a tablespoon of brandy or sherry just before serving'),
+('Lobster Bisque', 'Serve with crusty bread or oyster crackers on the side for dipping'),
+('Macaron', 'Let the macarons rest for 30 minutes before baking to develop a smooth, shiny surface'),
+('Macaron', 'For extra flavor, add a teaspoon of instant espresso powder or matcha powder to the meringue mixture'),
+('Macaron', 'Store in an airtight container in the refrigerator for up to three days to allow the flavors to meld'),
+('Mapo Tofu', 'Garnish with sliced green onions and a sprinkle of toasted sesame seeds before serving'),
+('Mapo Tofu', 'For extra heat, add more doubanjiang (Chinese chili bean paste) or chili oil to taste'),
+('Mapo Tofu', 'Serve with steamed rice or noodles for a satisfying meal'),
+('Moussaka', 'Let it rest for 10-15 minutes before slicing to allow the layers to set'),
+('Moussaka', 'For extra richness, sprinkle grated cheese or breadcrumbs on top before baking'),
+('Moussaka', 'Serve with a Greek salad and crusty bread for a complete meal'),
+('Nachos', 'Top with your favorite toppings such as salsa, guacamole, sour cream, and jalapenos'),
+('Nachos', 'For extra flavor, add seasoned ground beef, shredded chicken, or black beans to the nachos'),
+('Nachos', 'Serve immediately after assembling to prevent the chips from becoming soggy'),
+('Nasi Goreng', 'Top with a fried egg and a sprinkle of crispy shallots before serving'),
+('Nasi Goreng', 'For extra heat, add more sambal oelek or chopped fresh chili peppers to taste'),
+('Nasi Goreng', 'Garnish with sliced cucumber, tomato wedges, and a wedge of lime before serving for added freshness'),
+('Nougat', 'Cut into bite-sized pieces and wrap individually in parchment paper for a sweet treat on the go'),
+('Nougat', 'For extra crunch, add toasted nuts such as almonds, pistachios, or hazelnuts to the nougat mixture'),
+('Nougat', 'Store in an airtight container at room temperature for up to two weeks');
+INSERT INTO recipes_usageTips (recipeName, usageTip) VALUES 
+('Okonomiyaki','Top with a drizzle of okonomiyaki sauce, Japanese mayo, and bonito flakes before serving'),
+('Okonomiyaki','For extra flavor, add chopped cabbage, scallions, shrimp, or pork belly to the batter'),
+('Okonomiyaki','Serve with a side of pickled ginger and a bowl of miso soup for a complete meal'),
+('Osso Buco', 'Serve with creamy polenta, mashed potatoes, or crusty bread to soak up the flavorful sauce'),
+('Osso Buco', 'For extra richness, stir in a tablespoon of gremolata (lemon zest, garlic, and parsley) just before serving'),
+('Osso Buco', 'Garnish with chopped fresh parsley or lemon zest before serving for added freshness and flavor'),
+('Oysters Kilpatrick','Top with crispy bacon pieces and a sprinkle of breadcrumbs before grilling'),
+('Oysters Kilpatrick','For extra flavor, add a dash of Worcestershire sauce or hot sauce to each oyster before grilling'),
+('Oysters Kilpatrick','Serve with lemon wedges and a glass of chilled white wine for an elegant appetizer'),
+('Paella','Garnish with lemon wedges and fresh parsley before serving for added freshness and color'),
+('Paella', 'For extra flavor, use homemade seafood or chicken stock instead of water to cook the rice'),
+('Paella', 'Serve with a side of crusty bread and a glass of Spanish wine for a complete meal'),
+('Peking Duck', 'Serve with Mandarin pancakes, hoisin sauce, and thinly sliced scallions for wrapping'),
+('Peking Duck', 'For extra crispiness, hang the duck in front of a fan or air-dry'),
+('Peking Duck', 'Serve with steamed buns or lettuce cups for a variation in presentation'),
+('Pierogi', 'Serve with sour cream or applesauce for dipping'),
+('Pierogi', 'For extra flavor, sauté in butter until golden brown and crispy before serving'),
+('Pierogi', 'Freeze any leftovers for a quick and easy meal later on'),
+('Quesadilla', 'Serve with salsa, guacamole, and sour cream for dipping'),
+('Quesadilla', 'For extra flavor, add cooked chicken, steak, or shrimp to the filling mixture'),
+('Quesadilla', 'Cut into wedges and serve immediately while warm and crispy');
+INSERT INTO recipes_usageTips (recipeName, usageTip) VALUES 
+('Quiche Lorraine', 'Serve with a side salad dressed with balsamic vinaigrette for a light and refreshing meal'),
+('Quiche Lorraine', 'For extra richness, use heavy cream instead of milk in the custard mixture'),
+('Quiche Lorraine', 'Enjoy warm or at room temperature for breakfast, brunch, or lunch'),
+('Quinoa Salad', 'Garnish with chopped fresh herbs such as parsley, cilantro, or mint before serving'),
+('Quinoa Salad', 'For extra flavor, add diced avocado, cherry tomatoes, or crumbled feta cheese to the salad mixture'),
+('Quinoa Salad', 'Serve chilled or at room temperature as a side dish or light meal option'),
+('Ramen', 'Top with sliced green onions, nori strips, and a seasoned soft-boiled egg before serving'),
+('Ramen', 'For extra flavor, add a spoonful of miso paste, soy sauce, or chili oil to the broth'),
+('Ramen', 'Customize with your favorite toppings such as sliced pork, tofu, mushrooms, or corn kernels'),
+('Ratatouille', 'Garnish with a drizzle of extra virgin olive oil and a sprinkle of fresh basil or parsley before serving'),
+('Ratatouille', 'For extra richness, sprinkle grated Parmesan or crumbled goat cheese on top before serving'),
+('Ratatouille', 'Serve as a side dish, over pasta, or with crusty bread for a complete meal'),
+('Risotto', 'Stir in a knob of butter and a handful of grated Parmesan cheese for extra creaminess before serving'),
+('Risotto','For extra flavor, add cooked vegetables, mushrooms, or seafood to the risotto halfway through cooking'),
+('Risotto', 'Garnish with fresh herbs such as parsley, chives, or thyme for added freshness and color'),
+('Samosa', 'Serve with tamarind chutney, mint chutney, or mango chutney for dipping'),
+('Samosa', 'For extra heat, add more green chilies or red chili powder to the filling mixture'),
+('Samosa', 'Enjoy as a snack or appetizer with a cup of chai tea or your favorite beverage'),
+('Shepherds Pie', 'For extra flavor, stir in a tablespoon of Worcestershire sauce or tomato paste to the meat mixture'),
+('Shepherds Pie', 'Top with grated cheddar cheese or mashed sweet potatoes for a twist on the classic recipe'),
+('Shepherds Pie', 'Bake until the top is golden brown and crispy for the perfect finishing touch'),
+('Sushi', 'Serve with soy sauce, pickled ginger, and wasabi for dipping'),
+('Sushi', 'For extra flavor, add a thin layer of spicy mayo or eel sauce on top of the sushi rolls'),
+('Sushi', 'Experiment with different fillings such as raw fish, cooked shrimp, avocado, cucumber, or cream cheese');
+INSERT INTO recipes_usageTips (recipeName, usageTip) VALUES 
+('Tabbouleh','For extra freshness, add chopped mint or basil to the tabbouleh mixture before serving'),
+('Tabbouleh','Serve with grilled pita bread or falafel for a complete Middle Eastern meal'),
+('Tabbouleh', 'Drizzle with extra virgin olive oil and a squeeze of fresh lemon juice for added flavor before serving'),
+('Tacos','Serve with salsa, guacamole, sour cream, and lime wedges for topping and garnish'),
+('Tacos', 'For extra flavor, marinate the meat in lime juice, garlic, and spices before cooking'),
+('Tacos', 'Use soft tortillas for traditional tacos or crispy taco shells for a crunchy texture'),
+('Tiramisu', 'Dust with cocoa powder or grated chocolate before serving for an elegant finish'),
+('Tiramisu', 'For extra indulgence, drizzle with coffee liqueur or rum over the ladyfinger layers before adding the mascarpone mixture'),
+('Tiramisu', 'Chill in the refrigerator for at least four hours or overnight to allow the flavors to meld together'),
+('Udon Soup', 'Top with sliced green onions, kamaboko (fish cake), and a sprinkle of sesame seeds before serving'),
+('Udon Soup', 'For extra flavor, add a spoonful of miso paste or soy sauce to the broth before serving'),
+('Udon Soup', 'Customize with your favorite toppings such as tempura, tofu, spinach, or narutomaki (fish cake)'),
+('Ukrainian borscht', 'Serve with a dollop of sour cream and a sprinkle of fresh dill or parsley on top'),
+('Ukrainian borscht', 'For extra richness, stir in a spoonful of vinegar or lemon juice just before serving'),
+('Ukrainian borscht', 'Enjoy with a slice of hearty rye bread or pampushky (Ukrainian garlic bread rolls)'),
+('Umbrian Lentil Stew', 'Garnish with a drizzle of extra virgin olive oil and a sprinkle of grated Parmesan cheese before serving'),
+('Umbrian Lentil Stew', 'For extra flavor, stir in a spoonful of tomato paste or balsamic vinegar before simmering'),
+('Umbrian Lentil Stew', 'Serve with crusty bread or polenta for a hearty and satisfying meal'),
+('Vegetable Terrine', 'Serve with a dollop of herbed yogurt or tomato sauce on the side'),
+('Vegetable Terrine', 'For extra flavor, add roasted garlic, sun-dried tomatoes, or olives to the vegetable mixture'),
+('Vegetable Terrine', 'Chill in the refrigerator for at least four hours or overnight to allow the terrine to set before slicing'),
+('Venison Stew', 'Serve with mashed potatoes, buttered noodles, or crusty bread for soaking up the flavorful gravy'),
+('Venison Stew', 'For extra richness, stir in a tablespoon of red currant jelly or cocoa powder before simmering'),
+('Venison Stew', 'Garnish with chopped fresh parsley or rosemary before serving for added freshness and flavor');
+INSERT INTO recipes_usageTips (recipeName, usageTip) VALUES 
+('Vietnamese Pho', 'Top with bean sprouts, fresh herbs, lime wedges, and sliced chili peppers before serving'),
+('Vietnamese Pho', 'For extra flavor, add a splash of fish sauce or hoisin sauce to the broth before serving'),
+('Vietnamese Pho', 'Customize with your favorite toppings such as thinly sliced beef, cooked chicken, tofu, or shrimp'),
+('Waldorf Salad', 'For extra crunch, add toasted walnuts or pecans to the salad mixture before serving'),
+('Waldorf Salad', 'Serve on a bed of lettuce or mixed greens for a refreshing and light meal option'),
+('Waldorf Salad',  'Drizzle with a creamy dressing such as ranch or blue cheese before serving for added flavor'),
+('Welsh Rarebit',  'Serve with crusty bread or toasted English muffins for a classic British meal'),
+('Welsh Rarebit',  'For extra flavor, add a spoonful of Worcestershire sauce or mustard to the cheese sauce before serving'),
+('Welsh Rarebit',  'Broil until bubbly and golden brown for the perfect finishing touch'),
+('Wiener Schnitzel', 'Serve with lemon wedges and a sprinkle of chopped parsley before serving'),
+('Wiener Schnitzel', 'For extra flavor, season the breadcrumbs with salt, pepper, and paprika before breading the veal cutlets'),
+('Wiener Schnitzel', 'Enjoy with a side of potato salad, cucumber salad, or lingonberry jam for a traditional Austrian meal'),
+('Xiaolongbao', 'Serve with black vinegar, shredded ginger, and a few drops of chili oil for dipping'),
+('Xiaolongbao', 'For extra flavor, add a spoonful of hot broth or soup to each dumpling before eating'),
+('Xiaolongbao', 'Be careful when biting into the dumplings as the hot soup inside can be very hot'),
+('Xinjiang Lamb Skewers','Serve with a sprinkle of cumin and chili powder for added flavor'),
+('Xinjiang Lamb Skewers', 'For extra richness, brush with a mixture of melted butter and minced garlic before grilling'),
+('Xinjiang Lamb Skewers','Enjoy with a side of naan bread or steamed rice for a complete meal');
+
+
+
 
 INSERT INTO tools (name, usage) VALUES
 ('oven', 'Used for baking and roasting foods.'),
@@ -1094,15 +884,6 @@ INSERT INTO tools (name, usage) VALUES
 ('whisk', 'Used for whisking or beating to incorporate air into mixtures.'),
 ('stirring spoon', 'Used for stirring foods while cooking.');
 
-DROP TABLE recipes_tools;
-
-CREATE TABLE recipes_tools (
-    recipeName VARCHAR(64),
-    toolName VARCHAR(64),
-    PRIMARY KEY (recipeName,toolName),
-    FOREIGN KEY (recipeName) REFERENCES recipes(name),
-    FOREIGN KEY (toolName) REFERENCES tools(name)
-);
 
 INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Apple Frangipan Tart', 'oven'),
@@ -1618,475 +1399,8 @@ INSERT INTO recipes_tools (recipeName, toolName) VALUES
 ('Quesadilla', 'cutting board');
 
 
-DROP TABLE recipes_ingredients;
-CREATE TABLE recipes_ingredients (
-    recipeName VARCHAR(64),
-    ingredientName VARCHAR(64),
-    quantity VARCHAR(64),
-    PRIMARY KEY (recipeName, ingredientName),
-    FOREIGN KEY (recipeName) REFERENCES recipes(name)
-    FOREIGN KEY (ingredientName) REFERENCES ingredients(name)
-);
-
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Apple Frangipan Tart', 'Apples', '3 medium'),
-('Apple Frangipan Tart', 'Frangipane', '200g'),
-('Apple Frangipan Tart', 'Pastry crust', '1 unit');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Bakewell tart', 'Jam', '150g'),
-('Bakewell tart', 'Frangipane', '200g'),
-('Bakewell tart', 'Pastry crust', '1 unit');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Beef Wellington', 'Beef fillet', '500g'),
-('Beef Wellington', 'Puff pastry', '500g'),
-('Beef Wellington', 'Mushroom duxelles', '200g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Banana Pancakes', 'Bananas', '2 large'),
-('Banana Pancakes', 'Flour', '200g'),
-('Banana Pancakes', 'Eggs', '2 large');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Cannelloni', 'Cannelloni tubes', '12 units'),
-('Cannelloni', 'Ricotta cheese', '250g'),
-('Cannelloni', 'Spinach', '200g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Danish Pastry', 'Flour', '500g'),
-('Danish Pastry', 'Butter', '250g'),
-('Danish Pastry', 'Sugar', '100g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Eclairs', 'Choux pastry', '1 batch'),
-('Eclairs', 'Pastry cream', '200g'),
-('Eclairs', 'Chocolate glaze', '100g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('English Breakfast', 'Eggs', '4 large'),
-('English Breakfast', 'Bacon', '4 slices'),
-('English Breakfast', 'Sausages', '2 units');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Key Lime Pie', 'Lime juice', '100ml'),
-('Key Lime Pie', 'Condensed milk', '1 can'),
-('Key Lime Pie', 'Graham cracker crust', '1 unit');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Lasagna', 'Lasagna noodles', '12 sheets'),
-('Lasagna', 'Ricotta cheese', '500g'),
-('Lasagna', 'Marinara sauce', '600g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Macaron', 'Almond flour', '200g'),
-('Macaron', 'Granulated sugar', '200g'),
-('Macaron', 'Egg whites', '3 large');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Quiche Lorraine', 'Pastry crust', '1 unit'),
-('Quiche Lorraine', 'Bacon', '200g'),
-('Quiche Lorraine', 'Eggs', '3 large');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Japanese Cheesecake', 'Cream cheese', '250g'),
-('Japanese Cheesecake', 'Eggs', '3 large'),
-('Japanese Cheesecake', 'Sugar', '100g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
--- Breads and Pastries
-('Indian Curry', 'Chicken', '500g'),
-('Indian Curry', 'Curry powder', '2 tbsp'),
-('Indian Curry', 'Coconut milk', '400ml');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Italian Biscotti', 'Flour', '300g'),
-('Italian Biscotti', 'Sugar', '150g'),
-('Italian Biscotti', 'Almonds', '100g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
--- Grilled Meats and Barbecue
-('Ayam Percik', 'Chicken', '1 kg'),
-('Ayam Percik', 'Coconut milk', '200ml'),
-('Ayam Percik', 'Lemongrass', '2 stalks');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
--- General Cooking and Stir Frying
-('Apam balik', 'Flour', '200g'),
-('Apam balik', 'Eggs', '2 large'),
-('Apam balik', 'Peanut filling', '100g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Chicken Congee', 'Rice', '200g'),
-('Chicken Congee', 'Chicken breast', '300g'),
-('Chicken Congee', 'Ginger', '20g');
-
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Dakdoritang', 'Chicken', '1 kg'),
-('Dakdoritang', 'Potatoes', '3 medium'),
-('Dakdoritang', 'Carrots', '2 large'),
-('Dakdoritang', 'Gochujang (Korean chili paste)', '3 tbsp'),
-('Dakdoritang', 'Soy sauce', '50 ml'),
-('Dakdoritang', 'Garlic', '5 cloves'),
-
-('Dum Aloo', 'Potatoes', '500g'),
-('Dum Aloo', 'Tomatoes', '200g'),
-('Dum Aloo', 'Onion', '1 large'),
-('Dum Aloo', 'Cumin seeds', '1 tsp'),
-('Dum Aloo', 'Garam Masala', '1 tsp'),
-
-('Falafel', 'Chickpeas', '400g (drained)'),
-('Falafel', 'Onion', '1 small'),
-('Falafel', 'Garlic', '3 cloves'),
-('Falafel', 'Parsley', '50g'),
-('Falafel', 'Cumin', '2 tsp'),
-
-('Fish and Chips', 'White fish fillets', '4 large'),
-('Fish and Chips', 'Flour', '150g'),
-('Fish and Chips', 'Beer', '250ml'),
-('Fish and Chips', 'Potatoes', '4 large'),
-
-('Goulash', 'Beef', '500g'),
-('Goulash', 'Onions', '2 large'),
-('Goulash', 'Bell peppers', '2'),
-('Goulash', 'Paprika', '2 tbsp'),
-('Goulash', 'Tomatoes', '400g (canned)'),
-
-('Hot and Sour Soup', 'Bamboo shoots', '100g'),
-('Hot and Sour Soup', 'Tofu', '200g'),
-('Hot and Sour Soup', 'Shiitake mushrooms', '100g'),
-('Hot and Sour Soup', 'Chicken broth', '1.5 liters'),
-('Hot and Sour Soup', 'Soy sauce', '3 tbsp'),
-('Hot and Sour Soup', 'Rice vinegar', '3 tbsp'),
-
-('Hummus', 'Chickpeas', '400g (drained)'),
-('Hummus', 'Tahini', '100g'),
-('Hummus', 'Lemon juice', '50ml'),
-('Hummus', 'Garlic', '2 cloves'),
-('Hummus', 'Olive oil', '50ml'),
-
-('Kimchi Fried Rice', 'Cooked rice', '400g'),
-('Kimchi Fried Rice', 'Kimchi', '200g'),
-('Kimchi Fried Rice', 'Onion', '1 medium'),
-('Kimchi Fried Rice', 'Sesame oil', '2 tbsp'),
-('Kimchi Fried Rice', 'Eggs', '2'),
-
-('Mapo Tofu', 'Tofu', '400g'),
-('Mapo Tofu', 'Ground pork', '150g'),
-('Mapo Tofu', 'Doubanjiang (fermented bean paste)', '2 tbsp'),
-('Mapo Tofu', 'Garlic', '3 cloves'),
-('Mapo Tofu', 'Green onion', '3 stalks'),
-
-('Nasi Goreng', 'Cooked rice', '400g'),
-('Nasi Goreng', 'Chicken', '200g'),
-('Nasi Goreng', 'Kecap Manis (sweet soy sauce)', '3 tbsp'),
-('Nasi Goreng', 'Shallots', '2'),
-('Nasi Goreng', 'Garlic', '2 cloves'),
-('Nasi Goreng', 'Eggs', '2'),
-
-('Nachos', 'Tortilla chips', '300g'),
-('Nachos', 'Cheddar cheese', '200g'),
-('Nachos', 'Jalapenos', '50g'),
-('Nachos', 'Ground beef', '200g'),
-('Nachos', 'Salsa', '100g'),
-
-('Pierogi', 'Flour', '500g'),
-('Pierogi', 'Egg', '1 large'),
-('Pierogi', 'Potato', '300g'),
-('Pierogi', 'Cheese', '100g'),
-('Pierogi', 'Onion', '1 medium');
-
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Ratatouille', 'Eggplant', '1 large'),
-('Ratatouille', 'Zucchini', '1 large'),
-('Ratatouille', 'Yellow squash', '1 large'),
-('Ratatouille', 'Bell peppers', '2'),
-('Ratatouille', 'Tomato', '3 medium'),
-('Ratatouille', 'Onion', '1 large'),
-('Ratatouille', 'Garlic', '3 cloves');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Risotto', 'Arborio rice', '200g'),
-('Risotto', 'Chicken stock', '800ml'),
-('Risotto', 'Onion', '1 small'),
-('Risotto', 'White wine', '100ml'),
-('Risotto', 'Parmesan cheese', '50g'),
-('Risotto', 'Butter', '50g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Ramen', 'Ramen noodles', '400g'),
-('Ramen', 'Chicken broth', '1.5 liters'),
-('Ramen', 'Soy sauce', '50ml'),
-('Ramen', 'Sesame oil', '2 tbsp'),
-('Ramen', 'Green onions', '4 stalks'),
-('Ramen', 'Eggs', '4');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Samosa', 'Potatoes', '300g'),
-('Samosa', 'Green peas', '150g'),
-('Samosa', 'Cumin seeds', '1 tsp'),
-('Samosa', 'Garam masala', '1 tsp'),
-('Samosa', 'Pastry dough', '500g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Sushi', 'Sushi rice', '500g'),
-('Sushi', 'Nori sheets', '5'),
-('Sushi', 'Rice vinegar', '50ml'),
-('Sushi', 'Soy sauce', 'for dipping'),
-('Sushi', 'Fresh fish (various)', '300g'),
-('Sushi', 'Wasabi', 'according to taste');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Tacos', 'Corn tortillas', '12'),
-('Tacos', 'Ground beef', '500g'),
-('Tacos', 'Onion', '1 medium'),
-('Tacos', 'Tomatoes', '2 large'),
-('Tacos', 'Cheddar cheese', '100g'),
-('Tacos', 'Lettuce', '1 head');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Udon Soup', 'Udon noodles', '400g'),
-('Udon Soup', 'Dashi broth', '1 liter'),
-('Udon Soup', 'Soy sauce', '3 tbsp'),
-('Udon Soup', 'Mirin', '2 tbsp'),
-('Udon Soup', 'Green onions', '3 stalks'),
-('Udon Soup', 'Mushrooms', '100g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Vietnamese Pho', 'Rice noodles', '400g'),
-('Vietnamese Pho', 'Beef brisket', '500g'),
-('Vietnamese Pho', 'Onion', '1 large'),
-('Vietnamese Pho', 'Ginger', '50g'),
-('Vietnamese Pho', 'Star anise', '5 pods'),
-('Vietnamese Pho', 'Fish sauce', '3 tbsp');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Xinjiang Lamb Skewers', 'Lamb', '500g'),
-('Xinjiang Lamb Skewers', 'Cumin seeds', '2 tbsp'),
-('Xinjiang Lamb Skewers', 'Paprika', '1 tbsp'),
-('Xinjiang Lamb Skewers', 'Garlic powder', '1 tsp'),
-('Xinjiang Lamb Skewers', 'Salt', '1 tsp');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Xiaolongbao', 'Flour', '500g'),
-('Xiaolongbao', 'Ground pork', '300g'),
-('Xiaolongbao', 'Ginger', '20g'),
-('Xiaolongbao', 'Green onions', '50g'),
-('Xiaolongbao', 'Soy sauce', '3 tbsp');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Irish stew', 'Lamb shoulder', '500g'),
-('Irish stew', 'Potatoes', '500g'),
-('Irish stew', 'Carrots', '200g'),
-('Irish stew', 'Onions', '2 large'),
-('Irish stew', 'Beef stock', '1 liter');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Lamb Tagine', 'Lamb shoulder', '500g'),
-('Lamb Tagine', 'Onions', '2'),
-('Lamb Tagine', 'Garlic', '3 cloves'),
-('Lamb Tagine', 'Dried apricots', '100g'),
-('Lamb Tagine', 'Cinnamon', '1 stick');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Venison Stew', 'Venison', '500g'),
-('Venison Stew', 'Potatoes', '300g'),
-('Venison Stew', 'Carrots', '200g'),
-('Venison Stew', 'Onions', '2'),
-('Venison Stew', 'Beef stock', '1 liter');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Welsh Rarebit', 'Cheddar cheese', '200g'),
-('Welsh Rarebit', 'Beer', '100ml'),
-('Welsh Rarebit', 'Worcestershire sauce', '2 tbsp'),
-('Welsh Rarebit', 'Mustard', '1 tsp'),
-('Welsh Rarebit', 'Bread', '4 slices');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Ukrainian borscht', 'Beetroot', '500g'),
-('Ukrainian borscht', 'Cabbage', '200g'),
-('Ukrainian borscht', 'Potatoes', '300g'),
-('Ukrainian borscht', 'Carrots', '2'),
-('Ukrainian borscht', 'Onions', '1'),
-('Ukrainian borscht', 'Tomato paste', '2 tbsp');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Moussaka', 'Eggplant', '2 large'),
-('Moussaka', 'Ground lamb', '500g'),
-('Moussaka', 'Tomatoes', '400g (canned)'),
-('Moussaka', 'Bechamel sauce', '500ml'),
-('Moussaka', 'Onion', '1 large');
-
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Greek Salad', 'Cucumber', '1 large'),
-('Greek Salad', 'Tomatoes', '3 medium'),
-('Greek Salad', 'Red onion', '1 small'),
-('Greek Salad', 'Kalamata olives', '100g'),
-('Greek Salad', 'Feta cheese', '200g'),
-('Greek Salad', 'Olive oil', '50ml'),
-
-('Gazpacho', 'Tomatoes', '500g'),
-('Gazpacho', 'Cucumber', '1 medium'),
-('Gazpacho', 'Bell pepper', '1'),
-('Gazpacho', 'Red onion', '1 small'),
-('Gazpacho', 'Garlic', '2 cloves'),
-('Gazpacho', 'Olive oil', '50ml'),
-('Gazpacho', 'Vinegar', '2 tbsp'),
-
-('Waldorf Salad', 'Apples', '2 large'),
-('Waldorf Salad', 'Celery', '100g'),
-('Waldorf Salad', 'Walnuts', '50g'),
-('Waldorf Salad', 'Mayonnaise', '100ml'),
-('Waldorf Salad', 'Lemon juice', '1 tbsp'),
-
-('Tabbouleh', 'Bulgur', '100g'),
-('Tabbouleh', 'Parsley', '200g'),
-('Tabbouleh', 'Mint', '50g'),
-('Tabbouleh', 'Tomatoes', '3 medium'),
-('Tabbouleh', 'Lemon juice', '3 tbsp'),
-('Tabbouleh', 'Olive oil', '50ml'),
-
-('Quinoa Salad', 'Quinoa', '200g'),
-('Quinoa Salad', 'Cucumber', '1 medium'),
-('Quinoa Salad', 'Cherry tomatoes', '150g'),
-('Quinoa Salad', 'Red onion', '1 small'),
-('Quinoa Salad', 'Feta cheese', '100g'),
-('Quinoa Salad', 'Lemon juice', '2 tbsp'),
-('Quinoa Salad', 'Olive oil', '50ml'),
-
-('Tiramisu', 'Mascarpone cheese', '250g'),
-('Tiramisu', 'Ladyfingers', '200g'),
-('Tiramisu', 'Espresso', '200ml'),
-('Tiramisu', 'Eggs', '3 large'),
-('Tiramisu', 'Sugar', '100g'),
-
-('Eton Mess', 'Strawberries', '300g'),
-('Eton Mess', 'Meringue', '100g'),
-('Eton Mess', 'Whipping cream', '200ml'),
-
-('Nougat', 'Honey', '200g'),
-('Nougat', 'Sugar', '300g'),
-('Nougat', 'Egg whites', '2'),
-('Nougat', 'Almonds', '150g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Apple & Blackberry Crumble', 'Apples', '3 large'),
-('Apple & Blackberry Crumble', 'Blackberries', '150g'),
-('Apple & Blackberry Crumble', 'Sugar', '100g'),
-('Apple & Blackberry Crumble', 'Flour', '100g'),
-('Apple & Blackberry Crumble', 'Butter', '100g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Irish Coffee', 'Coffee', '250ml'),
-('Irish Coffee', 'Irish whiskey', '50ml'),
-('Irish Coffee', 'Brown sugar', '2 tbsp'),
-('Irish Coffee', 'Cream', '50ml');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Kaiserschmarrn', 'Eggs', '4 large'),
-('Kaiserschmarrn', 'Milk', '200ml'),
-('Kaiserschmarrn', 'Flour', '120g'),
-('Kaiserschmarrn', 'Sugar', '30g'),
-('Kaiserschmarrn', 'Butter', '50g');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Caldo verde', 'Potatoes', '500g'),
-('Caldo verde', 'Kale', '200g'),
-('Caldo verde', 'Chorizo', '100g'),
-('Caldo verde', 'Onion', '1 large'),
-('Caldo verde', 'Garlic', '2 cloves');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Jambalaya', 'Rice', '300g'),
-('Jambalaya', 'Chicken', '200g'),
-('Jambalaya', 'Shrimp', '150g'),
-('Jambalaya', 'Andouille sausage', '100g'),
-('Jambalaya', 'Bell peppers', '2');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Japanese Curry', 'Curry powder', '2 tbsp'),
-('Japanese Curry', 'Beef', '300g'),
-('Japanese Curry', 'Potatoes', '300g'),
-('Japanese Curry', 'Carrots', '200g'),
-('Japanese Curry', 'Onion', '1 large');
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-('Lobster Bisque', 'Lobster', '2 whole'),
-('Lobster Bisque', 'Carrots', '2'),
-('Lobster Bisque', 'Celery', '2 stalks'),
-('Lobster Bisque', 'Onion', '1 large'),
-('Lobster Bisque', 'Tomato paste', '1 tbsp'),
-('Lobster Bisque', 'Brandy', '50ml'),
-
-('Osso Buco', 'Veal shanks', '4 pieces'),
-('Osso Buco', 'Carrots', '2'),
-('Osso Buco', 'Celery', '2 stalks'),
-('Osso Buco', 'Onion', '1 large'),
-('Osso Buco', 'White wine', '100ml'),
-('Osso Buco', 'Tomatoes', '400g (canned)'),
-
-('Okonomiyaki', 'Cabbage', '300g'),
-('Okonomiyaki', 'Flour', '100g'),
-('Okonomiyaki', 'Eggs', '2'),
-('Okonomiyaki', 'Bacon', '100g'),
-('Okonomiyaki', 'Okonomiyaki sauce', '50ml'),
-
-('Paella', 'Rice', '300g'),
-('Paella', 'Chicken', '200g'),
-('Paella', 'Seafood mix', '200g'),
-('Paella', 'Bell peppers', '2'),
-('Paella', 'Saffron', '1 pinch'),
-
-('Peking Duck', 'Duck', '1 whole'),
-('Peking Duck', 'Hoisin sauce', '100ml'),
-('Peking Duck', 'Cucumbers', '2'),
-('Peking Duck', 'Green onions', '5 stalks'),
-
-('Shepherds Pie', 'Ground lamb', '500g'),
-('Shepherds Pie', 'Potatoes', '600g'),
-('Shepherds Pie', 'Carrots', '2'),
-('Shepherds Pie', 'Onion', '1 large'),
-('Shepherds Pie', 'Peas', '100g'),
-
-('Umbrian Lentil Stew', 'Lentils', '200g'),
-('Umbrian Lentil Stew', 'Tomatoes', '400g (canned)'),
-('Umbrian Lentil Stew', 'Carrots', '2'),
-('Umbrian Lentil Stew', 'Celery', '2 stalks'),
-('Umbrian Lentil Stew', 'Onion', '1 large'),
-
-('Vegetable Terrine', 'Carrots', '2 large'),
-('Vegetable Terrine', 'Zucchini', '2'),
-('Vegetable Terrine', 'Eggplant', '1'),
-('Vegetable Terrine', 'Gelatin', '10g'),
-
-('Kimchi Stew', 'Kimchi', '300g'),
-('Kimchi Stew', 'Tofu', '200g'),
-('Kimchi Stew', 'Pork belly', '200g'),
-('Kimchi Stew', 'Onion', '1 large'),
-('Kimchi Stew', 'Garlic', '4 cloves');
 
 
-INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
-
-
-('Fajitas', 'Chicken breast', '500g'),
-('Fajitas', 'Bell peppers', '3 (mixed colors)'),
-('Fajitas', 'Onion', '1 large'),
-('Fajitas', 'Fajita seasoning', '2 tbsp'),
-('Fajitas', 'Tortillas', '8'),
-
-('Hamburgers', 'Ground beef', '500g'),
-('Hamburgers', 'Hamburger buns', '4'),
-('Hamburgers', 'Lettuce', '4 leaves'),
-('Hamburgers', 'Tomato', '1 large'),
-('Hamburgers', 'Onion', '1 large'),
-('Hamburgers', 'Cheese', '4 slices'),
-
-('Jerk Chicken', 'Chicken thighs', '1 kg'),
-('Jerk Chicken', 'Jerk seasoning', '50g'),
-('Jerk Chicken', 'Scotch bonnet peppers', '2'),
-('Jerk Chicken', 'Green onions', '5 stalks'),
-('Jerk Chicken', 'Thyme', '1 tbsp'),
-
-('Kebab', 'Lamb', '500g'),
-('Kebab', 'Onions', '2 large'),
-('Kebab', 'Bell peppers', '2'),
-('Kebab', 'Kebab spices', '2 tbsp'),
-('Kebab', 'Yogurt', '100ml'),
-
-('Oysters Kilpatrick', 'Oysters', '12'),
-('Oysters Kilpatrick', 'Bacon', '100g'),
-('Oysters Kilpatrick', 'Worcestershire sauce', '2 tbsp'),
-('Oysters Kilpatrick', 'Butter', '50g'),
-('Oysters Kilpatrick', 'Parsley', 'for garnish'),
-
-('Quesadilla', 'Tortillas', '4 large'),
-('Quesadilla', 'Cheese', '200g'),
-('Quesadilla', 'Chicken', '200g (optional)'),
-('Quesadilla', 'Green peppers', '1'),
-('Quesadilla', 'Onion', '1 large'),
-
-
-('Wiener Schnitzel', 'Veal cutlets', '4'),
-('Wiener Schnitzel', 'Eggs', '2'),
-('Wiener Schnitzel', 'Breadcrumbs', '200g'),
-('Wiener Schnitzel', 'Flour', '100g'),
-('Wiener Schnitzel', 'Lemon', '2 (for garnish)');
-
-DROP TABLE ingredients;
-
-CREATE TABLE ingredients (
-    name VARCHAR(64),   
-    foodGroup VARCHAR(64),  
-    unitOfMeasure VARCHAR(64),  
-    caloriesPerUnitOfMeasure INT,--kcal
-    proteinsPerUnitOfMeasure INT,
-    carbohydratesPerUnitOfMeasure INT, --grams
-    fatsPerUnitOfMeasure INT,--grams
-    sugarsPerUnitOfMeasure INT,--grams
-    PRIMARY KEY (name)
-);
 
 INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasure, proteinsPerUnitOfMeasure, carbohydratesPerUnitOfMeasure, fatsPerUnitOfMeasure, sugarsPerUnitOfMeasure) VALUES
 ('Eggs', 'Dairy, Eggs, and Products', 'large (50g each)', 70, 6, 1, 5, 1),
@@ -2276,15 +1590,7 @@ INSERT INTO ingredients (name, foodGroup, unitOfMeasure, caloriesPerUnitOfMeasur
 
 
 
-DROP TABLE recipes_ingredients;
-CREATE TABLE recipes_ingredients (
-    recipeName VARCHAR(64),
-    ingredientName VARCHAR(64),
-    quantity INT,
-    PRIMARY KEY (recipeName, ingredientName),
-    FOREIGN KEY (recipeName) REFERENCES recipes(name)
-    FOREIGN KEY (ingredientName) REFERENCES ingredients(name)
-);
+
 
 INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
 ('Apam balik', 'Eggs', 2),
@@ -2696,15 +2002,7 @@ INSERT INTO recipes_ingredients (recipeName, ingredientName, quantity) VALUES
 ('Xinjiang Lamb Skewers', 'Paprika', 1), -- Teaspoons
 ('Xinjiang Lamb Skewers', 'Salt', 1); -- Teaspoons
 
-DROP TABLE recipes_instructions;
 
-CREATE TABLE recipes_instructions (
-    recipeName VARCHAR(64),
-    instructionStepNumber SMALL INT,
-    instruction VARCHAR(512),
-    PRIMARY KEY (recipeName, instructionStepNumber),
-    FOREIGN KEY (recipeName) REFERENCES recipes(name)
-);
 
 INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction) VALUES 
 ('Apam balik', 1, 'Mix flour, eggs, and water to form a smooth pancake batter.'),
@@ -3148,12 +2446,6 @@ INSERT INTO recipes_instructions (recipeName, instructionStepNumber, instruction
 ('Okonomiyaki', 5, 'Drizzle with okonomiyaki sauce, mayonnaise, sprinkle with bonito flakes and serve hot.');
 
 
-DROP TABLE foodGroups;
-CREATE TABLE foodGroups (
-    name VARCHAR(100),
-    description VARCHAR(255),
-    PRIMARY KEY (name)
-);
 
 
 INSERT INTO foodGroups (name, description) VALUES ('Dairy, Eggs, and Products', 'Includes milk, cheese, yogurt, and eggs, essential for calcium and protein intake.');
@@ -3173,95 +2465,86 @@ INSERT INTO foodGroups (name, description) VALUES ('Fruits and Products', 'Inclu
 
 
 
-DROP TABLE chefs;
 
-CREATE TABLE chefs (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,   
-    firstName VARCHAR(32) NOT NULL,                
-    lastName VARCHAR(32) NOT NULL,                
-    contactNumber VARCHAR(32) NOT NULL,            
-    dateOfBirth DATE NOT NULL,            
-    age INTEGER,                  
-    dateOfExperienceStart DATE NOT NULL,
-    yearsOfExperience INTEGER,    
-    professionalGrade TEXT NOT NULL,       
-    CHECK (professionalGrade IN ('Third-Chef', 'Second-Chef', 'Third-Chef', 'Sous-Chef', 'Head-Chef')),
-    --CHECK (age > 0 OR age IS NULL)
-    CHECK (age > 0),
-    CHECK (yearsOfExperience > 0)
-);
-
-
-INSERT INTO chefs (firstName, lastName, contactNumber, dateOfBirth, dateOfExperienceStart, professionalGrade) VALUES
-('John', 'Doe', '555-0101', '1980-03-15', '2000-03-15', 'Head-Chef'),
-('Jane', 'Smith', '555-0102', '1985-07-22', '2005-07-22', 'Sous-Chef'),
-('Alex', 'Johnson', '555-0103', '1990-11-30', '2010-11-30', 'Third-Chef'),
-('Maria', 'Lee', '555-0104', '1992-05-17', '2012-05-17', 'Second-Chef'),
-('James', 'Brown', '555-0105', '1975-01-29', '1995-01-29', 'Head-Chef'),
-('Linda', 'Davis', '555-0106', '1988-08-19', '2008-08-19', 'Sous-Chef'),
-('Robert', 'Miller', '555-0107', '1982-12-24', '2002-12-24', 'Third-Chef'),
-('Barbara', 'Wilson', '555-0108', '1978-04-05', '1998-04-05', 'Second-Chef'),
-('Michael', 'Moore', '555-0109', '1994-09-15', '2014-09-15', 'Third-Chef'),
-('Betty', 'Taylor', '555-0110', '1986-03-11', '2006-03-11', 'Sous-Chef'),
-('William', 'Anderson', '555-0111', '1981-07-30', '2001-07-30', 'Head-Chef'),
-('Susan', 'Thomas', '555-0112', '1989-10-28', '2009-10-28', 'Second-Chef'),
-('David', 'Jackson', '555-0113', '1970-05-21', '1990-05-21', 'Head-Chef'),
-('Sarah', 'White', '555-0114', '1983-01-15', '2003-01-15', 'Sous-Chef'),
-('Joseph', 'Harris', '555-0115', '1991-08-19', '2011-08-19', 'Third-Chef'),
-('Karen', 'Martin', '555-0116', '1974-12-04', '1994-12-04', 'Head-Chef'),
-('Nancy', 'Thompson', '555-0117', '1993-06-02', '2013-06-02', 'Second-Chef'),
-('Daniel', 'Garcia', '555-0118', '1984-09-17', '2004-09-17', 'Sous-Chef'),
-('Lisa', 'Martinez', '555-0119', '1987-02-23', '2007-02-23', 'Third-Chef'),
-('Matthew', 'Robinson', '555-0120', '1995-04-18', '2015-04-18', 'Second-Chef'),
-('Anthony', 'Clark', '555-0121', '1976-10-30', '1996-10-30', 'Head-Chef'),
-('Mark', 'Rodriguez', '555-0122', '1988-01-25', '2008-01-25', 'Sous-Chef'),
-('Elizabeth', 'Lewis', '555-0123', '1979-11-07', '1999-11-07', 'Third-Chef'),
-('Donald', 'Lee', '555-0124', '1992-03-15', '2012-03-15', 'Second-Chef'),
-('Steven', 'Walker', '555-0125', '1990-07-20', '2010-07-20', 'Third-Chef'),
-('Emily', 'Hall', '555-0126', '1985-05-25', '2005-05-25', 'Sous-Chef'),
-('George', 'Allen', '555-0127', '1974-02-11', '1994-02-11', 'Head-Chef'),
-('Laura', 'Young', '555-0128', '1991-09-14', '2011-09-14', 'Second-Chef'),
-('Joshua', 'Hernandez', '555-0129', '1989-12-18', '2009-12-18', 'Third-Chef'),
-('Jessica', 'King', '555-0130', '1993-10-31', '2013-10-31', 'Sous-Chef'),
-('Kevin', 'Wright', '555-0131', '1982-03-17', '2002-03-17', 'Head-Chef'),
-('Angela', 'Lopez', '555-0132', '1978-08-09', '1998-08-09', 'Second-Chef'),
-('Thomas', 'Hill', '555-0133', '1975-06-03', '1995-06-03', 'Head-Chef'),
-('Carol', 'Scott', '555-0134', '1984-04-12', '2004-04-12', 'Sous-Chef'),
-('Ryan', 'Green', '555-0135', '1987-11-23', '2007-11-23', 'Third-Chef'),
-('Eric', 'Adams', '555-0136', '1973-01-20', '1993-01-20', 'Head-Chef'),
-('Mary', 'Baker', '555-0137', '1994-02-28', '2014-02-28', 'Second-Chef'),
-('Jason', 'Gonzalez', '555-0138', '1981-10-05', '2001-10-05', 'Sous-Chef'),
-('Michelle', 'Nelson', '555-0139', '1977-07-07', '1997-07-07', 'Third-Chef'),
-('Timothy', 'Carter', '555-0140', '1996-03-19', '2016-03-19', 'Second-Chef'),
-('Charles', 'Mitchell', '555-0141', '1971-08-25', '1991-08-25', 'Head-Chef'),
-('Sarah', 'Perez', '555-0142', '1989-01-31', '2009-01-31', 'Sous-Chef'),
-('Brian', 'Roberts', '555-0143', '1976-12-14', '1996-12-14', 'Third-Chef'),
-('Diana', 'Turner', '555-0144', '1983-09-15', '2003-09-15', 'Second-Chef'),
-('Arthur', 'Phillips', '555-0145', '1978-05-06', '1998-05-06', 'Head-Chef'),
-('Ashley', 'Campbell', '555-0146', '1995-07-20', '2015-07-20', 'Third-Chef'),
-('Gregory', 'Parker', '555-0147', '1990-04-10', '2010-04-10', 'Sous-Chef'),
-('Deborah', 'Evans', '555-0148', '1972-11-08', '1992-11-08', 'Head-Chef'),
-('Shirley', 'Edwards', '555-0149', '1985-01-28', '2005-01-28', 'Second-Chef'),
-('Benjamin', 'Collins', '555-0150', '1987-10-12', '2007-10-12', 'Third-Chef');
+-- INSERT INTO chefs (firstName, lastName, contactNumber, dateOfBirth, dateOfExperienceStart, professionalGrade) VALUES
+-- ('John', 'Doe', '555-0101', '1980-03-15', '2000-03-15', 'Head-Chef'),
+-- ('Jane', 'Smith', '555-0102', '1985-07-22', '2005-07-22', 'Sous-Chef'),
+-- ('Alex', 'Johnson', '555-0103', '1990-11-30', '2010-11-30', 'Third-Chef'),
+-- ('Maria', 'Lee', '555-0104', '1992-05-17', '2012-05-17', 'Second-Chef'),
+-- ('James', 'Brown', '555-0105', '1975-01-29', '1995-01-29', 'Head-Chef'),
+-- ('Linda', 'Davis', '555-0106', '1988-08-19', '2008-08-19', 'Sous-Chef'),
+-- ('Robert', 'Miller', '555-0107', '1982-12-24', '2002-12-24', 'Third-Chef'),
+-- ('Barbara', 'Wilson', '555-0108', '1978-04-05', '1998-04-05', 'Second-Chef'),
+-- ('Michael', 'Moore', '555-0109', '1994-09-15', '2014-09-15', 'Third-Chef'),
+-- ('Betty', 'Taylor', '555-0110', '1986-03-11', '2006-03-11', 'Sous-Chef'),
+-- ('William', 'Anderson', '555-0111', '1981-07-30', '2001-07-30', 'Head-Chef'),
+-- ('Susan', 'Thomas', '555-0112', '1989-10-28', '2009-10-28', 'Second-Chef'),
+-- ('David', 'Jackson', '555-0113', '1970-05-21', '1990-05-21', 'Head-Chef'),
+-- ('Sarah', 'White', '555-0114', '1983-01-15', '2003-01-15', 'Sous-Chef'),
+-- ('Joseph', 'Harris', '555-0115', '1991-08-19', '2011-08-19', 'Third-Chef'),
+-- ('Karen', 'Martin', '555-0116', '1974-12-04', '1994-12-04', 'Head-Chef'),
+-- ('Nancy', 'Thompson', '555-0117', '1993-06-02', '2013-06-02', 'Second-Chef'),
+-- ('Daniel', 'Garcia', '555-0118', '1984-09-17', '2004-09-17', 'Sous-Chef'),
+-- ('Lisa', 'Martinez', '555-0119', '1987-02-23', '2007-02-23', 'Third-Chef'),
+-- ('Matthew', 'Robinson', '555-0120', '1995-04-18', '2015-04-18', 'Second-Chef'),
+-- ('Anthony', 'Clark', '555-0121', '1976-10-30', '1996-10-30', 'Head-Chef'),
+-- ('Mark', 'Rodriguez', '555-0122', '1988-01-25', '2008-01-25', 'Sous-Chef'),
+-- ('Elizabeth', 'Lewis', '555-0123', '1979-11-07', '1999-11-07', 'Third-Chef'),
+-- ('Donald', 'Lee', '555-0124', '1992-03-15', '2012-03-15', 'Second-Chef'),
+-- ('Steven', 'Walker', '555-0125', '1990-07-20', '2010-07-20', 'Third-Chef'),
+-- ('Emily', 'Hall', '555-0126', '1985-05-25', '2005-05-25', 'Sous-Chef'),
+-- ('George', 'Allen', '555-0127', '1974-02-11', '1994-02-11', 'Head-Chef'),
+-- ('Laura', 'Young', '555-0128', '1991-09-14', '2011-09-14', 'Second-Chef'),
+-- ('Joshua', 'Hernandez', '555-0129', '1989-12-18', '2009-12-18', 'Third-Chef'),
+-- ('Jessica', 'King', '555-0130', '1993-10-31', '2013-10-31', 'Sous-Chef'),
+-- ('Kevin', 'Wright', '555-0131', '1982-03-17', '2002-03-17', 'Head-Chef'),
+-- ('Angela', 'Lopez', '555-0132', '1978-08-09', '1998-08-09', 'Second-Chef'),
+-- ('Thomas', 'Hill', '555-0133', '1975-06-03', '1995-06-03', 'Head-Chef'),
+-- ('Carol', 'Scott', '555-0134', '1984-04-12', '2004-04-12', 'Sous-Chef'),
+-- ('Ryan', 'Green', '555-0135', '1987-11-23', '2007-11-23', 'Third-Chef'),
+-- ('Eric', 'Adams', '555-0136', '1973-01-20', '1993-01-20', 'Head-Chef'),
+-- ('Mary', 'Baker', '555-0137', '1994-02-28', '2014-02-28', 'Second-Chef'),
+-- ('Jason', 'Gonzalez', '555-0138', '1981-10-05', '2001-10-05', 'Sous-Chef'),
+-- ('Michelle', 'Nelson', '555-0139', '1977-07-07', '1997-07-07', 'Third-Chef'),
+-- ('Timothy', 'Carter', '555-0140', '1996-03-19', '2016-03-19', 'Second-Chef'),
+-- ('Charles', 'Mitchell', '555-0141', '1971-08-25', '1991-08-25', 'Head-Chef'),
+-- ('Sarah', 'Perez', '555-0142', '1989-01-31', '2009-01-31', 'Sous-Chef'),
+-- ('Brian', 'Roberts', '555-0143', '1976-12-14', '1996-12-14', 'Third-Chef'),
+-- ('Diana', 'Turner', '555-0144', '1983-09-15', '2003-09-15', 'Second-Chef'),
+-- ('Arthur', 'Phillips', '555-0145', '1978-05-06', '1998-05-06', 'Head-Chef'),
+-- ('Ashley', 'Campbell', '555-0146', '1995-07-20', '2015-07-20', 'Third-Chef'),
+-- ('Gregory', 'Parker', '555-0147', '1990-04-10', '2010-04-10', 'Sous-Chef'),
+-- ('Deborah', 'Evans', '555-0148', '1972-11-08', '1992-11-08', 'Head-Chef'),
+-- ('Shirley', 'Edwards', '555-0149', '1985-01-28', '2005-01-28', 'Second-Chef'),
+-- ('Benjamin', 'Collins', '555-0150', '1987-10-12', '2007-10-12', 'Third-Chef');
 
 
-DROP TABLE chefs_nationalCuisines;
+-- DROP TABLE chefs_nationalCuisines;
 
-CREATE TABLE chefs_nationalCuisines(
-    chefId INT,
-    nationalCuisineName VARCHAR(64),
-    PRIMARY KEY (chefId, nationalCuisineName)
-    FOREIGN KEY (chefId) REFERENCES chefs(id),
-    FOREIGN KEY (nationalCuisineName) REFERENCES nationalCuisines(Name)
-);
+-- CREATE TABLE chefs_nationalCuisines(
+--     chefId INT,
+--     nationalCuisineName VARCHAR(64),
+--     PRIMARY KEY (chefId, nationalCuisineName)
+--     FOREIGN KEY (chefId) REFERENCES chefs(id),
+--     FOREIGN KEY (nationalCuisineName) REFERENCES nationalCuisines(Name)
+-- );
 
-DROP TABLE chefs_recipes;
+-- DROP TABLE chefs_recipes;
 
-CREATE TABLE chefs_recipes(
-    chefId INT,
-    recipeName VARCHAR(64),
-    PRIMARY KEY (chefId, recipeName),
-    FOREIGN KEY (chefId) REFERENCES chefs(id),
-    FOREIGN KEY (recipeName) REFERENCES recipes(name)
-);
+-- CREATE TABLE chefs_recipes(
+--     chefId INT,
+--     recipeName VARCHAR(64),
+--     PRIMARY KEY (chefId, recipeName),
+--     FOREIGN KEY (chefId) REFERENCES chefs(id),
+--     FOREIGN KEY (recipeName) REFERENCES recipes(name)
+-- );
 
+
+-- CREATE TABLE credentials (
+--     username VARCHAR(64),
+--     password VARCHAR(64),
+--     chefId INTEGER,
+--     isAdmin BOOLEAN DEFAULT FALSE,
+--     PRIMARY KEY (username),
+--     FOREIGN KEY (chefId) REFERENCES chefs(id)
+-- );

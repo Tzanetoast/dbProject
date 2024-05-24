@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Instructions</title>
+    <style>
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+        .flashes li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .flashes .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .flashes .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .instruction-item {
+            margin-bottom: 10px;
+        }
+        .actions {
+            margin-top: 20px;
+        }
+        .delete-form {
+            display: block;
+            margin-top: 10px;
+        }
+        .add-form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Instructions for {{ recipe_name }}</h1>
+    
+    <!-- Flash message section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('update_recipe_instructions') }}" method="post">
+        <input type="hidden" name="recipe_name" value="{{ recipe_name }}">
+        <div id="instructions">
+            {% for step in recipe_instructions %}
+                <div class="instruction-item">
+                    <label for="instruction_{{ step[0] }}">Step {{ step[0] }}:</label>
+                    <textarea id="instruction_{{ step[0] }}" name="instruction_{{ step[0] }}" rows="4" cols="50">{{ step[1] }}</textarea>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="actions">
+            <button type="submit">Save Changes</button>
+        </div>
+    </form>
+
+    <form action="{{ url_for('delete_last_instruction') }}" method="post" class="delete-form">
+        <input type="hidden" name="recipe_name" value="{{ recipe_name }}">
+        <button type="submit">Delete Last Step</button>
+    </form>
+
+    <form action="{{ url_for('add_new_instruction') }}" method="post" class="add-form">
+        <input type="hidden" name="recipe_name" value="{{ recipe_name }}">
+        <label for="new_instruction">Add New Instruction:</label>
+        <br>
+        <textarea id="new_instruction" name="new_instruction" rows="4" cols="50"></textarea>
+        <br>
+        <button type="submit">Add New Step</button>
+    </form>
+
+    <a href="{{ url_for('chef_logged_in') }}">Back to Dashboard</a>
+</body>
+</html>

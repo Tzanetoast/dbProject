@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chef Dashboard</title>
+    <style>
+        .recipe-links {
+            padding-left: 20px;
+        }
+        .recipe-links a {
+            display: block;
+            margin: 5px 0;
+        }
+        .recipe-item {
+            margin-bottom: 20px;
+        }
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+        .flashes li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .flashes .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .flashes .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ username }} (Chef)</h1>
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <h2>Your Recipes</h2>
+    {% if recipes %}
+        <ul>
+            {% for recipe in recipes %}
+                <li class="recipe-item">
+                    <h3>{{ recipe[0] }}</h3>
+                    <div class="recipe-links">
+                        <a href="{{ url_for('edit_cooking_or_pastry', recipe_name=recipe[0]) }}">Change cooking or pastry</a>
+                        <a href="{{ url_for('edit_recipe_description', recipe_name=recipe[0]) }}">Change description</a>
+                        <a href="{{ url_for('edit_recipe_national_cuisine', recipe_name=recipe[0]) }}">Change National Cuisine</a>
+                        <a href="{{ url_for('edit_recipe_difficulty', recipe_name=recipe[0]) }}">Change Difficulty</a>
+                        <a href="{{ url_for('edit_recipe_prep_and_cooking_time', recipe_name=recipe[0]) }}">Change Prep and Cook Time</a>
+                        <a href="{{ url_for('edit_recipe_meal_types', recipe_name=recipe[0]) }}">Change Meal Types</a>
+                        <a href="{{ url_for('edit_recipe_usage_tips', recipe_name=recipe[0]) }}">Change Usage Tips</a>
+                        <a href="{{ url_for('edit_recipe_tools', recipe_name=recipe[0]) }}">Change Tools</a>
+                        <a href="{{ url_for('edit_recipe_instructions', recipe_name=recipe[0]) }}">Change Instructions</a>
+                        <a href="{{ url_for('edit_recipe_ingredients', recipe_name=recipe[0]) }}">Change Ingredients</a>
+                        <a href="{{ url_for('edit_recipe_portions', recipe_name=recipe[0]) }}">Change Portions</a>
+                        <a href="{{ url_for('edit_recipe_basic_ingredient', recipe_name=recipe[0]) }}">Change Basic Ingredient</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no recipes.</p>
+    {% endif %}
+    <a href="{{ url_for('add_recipe') }}">Add New Recipe</a>
+</body>
+</html>

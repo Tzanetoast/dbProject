@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        .action-buttons {
+            margin-top: 20px;
+        }
+        .season-section, .query-section {
+            margin-top: 30px;
+        }
+        .season-buttons, .query-buttons {
+            margin-top: 10px;
+        }
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+        .flashes li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .flashes .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .flashes .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ username }} (Admin)</h1>
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+    <!-- Flash message section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <div class="action-buttons">
+        <h2>Database Management</h2>
+        <form action="{{ url_for('backup_db') }}" method="post">
+            <button type="submit">Backup Database</button>
+        </form>
+        <form action="{{ url_for('restore_db') }}" method="post">
+            <button type="submit">Restore Database</button>
+        </form>
+    </div>
+
+    <div class="season-section">
+        <h2>Seasons Management</h2>
+        <form action="{{ url_for('view_finished_seasons') }}" method="get">
+            <button type="submit">View Finished Seasons</button>
+        </form>
+        <form action="{{ url_for('delete_latest_season') }}" method="post">
+            <button type="submit">Delete Latest Season</button>
+        </form>
+        <form action="{{ url_for('create_new_season') }}" method="post">
+            <button type="submit">Create New Season</button>
+        </form>
+    </div>
+
+    <div class="query-section">
+        <h2>Query the Database</h2>
+        <form action="{{ url_for('query_database') }}" method="get">
+            <button type="submit">Query Database</button>
+        </form>
+    </div>
+
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>
+

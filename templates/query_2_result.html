@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query 2 Results</title>
+</head>
+<body>
+    <h1>Results for {{ national_cuisine }} Cuisine in {{ year }}</h1>
+    
+    <h2>Chefs Belonging to {{ national_cuisine }} Cuisine</h2>
+    <ul>
+        {% for chef in chefs_belonging_to_cuisine %}
+            <li>{{ chef[0] }} {{ chef[1] }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Chefs Participated in Episodes in {{ year }}</h2>
+    <ul>
+        {% for chef in chefs_participated_in_year %}
+            <li>{{ chef[0] }} {{ chef[1] }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('query_2_form') }}">Back to Form</a>
+</body>
+</html>
+

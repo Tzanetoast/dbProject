@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Meal Types</title>
+    <style>
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+        .flashes li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .flashes .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .flashes .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .meal-types {
+            display: flex;
+            justify-content: space-between;
+        }
+        .meal-types div {
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Meal Types for {{ recipe_name }}</h1>
+    
+    <!-- Flash message section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <div class="meal-types">
+        <div>
+            <h2>Current Meal Types</h2>
+            <ul>
+                {% for meal_type in recipe_meal_types %}
+                    <li>
+                        {{ meal_type }}
+                        <form action="{{ url_for('remove_recipe_meal_type') }}" method="post" style="display:inline;">
+                            <input type="hidden" name="recipe_name" value="{{ recipe_name }}">
+                            <input type="hidden" name="meal_type" value="{{ meal_type }}">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <h2>Add New Meal Type</h2>
+            <form action="{{ url_for('add_recipe_meal_type') }}" method="post">
+                <input type="hidden" name="recipe_name" value="{{ recipe_name }}">
+                <label for="new_meal_type">Select a new meal type:</label>
+                <br>
+                <select id="new_meal_type" name="new_meal_type">
+                    {% for meal_type in all_of_meal_types %}
+                        {% if meal_type not in recipe_meal_types %}
+                            <option value="{{ meal_type }}">{{ meal_type }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <br>
+                <button type="submit">Add Meal Type</button>
+            </form>
+        </div>
+    </div>
+    <a href="{{ url_for('chef_logged_in') }}">Back to Dashboard</a>
+</body>
+</html>

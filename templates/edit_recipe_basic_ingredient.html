@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Basic Ingredient</title>
+    <style>
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+        .flashes li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .flashes .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .flashes .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .ingredient-item {
+            margin-bottom: 10px;
+        }
+        .actions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Basic Ingredient for {{ recipe_name }}</h1>
+    
+    <!-- Flash message section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <div>
+        <h2>Current Basic Ingredient</h2>
+        <p>Basic Ingredient: {{ basic_ingredient[0] }}</p>
+        <p>Category Based on Basic Ingredient: {{ category_based_on_basic_ingredient[0] }}</p>
+    </div>
+
+    <div class="actions">
+        <h2>Update Basic Ingredient</h2>
+        <form action="{{ url_for('update_recipe_basic_ingredient') }}" method="post">
+            <input type="hidden" name="recipe_name" value="{{ recipe_name }}">
+            <label for="basic_ingredient">Select Basic Ingredient:</label>
+            <select id="basic_ingredient" name="basic_ingredient">
+                {% for ingredient in recipe_ingredients %}
+                    <option value="{{ ingredient[0] }}" {% if ingredient[0] == basic_ingredient[0] %}selected{% endif %}>{{ ingredient[0] }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <button type="submit">Update Basic Ingredient</button>
+        </form>
+    </div>
+
+    <a href="{{ url_for('chef_logged_in') }}">Back to Dashboard</a>
+</body>
+</html>

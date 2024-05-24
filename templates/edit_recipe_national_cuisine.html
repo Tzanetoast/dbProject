@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit National Cuisine</title>
+    <style>
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+        .flashes li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .flashes .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .flashes .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit National Cuisine for {{ recipe_name }}</h1>
+    
+    <!-- Flash message section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <p>The current national cuisine for the recipe is: {{ recipe_national_cuisine }}</p>
+    <form action="{{ url_for('change_recipe_national_cuisine') }}" method="post">
+        <input type="hidden" name="recipe_name" value="{{ recipe_name }}">
+        <label for="new_national_cuisine">Select a new national cuisine:</label>
+        <br>
+        <select id="new_national_cuisine" name="new_national_cuisine">
+            {% for cuisine in national_cuisines %}
+                <option value="{{ cuisine }}" {% if cuisine == recipe_national_cuisine %}selected{% endif %}>{{ cuisine }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="{{ url_for('chef_logged_in') }}">Back to Dashboard</a>
+</body>
+</html>

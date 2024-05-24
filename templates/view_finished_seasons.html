@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+        .flashes li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .flashes .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .flashes .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .season-section {
+            margin-top: 30px;
+        }
+        .episode-list {
+            margin-left: 20px;
+        }
+        .episode-item {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <a href="{{ url_for('admin_logged_in') }}">Back to Admin Dashboard</a>
+
+    <!-- Flash message section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <div class="season-section">
+        {% if seasons %}
+            <ul>
+                {% for season in seasons %}
+                    <li>
+                        <strong>Season {{ season }}</strong>
+                        <ul class="episode-list">
+                            {% for episode in range(1, 11) %}
+                                <li class="episode-item">
+                                    <a href="{{ url_for('view_episode', episode_year=season, episode_number=episode) }}">Episode {{ episode }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No finished seasons available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

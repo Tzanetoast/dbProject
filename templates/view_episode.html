@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Episode {{ episode_number }} - {{ episode_year }}</title>
+    <style>
+        .back-button {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .scores {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Episode {{ episode_number }} - {{ episode_year }}</h1>
+    <table>
+        <tr>
+            <th>Recipe Number</th>
+            <th>Recipe Name</th>
+            <th>National Cuisine</th>
+            <th>Chef Assigned</th>
+            <th>Scores by Judge</th>
+        </tr>
+        {% for recipe in recipes %}
+            <tr>
+                <td>{{ recipe[2] }}</td>
+                <td>{{ recipe[3] }}</td>
+                <td>{{ recipe[4] }}</td>
+                <td>{{ recipe[5] }}</td>
+                <td>
+                    <ul class="scores">
+                        {% for score in scores.get(recipe[2], []) %}
+                            <li>{{ score[0] }}: {{ score[1] }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('view_finished_seasons') }}" class="back-button">Back to Finished Seasons</a>
+</body>
+</html>
