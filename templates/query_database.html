@@ -7,6 +7,9 @@
         .query-buttons {
             margin-top: 20px;
         }
+        .query-description {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -14,23 +17,77 @@
     <a href="{{ url_for('admin_logged_in') }}">Back to Admin Dashboard</a>
 
     <div class="query-buttons">
+        <div class="query-description">Μέσος Όρος Αξιολογήσεων (σκορ) ανά μάγειρα και Εθνική κουζίνα</div>
         <form action="{{ url_for('query_1') }}" method="get">
             <button type="submit">Query 1</button>
         </form>
+
+        <div class="query-description">Για δεδομένη Εθνική κουζίνα και έτος, ποιοι μάγειρες ανήκουν σε αυτήν και ποιοι μάγειρες συμμετείχαν σε επεισόδια</div>
         <form action="{{ url_for('query_2_form') }}" method="get">
             <button type="submit">Query 2</button>
         </form>
+
+        <div class="query-description">Βρείτε τους νέους μάγειρες (ηλικία < 30 ετών) που έχουν τις περισσότερες συνταγές</div>
         <form action="{{ url_for('query_3') }}" method="get">
             <button type="submit">Query 3</button>
         </form>
+
+        <div class="query-description">Βρείτε τους μάγειρες που δεν έχουν συμμετάσχει ποτέ ως κριτές σε κάποιο επεισόδιο</div>
         <form action="{{ url_for('query_4') }}" method="get">
             <button type="submit">Query 4</button>
         </form>
+
+        <div class="query-description">Κριτές με τον ίδιο αριθμό επεισοδίων σε διάστημα ενός έτους με περισσότερες από 3 εμφανίσεις</div>
         <form action="{{ url_for('query_5') }}" method="get">
             <button type="submit">Query 5</button>
         </form>
+
+        <div class="query-description">Βρείτε τα 3 κορυφαία ζεύγη πεδίων που εμφανίστηκαν σε επεισόδια</div>
+        <form action="{{ url_for('query_6') }}" method="get">
+            <button type="submit">Query 6</button>
+        </form>
+
+        <div class="query-description">Βρείτε όλους τους μάγειρες που συμμετείχαν τουλάχιστον 5 λιγότερες φορές από τον μάγειρα με τις περισσότερες συμμετοχές σε επεισόδια</div>
+        <form action="{{ url_for('query_7') }}" method="get">
+            <button type="submit">Query 7</button>
+        </form>
+
+        <div class="query-description">Σε ποιο επεισόδιο χρησιμοποιήθηκαν τα περισσότερα εξαρτήματα (εξοπλισμός)</div>
+        <form action="{{ url_for('query_8') }}" method="get">
+            <button type="submit">Query 8</button>
+        </form>
+
+        <div class="query-description">Λίστα με μέσο όρο αριθμού γραμμάριων υδατανθράκων στο διαγωνισμό ανά έτος</div>
+        <form action="{{ url_for('query_9') }}" method="get">
+            <button type="submit">Query 9</button>
+        </form>
+
+        <div class="query-description">Ποιες Εθνικές κουζίνες έχουν τον ίδιο αριθμό συμμετοχών σε διαγωνισμούς, σε διάστημα δύο συνεχόμενων ετών, με τουλάχιστον 3 συμμετοχές ετησίως</div>
+        <form action="{{ url_for('query_10') }}" method="get">
+            <button type="submit">Query 10</button>
+        </form>
+
+        <div class="query-description">Top-5 κριτές που έχουν δώσει συνολικά την υψηλότερη βαθμολόγηση σε ένα μάγειρα</div>
+        <form action="{{ url_for('query_11') }}" method="get">
+            <button type="submit">Query 11</button>
+        </form>
+
+        <div class="query-description">Πιο τεχνικά δύσκολο επεισόδιο του διαγωνισμού ανά έτος</div>
+        <form action="{{ url_for('query_12') }}" method="get">
+            <button type="submit">Query 12</button>
+        </form>
+
+        <div class="query-description">Επεισόδιο με τον χαμηλότερο βαθμό επαγγελματικής κατάρτισης (κριτές και μάγειρες)</div>
+        <form action="{{ url_for('query_13') }}" method="get">
+            <button type="submit">Query 13</button>
+        </form>
+
+        <div class="query-description">Ποιες ομάδες τροφίμων δεν έχουν εμφανιστεί ποτέ στον διαγωνισμό</div>
+        <form action="{{ url_for('query_14') }}" method="get">
+            <button type="submit">Query 14</button>
+        </form>
+
         <!-- Add more queries as needed -->
     </div>
 </body>
 </html>
-

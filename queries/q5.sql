@@ -1,8 +1,13 @@
+DROP VIEW IF EXISTS view_1;
+DROP VIEW IF EXISTS view_2;
+DROP VIEW IF EXISTS view_3;
+DROP VIEW IF EXISTS view_4;
+
 CREATE VIEW view_1 AS
 SELECT chefId, episodeYear, COUNT(*) AS appearances
 FROM episode_judges
 GROUP BY chefId, episodeYear
-HAVING appearances > 3;
+HAVING appearances >= 3;
 
 
 CREATE VIEW view_2 AS
@@ -33,5 +38,13 @@ SELECT
     view_3.episodeYear
 FROM view_3
 JOIN chefs c2 ON view_3.chefId2 = c2.id;
+
+SELECT chef1_firstName, chef1_lastName, chef2_firstName, chef2_lastName, appearances, episodeYear
+FROM view_4;
+
+DROP VIEW IF EXISTS view_1;
+DROP VIEW IF EXISTS view_2;
+DROP VIEW IF EXISTS view_3;
+DROP VIEW IF EXISTS view_4;
 
 

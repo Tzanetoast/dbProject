@@ -46,106 +46,107 @@ INSERT INTO mealTypes (name) VALUES
 
 
 
-INSERT INTO recipes (name, cookingORpastry, shortDescription, nationalCuisine, difficulty, prepTime, cookingTime, mealType, portions) VALUES 
-('Apple Frangipan Tart', 'pastry', 'A delicious tart made with apples and frangipane.', 'British', 3, 30, 45, 'Dessert', 4),
-('Apple & Blackberry Crumble', 'pastry', 'A traditional dessert combining apples and blackberries with a crumble topping.', 'British', 2, 15, 30, 'Dessert', 4),
-('Apam balik', 'cooking', 'A sweet Malaysian pancake that is crispy on the outside and fluffy inside.', 'Malaysian', 2, 10, 15, 'Snack', 4),
-('Ayam Percik', 'cooking', 'Malaysian grilled chicken slathered in a spicy coconut milk marinade.', 'Malaysian', 3, 20, 30, 'Dinner', 4),
+INSERT INTO recipes (name, cookingORpastry, shortDescription, nationalCuisine, difficulty, prepTime, cookingTime, portions) VALUES 
+('Apple Frangipan Tart', 'pastry', 'A delicious tart made with apples and frangipane.', 'British', 3, 30, 45, 4),
+('Apple & Blackberry Crumble', 'pastry', 'A traditional dessert combining apples and blackberries with a crumble topping.', 'British', 2, 15, 30, 4),
+('Apam balik', 'cooking', 'A sweet Malaysian pancake that is crispy on the outside and fluffy inside.', 'Malaysian', 2, 10, 15, 4),
+('Ayam Percik', 'cooking', 'Malaysian grilled chicken slathered in a spicy coconut milk marinade.', 'Malaysian', 3, 20, 30, 4),
 
-('Bakewell tart', 'pastry', 'A classic English dessert tart with jam and frangipane.', 'British', 3, 20, 40, 'Dessert, Snack', 6),
-('Beef Wellington', 'cooking', 'Beef fillet coated with mushroom duxelles and wrapped in puff pastry.', 'British', 5, 30, 60, 'Dinner, Fine-Dining', 4),
-('Banana Pancakes', 'cooking', 'Sweet pancakes made with ripe bananas.', 'American', 1, 10, 15, 'Breakfast, Dessert', 4),
+('Bakewell tart', 'pastry', 'A classic English dessert tart with jam and frangipane.', 'British', 3, 20, 40, 6),
+('Beef Wellington', 'cooking', 'Beef fillet coated with mushroom duxelles and wrapped in puff pastry.', 'British', 5, 30, 60, 4),
+('Banana Pancakes', 'cooking', 'Sweet pancakes made with ripe bananas.', 'American', 1, 10, 15, 4),
 
-('Chicken Congee', 'cooking', 'A type of rice porridge popular in Asian countries.', 'Chinese', 1, 10, 90, 'Breakfast, Dinner', 2),
-('Cannelloni', 'cooking', 'Tubular pasta filled with meat or cheese and baked in a sauce.', 'Italian', 3, 30, 45, 'Lunch, Dinner', 4),
-('Caldo verde', 'cooking', 'A traditional Portuguese soup made with potatoes, chorizo, and kale.', 'Portuguese', 2, 15, 35, 'Dinner, Cold-dish', 4),
+('Chicken Congee', 'cooking', 'A type of rice porridge popular in Asian countries.', 'Chinese', 1, 10, 90, 2),
+('Cannelloni', 'cooking', 'Tubular pasta filled with meat or cheese and baked in a sauce.', 'Italian', 3, 30, 45, 4),
+('Caldo verde', 'cooking', 'A traditional Portuguese soup made with potatoes, chorizo, and kale.', 'Portuguese', 2, 15, 35, 4),
 
-('Dakdoritang', 'cooking', 'Korean spicy chicken stew with vegetables.', 'Korean', 3, 20, 40, 'Dinner', 4),
-('Danish Pastry', 'pastry', 'Sweet pastry originated from Denmark.', 'Danish', 4, 30, 20, 'Breakfast, Snack', 4),
-('Dum Aloo', 'cooking', 'Potatoes cooked in curry, popular in Indian cuisine.', 'Indian', 2, 15, 30, 'Lunch, Dinner', 4),
+('Dakdoritang', 'cooking', 'Korean spicy chicken stew with vegetables.', 'Korean', 3, 20, 40, 4),
+('Danish Pastry', 'pastry', 'Sweet pastry originated from Denmark.', 'Danish', 4, 30, 20, 4),
+('Dum Aloo', 'cooking', 'Potatoes cooked in curry, popular in Indian cuisine.', 'Indian', 2, 15, 30, 4),
 
-('English Breakfast', 'cooking', 'Full breakfast dish consisting of eggs, sausages, beans, toast, and more.', 'British', 2, 5, 15, 'Breakfast, Brunch', 1),
-('Eclairs', 'pastry', 'Pastry filled with cream and topped with chocolate icing.', 'French', 4, 25, 50, 'Dessert, Snack', 8),
-('Eton Mess', 'pastry', 'Dessert consisting of a mix of strawberries, meringue, and whipped cream.', 'British', 1, 15, 0, 'Dessert, Snack', 2),
+('English Breakfast', 'cooking', 'Full breakfast dish consisting of eggs, sausages, beans, toast, and more.', 'British', 2, 5, 15, 1),
+('Eclairs', 'pastry', 'Pastry filled with cream and topped with chocolate icing.', 'French', 4, 25, 50, 8),
+('Eton Mess', 'pastry', 'Dessert consisting of a mix of strawberries, meringue, and whipped cream.', 'British', 1, 15, 0, 2),
 
-('Fish and Chips', 'cooking', 'Battered fish with deep-fried chips, a popular British fast food.', 'British', 2, 10, 20, 'Lunch, Dinner, Snack', 2),
-('Fajitas', 'cooking', 'Grilled meat served on a flour or corn tortilla.', 'Mexican', 2, 20, 10, 'Dinner, Barbecue', 4),
-('Falafel', 'cooking', 'Deep-fried balls made from ground chickpeas or fava beans.', 'Middle Eastern', 2, 30, 5, 'Lunch, Dinner, Snack', 4),
+('Fish and Chips', 'cooking', 'Battered fish with deep-fried chips, a popular British fast food.', 'British', 2, 10, 20, 2),
+('Fajitas', 'cooking', 'Grilled meat served on a flour or corn tortilla.', 'Mexican', 2, 20, 10, 4),
+('Falafel', 'cooking', 'Deep-fried balls made from ground chickpeas or fava beans.', 'Middle Eastern', 2, 30, 5, 4),
 
-('Gazpacho', 'cooking', 'Cold soup made from raw, blended vegetables.', 'Spanish', 1, 20, 0, 'Lunch, Dinner, Cold-dish', 4),
-('Goulash', 'cooking', 'Stew of meat and vegetables seasoned with paprika.', 'Hungarian', 3, 15, 120, 'Dinner', 4),
-('Greek Salad', 'cooking', 'Salad made with tomatoes, cucumbers, onion, feta cheese, and olives.', 'Greek', 1, 10, 0, 'Lunch, Dinner, Cold-dish', 2),
+('Gazpacho', 'cooking', 'Cold soup made from raw, blended vegetables.', 'Spanish', 1, 20, 0, 4),
+('Goulash', 'cooking', 'Stew of meat and vegetables seasoned with paprika.', 'Hungarian', 3, 15, 120, 4),
+('Greek Salad', 'cooking', 'Salad made with tomatoes, cucumbers, onion, feta cheese, and olives.', 'Greek', 1, 10, 0, 2),
 
-('Hot and Sour Soup', 'cooking', 'A variety of soups from several Asian countries, particularly spicy in Sichuan cuisine.', 'Chinese', 2, 10, 20, 'Dinner, Snack', 2),
-('Hummus', 'cooking', 'Creamy dip made from cooked, mashed chickpeas blended with tahini, lemon juice, and garlic.', 'Middle Eastern', 1, 10, 0, 'Snack, Appetizer', 4),
-('Hamburgers', 'cooking', 'Ground meat patties, typically beef, served on a bun with various toppings.', 'American', 1, 10, 10, 'Lunch, Dinner, Snack', 4),
+('Hot and Sour Soup', 'cooking', 'A variety of soups from several Asian countries, particularly spicy in Sichuan cuisine.', 'Chinese', 2, 10, 20, 2),
+('Hummus', 'cooking', 'Creamy dip made from cooked, mashed chickpeas blended with tahini, lemon juice, and garlic.', 'Middle Eastern', 1, 10, 0, 4),
+('Hamburgers', 'cooking', 'Ground meat patties, typically beef, served on a bun with various toppings.', 'American', 1, 10, 10, 4),
 
-('Irish Coffee', 'pastry', 'Hot coffee with Irish whiskey and sugar, stirred, and topped with cream.', 'Irish', 1, 5, 0, 'Dessert, Snack', 1),
-('Indian Curry', 'cooking', 'Spiced meat, fish, or vegetables cooked in a sauce.', 'Indian', 3, 20, 40, 'Lunch, Dinner', 4),
-('Italian Biscotti', 'pastry', 'Twice-baked almond biscuits originating from Italy.', 'Italian', 2, 20, 30, 'Snack, Dessert', 8),
-('Irish Stew', 'cooking', 'A hearty stew made with lamb, potatoes, and carrots.', 'Irish', 2, 15, 120, 'Dinner, Lunch', 4),
+('Irish Coffee', 'pastry', 'Hot coffee with Irish whiskey and sugar, stirred, and topped with cream.', 'Irish', 1, 5, 0, 1),
+('Indian Curry', 'cooking', 'Spiced meat, fish, or vegetables cooked in a sauce.', 'Indian', 3, 20, 40, 4),
+('Italian Biscotti', 'pastry', 'Twice-baked almond biscuits originating from Italy.', 'Italian', 2, 20, 30, 8),
+('Irish Stew', 'cooking', 'A hearty stew made with lamb, potatoes, and carrots.', 'Irish', 2, 15, 120, 4),
 
-('Jambalaya', 'cooking', 'A Creole rice dish with meat and seafood, cooked in a tomato base.', 'American', 3, 20, 45, 'Lunch, Dinner', 4),
-('Japanese Curry', 'cooking', 'A thick, stew-like curry with meat and vegetables.', 'Japanese', 2, 15, 35, 'Dinner', 4),
-('Jerk Chicken', 'cooking', 'Spicy chicken dish marinated with a hot spice mixture called jerk spice.', 'Caribbean', 3, 240, 45, 'Dinner, Barbecue', 4),
-('Japanese Cheesecake', 'pastry', 'A fluffy and light style of cheesecake.', 'Japanese', 2, 15, 45, 'Dessert', 6),
+('Jambalaya', 'cooking', 'A Creole rice dish with meat and seafood, cooked in a tomato base.', 'American', 3, 20, 45, 4),
+('Japanese Curry', 'cooking', 'A thick, stew-like curry with meat and vegetables.', 'Japanese', 2, 15, 35, 4),
+('Jerk Chicken', 'cooking', 'Spicy chicken dish marinated with a hot spice mixture called jerk spice.', 'Caribbean', 3, 240, 45, 4),
+('Japanese Cheesecake', 'pastry', 'A fluffy and light style of cheesecake.', 'Japanese', 2, 15, 45, 6),
 
-('Kimchi Fried Rice', 'cooking', 'Fried rice made with kimchi and other ingredients such as vegetables or meat.', 'Korean', 1, 10, 15, 'Lunch, Dinner', 2),
-('Kaiserschmarrn', 'pastry', 'A fluffy shredded pancake that has its origins in Austria.', 'Austrian', 2, 10, 20, 'Dessert, Snack', 4),
-('Kebab', 'cooking', 'Meat cut into cubes, marinated, and then grilled on skewers.', 'Middle Eastern', 2, 180, 10, 'Lunch, Dinner, Snack', 4),
-('Kimchi Stew', 'cooking', 'Spicy stew made with kimchi and tofu.', 'Korean', 2, 15, 30, 'Lunch, Dinner', 4),
-('Key Lime Pie', 'pastry', 'A pie made with Key lime juice, egg yolks, and sweetened condensed milk.', 'American', 2, 20, 30, 'Dessert', 8),
+('Kimchi Fried Rice', 'cooking', 'Fried rice made with kimchi and other ingredients such as vegetables or meat.', 'Korean', 1, 10, 15, 2),
+('Kaiserschmarrn', 'pastry', 'A fluffy shredded pancake that has its origins in Austria.', 'Austrian', 2, 10, 20, 4),
+('Kebab', 'cooking', 'Meat cut into cubes, marinated, and then grilled on skewers.', 'Middle Eastern', 2, 180, 10, 4),
+('Kimchi Stew', 'cooking', 'Spicy stew made with kimchi and tofu.', 'Korean', 2, 15, 30, 4),
+('Key Lime Pie', 'pastry', 'A pie made with Key lime juice, egg yolks, and sweetened condensed milk.', 'American', 2, 20, 30, 8),
 
-('Lasagna', 'cooking', 'Layered pasta dish with cheese, meat, and tomato sauce.', 'Italian', 4, 30, 60, 'Lunch, Dinner', 6),
-('Lamb Tagine', 'cooking', 'Moroccan dish of slow-cooked lamb with spices.', 'Moroccan', 3, 20, 120, 'Dinner', 4),
-('Lobster Bisque', 'cooking', 'A smooth and creamy soup made with lobster stock.', 'French', 4, 15, 45, 'Dinner, Fine-Dining', 4),
+('Lasagna', 'cooking', 'Layered pasta dish with cheese, meat, and tomato sauce.', 'Italian', 4, 30, 60, 6),
+('Lamb Tagine', 'cooking', 'Moroccan dish of slow-cooked lamb with spices.', 'Moroccan', 3, 20, 120, 4),
+('Lobster Bisque', 'cooking', 'A smooth and creamy soup made with lobster stock.', 'French', 4, 15, 45, 4),
 
-('Moussaka', 'cooking', 'Eggplant or potato-based dish, often including ground meat.', 'Greek', 3, 30, 60, 'Dinner', 4),
-('Mapo Tofu', 'cooking', 'Spicy Sichuan tofu dish with minced meat, typically pork or beef.', 'Chinese', 2, 10, 20, 'Lunch, Dinner', 4),
-('Macaron', 'pastry', 'Sweet meringue-based confection made with egg white, icing sugar, granulated sugar, almond meal, and food coloring.', 'French', 4, 25, 15, 'Dessert, Snack', 8),
+('Moussaka', 'cooking', 'Eggplant or potato-based dish, often including ground meat.', 'Greek', 3, 30, 60, 4),
+('Mapo Tofu', 'cooking', 'Spicy Sichuan tofu dish with minced meat, typically pork or beef.', 'Chinese', 2, 10, 20, 4),
+('Macaron', 'pastry', 'Sweet meringue-based confection made with egg white, icing sugar, granulated sugar, almond meal, and food coloring.', 'French', 4, 25, 15, 8),
 
-('Nachos', 'cooking', 'Dish of heated tortilla chips or totopos covered with melted cheese, often served as a snack or appetizer.', 'Mexican', 1, 5, 10, 'Snack, Appetizer', 4),
-('Nasi Goreng', 'cooking', 'Indonesian dish made with fried rice, typically flavored with kecap manis (sweet soy sauce), shallot, garlic, tamarind and chili.', 'Indonesian', 2, 10, 15, 'Lunch, Dinner', 2),
-('Nougat', 'pastry', 'A family of confections made with sugar or honey, roasted nuts, whipped egg whites, and sometimes chopped candied fruit.', 'French', 3, 30, 20, 'Dessert, Snack', 8),
+('Nachos', 'cooking', 'Dish of heated tortilla chips or totopos covered with melted cheese, often served as a snack or appetizer.', 'Mexican', 1, 5, 10, 4),
+('Nasi Goreng', 'cooking', 'Indonesian dish made with fried rice, typically flavored with kecap manis (sweet soy sauce), shallot, garlic, tamarind and chili.', 'Indonesian', 2, 10, 15, 2),
+('Nougat', 'pastry', 'A family of confections made with sugar or honey, roasted nuts, whipped egg whites, and sometimes chopped candied fruit.', 'French', 3, 30, 20, 8),
 
-('Osso Buco', 'cooking', 'An Italian dish made with veal shanks cooked with vegetables, white wine, and broth.', 'Italian', 4, 15, 120, 'Lunch, Dinner', 4),
-('Oysters Kilpatrick', 'cooking', 'Oysters topped with a Worcestershire-based sauce, bacon and breadcrumbs, then grilled.', 'Australian', 2, 10, 10, 'Appetizer, Fine-Dining', 2),
-('Okonomiyaki', 'cooking', 'Japanese savory pancake containing a variety of ingredients.', 'Japanese', 2, 10, 15, 'Lunch, Dinner, Snack', 2),
+('Osso Buco', 'cooking', 'An Italian dish made with veal shanks cooked with vegetables, white wine, and broth.', 'Italian', 4, 15, 120, 4),
+('Oysters Kilpatrick', 'cooking', 'Oysters topped with a Worcestershire-based sauce, bacon and breadcrumbs, then grilled.', 'Australian', 2, 10, 10, 2),
+('Okonomiyaki', 'cooking', 'Japanese savory pancake containing a variety of ingredients.', 'Japanese', 2, 10, 15, 2),
 
-('Paella', 'cooking', 'Spanish rice dish originally from Valencia, containing meat, seafood, and vegetables.', 'Spanish', 3, 20, 40, 'Lunch, Dinner', 4),
-('Pierogi', 'cooking', 'Filled dumplings of Central European origin made by wrapping unleavened dough around a savory or sweet filling.', 'Eastern European', 3, 30, 20, 'Lunch, Dinner, Snack', 6),
-('Peking Duck', 'cooking', 'A famous duck dish from Beijing that has been prepared since the imperial era, known for its thin, crisp skin.', 'Chinese', 5, 120, 60, 'Dinner, Fine-Dining', 4),
+('Paella', 'cooking', 'Spanish rice dish originally from Valencia, containing meat, seafood, and vegetables.', 'Spanish', 3, 20, 40, 4),
+('Pierogi', 'cooking', 'Filled dumplings of Central European origin made by wrapping unleavened dough around a savory or sweet filling.', 'Eastern European', 3, 30, 20, 6),
+('Peking Duck', 'cooking', 'A famous duck dish from Beijing that has been prepared since the imperial era, known for its thin, crisp skin.', 'Chinese', 5, 120, 60, 4),
 
-('Quiche Lorraine', 'pastry', 'A French tart consisting of pastry crust filled with smoked bacon, cheese, and egg custard.', 'French', 3, 20, 45, 'Breakfast, Brunch, Snack', 6),
-('Quesadilla', 'cooking', 'A Mexican dish consisting of a tortilla that is filled primarily with cheese, and sometimes meats, spices, and other fillings, and then cooked on a griddle.', 'Mexican', 1, 5, 10, 'Snack, Lunch', 4),
-('Quinoa Salad', 'cooking', 'Salad made from quinoa mixed with various vegetables and sometimes meat or seafood.', 'International', 1, 15, 0, 'Lunch, Dinner, Cold-dish', 4),
+('Quiche Lorraine', 'pastry', 'A French tart consisting of pastry crust filled with smoked bacon, cheese, and egg custard.', 'French', 3, 20, 45, 6),
+('Quesadilla', 'cooking', 'A Mexican dish consisting of a tortilla that is filled primarily with cheese, and sometimes meats, spices, and other fillings, and then cooked on a griddle.', 'Mexican', 1, 5, 10, 4),
+('Quinoa Salad', 'cooking', 'Salad made from quinoa mixed with various vegetables and sometimes meat or seafood.', 'International', 1, 15, 0, 4),
 
-('Ratatouille', 'cooking', 'A French Provençal stewed vegetable dish, originating in Nice.', 'French', 2, 20, 40, 'Lunch, Dinner', 4),
-('Risotto', 'cooking', 'An Italian rice dish cooked with broth until it reaches a creamy consistency.', 'Italian', 3, 10, 30, 'Lunch, Dinner', 4),
-('Ramen', 'cooking', 'A Japanese noodle soup dish with meat or fish broth flavored with soy sauce or miso, and uses toppings such as sliced pork, nori, and green onions.', 'Japanese', 3, 15, 30, 'Lunch, Dinner', 2),
+('Ratatouille', 'cooking', 'A French Provençal stewed vegetable dish, originating in Nice.', 'French', 2, 20, 40, 4),
+('Risotto', 'cooking', 'An Italian rice dish cooked with broth until it reaches a creamy consistency.', 'Italian', 3, 10, 30, 4),
+('Ramen', 'cooking', 'A Japanese noodle soup dish with meat or fish broth flavored with soy sauce or miso, and uses toppings such as sliced pork, nori, and green onions.', 'Japanese', 3, 15, 30, 2),
 
-('Sushi', 'cooking', 'Japanese dish of prepared vinegared rice, usually with some sugar and salt, accompanying a variety of ingredients, such as seafood, often raw, and vegetables.', 'Japanese', 3, 30, 0, 'Lunch, Dinner, Snack', 4),
-('Shepherds Pie', 'cooking', 'A traditional British dish of minced meat topped with a mashed potato crust.', 'British', 2, 20, 60, 'Lunch, Dinner', 4),
-('Samosa', 'cooking', 'A fried or baked pastry with a savory filling, such as spiced potatoes, onions, peas, or lentils.', 'Indian', 2, 30, 10, 'Snack, Appetizer', 6),
+('Sushi', 'cooking', 'Japanese dish of prepared vinegared rice, usually with some sugar and salt, accompanying a variety of ingredients, such as seafood, often raw, and vegetables.', 'Japanese', 3, 30, 0, 4),
+('Shepherds Pie', 'cooking', 'A traditional British dish of minced meat topped with a mashed potato crust.', 'British', 2, 20, 60, 4),
+('Samosa', 'cooking', 'A fried or baked pastry with a savory filling, such as spiced potatoes, onions, peas, or lentils.', 'Indian', 2, 30, 10, 6),
 
-('Tiramisu', 'pastry', 'A popular coffee-flavored Italian dessert.', 'Italian', 2, 30, 0, 'Dessert', 8),
-('Tacos', 'cooking', 'Traditional Mexican dish consisting of a small hand-sized corn or wheat tortilla topped with a filling.', 'Mexican', 1, 10, 10, 'Lunch, Dinner, Snack', 4),
-('Tabbouleh', 'cooking', 'A Levantine vegetarian salad made of finely chopped parsley, with tomatoes, mint, onion, bulgur, and seasoned with olive oil, lemon juice, salt and pepper.', 'Middle Eastern', 1, 20, 0, 'Lunch, Dinner, Cold-dish', 4),
+('Tiramisu', 'pastry', 'A popular coffee-flavored Italian dessert.', 'Italian', 2, 30, 0, 8),
+('Tacos', 'cooking', 'Traditional Mexican dish consisting of a small hand-sized corn or wheat tortilla topped with a filling.', 'Mexican', 1, 10, 10, 4),
+('Tabbouleh', 'cooking', 'A Levantine vegetarian salad made of finely chopped parsley, with tomatoes, mint, onion, bulgur, and seasoned with olive oil, lemon juice, salt and pepper.', 'Middle Eastern', 1, 20, 0, 4),
 
-('Udon Soup', 'cooking', 'A Japanese noodle soup made with udon noodles.', 'Japanese', 2, 5, 15, 'Lunch, Dinner', 2),
-('Ukrainian borscht', 'cooking', 'A hearty soup made with beetroot as a main ingredient, giving it a distinctive red color.', 'Ukrainian', 3, 30, 60, 'Lunch, Dinner', 4),
-('Umbrian Lentil Stew', 'cooking', 'Made with lentils and typically includes tomatoes, vegetables, and herbs.', 'Italian', 2, 10, 45, 'Lunch, Dinner', 4),
+('Udon Soup', 'cooking', 'A Japanese noodle soup made with udon noodles.', 'Japanese', 2, 5, 15, 2),
+('Ukrainian borscht', 'cooking', 'A hearty soup made with beetroot as a main ingredient, giving it a distinctive red color.', 'Ukrainian', 3, 30, 60, 4),
+('Umbrian Lentil Stew', 'cooking', 'Made with lentils and typically includes tomatoes, vegetables, and herbs.', 'Italian', 2, 10, 45, 4),
 
-('Vietnamese Pho', 'cooking', 'A Vietnamese soup consisting of broth, rice noodles, herbs, and meat.', 'Vietnamese', 2, 20, 90, 'Lunch, Dinner', 4),
-('Vegetable Terrine', 'cooking', 'Made with layers of cooked or raw vegetables held together by a gelatin made from a vegetable stock or a meat stock.', 'French', 4, 30, 120, 'Lunch, Dinner, Cold-dish', 4),
-('Venison Stew', 'cooking', 'A hearty stew made using venison as the main ingredient.', 'International', 3, 20, 120, 'Lunch, Dinner', 4),
+('Vietnamese Pho', 'cooking', 'A Vietnamese soup consisting of broth, rice noodles, herbs, and meat.', 'Vietnamese', 2, 20, 90, 4),
+('Vegetable Terrine', 'cooking', 'Made with layers of cooked or raw vegetables held together by a gelatin made from a vegetable stock or a meat stock.', 'French', 4, 30, 120, 4),
+('Venison Stew', 'cooking', 'A hearty stew made using venison as the main ingredient.', 'International', 3, 20, 120, 4),
 
-('Waldorf Salad', 'cooking', 'An American salad generally made of fresh apples, celery, grapes, and walnuts, dressed in mayonnaise, and usually served on a bed of lettuce.', 'American', 1, 15, 0, 'Lunch, Dinner, Cold-dish', 4),
-('Welsh Rarebit', 'cooking', 'A dish made with a savory sauce of melted cheese and various other ingredients and served hot, after being poured over slices of toasted bread.', 'British', 1, 5, 10, 'Snack, Lunch', 4),
-('Wiener Schnitzel', 'cooking', 'A traditional Viennese dish made by breading and frying a thin slice of meat (usually veal).', 'Austrian', 2, 10, 10, 'Lunch, Dinner', 4),
+('Waldorf Salad', 'cooking', 'An American salad generally made of fresh apples, celery, grapes, and walnuts, dressed in mayonnaise, and usually served on a bed of lettuce.', 'American', 1, 15, 0, 4),
+('Welsh Rarebit', 'cooking', 'A dish made with a savory sauce of melted cheese and various other ingredients and served hot, after being poured over slices of toasted bread.', 'British', 1, 5, 10, 4),
+('Wiener Schnitzel', 'cooking', 'A traditional Viennese dish made by breading and frying a thin slice of meat (usually veal).', 'Austrian', 2, 10, 10, 4),
 
-('Xiaolongbao', 'cooking', 'Chinese steamed buns filled with meat and broth.', 'Chinese', 4, 30, 20, 'Lunch, Dinner, Snack', 6),
-('Xinjiang Lamb Skewers', 'cooking', 'Spicy skewers of grilled lamb, a popular street food from the Xinjiang region.', 'Chinese', 2, 120, 10, 'Dinner, Snack', 6);
+('Xiaolongbao', 'cooking', 'Chinese steamed buns filled with meat and broth.', 'Chinese', 4, 30, 20, 6),
+('Xinjiang Lamb Skewers', 'cooking', 'Spicy skewers of grilled lamb, a popular street food from the Xinjiang region.', 'Chinese', 2, 120, 10, 6);
+
 
 
 UPDATE recipes SET portions = 4 WHERE name = 'Apple Frangipan Tart';
@@ -515,70 +516,6 @@ INSERT INTO recipes_mealTypes (recipeName, mealTypeName) VALUES
 ('Xinjiang Lamb Skewers', 'Dinner'),
 ('Xinjiang Lamb Skewers', 'Snack');
 
--- Pies, Tarts, and Cakes
-UPDATE recipes
-SET tools = 'oven, mixing bowl, cake mold, rolling pin, pastry brush, measuring spoon'
-WHERE name IN ('Apple Frangipan Tart', 'Bakewell tart', 'Beef Wellington', 'Banana Pancakes', 'Cannelloni', 'Danish Pastry', 'Eclairs', 'English Breakfast', 'Key Lime Pie', 'Lasagna', 'Macaron', 'Quiche Lorraine', 'Japanese Cheesecake');
-
--- Breads and Pastries
-UPDATE recipes
-SET tools = 'oven, baking sheet, mixing bowl, dough cutter, proofing basket, pastry brush'
-WHERE name IN ('Indian Curry', 'Italian Biscotti');
-
--- Grilled Meats and Barbecue
-UPDATE recipes
-SET tools = 'grill, tong, basting brush, grill fork, charcoal, meat thermometer'
-WHERE name IN ('Ayam Percik', 'Beef Wellington', 'Fajitas', 'Jerk Chicken', 'Kebab', 'Oysters Kilpatrick', 'Jerk Chicken (Jamaican)');
-
--- General Cooking and Stir Frying
-UPDATE recipes
-SET tools = 'stovetop, frying pan, spatula, ladle, chefs knife, cutting board'
-WHERE name IN ('Apam balik', 'Chicken Congee', 'Dakdoritang', 'Dum Aloo', 'Falafel', 'Fish and Chips', 'Goulash', 'Hot and Sour Soup', 'Hummus', 'Kimchi Fried Rice', 'Mapo Tofu', 'Nasi Goreng', 'Nachos', 'Pierogi', 'Ratatouille', 'Risotto', 'Ramen', 'Samosa', 'Sushi', 'Tacos', 'Udon Soup', 'Vietnamese Pho', 'Xinjiang Lamb Skewers');
-
--- Steaming
-UPDATE recipes
-SET tools = 'steamer basket, pot, chefs knife, cutting board'
-WHERE name IN ('Xiaolongbao', 'Chicken Congee');
-
--- Deep Frying
-UPDATE recipes
-SET tools = 'deep fryer, slotted spoon, thermometer, paper towel'
-WHERE name IN ('Falafel', 'Fish and Chips');
-
--- Slow Cooking or Simmering
-UPDATE recipes
-SET tools = 'slow cooker, ladle, meat thermometer'
-WHERE name IN ('Irish stew', 'Lamb Tagine', 'Venison Stew', 'Welsh Rarebit', 'Ukrainian borscht', 'Moussaka');
-
--- No Heat Preparation (Salads and Cold Dishes)
-UPDATE recipes
-SET tools = 'mixing bowl, chopping board, chefs knife, salad spinner, measuring spoon'
-WHERE name IN ('Greek Salad', 'Gazpacho', 'Waldorf Salad', 'Tabbouleh', 'Quinoa Salad');
-
--- Desserts Requiring Delicate Preparation
-UPDATE recipes
-SET tools = 'mixing bowl, measuring cup, measuring spoon, mixer, dessert cups'
-WHERE name IN ('Tiramisu', 'Eton Mess', 'Nougat', 'Venison Stew');
-
--- For pastry dishes that involve baking
-UPDATE recipes
-SET tools = 'mixing bowl, baking dish, whisk, oven, pastry brush'
-WHERE name IN ('Apple & Blackberry Crumble', 'Irish Coffee', 'Kaiserschmarrn');
-
--- For cooking dishes that involve simmering or stewing
-UPDATE recipes
-SET tools = 'pot, ladle, chefs knife, cutting board, stirring spoon'
-WHERE name IN ('Caldo verde', 'Jambalaya', 'Japanese Curry', 'Lobster Bisque', 'Osso Buco', 'Okonomiyaki', 'Paella', 'Peking Duck', 'Shepherds Pie', 'Umbrian Lentil Stew', 'Vegetable Terrine', 'Kimchi Stew');
-
--- For dishes involving grilling or pan-frying
-UPDATE recipes
-SET tools = 'grill, tong, spatula, cutting board, meat thermometer'
-WHERE name IN ('Hamburgers', 'Wiener Schnitzel');
-
--- For dishes that are made using a griddle or shallow frying
-UPDATE recipes
-SET tools = 'frying pan, spatula, chefs knife, cutting board'
-WHERE name = 'Quesadilla';
 
 
 
@@ -2466,85 +2403,61 @@ INSERT INTO foodGroups (name, description) VALUES ('Fruits and Products', 'Inclu
 
 
 
--- INSERT INTO chefs (firstName, lastName, contactNumber, dateOfBirth, dateOfExperienceStart, professionalGrade) VALUES
--- ('John', 'Doe', '555-0101', '1980-03-15', '2000-03-15', 'Head-Chef'),
--- ('Jane', 'Smith', '555-0102', '1985-07-22', '2005-07-22', 'Sous-Chef'),
--- ('Alex', 'Johnson', '555-0103', '1990-11-30', '2010-11-30', 'Third-Chef'),
--- ('Maria', 'Lee', '555-0104', '1992-05-17', '2012-05-17', 'Second-Chef'),
--- ('James', 'Brown', '555-0105', '1975-01-29', '1995-01-29', 'Head-Chef'),
--- ('Linda', 'Davis', '555-0106', '1988-08-19', '2008-08-19', 'Sous-Chef'),
--- ('Robert', 'Miller', '555-0107', '1982-12-24', '2002-12-24', 'Third-Chef'),
--- ('Barbara', 'Wilson', '555-0108', '1978-04-05', '1998-04-05', 'Second-Chef'),
--- ('Michael', 'Moore', '555-0109', '1994-09-15', '2014-09-15', 'Third-Chef'),
--- ('Betty', 'Taylor', '555-0110', '1986-03-11', '2006-03-11', 'Sous-Chef'),
--- ('William', 'Anderson', '555-0111', '1981-07-30', '2001-07-30', 'Head-Chef'),
--- ('Susan', 'Thomas', '555-0112', '1989-10-28', '2009-10-28', 'Second-Chef'),
--- ('David', 'Jackson', '555-0113', '1970-05-21', '1990-05-21', 'Head-Chef'),
--- ('Sarah', 'White', '555-0114', '1983-01-15', '2003-01-15', 'Sous-Chef'),
--- ('Joseph', 'Harris', '555-0115', '1991-08-19', '2011-08-19', 'Third-Chef'),
--- ('Karen', 'Martin', '555-0116', '1974-12-04', '1994-12-04', 'Head-Chef'),
--- ('Nancy', 'Thompson', '555-0117', '1993-06-02', '2013-06-02', 'Second-Chef'),
--- ('Daniel', 'Garcia', '555-0118', '1984-09-17', '2004-09-17', 'Sous-Chef'),
--- ('Lisa', 'Martinez', '555-0119', '1987-02-23', '2007-02-23', 'Third-Chef'),
--- ('Matthew', 'Robinson', '555-0120', '1995-04-18', '2015-04-18', 'Second-Chef'),
--- ('Anthony', 'Clark', '555-0121', '1976-10-30', '1996-10-30', 'Head-Chef'),
--- ('Mark', 'Rodriguez', '555-0122', '1988-01-25', '2008-01-25', 'Sous-Chef'),
--- ('Elizabeth', 'Lewis', '555-0123', '1979-11-07', '1999-11-07', 'Third-Chef'),
--- ('Donald', 'Lee', '555-0124', '1992-03-15', '2012-03-15', 'Second-Chef'),
--- ('Steven', 'Walker', '555-0125', '1990-07-20', '2010-07-20', 'Third-Chef'),
--- ('Emily', 'Hall', '555-0126', '1985-05-25', '2005-05-25', 'Sous-Chef'),
--- ('George', 'Allen', '555-0127', '1974-02-11', '1994-02-11', 'Head-Chef'),
--- ('Laura', 'Young', '555-0128', '1991-09-14', '2011-09-14', 'Second-Chef'),
--- ('Joshua', 'Hernandez', '555-0129', '1989-12-18', '2009-12-18', 'Third-Chef'),
--- ('Jessica', 'King', '555-0130', '1993-10-31', '2013-10-31', 'Sous-Chef'),
--- ('Kevin', 'Wright', '555-0131', '1982-03-17', '2002-03-17', 'Head-Chef'),
--- ('Angela', 'Lopez', '555-0132', '1978-08-09', '1998-08-09', 'Second-Chef'),
--- ('Thomas', 'Hill', '555-0133', '1975-06-03', '1995-06-03', 'Head-Chef'),
--- ('Carol', 'Scott', '555-0134', '1984-04-12', '2004-04-12', 'Sous-Chef'),
--- ('Ryan', 'Green', '555-0135', '1987-11-23', '2007-11-23', 'Third-Chef'),
--- ('Eric', 'Adams', '555-0136', '1973-01-20', '1993-01-20', 'Head-Chef'),
--- ('Mary', 'Baker', '555-0137', '1994-02-28', '2014-02-28', 'Second-Chef'),
--- ('Jason', 'Gonzalez', '555-0138', '1981-10-05', '2001-10-05', 'Sous-Chef'),
--- ('Michelle', 'Nelson', '555-0139', '1977-07-07', '1997-07-07', 'Third-Chef'),
--- ('Timothy', 'Carter', '555-0140', '1996-03-19', '2016-03-19', 'Second-Chef'),
--- ('Charles', 'Mitchell', '555-0141', '1971-08-25', '1991-08-25', 'Head-Chef'),
--- ('Sarah', 'Perez', '555-0142', '1989-01-31', '2009-01-31', 'Sous-Chef'),
--- ('Brian', 'Roberts', '555-0143', '1976-12-14', '1996-12-14', 'Third-Chef'),
--- ('Diana', 'Turner', '555-0144', '1983-09-15', '2003-09-15', 'Second-Chef'),
--- ('Arthur', 'Phillips', '555-0145', '1978-05-06', '1998-05-06', 'Head-Chef'),
--- ('Ashley', 'Campbell', '555-0146', '1995-07-20', '2015-07-20', 'Third-Chef'),
--- ('Gregory', 'Parker', '555-0147', '1990-04-10', '2010-04-10', 'Sous-Chef'),
--- ('Deborah', 'Evans', '555-0148', '1972-11-08', '1992-11-08', 'Head-Chef'),
--- ('Shirley', 'Edwards', '555-0149', '1985-01-28', '2005-01-28', 'Second-Chef'),
--- ('Benjamin', 'Collins', '555-0150', '1987-10-12', '2007-10-12', 'Third-Chef');
+INSERT INTO chefs (firstName, lastName, contactNumber, dateOfBirth, dateOfExperienceStart, professionalGrade) VALUES
+('John', 'Doe', '555-0101', '1980-03-15', '2000-03-15', 'Head-Chef'),
+('Jane', 'Smith', '555-0102', '1985-07-22', '2005-07-22', 'Sous-Chef'),
+('Alex', 'Johnson', '555-0103', '1990-11-30', '2010-11-30', 'Third-Chef'),
+('Maria', 'Lee', '555-0104', '1992-05-17', '2012-05-17', 'Second-Chef'),
+('James', 'Brown', '555-0105', '1975-01-29', '1995-01-29', 'Head-Chef'),
+('Linda', 'Davis', '555-0106', '1988-08-19', '2008-08-19', 'Sous-Chef'),
+('Robert', 'Miller', '555-0107', '1982-12-24', '2002-12-24', 'Third-Chef'),
+('Barbara', 'Wilson', '555-0108', '1978-04-05', '1998-04-05', 'Second-Chef'),
+('Michael', 'Moore', '555-0109', '1994-09-15', '2014-09-15', 'Third-Chef'),
+('Betty', 'Taylor', '555-0110', '1986-03-11', '2006-03-11', 'Sous-Chef'),
+('William', 'Anderson', '555-0111', '1981-07-30', '2001-07-30', 'Head-Chef'),
+('Susan', 'Thomas', '555-0112', '1989-10-28', '2009-10-28', 'Second-Chef'),
+('David', 'Jackson', '555-0113', '1970-05-21', '1990-05-21', 'Head-Chef'),
+('Sarah', 'White', '555-0114', '1983-01-15', '2003-01-15', 'Sous-Chef'),
+('Joseph', 'Harris', '555-0115', '1991-08-19', '2011-08-19', 'Third-Chef'),
+('Karen', 'Martin', '555-0116', '1974-12-04', '1994-12-04', 'Head-Chef'),
+('Nancy', 'Thompson', '555-0117', '1993-06-02', '2013-06-02', 'Second-Chef'),
+('Daniel', 'Garcia', '555-0118', '1984-09-17', '2004-09-17', 'Sous-Chef'),
+('Lisa', 'Martinez', '555-0119', '1987-02-23', '2007-02-23', 'Third-Chef'),
+('Matthew', 'Robinson', '555-0120', '1995-04-18', '2015-04-18', 'Second-Chef'),
+('Anthony', 'Clark', '555-0121', '1976-10-30', '1996-10-30', 'Head-Chef'),
+('Mark', 'Rodriguez', '555-0122', '1988-01-25', '2008-01-25', 'Sous-Chef'),
+('Elizabeth', 'Lewis', '555-0123', '1979-11-07', '1999-11-07', 'Third-Chef'),
+('Donald', 'Lee', '555-0124', '1992-03-15', '2012-03-15', 'Second-Chef'),
+('Steven', 'Walker', '555-0125', '1990-07-20', '2010-07-20', 'Third-Chef'),
+('Emily', 'Hall', '555-0126', '1985-05-25', '2005-05-25', 'Sous-Chef'),
+('George', 'Allen', '555-0127', '1974-02-11', '1994-02-11', 'Head-Chef'),
+('Laura', 'Young', '555-0128', '1991-09-14', '2011-09-14', 'Second-Chef'),
+('Joshua', 'Hernandez', '555-0129', '1989-12-18', '2009-12-18', 'Third-Chef'),
+('Jessica', 'King', '555-0130', '1993-10-31', '2013-10-31', 'Sous-Chef'),
+('Kevin', 'Wright', '555-0131', '1982-03-17', '2002-03-17', 'Head-Chef'),
+('Angela', 'Lopez', '555-0132', '1978-08-09', '1998-08-09', 'Second-Chef'),
+('Thomas', 'Hill', '555-0133', '1975-06-03', '1995-06-03', 'Head-Chef'),
+('Carol', 'Scott', '555-0134', '1984-04-12', '2004-04-12', 'Sous-Chef'),
+('Ryan', 'Green', '555-0135', '1987-11-23', '2007-11-23', 'Third-Chef'),
+('Eric', 'Adams', '555-0136', '1973-01-20', '1993-01-20', 'Head-Chef'),
+('Mary', 'Baker', '555-0137', '1994-02-28', '2014-02-28', 'Second-Chef'),
+('Jason', 'Gonzalez', '555-0138', '1981-10-05', '2001-10-05', 'Sous-Chef'),
+('Michelle', 'Nelson', '555-0139', '1977-07-07', '1997-07-07', 'Third-Chef'),
+('Timothy', 'Carter', '555-0140', '1996-03-19', '2016-03-19', 'Second-Chef'),
+('Charles', 'Mitchell', '555-0141', '1971-08-25', '1991-08-25', 'Head-Chef'),
+('Sarah', 'Perez', '555-0142', '1989-01-31', '2009-01-31', 'Sous-Chef'),
+('Brian', 'Roberts', '555-0143', '1976-12-14', '1996-12-14', 'Third-Chef'),
+('Diana', 'Turner', '555-0144', '1983-09-15', '2003-09-15', 'Second-Chef'),
+('Arthur', 'Phillips', '555-0145', '1978-05-06', '1998-05-06', 'Head-Chef'),
+('Ashley', 'Campbell', '555-0146', '1995-07-20', '2015-07-20', 'Third-Chef'),
+('Gregory', 'Parker', '555-0147', '1990-04-10', '2010-04-10', 'Sous-Chef'),
+('Deborah', 'Evans', '555-0148', '1972-11-08', '1992-11-08', 'Head-Chef'),
+('Shirley', 'Edwards', '555-0149', '1985-01-28', '2005-01-28', 'Second-Chef'),
+('Benjamin', 'Collins', '555-0150', '1987-10-12', '2007-10-12', 'Third-Chef');
 
 
--- DROP TABLE chefs_nationalCuisines;
-
--- CREATE TABLE chefs_nationalCuisines(
---     chefId INT,
---     nationalCuisineName VARCHAR(64),
---     PRIMARY KEY (chefId, nationalCuisineName)
---     FOREIGN KEY (chefId) REFERENCES chefs(id),
---     FOREIGN KEY (nationalCuisineName) REFERENCES nationalCuisines(Name)
--- );
-
--- DROP TABLE chefs_recipes;
-
--- CREATE TABLE chefs_recipes(
---     chefId INT,
---     recipeName VARCHAR(64),
---     PRIMARY KEY (chefId, recipeName),
---     FOREIGN KEY (chefId) REFERENCES chefs(id),
---     FOREIGN KEY (recipeName) REFERENCES recipes(name)
--- );
 
 
--- CREATE TABLE credentials (
---     username VARCHAR(64),
---     password VARCHAR(64),
---     chefId INTEGER,
---     isAdmin BOOLEAN DEFAULT FALSE,
---     PRIMARY KEY (username),
---     FOREIGN KEY (chefId) REFERENCES chefs(id)
--- );
+
+
+

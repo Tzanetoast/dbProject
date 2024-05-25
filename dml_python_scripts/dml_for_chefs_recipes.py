@@ -19,7 +19,7 @@ def choose_random_subset(input_list, min_length, max_length):
     return subset
 
 def connect_db():
-    return sqlite3.connect('example.db')
+    return sqlite3.connect('../example.db')
 
 def assign_cuisines():
     conn = connect_db()

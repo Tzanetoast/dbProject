@@ -62,6 +62,8 @@ def chef_logged_in():
     print(recipes)
     cursor.close()
     conn.close()
+
+    
     return render_template('chef_dashboard.html', username=session['username'], recipes=recipes)
 
 @app.route('/edit_cooking_or_pastry/<recipe_name>', methods=['GET', 'POST'])
@@ -1123,6 +1125,527 @@ def query_5():
     return render_template('query_5_results.html', 
                            results=results, 
                            query_name="Κριτές με τον ίδιο αριθμό επεισοδίων σε διάστημα ενός έτους με περισσότερες από 3 εμφανίσεις")
+
+
+
+@app.route('/query_6', methods=['GET'])
+def query_6():
+    if 'username' not in session or not session['isAdmin']:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute('DROP VIEW IF EXISTS recipe_meal_type_pairs;')
+    cursor.execute('DROP VIEW IF EXISTS top_3_meal_type_pairs;')
+
+    # Step 1: Create the recipe meal type pairs view
+    cursor.execute('''
+        CREATE VIEW IF NOT EXISTS recipe_meal_type_pairs AS
+        SELECT 
+            r1.mealTypeName AS mealType1,
+            r2.mealTypeName AS mealType2
+        FROM 
+            recipes_mealTypes r1
+        JOIN 
+            recipes_mealTypes r2 ON r1.recipeName = r2.recipeName AND r1.mealTypeName < r2.mealTypeName
+        WHERE
+            r1.recipeName IN (SELECT recipeName FROM episode_recipes);
+    ''')
+
+    # Step 2: Create the top 3 meal type pairs view
+    cursor.execute('''
+        CREATE VIEW IF NOT EXISTS top_3_meal_type_pairs AS
+        SELECT 
+            mealType1, 
+            mealType2, 
+            COUNT(*) AS pair_count
+        FROM 
+            recipe_meal_type_pairs
+        GROUP BY 
+            mealType1, mealType2
+        ORDER BY 
+            pair_count DESC
+        LIMIT 3;
+    ''')
+
+    # Query to get the top 3 pairs
+    cursor.execute('''
+        SELECT mealType1, mealType2, pair_count
+        FROM top_3_meal_type_pairs;
+    ''')
+    results = cursor.fetchall()
+
+    # Clean up views
+    cursor.execute('DROP VIEW IF EXISTS recipe_meal_type_pairs;')
+    cursor.execute('DROP VIEW IF EXISTS top_3_meal_type_pairs;')
+    
+    cursor.close()
+    conn.close()
+
+    return render_template('query_6_results.html', 
+                           results=results, 
+                           query_name="Top 3 Meal Type Pairs in Episodes")
+
+
+
+@app.route('/query_7', methods=['GET'])
+def query_7():
+    if 'username' not in session or not session['isAdmin']:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Find the maximum number of participations
+    cursor.execute('''
+        SELECT MAX(episode_count)
+        FROM (
+            SELECT chefAssignedToRecipeId AS chefId, COUNT(*) AS episode_count
+            FROM episode_recipes
+            GROUP BY chefAssignedToRecipeId
+        ) AS chef_participations;
+    ''')
+    max_participations = cursor.fetchone()[0]
+
+    # Find all chefs with at least 5 fewer participations than the maximum
+    cursor.execute('''
+        SELECT chefs.id, chefs.firstName, chefs.lastName, COUNT(episode_recipes.chefAssignedToRecipeId) AS episode_count
+        FROM episode_recipes
+        JOIN chefs ON episode_recipes.chefAssignedToRecipeId = chefs.id
+        GROUP BY episode_recipes.chefAssignedToRecipeId
+        HAVING COUNT(episode_recipes.chefAssignedToRecipeId) <= ?;
+    ''', (max_participations - 5,))
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return render_template('query_7_results.html', 
+                           results=results, 
+                           query_name="Chefs with at least 5 fewer participations than the chef with the most participations")
+
+
+@app.route('/query_8', methods=['GET'])
+def query_8():
+    if 'username' not in session or not session['isAdmin']:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Query to find the episode with the most tools used
+    cursor.execute('''
+        SELECT 
+            episodeYear,
+            episodeNumber,
+            COUNT(*) AS number_of_tools_in_that_episode
+        FROM (
+            SELECT 
+                episode_recipes.episodeYear,
+                episode_recipes.episodeNumber
+            FROM 
+                episode_recipes
+            JOIN 
+                recipes_tools ON recipes_tools.recipeName = episode_recipes.recipeName
+        )
+        GROUP BY 
+            episodeYear, 
+            episodeNumber
+        ORDER BY 
+            number_of_tools_in_that_episode DESC
+        LIMIT 1;
+    ''')
+    result = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return render_template('query_8_results.html', 
+                           result=result, 
+                           query_name="Episode with the most tools used")
+
+
+@app.route('/query_9', methods=['GET'])
+def query_9():
+    if 'username' not in session or not session['isAdmin']:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Query to get the average number of grams of carbohydrates per year
+    cursor.execute('''
+        SELECT 
+            episode_recipes.episodeYear,
+            AVG(recipes.carbohydratesPerPortion) AS avg_carbohydrates
+        FROM 
+            episode_recipes
+        JOIN 
+            recipes ON episode_recipes.recipeName = recipes.name
+        GROUP BY 
+            episode_recipes.episodeYear
+        ORDER BY 
+            episode_recipes.episodeYear;
+    ''')
+    results = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return render_template('query_9_results.html', 
+                           results=results, 
+                           query_name="Average Grams of Carbohydrates per Year in the Competition")
+
+
+
+@app.route('/query_10', methods=['GET'])
+def query_10():
+    if 'username' not in session or not session['isAdmin']:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Query to find national cuisines with the same number of participations in consecutive years
+    cursor.execute('''
+        CREATE VIEW national_cuisine_participations AS
+        SELECT 
+            episode_recipes.recipeNationalCuisine,
+            episode_recipes.episodeYear,
+            COUNT(*) AS participation_count
+        FROM 
+            episode_recipes
+        GROUP BY 
+            episode_recipes.recipeNationalCuisine, 
+            episode_recipes.episodeYear
+        HAVING 
+            COUNT(*) >= 3;
+    ''')
+
+    cursor.execute('''
+        CREATE VIEW national_cuisine_consecutive_years AS
+        SELECT 
+            t1.recipeNationalCuisine,
+            t1.episodeYear AS year1,
+            t1.participation_count AS count1,
+            t2.episodeYear AS year2,
+            t2.participation_count AS count2
+        FROM 
+            national_cuisine_participations t1
+        JOIN 
+            national_cuisine_participations t2 ON t1.recipeNationalCuisine = t2.recipeNationalCuisine
+        WHERE 
+            t1.episodeYear + 1 = t2.episodeYear 
+            AND t1.participation_count = t2.participation_count;
+    ''')
+
+    cursor.execute('''
+        SELECT 
+            recipeNationalCuisine, 
+            year1, 
+            count1, 
+            year2, 
+            count2
+        FROM 
+            national_cuisine_consecutive_years
+    ''')
+    results = cursor.fetchall()
+
+    cursor.execute('DROP VIEW national_cuisine_participations;')
+    cursor.execute('DROP VIEW national_cuisine_consecutive_years;')
+    cursor.close()
+    conn.close()
+
+    return render_template('query_10_results.html', 
+                           results=results, 
+                           query_name="National Cuisines with the Same Number of Participations in Consecutive Years")
+
+
+@app.route('/query_11', methods=['GET'])
+def query_11():
+    if 'username' not in session or not session['isAdmin']:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Create views to find the top 5 judges with the highest total scores given to chefs
+    cursor.execute('''
+        CREATE VIEW judge_chef_scores AS
+        SELECT 
+            rs.judgeId,
+            er.chefAssignedToRecipeId AS chefId,
+            SUM(rs.score) AS total_score
+        FROM 
+            recipe_score rs
+        JOIN 
+            episode_recipes er ON rs.episodeYear = er.episodeYear AND rs.episodeNumber = er.episodeNumber AND rs.recipeNumber = er.recipeNumber
+        GROUP BY 
+            rs.judgeId, er.chefAssignedToRecipeId;
+    ''')
+
+    cursor.execute('''
+        CREATE VIEW top_5_judges AS
+        SELECT 
+            jcs.judgeId,
+            jcs.chefId,
+            jcs.total_score
+        FROM 
+            judge_chef_scores jcs
+        ORDER BY 
+            jcs.total_score DESC
+        LIMIT 5;
+    ''')
+
+    cursor.execute('''
+        CREATE VIEW top_5_judges_with_names AS
+        SELECT 
+            c1.firstName AS judge_first_name, 
+            c1.lastName AS judge_last_name, 
+            c2.firstName AS chef_first_name, 
+            c2.lastName AS chef_last_name, 
+            t5j.total_score
+        FROM 
+            top_5_judges t5j
+        JOIN 
+            chefs c1 ON t5j.judgeId = c1.id
+        JOIN 
+            chefs c2 ON t5j.chefId = c2.id;
+    ''')
+
+    cursor.execute('''
+        SELECT 
+            judge_first_name, 
+            judge_last_name, 
+            chef_first_name, 
+            chef_last_name, 
+            total_score
+        FROM 
+            top_5_judges_with_names;
+    ''')
+    results = cursor.fetchall()
+
+    cursor.execute('DROP VIEW judge_chef_scores;')
+    cursor.execute('DROP VIEW top_5_judges;')
+    cursor.execute('DROP VIEW top_5_judges_with_names;')
+    cursor.close()
+    conn.close()
+
+    return render_template('query_11_results.html', 
+                           results=results, 
+                           query_name="Top-5 Judges with the Highest Total Score Given to a Chef")
+
+
+@app.route('/query_12', methods=['GET'])
+def query_12():
+    if 'username' not in session or not session['isAdmin']:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Create views to find the most technically difficult episode per year
+    cursor.execute('''
+        CREATE VIEW episode_difficulty AS
+        SELECT 
+            er.episodeYear, 
+            er.episodeNumber, 
+            AVG(r.difficulty) AS avg_difficulty
+        FROM 
+            episode_recipes er
+        JOIN 
+            recipes r ON er.recipeName = r.name
+        GROUP BY 
+            er.episodeYear, er.episodeNumber;
+    ''')
+
+    cursor.execute('''
+        CREATE VIEW most_difficult_episode_per_year AS
+        SELECT 
+            ed.episodeYear, 
+            ed.episodeNumber, 
+            ed.avg_difficulty
+        FROM 
+            episode_difficulty ed
+        JOIN (
+            SELECT 
+                episodeYear, 
+                MAX(avg_difficulty) AS max_difficulty
+            FROM 
+                episode_difficulty
+            GROUP BY 
+                episodeYear
+        ) max_difficulty_per_year ON ed.episodeYear = max_difficulty_per_year.episodeYear AND ed.avg_difficulty = max_difficulty_per_year.max_difficulty;
+    ''')
+
+    cursor.execute('''
+        SELECT 
+            episodeYear, 
+            episodeNumber, 
+            avg_difficulty
+        FROM 
+            most_difficult_episode_per_year;
+    ''')
+    results = cursor.fetchall()
+
+    cursor.execute('DROP VIEW episode_difficulty;')
+    cursor.execute('DROP VIEW most_difficult_episode_per_year;')
+    cursor.close()
+    conn.close()
+
+    return render_template('query_12_results.html', 
+                           results=results, 
+                           query_name="Most Technically Difficult Episode Per Year")
+
+
+@app.route('/query_13', methods=['GET'])
+def query_13():
+    if 'username' not in session or not session['isAdmin']:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Create views to find the episode with the lowest professional grade
+    cursor.execute('''
+        CREATE VIEW chef_professional_grades AS
+        SELECT 
+            id, 
+            CASE professionalGrade
+                WHEN 'Third-Chef' THEN 1
+                WHEN 'Second-Chef' THEN 2
+                WHEN 'First-Chef' THEN 3
+                WHEN 'Sous-Chef' THEN 4
+                WHEN 'Head-Chef' THEN 5
+            END AS grade
+        FROM 
+            chefs;
+    ''')
+
+    cursor.execute('''
+        CREATE VIEW episode_professional_grades AS
+        SELECT 
+            ej.episodeYear,
+            ej.episodeNumber,
+            AVG(cpg.grade) AS avg_judge_grade
+        FROM 
+            episode_judges ej
+        JOIN 
+            chef_professional_grades cpg ON ej.chefId = cpg.id
+        GROUP BY 
+            ej.episodeYear, ej.episodeNumber;
+    ''')
+
+    cursor.execute('''
+        CREATE VIEW episode_chef_professional_grades AS
+        SELECT 
+            er.episodeYear,
+            er.episodeNumber,
+            AVG(cpg.grade) AS avg_chef_grade
+        FROM 
+            episode_recipes er
+        JOIN 
+            chef_professional_grades cpg ON er.chefAssignedToRecipeId = cpg.id
+        GROUP BY 
+            er.episodeYear, er.episodeNumber;
+    ''')
+
+    cursor.execute('''
+        CREATE VIEW combined_episode_professional_grades AS
+        SELECT 
+            epg.episodeYear,
+            epg.episodeNumber,
+            (epg.avg_judge_grade + ecpg.avg_chef_grade) / 2 AS combined_avg_grade
+        FROM 
+            episode_professional_grades epg
+        JOIN 
+            episode_chef_professional_grades ecpg ON epg.episodeYear = ecpg.episodeYear AND epg.episodeNumber = ecpg.episodeNumber;
+    ''')
+
+    cursor.execute('''
+        CREATE VIEW lowest_combined_professional_grade_episode AS
+        SELECT 
+            episodeYear,
+            episodeNumber,
+            combined_avg_grade
+        FROM 
+            combined_episode_professional_grades
+        ORDER BY 
+            combined_avg_grade ASC
+        LIMIT 1;
+    ''')
+
+    cursor.execute('''
+        SELECT 
+            episodeYear, 
+            episodeNumber, 
+            combined_avg_grade
+        FROM 
+            lowest_combined_professional_grade_episode;
+    ''')
+    results = cursor.fetchall()
+
+    cursor.execute('DROP VIEW chef_professional_grades;')
+    cursor.execute('DROP VIEW episode_professional_grades;')
+    cursor.execute('DROP VIEW episode_chef_professional_grades;')
+    cursor.execute('DROP VIEW combined_episode_professional_grades;')
+    cursor.execute('DROP VIEW lowest_combined_professional_grade_episode;')
+    cursor.close()
+    conn.close()
+
+    return render_template('query_13_results.html', 
+                           results=results, 
+                           query_name="Episode with the Lowest Professional Grade")
+
+
+@app.route('/query_14', methods=['GET'])
+def query_14():
+    if 'username' not in session or not session['isAdmin']:
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Create views to find the food groups that have never appeared in the competition
+    cursor.execute('''
+        CREATE VIEW appeared_food_groups AS
+        SELECT DISTINCT 
+            ingredients.foodGroup
+        FROM 
+            episode_recipes
+        JOIN 
+            recipes_ingredients ON episode_recipes.recipeName = recipes_ingredients.recipeName
+        JOIN 
+            ingredients ON recipes_ingredients.ingredientName = ingredients.name;
+    ''')
+
+    cursor.execute('''
+        CREATE VIEW never_appeared_food_groups AS
+        SELECT 
+            foodGroups.name AS foodGroup
+        FROM 
+            foodGroups
+        LEFT JOIN 
+            appeared_food_groups ON foodGroups.name = appeared_food_groups.foodGroup
+        WHERE 
+            appeared_food_groups.foodGroup IS NULL;
+    ''')
+
+    cursor.execute('''
+        SELECT foodGroup 
+        FROM never_appeared_food_groups;
+    ''')
+    results = cursor.fetchall()
+
+    cursor.execute('DROP VIEW appeared_food_groups;')
+    cursor.execute('DROP VIEW never_appeared_food_groups;')
+    cursor.close()
+    conn.close()
+
+    return render_template('query_14_results.html', 
+                           results=results, 
+                           query_name="Food Groups Never Appeared in Competition")
 
 
 
